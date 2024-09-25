@@ -1,9 +1,9 @@
 <template>
-  <AppHeader />
+  <AppHeader />    <!-- 헤더 컴포넌트 -->
   <main>
-    <RouterView />
+    <RouterView />  <!-- 라우트에 따라 페이지가 출력됨 -->
   </main>
-  <AppFooter />
+  <AppFooter />    <!-- 푸터 컴포넌트 -->
 </template>
 
 <script setup>
@@ -14,5 +14,7 @@ import AppFooter from '@/components/AppFooter.vue';
 </script>
 
 <style scoped>
-
+main {
+  padding: 20px;
+}
 </style>
