@@ -3,7 +3,7 @@
       <div class="logo">
         <img src="@/assets/icons/wizbuddy_logo.svg" alt="Wiz Buddy Logo" class="logo-img" />
       </div>
-      <div class="profile-section">
+      <div class="profile-section" v-if="!isLoginPage">
         <div class="welcome-message">
           <p>알바생 {{ username }}님, 환영합니다.</p>
         </div>
@@ -12,15 +12,20 @@
     </header>
   </template>
   
-  <script>
-  export default {
-    props: {
-      username: {
-        type: String,
-        default: '사용자'
-      }
+  <script setup>
+    import {useRoute} from 'vue-router';
+    import {ref, watch} from 'vue';
+
+    const route = useRoute();
+    const isLoginPage = ref(false);
+
+    watch(() => route.path, (newPath) => {
+      isLoginPage.value = newPath === '/login';
     }
-  };
+    , 
+    {
+      immediate: true 
+    });
   </script>
   
   <style scoped>
