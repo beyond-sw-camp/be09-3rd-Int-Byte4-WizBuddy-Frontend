@@ -3,11 +3,11 @@
       <div class="logo">
         <img src="@/assets/icons/wizbuddy_logo.svg" alt="Wiz Buddy Logo" class="logo-img" />
       </div>
-      <div class="welcome-message">
-        <p>알바생 {{ username }}님, 환영합니다.</p>
-      </div>
-      <div class="profile-icon">
-        <i class="fas fa-user-circle"></i>
+      <div class="profile-section">
+        <div class="welcome-message">
+          <p>알바생 {{ username }}님, 환영합니다.</p>
+        </div>
+        <img src="@/assets/icons/Profile.svg" alt="Profile" class="profile-img" />
       </div>
     </header>
   </template>
@@ -31,18 +31,34 @@
     background-color: #3A4E8B;
     padding: 10px 20px;
     color: white;
+    height: 60px;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
   }
   
   .logo-img {
-    height: 40px; /* 로고 이미지 높이 설정 */
+    height: 40px;
   }
   
-  .welcome-message p {
-    margin: 0;
+  .profile-section {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* 오른쪽 정렬 */
   }
   
-  .profile-icon {
-    font-size: 24px;
+  .welcome-message {
+    margin-right: 10px; /* 프로필 이미지와 간격 설정 */
+    font-size: 18px;
+  }
+  
+  .profile-img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+
   }
   </style>
   
