@@ -7,7 +7,7 @@
   <AppHeaderInShop v-if="isSubsBoardPage"/>
   
   <main>
-    <RouterView />  <!-- 라우트에 따라 페이지가 출력됨 -->
+    <RouterView/>  <!-- 라우트에 따라 페이지가 출력됨 -->
   </main>
   
 
@@ -58,11 +58,8 @@ watch(() => route.path, (newPath) => {
 }
 
 main {
-    flex-grow: 1; /* 남은 공간을 모두 차지 */
-    display: flex;
-    justify-content: center;
-    align-items: center; /* 달력 등을 화면 가운데 정렬 */
-    background-color: #F3F7FA; /* 배경 색을 채우기 위해 설정 */
+  flex-grow: 1; /* 메인 영역이 남은 공간을 모두 차지 */
+  background-color: #F5F5F5;
 }
 
 .footer {
