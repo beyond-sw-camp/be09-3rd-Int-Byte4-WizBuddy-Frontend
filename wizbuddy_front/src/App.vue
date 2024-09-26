@@ -29,7 +29,8 @@ watch(() => route.path, (newPath) => {
 
 <style scoped>
 main {
-  padding: 20px;
-  background-color: #F3F7FA;
+  width: 100%;
+  height: 833px;
+  background-color: #F5F5F5;
 }
 </style>
