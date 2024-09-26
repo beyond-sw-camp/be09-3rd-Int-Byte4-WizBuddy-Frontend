@@ -61,12 +61,15 @@
 
   .login-page {
     display: flex;
-    height: 100vh;
+    justify-content: center;
+    align-items: center;
     background-color: #F3F7FA;
+    gap:200px;    
+    height: calc(100vh - 80px);
   }
   
   .left-section {
-    flex: 1;
+    flex: 0.3;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -74,12 +77,13 @@
   }
   
   .character-image {
-    width: 80%; 
+    width: 100%; 
     max-width: 500px;
+    object-fit: contain; 
   }
   
   .right-section {
-    flex: 1;
+    flex: 0.3;
     display: flex;
     justify-content: center;
     align-items: center;
