@@ -7,6 +7,9 @@ import SignupPage from "@/views/user/SignupPage.vue";
 import ManualBoardRoutes from './manualBoard';
 import ScheduleRoutes from './schedule';
 
+import ChecklistRoutes from './checklist';
+import TaskRoutes from './task';
+
 const routes = [
   { path: "/", component: MainPage },
   { 
@@ -25,6 +28,9 @@ const routes = [
 
   ...ManualBoardRoutes,
   ...ScheduleRoutes,
+  ...ChecklistRoutes,
+  ...TaskRoutes
+
 ];
 
 const router = createRouter({
