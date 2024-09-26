@@ -6,7 +6,7 @@
   <AppHeaderInShop v-if="isManualBoardPage"/>
   <AppHeaderInShop v-if="isSubsBoardPage"/>
   <main>
-    <RouterView />  <!-- 라우트에 따라 페이지가 출력됨 -->
+    <RouterView/>  <!-- 라우트에 따라 페이지가 출력됨 -->
   </main>
   
   <!-- v-if로 LoginPage일 경우에는 AppFooter가 보이지 않도록 함 -->
@@ -57,6 +57,7 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;  
-}
+
+
 </style>
 

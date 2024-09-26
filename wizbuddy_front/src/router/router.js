@@ -9,14 +9,13 @@ import ScheduleMainPage from "@/components/schedule/Main.vue";
 // import SubsBoardPage from '@/views/SubsBoardPage.vue'; // SubsBoardPage 컴포넌트 경로 확인
 import SignupPage from "@/views/SignupPage.vue";
 import TaskMainPage from "@/views/checklist/TaskMainPage.vue";
-import TaskInsertPage from "@/views/checklist/TaskInsertPage.vue";
-import BoardView from "@/components/board/BoardBackground.vue";
+// import TaskInsertPage from "@/views/checklist/TaskInsertPage.vue";
+import manualBoardRoute from './manualBoard';
 
 const routes = [
   { path: '/schedule', component: ScheduleMainPage },
   // { path: '/checklist', component: CheckListPage },
   // { path: '/noticeboard', component: NoticeBoardPage },
-  // { path: '/manualboard', component: ManualBoardPage },
   // { path: '/subsboard', component: SubsBoardPage },
   { path: "/", component: MainPage }, // 메인 경로를 루트로 설정
   { 
@@ -28,10 +27,6 @@ const routes = [
     component: SignupPage
   },
   {
-    path: '/board',
-    component: BoardView
-  },
-  {
     path: "/task", name: 'TaskMainPage', component: TaskMainPage 
   },
   { 
@@ -39,6 +34,7 @@ const routes = [
     name: 'TaskInsertPage', 
     component: () => import('@/views/checklist/TaskInsertPage.vue') 
   },
+  manualBoardRoute
 ];
 
 const router = createRouter({
