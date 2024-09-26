@@ -12,8 +12,8 @@
 import { RouterView, useRoute } from 'vue-router';
 import {ref, watch} from 'vue';
 
-import AppHeader from '@/components/AppHeader.vue';
-import AppFooter from '@/components/AppFooter.vue';
+import AppHeader from '@/components/common/AppHeader.vue';
+import AppFooter from '@/components/common/AppFooter.vue';
 
 const route = useRoute();
 
