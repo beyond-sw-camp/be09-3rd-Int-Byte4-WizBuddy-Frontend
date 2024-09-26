@@ -1,26 +1,60 @@
 /* 화면 전체를 채우는 컨테이너 설정 */
 .main-container {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
     min-height: calc(100vh - 151.6px);
     padding-bottom: 41.6px;
     background-color: #F3F7FA;
-    box-sizing: border-box;
+    padding: 0 20px;
+    gap: 20px;
 }
+
+/* .tab-container {
+    display: flex;
+    margin-top: 10px;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0px 8px 33px 0px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    height: auto;
+    min-width: 240px;
+}
+
+.tab-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #000;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.tab-item:hover {
+    background-color: #f0f0f0;
+} */
 
 /* 달력 컨테이너 중앙 정렬 */
 .calendar-container {
     max-width: 850px;
     width: 100%;
-    margin: 10px auto 0 auto; /* 위쪽에 10px의 마진 추가 */
+    margin-top: 10px;
     background-color: white;
     border: 1px solid #ccc;
     border-radius: 20px;
     padding: 5px 40px 14px 40px;
-    box-shadow: 0px 8px 33px 0px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box; /* 패딩이 컨테이너 크기에 포함되도록 */
+    box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
     overflow: hidden;
+    flex: 1;
 }
 
 /* 달력의 헤더 부분 */
