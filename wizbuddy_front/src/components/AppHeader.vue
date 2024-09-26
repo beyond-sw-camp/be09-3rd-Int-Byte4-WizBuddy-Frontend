@@ -4,7 +4,7 @@
       <div class="left-section">
         <img src="@/assets/icons/wizbuddy_logo.svg" alt="Wiz Buddy Logo" class="logo-img" />
       </div>
-      <div class="right-section">
+      <div class="right-section" v-if="!(isLoginPage|isSignupPage)">
         <p>알바생 {{ username }}님, 환영합니다.</p>
         <img src="@/assets/icons/Profile.svg" alt="Profile" class="profile-img" />
       </div>
