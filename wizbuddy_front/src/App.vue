@@ -70,23 +70,6 @@ main {
   background-color: #F3F7FA;
 }
 
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%; /* HTML과 body의 높이를 100%로 설정 */
-}
-
-#app {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* 화면 전체를 채우도록 설정 */
-}
-
-main {
-    flex: 1; /* 남은 공간을 모두 차지하게 설정 */
-    display: flex;
-    background-color: #F3F7FA; /* 배경 색을 채우기 위해 설정 */
-}
 
 .footer {
     background-color: #3A4E8B;
