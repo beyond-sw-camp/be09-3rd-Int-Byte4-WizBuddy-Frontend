@@ -30,7 +30,7 @@ const routes = [
   {
     path: '/board',
     component: BoardView
-  }
+  },
   {
     path: "/task", name: 'TaskMainPage', component: TaskMainPage 
   },
