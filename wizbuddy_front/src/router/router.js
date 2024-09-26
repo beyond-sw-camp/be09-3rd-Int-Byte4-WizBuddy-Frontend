@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import MainPage from "@/views/MainPage.vue";
 import LoginPage from "@/views/LoginPage.vue";
-import ScheduleMainPage from "@/views/ScheduleMainPage.vue";
+import ScheduleMainPage from "@/components/schedule/Main.vue";
 // import CheckListPage from '@/views/CheckListPage.vue'; // CheckListPage 컴포넌트 경로 확인
 // import NoticeBoardPage from '@/views/NoticeBoardPage.vue'; // NoticeBoardPage 컴포넌트 경로 확인
 // import ManualBoardPage from '@/views/ManualBoardPage.vue'; // ManualBoardPage 컴포넌트 경로 확인

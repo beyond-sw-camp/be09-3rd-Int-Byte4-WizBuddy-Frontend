@@ -5,26 +5,24 @@
   <AppHeaderInShop v-if="isNoticeBoardPage"/>
   <AppHeaderInShop v-if="isManualBoardPage"/>
   <AppHeaderInShop v-if="isSubsBoardPage"/>
-
+  
   <main>
     <RouterView/>  <!-- 라우트에 따라 페이지가 출력됨 -->
   </main>
   
-  <!-- v-if로 LoginPage일 경우에는 AppFooter가 보이지 않도록 함 -->
-  <AppFooter v-if="!(isLoginPage|isSignupPage)"/>    <!-- 푸터 컴포넌트 -->
 
+  <!-- v-if로 LoginPage일 경우에는 AppFooter가 보이지 않도록 설정 -->
+  <AppFooter v-if="!(isLoginPage || isSignupPage)"/>    <!-- 푸터 컴포넌트 -->
 </template>
 
 <script setup>
 import './assets/css/style.css';
 import { RouterView, useRoute } from 'vue-router';
-import {ref, watch} from 'vue';
-
+import { ref, watch } from 'vue';
 
 import AppHeader from '@/components/AppHeader.vue';
 import AppFooter from '@/components/AppFooter.vue';
 import AppHeaderInShop from '@/components/AppHeaderInShop.vue';
-
 
 const route = useRoute();
 
@@ -46,31 +44,23 @@ watch(() => route.path, (newPath) => {
   isNoticeBoardPage.value = newPath === '/noticeboard';
   isManualBoardPage.value = newPath === '/manualboard';
   isSubsBoardPage.value = newPath === '/subsboard';
-},
-{ 
+}, { 
   immediate: true 
 }); 
-</script> 
-
+</script>
 
 <style scoped>
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;  /* HTML과 BODY가 전체 화면을 차지하게 설정 */
-}
-
 #app {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* 앱 전체를 100vh로 설정 */
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* 화면 전체를 100%로 사용 */
+    overflow: hidden; /* 스크롤 제거 */
 }
 
 main {
   flex-grow: 1; /* 메인 영역이 남은 공간을 모두 차지 */
   background-color: #F5F5F5;
 }
-
 
 .footer {
     background-color: #3A4E8B;
@@ -83,4 +73,3 @@ main {
     left: 0;
 }
 </style>
-

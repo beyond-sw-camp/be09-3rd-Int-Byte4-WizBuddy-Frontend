@@ -16,10 +16,10 @@ export default {};
   padding: 10px;
   text-align: center;
   color: white;
-  /* 콘텐츠가 적을 때도 화면 하단에 배치되도록 수정 */
-  position: relative; /* absolute에서 relative로 변경 */
+  position: fixed; /* 푸터를 화면 하단에 고정 */
   bottom: 0;
   width: 100%;
+  left: 0;
 }
 
 .footer-content p {
