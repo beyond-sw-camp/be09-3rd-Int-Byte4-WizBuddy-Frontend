@@ -1,10 +1,10 @@
 <template>
   <AppHeader v-if="isLoginPage|isSignupPage|isMainPage"/>    <!-- 헤더 컴포넌트 -->
-  <AppHeaderInShop v-if="isSchedulePage"/>
-  <AppHeaderInShop v-if="isCheckListPage"/>
-  <AppHeaderInShop v-if="isNoticeBoardPage"/>
-  <AppHeaderInShop v-if="isManualBoardPage"/>
-  <AppHeaderInShop v-if="isSubsBoardPage"/>
+  <AppHeader v-if="isSchedulePage"/>
+  <AppHeader v-if="isCheckListPage"/>
+  <AppHeader v-if="isNoticeBoardPage"/>
+  <AppHeader v-if="isManualBoardPage"/>
+  <AppHeader v-if="isSubsBoardPage"/>
   <main>
     <RouterView/>  <!-- 라우트에 따라 페이지가 출력됨 -->
   </main>
@@ -22,8 +22,6 @@ import {ref, watch} from 'vue';
 
 import AppHeader from '@/components/AppHeader.vue';
 import AppFooter from '@/components/AppFooter.vue';
-import AppHeaderInShop from '@/components/AppHeaderInShop.vue';
-
 
 const route = useRoute();
 
@@ -53,11 +51,5 @@ watch(() => route.path, (newPath) => {
 
 
 <style scoped>
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;  
-
-
 </style>
 

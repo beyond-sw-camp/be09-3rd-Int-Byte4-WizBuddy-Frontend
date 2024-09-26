@@ -1,4 +1,4 @@
-import ManualBoard from '@/views/ManualBoard.vue';
+import ManualBoard from '@/views/board/ManualBoard.vue';
 
 const ManualBoardRoutes = [
     {

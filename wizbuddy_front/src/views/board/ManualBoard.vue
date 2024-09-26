@@ -5,5 +5,5 @@
 </template>
 
 <script setup>
-    import BoardBackground from "@/board/BoardBackground.vue";
+    import BoardBackground from "@/components/board/BoardBackground.vue";
 </script>

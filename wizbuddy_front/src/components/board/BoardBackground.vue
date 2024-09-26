@@ -72,17 +72,17 @@
   }
 
   .central-container {
-    margin-top: 40px;
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center; /* Center the inner-container horizontally */
     align-items: center;     /* Center the inner-container vertically */
-    height: 90vh;           /* Full viewport height */
+    height: 70vh;           /* Full viewport height */
     width: 90%;             /* Full width */
     background-color: #ffffff;
     filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
     box-sizing: border-box;
-    padding: 20px;           /* Add padding to prevent inner content from touching the edges */
+    padding: 5px;           /* Add padding to prevent inner content from touching the edges */
     position: relative;
     border-radius: 10px;
   }
@@ -98,7 +98,7 @@
     justify-content: center;  /* Center the content horizontally */
     align-items: center;      /* Center the content vertically */
     box-sizing: border-box;
-    padding: 20px;            /* Padding inside the inner-container */
+    padding: 5px;            /* Padding inside the inner-container */
     height: 80%;              /* Reduced height to make space for bottom-controls */
     margin-bottom: 20px;       /* Add spacing below the inner-container for bottom-controls */
   }
@@ -185,7 +185,7 @@
   border-collapse: collapse; /* Ensure table borders merge */
 }
 .notice-board th, .notice-board td {
-  padding: 12px 16px; /* Spacing between table cells */
+  padding: 5px 10px; /* Spacing between table cells */
   border: 1px solid #ddd; /* Add borders between cells */
   text-align: center; /* Center align text */
 }
