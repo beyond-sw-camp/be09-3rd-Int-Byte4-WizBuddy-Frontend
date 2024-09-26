@@ -3,7 +3,7 @@
       <div class="logo">
         <img src="@/assets/icons/wizbuddy_logo.svg" alt="Wiz Buddy Logo" class="logo-img" />
       </div>
-      <div class="profile-section" v-if="!isLoginPage">
+      <div class="profile-section" v-if="!(isLoginPage|isSignupPage)">
         <div class="welcome-message">
           <p>알바생 {{ username }}님, 환영합니다.</p>
         </div>
@@ -18,9 +18,11 @@
 
     const route = useRoute();
     const isLoginPage = ref(false);
+    const isSignupPage = ref(false);
 
     watch(() => route.path, (newPath) => {
       isLoginPage.value = newPath === '/login';
+      isSignupPage.value = newPath === '/signup';
     }
     , 
     {
@@ -37,6 +39,7 @@
     padding: 10px 20px;
     color: white;
     height: 60px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   }
   
   .logo {
