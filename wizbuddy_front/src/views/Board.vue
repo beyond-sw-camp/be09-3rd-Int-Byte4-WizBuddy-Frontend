@@ -1,17 +1,10 @@
 <template>
-    <main>
-        <RouterView/>
-        <Board/>
-    </main>
+    <div>
+        <BoardBackground/>
+    </div>
 </template>
 
-<script>
-  export default {
-    name: 'Board',
-  };
-</script>
 <script setup>
-    import { RouterView } from "vue-router";
-    import Board from '@/views/Board.vue';
+    import BoardBackground from "@/board/BoardBackground.vue";
 
 </script>

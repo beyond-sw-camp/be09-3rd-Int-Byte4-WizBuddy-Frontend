@@ -1,18 +1,21 @@
 <template>
+  <header>
   <AppHeader v-if="isLoginPage"/>    <!-- 헤더 컴포넌트 -->
   <AppHeaderInShop v-if="isSchedulePage"/>
   <AppHeaderInShop v-if="isCheckListPage"/>
   <AppHeaderInShop v-if="isNoticeBoardPage"/>
   <AppHeaderInShop v-if="isManualBoardPage"/>
-  <AppHeaderInShop v-if="isSubsBoardPage"/>
+  <AppHeaderInShop v-if="isSubsBoardPage"/></header>
+
   <main>
-    <RouterView />  <!-- 라우트에 따라 페이지가 출력됨 -->
+    <RouterView/>  <!-- 라우트에 따라 페이지가 출력됨 -->
   </main>
   
   
 
   <!-- v-if로 LoginPage일 경우에는 AppFooter가 보이지 않도록 함 -->
-  <AppFooter v-if="!isLoginPage"/>    <!-- 푸터 컴포넌트 -->
+   <footer>
+  <AppFooter v-if="!isLoginPage"/>    <!-- 푸터 컴포넌트 --></footer>
 </template>
 
 <script setup>
@@ -49,7 +52,7 @@ watch(() => route.path, (newPath) => {
 <style scoped>
 main {
   width: 100%;
-  height: 833px;
+  height: 100vh;
   background-color: #F5F5F5;
 }
 

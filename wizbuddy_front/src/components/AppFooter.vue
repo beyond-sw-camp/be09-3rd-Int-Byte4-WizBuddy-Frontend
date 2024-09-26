@@ -1,7 +1,7 @@
 <template>
     <footer class="footer">
       <div class="footer-content">
-        <p>&copy; 2024 IntiByte</p>
+        <p>&copy; 2024 IntByte</p>
       </div>
     </footer>
   </template>
@@ -16,7 +16,7 @@
     padding: 10px;
     text-align: center;
     color: white;
-    position: absolute;
+    /* position: fixed; */
     bottom: 0;
     width: 100%;
   }
