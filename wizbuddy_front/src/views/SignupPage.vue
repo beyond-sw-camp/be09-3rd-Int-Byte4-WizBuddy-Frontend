@@ -49,42 +49,48 @@
 </script>
   
 <style scoped>
+
   .signup-page {
     display: flex;
-    height: 100vh;
+    justify-content: center;
+    align-items: center;
     background-color: #F3F7FA;
+    gap:200px;
+    height: calc(100vh - 80px);
   }
 
   .left-section {
-      flex: 1;
+      flex: 0.3;
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #F3F7FA;
+      background-color: #F3F7FA; 
     }
+  
 
   .character-image {
-  width: 80%;
-  max-width: 500px;
+    width: 100%;
+    max-width: 500px;
+    object-fit: contain; 
   }
 
   .signup-form {
-    width: 80%;
+    width: 100%;
     max-width: 400px;
     text-align: center;
-    padding: 20px;
     background-color: white;
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
   .right-section {
-    flex: 1;
+    flex: 0.3;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #F3F7FA;
   }
+  
 
   .employer-btn {
     width: 40%;
