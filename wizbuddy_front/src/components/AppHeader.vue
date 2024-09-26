@@ -1,14 +1,14 @@
 <template>
     <header class="header">
-      <div class="logo">
+      <div class="top-bar">
+      <div class="left-section">
         <img src="@/assets/icons/wizbuddy_logo.svg" alt="Wiz Buddy Logo" class="logo-img" />
       </div>
-      <div class="profile-section" v-if="!(isLoginPage|isSignupPage)">
-        <div class="welcome-message">
-          <p>알바생 {{ username }}님, 환영합니다.</p>
-        </div>
+      <div class="right-section">
+        <p>알바생 {{ username }}님, 환영합니다.</p>
         <img src="@/assets/icons/Profile.svg" alt="Profile" class="profile-img" />
       </div>
+    </div>
     </header>
   </template>
   
@@ -33,35 +33,39 @@
   <style scoped>
   .header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
     background-color: #3A4E8B;
-    padding: 10px 20px;
     color: white;
-    height: 60px;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   }
-  
-  .logo {
+
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .left-section {
     display: flex;
     align-items: center;
   }
   
   .logo-img {
-    height: 40px;
+    width: 150px;
+    height: auto;
   }
-  
-  .profile-section {
+
+  .right-section {
     display: flex;
     align-items: center;
-    justify-content: flex-end; /* 오른쪽 정렬 */
   }
-  
-  .welcome-message {
-    margin-right: 10px; /* 프로필 이미지와 간격 설정 */
-    font-size: 18px;
+
+  .right-section p {
+    margin-right: 15px;
+    font-size: 16px;
   }
-  
+
   .profile-img {
     height: 40px;
     width: 40px;
