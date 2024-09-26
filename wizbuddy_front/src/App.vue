@@ -5,7 +5,7 @@
   </main>
 
   <!-- v-if로 LoginPage일 경우에는 AppFooter가 보이지 않도록 함 -->
-  <AppFooter v-if="!isLoginPage"/>    <!-- 푸터 컴포넌트 -->
+  <AppFooter v-if="!(isLoginPage|isSignupPage)"/>    <!-- 푸터 컴포넌트 -->
 </template>
 
 <script setup>
@@ -18,18 +18,22 @@ import AppFooter from '@/components/AppFooter.vue';
 const route = useRoute();
 
 const isLoginPage = ref(false);
+const isSignupPage = ref(false);
 
 watch(() => route.path, (newPath) => {
-  isLoginPage.value = newPath === '/login';
+  isLoginPage.value = newPath === '/login',
+  isSignupPage.value = newPath === '/signup';
 },
 { 
   immediate: true 
 }); 
 </script> 
 
+
 <style scoped>
 main {
-  padding: 20px;
+  width: 100%;
+  height: 833px;
   background-color: #F3F7FA;
 }
 </style>
