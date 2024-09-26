@@ -1,10 +1,5 @@
 <template>
-  <AppHeader v-if="isLoginPage|isSignupPage|isMainPage"/>    <!-- 헤더 컴포넌트 -->
-  <AppHeader v-if="isSchedulePage"/>
-  <AppHeader v-if="isCheckListPage"/>
-  <AppHeader v-if="isNoticeBoardPage"/>
-  <AppHeader v-if="isManualBoardPage"/>
-  <AppHeader v-if="isSubsBoardPage"/>
+  <AppHeader/>
   <main>
     <RouterView/>  <!-- 라우트에 따라 페이지가 출력됨 -->
   </main>
@@ -48,7 +43,6 @@ watch(() => route.path, (newPath) => {
   immediate: true 
 }); 
 </script> 
-
 
 <style scoped>
 </style>
