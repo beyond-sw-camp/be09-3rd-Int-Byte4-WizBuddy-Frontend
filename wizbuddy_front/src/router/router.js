@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import MainPage from "@/views/MainPage.vue";
+import MainPage from "@/views/user/MainPage.vue";
 import LoginPage from "@/views/user/LoginPage.vue";
 import SignupPage from "@/views/user/SignupPage.vue";
 
@@ -11,20 +11,26 @@ import ChecklistRoutes from './checklist';
 import TaskRoutes from './task';
 
 const routes = [
-  { path: "/", component: MainPage }, // 메인 경로를 루트로 설정
+  { path: "/", component: MainPage },
   { 
     path: "/login", 
     component: LoginPage,
   },
+
   {
     path: "/signup",
-    component: SignupPage
+    component: SignupPage,
+  },
+  {
+    path: "/main",
+    component: MainPage
   },
 
   ...ManualBoardRoutes,
   ...ScheduleRoutes,
   ...ChecklistRoutes,
   ...TaskRoutes
+
 ];
 
 const router = createRouter({
