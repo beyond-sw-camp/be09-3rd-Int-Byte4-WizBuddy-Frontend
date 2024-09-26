@@ -11,6 +11,7 @@ import SignupPage from "@/views/user/SignupPage.vue";
 import TaskMainPage from "@/views/checklist/TaskMainPage.vue";
 // import TaskInsertPage from "@/views/checklist/TaskInsertPage.vue";
 import ManualBoardRoutes from './manualBoard';
+import NoticeBoardRoutes from './noticeBoard';
 
 const routes = [
   { path: '/schedule', component: ScheduleMainPage },
@@ -34,7 +35,8 @@ const routes = [
     name: 'TaskInsertPage', 
     component: () => import('@/views/checklist/TaskInsertPage.vue') 
   },
-  ...ManualBoardRoutes
+  ...ManualBoardRoutes,
+  ...NoticeBoardRoutes
 ];
 
 const router = createRouter({
