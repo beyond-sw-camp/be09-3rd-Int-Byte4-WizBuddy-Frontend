@@ -7,6 +7,9 @@ import SignupPage from "@/views/user/SignupPage.vue";
 import ManualBoardRoutes from './manualBoard';
 import ScheduleRoutes from './schedule';
 
+import ChecklistRoutes from './checklist';
+import TaskRoutes from './task';
+
 const routes = [
   { path: "/", component: MainPage }, // 메인 경로를 루트로 설정
   { 
@@ -19,7 +22,9 @@ const routes = [
   },
 
   ...ManualBoardRoutes,
-  ...ScheduleRoutes
+  ...ScheduleRoutes,
+  ...ChecklistRoutes,
+  ...TaskRoutes
 ];
 
 const router = createRouter({
