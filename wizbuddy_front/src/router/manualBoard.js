@@ -1,19 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Board from '@/views/Board.vue';
+import ManualBoard from '@/views/ManualBoard.vue';
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    Board
+    ManualBoard
   ]
 });
 
-export default {
-    path: '/manualboard',
-    name: 'manualboard',
-    component: Board
-};
-
-
-
-// export default router;
+export default router;

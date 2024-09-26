@@ -95,7 +95,7 @@ watchEffect(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 10px;
   border-bottom: 1px solid white;
 }
 
@@ -117,6 +117,7 @@ watchEffect(() => {
 .right-section p {
   margin-right: 15px;
   font-size: 16px;
+  font-family: Inter;
 }
 
 .profile-img {
@@ -128,7 +129,7 @@ watchEffect(() => {
 .tabs {
   display: flex;
   justify-content: flex-start;
-  gap: 20px; /* 버튼들 사이의 간격 설정 */
+  gap: 10px; /* 버튼들 사이의 간격 설정 */
   background-color: white;
   padding: 10px 0;
 }
@@ -138,18 +139,18 @@ watchEffect(() => {
   color: black;
   border: none;
   transition: background-color 0.3s, color 0.3s;
-  font-size: 16px;
+  font-size: 12px;
   cursor: pointer;
   display: flex;
   width: 140px;
-  height: 40px;
+  height: 20px;
   padding: 5px 10px;
   justify-content: center;
   align-items: center; /* 상하 중앙 정렬 */
   text-align: center;
 text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 font-family: Inter;
-font-size: 16px;
+font-size: 14px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
