@@ -10,7 +10,7 @@ import ScheduleMainPage from "@/components/schedule/Main.vue";
 import SignupPage from "@/views/SignupPage.vue";
 import TaskMainPage from "@/views/checklist/TaskMainPage.vue";
 // import TaskInsertPage from "@/views/checklist/TaskInsertPage.vue";
-import manualBoardRoute from './manualBoard';
+import ManualBoardRoutes from './manualBoard';
 
 const routes = [
   { path: '/schedule', component: ScheduleMainPage },
@@ -34,7 +34,11 @@ const routes = [
     name: 'TaskInsertPage', 
     component: () => import('@/views/checklist/TaskInsertPage.vue') 
   },
-  manualBoardRoute
+  // {
+  //   path: "/manualboard", 
+  //   component: ManualBoard
+  // },
+  ...ManualBoardRoutes
 ];
 
 const router = createRouter({
