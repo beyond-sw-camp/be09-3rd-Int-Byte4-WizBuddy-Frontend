@@ -66,7 +66,7 @@
     import ScheduleTab from './ScheduleTab.vue';
     import UserProfileMenu from '../UserProfileMenu.vue';
     import EmployerSideMenu from './EmployerSideMenu.vue';
-    import EmployeeRegisterModal from './EmployeeRegisterModal.vue';
+    import EmployeeRegisterModal from './modal/EmployeeRegisterModal.vue';
 
     const selectedDay = ref(null);
     const currentDate = ref(new Date());

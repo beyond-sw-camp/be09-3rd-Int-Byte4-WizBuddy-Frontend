@@ -5,8 +5,8 @@ import LoginPage from "@/views/user/LoginPage.vue";
 import SignupPage from "@/views/user/SignupPage.vue";
 
 import ManualBoardRoutes from './manualBoard';
-import ScheduleRoutes from './schedule.js';
-
+import NoticeBoardRoutes from './noticeBoard';
+import ScheduleRoutes from './schedule';
 import ChecklistRoutes from './checklist';
 import TaskRoutes from './task';
 
@@ -31,12 +31,11 @@ const routes = [
     path: "/main",
     component: MainPage
   },
-
   ...ManualBoardRoutes,
+  ...NoticeBoardRoutes,
   ...ScheduleRoutes,
   ...ChecklistRoutes,
   ...TaskRoutes
-
 ];
 
 const router = createRouter({
