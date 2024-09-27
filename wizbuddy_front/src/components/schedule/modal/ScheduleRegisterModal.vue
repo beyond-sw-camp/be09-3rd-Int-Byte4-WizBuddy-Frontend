@@ -1,7 +1,8 @@
 <template>
   <div v-if="isOpen" class="modal-overlay" @click.self="closeModal">
     <div class="modal-container">
-        <h3 class="modal-title">스케줄 등록</h3>
+      <h3 class="modal-title">{{ isRegistered ? '등록 완료' : '스케줄 등록' }}</h3>
+      <template v-if="!isRegistered">
         <form @submit.prevent="submitForm" class="modal-form">
           <div class="form-group">
             <label for="date">시작일 선택 (월요일):</label>
@@ -22,7 +23,14 @@
             <button type="submit" class="submit-btn" :disabled="!isValid">등록</button>
           </div>
         </form>
-      </div>
+      </template>
+      <template v-else>
+        <p class="success-message">스케줄이 등록되었습니다.</p>
+        <div class="modal-actions">
+          <button @click="closeModal" class="confirm-btn">확인</button>
+        </div>
+      </template>
+    </div>
   </div>
 </template>
 
@@ -54,15 +62,24 @@ const schedule = ref({
 
 const isValid = ref(true);
 const minDate = ref(formatDate(new Date()));
+const isRegistered = ref(false);
 
 function closeModal() {
+  if (isRegistered.value) {
+    isRegistered.value = false;
+    schedule.value.date = "";
+  }
   emit("close");
 }
 
 function submitForm() {
   if (isValid.value) {
-    emit("submit", schedule.value);
-    closeModal();
+    isRegistered.value = true;  
+    
+    setTimeout(() => {
+      emit("submit", schedule.value);
+      closeModal();
+    }, 5000);
   }
 }
 
@@ -163,6 +180,35 @@ label {
 }
 
 .submit-btn:hover {
+  background-color: #357ae8;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+.success-message {
+  color: #4285F4;
+  font-size: 18px;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.confirm-btn {
+  background-color: #4285F4;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  font-size: 18px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.confirm-btn:hover {
   background-color: #357ae8;
 }
 </style>
