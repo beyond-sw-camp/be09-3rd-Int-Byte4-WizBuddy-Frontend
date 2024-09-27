@@ -1,101 +1,41 @@
 <template>
-        <table class="board">
-          <thead>
-            <tr>
-              <th class="board-number">번호</th>
-              <th class="board-title">제목</th>
-              <th class="board-writer">작성자</th>
-              <th class="board-register-date">작성 날짜</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <template >{{ }}</template>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
+  <div class="board-container">
+    <div class="board-header">
+      <div class="board-header-number">번호</div>
+      <div class="board-header-title">제목</div>
+      <div class="board-header-writer">작성자</div>
+      <div class="board-header-registerdate">작성날짜</div>
+    </div>
+    <BoardItem v-for="board in boards.slice().reverse()" :board="board" :key="board.id" />
+  </div>
 </template>
 
 <script setup>
-    import {useRoute, useRouter} from 'vue-router';
+  import { ref } from 'vue';
+  import BoardItem from './BoardItem.vue';
 
-    const currentRoute = useRoute();
-    const router = useRouter();
+  const boards = ref([
+    {id: 1, title: '제목1', writer: '사장1', registerdate: '2024.09.20'},
+    {id: 2, title: '제목2', writer: '사장2', registerdate: '2024.09.21'},
+    {id: 3, title: '제목3', writer: '사장3', registerdate: '2024.09.22'},
+    {id: 4, title: '제목4', writer: '사장4', registerdate: '2024.09.23'},
+    {id: 5, title: '제목5', writer: '사장5', registerdate: '2024.09.24'},
+  ]);
 </script>
 
 <style scoped>
-    .board {
-    width: 100%;
-    height: 100%;
-    border-collapse: collapse; /* Ensure table borders merge */
-    }
-    .board th, .board td {
-    padding: 5px 10px; /* Spacing between table cells */
-    border: 1px solid #ddd; /* Add borders between cells */
-    text-align: center; /* Center align text */
-    }
-
-    .board th {
-    background-color: #ffffff; /* Background for table header */
-    color: #000000;
+  .board-header {
+    display: grid;
+    grid-template-columns: 1fr 4fr 2fr 2fr; /* Match column widths to the items */
+    padding: 12px 16px;
+    background-color: #ffffff;
     font-weight: bold;
-    padding: 12px 20px 12px 20px;
-    font-size: 20px;
-    }
-
-    .board td {
-    font-size: 14px;
-    }
-
-    .board tr:hover td {
-    background-color: #f2f2f2; /* Row hover effect */
-    }
-
-    .board td {
-        padding: 8px;
-        font-size: 12px;
-    }
-
-    .board-number {
-    width: 10%;
-    }
-
-    .board-title {
-    width: 50%;
-    }
-
-    .board-writer {
-    width: 20%;
-    }
-
-    .board-register-date {
-    width: 20%;
-    }
+    border-bottom: 2px solid #ddd;
+    text-align: center;
+  }
+  .board-container {
+    width: 95%;
+    /* border-radius: 20px; */
+    overflow: hidden;
+  }
 </style>

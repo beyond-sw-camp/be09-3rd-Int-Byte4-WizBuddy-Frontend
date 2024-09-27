@@ -2,7 +2,7 @@
   <div class="container">
     <div class="central-container">
       <div class="inner-container">
-        <ManualBoardList/>
+        <BoardTable/>
       </div>
       <div class="bottom-controls">
         <div class="search-container">
@@ -17,7 +17,7 @@
   
 <script setup>
     import {useRoute, useRouter} from 'vue-router';
-    import ManualBoardList from '@/components/board/ManualBoardList.vue';
+    import BoardTable from './BoardTable.vue';
 
     const currentRoute = useRoute();
     const router = useRouter();
