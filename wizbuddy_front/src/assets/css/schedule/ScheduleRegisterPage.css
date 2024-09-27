@@ -3,7 +3,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-    min-height: calc(100vh - 151.6px);
+    min-height: 100vh;
     padding-bottom: 41.6px;
     background-color: #F3F7FA;
     padding: 0 20px;
@@ -46,7 +46,7 @@
   }
 
 .calendar-container {
-    max-width: 850px;
+    max-width: 900px;
     width: 100%;
     margin-top: 20px;
     background-color: white;
@@ -59,7 +59,6 @@
     flex: 1;
 }
 
-/* 달력의 헤더 부분 */
 .calendar-header {
     display:flex;
     justify-content: center;
@@ -69,21 +68,17 @@
     font-weight: bold;
     position: relative;
     margin-bottom: 5px;
-    margin-left: 200px;
-    margin-right: 200px;
+    margin-left: 190px;
+    margin-right: 190px;
 }
 
 .calendar-header h2 {
     font-size: auto;
-    margin-bottom: 10px;
-    padding-left: 30px;
-    padding-right: 30px;
 }
 
-/* 이전, 다음 버튼 스타일 */
 .prev-next-button {
     font-size: 18px;
-    padding: 5px 10px;
+    margin-top: 5px;
     cursor: pointer;
     border: none;
     background-color: transparent;
@@ -105,27 +100,23 @@
     border-radius: 5px;
 }
 
-/* 달력 본문 */
 .calendar-body {
     display: flex;
     flex-direction: column;
 }
 
-/* 요일 제목 */
 .calendar-weekdays {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     text-align: center;
     font-weight: bold;
-    margin-bottom: 10px;
 }
 
-/* 날짜 셀 */
 .calendar-days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-auto-rows: minmax(70px, auto);
-    gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+    gap: 5px;
 }
 
 .calendar-day {
@@ -151,7 +142,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 5px;
     background-color: transparent;
 }
 
@@ -177,20 +167,23 @@
     padding: 5px;
     border-radius: 5px;
     margin: 2px 0;
-    font-size: 8px;
+    font-size: 10px;
     text-align: center;
 }
 
 /* 스케줄 타입별 스타일 */
 .schedule.fun {
+    font-size: 9px;
     background-color: #D2F0FF;
 }
 
 .schedule.important {
+    font-size: 9px;
     background-color: #FFD9D9;
 }
 
 .schedule.personal {
+    font-size: 9px;
     background-color: #FEE6C9;
 }
 

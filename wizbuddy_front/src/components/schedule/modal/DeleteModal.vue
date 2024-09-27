@@ -1,17 +1,22 @@
 <template>
     <div v-if="isOpen" class="modal-overlay" @click.self="closeModal">
       <div class="modal-container">
+        <!-- "삭제되었습니다" 메시지와 "정말 삭제하시겠습니까?" 메시지 구분 -->
         <h3 class="modal-title">{{ isDeleted ? '삭제되었습니다' : '정말 삭제하시겠습니까?' }}</h3>
+  
+        <!-- 삭제가 완료되지 않은 경우의 버튼 -->
         <div class="modal-actions" v-if="!isDeleted">
           <button type="button" class="cancel-btn" @click="closeModal">아니오</button>
           <button type="button" class="delete-btn" @click="confirmDelete">네</button>
         </div>
+  
+        <!-- 삭제 완료 후 "확인" 버튼만 보이도록 -->
         <div class="modal-actions" v-else>
           <button type="button" class="confirm-btn" @click="closeModal">확인</button>
         </div>
       </div>
     </div>
-</template>
+  </template>
   
   <script setup>
   import { ref } from 'vue';
@@ -29,12 +34,13 @@
   
   function confirmDelete() {
     isDeleted.value = true;
-    emit('confirmDelete');
-    
+    emit('confirmDelete'); // 삭제 처리를 서버에 요청하거나 로직 처리
+  
+    // 5초 후에 모달 창을 자동으로 닫습니다.
     setTimeout(() => {
-      closeModal();
-      isDeleted.value = false;
-    }, 5000);
+      closeModal();  // 모달을 닫음
+      isDeleted.value = false;  // 초기 상태로 리셋 (다음에 모달이 열릴 때 "정말 삭제하시겠습니까?" 상태로 시작)
+    }, 5000); // 5000ms = 5초
   }
   </script>
   

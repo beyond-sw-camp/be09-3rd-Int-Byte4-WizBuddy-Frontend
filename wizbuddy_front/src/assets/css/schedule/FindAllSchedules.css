@@ -3,7 +3,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-    min-height: calc(100vh - 151.6px);
+    min-height: 100vh;
     padding-bottom: 41.6px;
     background-color: #F3F7FA;
     padding: 0 20px;
@@ -20,7 +20,7 @@
 }
 
   .schedule-container {
-    max-width: 850px;
+    max-width: 900px;
     width: 100%;
     margin-top: 20px;
     background-color: white;
@@ -39,8 +39,8 @@
     align-items: center;
     margin-top: 10px;
     margin-bottom: 20px;
-    margin-left: 180px;
-    margin-right: 180px;
+    margin-left: 120px;
+    margin-right: 120px;
   }
   
   .date-range {
@@ -106,6 +106,9 @@
   }
   
   .prev-next-button {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 5px;
     cursor: pointer;
     background: none;
     border: none;
