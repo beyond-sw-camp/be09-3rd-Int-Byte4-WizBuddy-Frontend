@@ -14,19 +14,28 @@
             <div class="input-group">
               <label for="password">비밀번호</label>
               <input type="password" id="password" v-model="password" placeholder="비밀번호 입력" />
+
             </div>
-            <button type="submit" class="login-btn">
-              <img src="@/assets/icons/user/로그인.svg" alt="로그인 버튼">
-            </button>
-            <button type="button" @click="kakaoLogin" class="kakao-btn">
-              <img src="@/assets/icons/user/카카오_로그인.svg" alt="카카오 로그인 버튼">
-            </button>
-              <div class="login-bottom-btn">
-                <button type="submit" class="find-id-btn">아이디 찾기</button>
-                <p> | </p>
-                <button class="find-password-btn">비밀번호 찾기</button> 
-                <p> | </p>
-                <button @click="goToSignup" class="signup-btn">회원가입</button> <!-- 회원가입 -> 회원 가입 누르면 /signup으로 -->
+            <P v-if="errorMessage" class="error-Message">
+              <span v-if="errorMessage === '아이디 또는 비밀번호를 입력해주세요.'">
+                <strong>아이디 또는 비밀번호</strong>를 입력해주세요.
+              </span>
+              <span v-else>{{errorMessage}}</span></P>
+
+             <div class="login-button">
+              <button type="submit" class="login-btn">
+                <img src="@/assets/icons/user/로그인.svg" alt="로그인 버튼">
+              </button>
+              <button type="button" @click="kakaoLogin" class="kakao-btn">
+                <img src="@/assets/icons/user/카카오_로그인.svg" alt="카카오 로그인 버튼">
+              </button>
+                <div class="login-bottom-btn">
+                  <button type="submit" class="find-id-btn">아이디 찾기</button>
+                  <p> | </p>
+                  <button class="find-password-btn">비밀번호 찾기</button> 
+                  <p> | </p>
+                  <button @click="goToSignup" class="signup-btn">회원가입</button> <!-- 회원가입 -> 회원 가입 누르면 /signup으로 -->
+                </div>
               </div>
           </form>
         </div>
@@ -35,24 +44,45 @@
   </template>
   
   <script setup>
-  import { ref } from 'vue';
-  import { useRouter } from 'vue-router';
-  
-  const username = ref('');
-  const password = ref('');
-  const router = useRouter();
-  
-  const onSubmit = () => {
-    console.log('로그인 시도');
-  };
-  
-  const kakaoLogin = () => {
-    console.log('카카오 로그인 시도');
-  };
+    import { ref } from 'vue';
+    import { useRouter } from 'vue-router';
+    
+    const username = ref('');
+    const password = ref('');
+    const errorMessage = ref('');
 
-  const goToSignup = () => {
-    router.push('/signup');
-  };
+    const router = useRouter();
+  
+    const onSubmit = async () => {
+      errorMessage.value = '';
+      if(!username.value || !password.value) {
+        errorMessage.value = '아이디 또는 비밀번호를 입력해주세요.';
+        return;
+      }
+      try {
+        const response = await fetch('http://localhost:8080/users?username=' + username.value + '&password=' + password.value);
+        const data = await response.json();
+        
+        if (data.length > 0) {
+          console.log('로그인 성공:', data[0]);
+          router.push('/main');
+        } else {
+          errorMessage.value = '일치하는 회원정보가 없습니다.';
+
+        }
+      } catch (error) {
+        console.error('로그인 중 오류가 발생했습니다:', error);
+      }
+    };
+
+    
+    const kakaoLogin = () => {
+      console.log('카카오 로그인 시도');
+    };
+
+    const goToSignup = () => {
+      router.push('/signup');
+    };
 </script>
 
   
@@ -65,6 +95,7 @@
     background-color: #F3F7FA;
     gap:200px;    
     height: calc(100vh - 80px);
+    width: 100%;
   }
   
   .left-section {
@@ -89,15 +120,16 @@
     background-color: #F3F7FA;
   }
   
-  /* 로그인 폼 간격 조절 */
+
   .login-form {
-    width: 80%;
-    max-width: 400px;
+    width: 350px; 
+    height: 400px;
     text-align: center;
     padding: 20px;
     background-color: white;
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative; 
   }
   
   .input-group {
@@ -115,6 +147,16 @@
     background: #F3F7FA;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   }
+
+  .login-button {
+    position: absolute;
+    bottom: 20px; 
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   
   .login-btn {
   width: 80%;
@@ -122,9 +164,9 @@
   background-color: transparent; /* 버튼 배경 투명 */
   border: none; /* 테두리 제거 */
   cursor: pointer;
-  margin-top: 20px;
+  margin-top: 50px;
   margin-bottom: 10px;
-  }
+  } 
   
   .login-btn img {
     width: 100%;
@@ -167,6 +209,11 @@
   color: #B7B7B8;
   margin: 0;
   display: flex;
+  }
+
+  .error-Message {
+    font-size: 12px;
+    color: red;
   }
 
 </style>
