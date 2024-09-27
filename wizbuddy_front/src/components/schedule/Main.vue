@@ -1,6 +1,8 @@
 <template>
   <div class="main-container">
-    <ScheduleTab/>
+    <aside class="left-side">
+      <ScheduleTab/>
+    </aside>
     <div class="calendar-container">
       <div class="calendar-header">
         <button @click="prevMonth" class="prev-next-button">
@@ -40,7 +42,9 @@
         </div>
       </div>
     </div>
-    <!-- 여기에 유저 정보를 띄워주는 것만 있으면 된다. -->
+    <aside class="right-side">
+      <UserProfileMenu/>
+    </aside>
   </div>
 </template>
   
@@ -48,6 +52,7 @@
 
   import {ref} from 'vue';
   import ScheduleTab from '../ScheduleTab.vue';
+  import UserProfileMenu from '../UserProfileMenu.vue';
 
   const currentDate = ref(new Date());
   const currentMonth = ref(currentDate.value.getMonth());
