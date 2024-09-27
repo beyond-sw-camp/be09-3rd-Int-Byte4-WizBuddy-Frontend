@@ -3,7 +3,8 @@ import ScheduleMainPage from "@/components/schedule/Main.vue";
 const ScheduleRoutes = [
     { 
         path: '/schedule', 
-        component: ScheduleMainPage 
+        component: ScheduleMainPage,
+        // meta: { requiresAuth: true }
     }
 ];
 

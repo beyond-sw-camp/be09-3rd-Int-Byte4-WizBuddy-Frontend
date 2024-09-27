@@ -1,9 +1,12 @@
 <template>
-  <SideProfileMenu/>
-  </template>
+  <SideMenu>
+    <ShopMenu/>
+  </SideMenu>
+</template>
   
 <script setup>
-  import SideProfileMenu from '@/components/SideMenu.vue';
+  import SideMenu from '@/components/SideMenu.vue';
+  import ShopMenu from '@/components/shop/ShopMenu.vue';
 </script>
 
 <script>

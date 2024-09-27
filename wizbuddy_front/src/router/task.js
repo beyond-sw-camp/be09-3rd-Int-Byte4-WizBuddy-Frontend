@@ -3,7 +3,8 @@ import TaskListPage from "@/views/task/TaskListPage.vue";
 const TaskRoutes = [
     {
         path: "/task",
-        component: TaskListPage
+        component: TaskListPage,
+        // meta: { requiresAuth: true }
     }
 ];
 
