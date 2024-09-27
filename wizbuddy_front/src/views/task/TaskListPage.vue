@@ -1,5 +1,8 @@
 <template>
   <div class="task-list-page">
+    <aside class="left-side">
+      <TaskTab/>
+    </aside>
     <div class="sidebar">
       <button @click="goToTaskCreatePage" class="register-button">등록</button>
     </div>
@@ -9,6 +12,10 @@
         <TaskItem v-for="task in tasks" :task="task" :key="task.id" />
       </div>
     </div>
+    
+    <aside class="right-side">
+      <UserProfileMenu/>
+    </aside>
   </div>
 </template>
 
@@ -17,6 +24,8 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import TaskItem from '@/components/task/TaskItem.vue'; // TaskItem 컴포넌트 경로 확인
+import TaskTab from '@/components/task/TaskTab.vue';
+import UserProfileMenu from '@/components/UserProfileMenu.vue';
 
 // Task 데이터 예시
 const tasks = ref([
@@ -38,11 +47,26 @@ const goToTaskCreatePage = () => {
 
 <style scoped>
 .task-list-page {
-  display: flex;
-  min-height: 100vh;
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    min-height: calc(100vh - 151.6px);
+    padding-bottom: 41.6px;
+    background-color: #F3F7FA;
+    
+    padding: 0 20px;
+}
+
+.left-side {
+    width: 16%; 
+    background-color: #F3F7FA;
+    padding: 20px;
+    margin-left : 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 100px;
 }
 
 .sidebar {
@@ -71,10 +95,14 @@ const goToTaskCreatePage = () => {
   flex: 1;
   margin-left: 120px;
   /* 사이드바 너비 + 여백 */
+
+  margin-right: 120px;
 }
 
-h1 {
-  text-align: center;
+h1 {text-align: center;
+  margin-top: 20px; /* 상단에 여백을 추가 */
+    margin-bottom: 20px; /* 하단에도 여백을 추가하여 항목과 구분 */
+    font-weight: bold;
 }
 
 .task-container {
@@ -98,5 +126,11 @@ h1 {
   .main-content {
     margin-left: 0;
   }
+}
+
+.right-side {
+    width: 20%; 
+    background-color: #F3F7FA;
+    padding: 20px;
 }
 </style>
