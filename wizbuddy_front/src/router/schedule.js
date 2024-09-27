@@ -1,5 +1,6 @@
 import ScheduleMainPage from "@/components/schedule/Main.vue";
 import FindAllSchedules from "@/components/schedule/FindAllSchedules.vue";
+import ScheduleRegisterPage from "@/components/schedule/ScheduleRegisterPage.vue";
 
 const ScheduleRoutes = [
     { 
@@ -11,6 +12,10 @@ const ScheduleRoutes = [
         //         component: RegisterWeeklySchedule
         //     },
         // ]
+    },
+    {
+        path: '/schedule/regist',
+        component: ScheduleRegisterPage
     },
     {
         path: '/schedule/schedules',
