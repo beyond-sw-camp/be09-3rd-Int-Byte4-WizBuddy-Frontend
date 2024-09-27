@@ -9,7 +9,7 @@
   
   <script setup>
   import { ref } from 'vue';
-  import Register from './RegisterModal.vue';
+  import Register from './ScheduleRegisterModal.vue';
   import { useRouter } from 'vue-router';
   
   const router = useRouter();
