@@ -46,7 +46,7 @@
 
 <script setup>
     import {ref} from 'vue';
-    import ScheduleTab from '../ScheduleTab.vue';
+    import ScheduleTab from './ScheduleTab.vue';
     import UserProfileMenu from '../UserProfileMenu.vue';
 
     const currentDate = ref(new Date());
