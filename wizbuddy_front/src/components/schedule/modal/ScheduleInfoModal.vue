@@ -6,31 +6,43 @@
           <button @click="closeModal" class="close-btn">X</button>
         </div>
         <div class="modal-body">
-          <div v-for="(schedule, index) in schedules" :key="index" class="schedule-item">
-            <p>{{ getTimeSlot(schedule.type) }} {{ schedule.title }} </p>
+          <div v-for="(schedule, index) in flatSchedules" :key="index" class="schedule-item">
+            <p>{{ getTimeSlot(schedule.type) }}: {{ schedule.title }}</p>
             <button class="edit-btn">수정</button>
           </div>
         </div>
       </div>
     </div>
   </template>
-  
-  <script setup>
+
+<script setup>
+import { computed } from 'vue';
+
   const props = defineProps({
     isOpen: Boolean,
     selectedDate: Number,
     schedules: Array,
     currentMonth: String
   });
-  
+
   const emit = defineEmits(['close']);
-  
+
   function closeModal() {
     emit('close');
   }
-  
+
+  // Flatten the schedules to separate each name into its own entry
+  const flatSchedules = computed(() => {
+    return props.schedules.map(schedule => ({
+      title: schedule.title,
+      time: schedule.time,
+      type: schedule.type
+    }));
+  });
+
+  // Function to get time slot based on schedule type
   function getTimeSlot(type) {
-    switch(type) {
+    switch (type) {
       case 'fun':
         return '1T 09:00 ~ 14:00';
       case 'important':
@@ -42,7 +54,7 @@
     }
   }
   </script>
-  
+
   <style scoped>
   .modal-overlay {
     position: fixed;
@@ -56,7 +68,7 @@
     align-items: center;
     z-index: 1000;
   }
-  
+
   .modal-container {
     background-color: #fff;
     padding: 20px;
@@ -64,43 +76,42 @@
     width: 450px;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
   }
-  
+
   .modal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
   }
-  
+
   .modal-title {
     font-size: 20px;
     font-weight: bold;
   }
-  
+
   .close-btn {
     background-color: transparent;
     border: none;
     font-size: 20px;
     cursor: pointer;
   }
-  
+
   .schedule-item {
     margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
   }
-  
+
   .edit-btn {
-    background-color: #4285F4;
+    background-color: #4285f4;
     color: white;
     padding: 5px 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
   }
-  
+
   .edit-btn:hover {
     background-color: #357ae8;
   }
   </style>
-  
