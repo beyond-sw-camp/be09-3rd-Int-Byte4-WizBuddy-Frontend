@@ -5,17 +5,17 @@ import FindAllSchedules from "@/components/schedule/FindAllSchedules.vue";
 const ScheduleRoutes = [
     { 
         path: '/schedule', 
-        component: ScheduleMainPage
+        component: ScheduleMainPage,
         // children: [
         //     {
         //         path: 'regist',
         //         component: RegisterWeeklySchedule
         //     },
-        //     {
-        //         path: '/schedules',
-        //         component: FindAllSchedules
-        //     }
         // ]
+    },
+    {
+        path: '/schedule/schedules',
+        component: FindAllSchedules
     }
 ];
 

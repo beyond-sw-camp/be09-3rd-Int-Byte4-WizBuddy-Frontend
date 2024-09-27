@@ -46,8 +46,8 @@
   
 <script setup>
 
-    import {ref} from 'vue';
-    import ScheduleTab from '../ScheduleTab.vue';
+  import {ref} from 'vue';
+  import ScheduleTab from '../ScheduleTab.vue';
 
   const currentDate = ref(new Date());
   const currentMonth = ref(currentDate.value.getMonth());

@@ -1,9 +1,9 @@
 <template>
-    <nav class="tab-container" v-if="!(isMainPage|isLoginPage|isSignupPage)">
+    <nav class="tab-container">
         <button class="tab-item" :class="{ active: activeTab === 'scheduleinfo' }" @click="setActiveTab('scheduleinfo')">근무일정</button>
         <button class="tab-item" :class="{ active: activeTab === 'weeklyschedule' }" @click="setActiveTab('weeklyschedule')">일주일 스케줄표</button>
-        <button class="tab-item" :class="{ active: activeTab === 'myschedule' }" @click="setActiveTab('myschedule')">나의 스케줄표</button>
-        <button class="tab-item" :class="{ active: activeTab === 'worktime' }" @click="setActiveTab('worktime')">출퇴근 시간 확인</button>
+        <!-- <button class="tab-item" :class="{ active: activeTab === 'myschedule' }" @click="setActiveTab('myschedule')">나의 스케줄표</button>
+        <button class="tab-item" :class="{ active: activeTab === 'worktime' }" @click="setActiveTab('worktime')">출퇴근 시간 확인</button> -->
     </nav>
 </template>
 
@@ -15,14 +15,14 @@
     const router = useRouter();
     const isscheduleInfoPage = ref(false);
     const isWeeklyschedulePage = ref(false);
-    const isMyschedulePage = ref(false);
-    const isWorktimePage = ref(false);
+    // const isMyschedulePage = ref(false);
+    // const isWorktimePage = ref(false);
 
     watch(() => route.path, (newPath) => {
         isscheduleInfoPage.value = newPath === '/schedule';
-        isWeeklyschedulePage.value = newPath === '/schedule/weeklyschedule';
-        isMyschedulePage.value = newPath === '/schedule/myschedule';
-        isWorktimePage.value = newPath === '/schedule/worktime';
+        isWeeklyschedulePage.value = newPath === '/schedule/schedules';
+        // isMyschedulePage.value = newPath === '/schedule/myschedule';
+        // isWorktimePage.value = newPath === '/schedule/worktime';
     }
     , 
     {
@@ -31,44 +31,45 @@
 
     const activeTab = ref('');
 
-function setActiveTab(tab) {
-    activeTab.value = tab;
-    switch (tab) {
-        case 'scheduleInfo':
-        router.push('/schedule');
-        break;
-    case 'weeklyschedule':
-        router.push('/schedule/weeklyschedule');
-        break;
-    case 'myschedule':
-        router.push('/schedule/myschedule');
-        break;
-    case 'worktime':
-        router.push('/schedule/worktime');
-        break;
+    const setActiveTab = (tab) => {
+        activeTab.value = tab;
+
+        switch (tab) {
+            case 'scheduleinfo':
+                router.push('/schedule');
+                break;
+            case 'weeklyschedule':
+                router.push('/schedule/schedules');
+                break;
+            // case 'myschedule':
+            //     router.push('/schedule/myschedule');
+            //     break;
+            // case 'worktime':
+            //     router.push('/schedule/worktime');
+            //     break;
+        }
     }
-}
 
-function updateActiveTabFromRoute() {
-    const path = route.path;
-    if (path.includes('scheduleInfo')) {
-        activeTab.value = 'scheduleInfo';
-    } else if (path.includes('weeklyschedule')) {
-        activeTab.value = 'weeklyschedule';
-    } else if (path.includes('myschedule')) {
-        activeTab.value = 'myschedule';
-    } else if (path.includes('worktime')) {
-        activeTab.value = 'worktime';
+    const updateActiveTabFromRoute = () => {
+        const path = route.path;
+        if (path.includes('/schedule/schedules')) {
+            activeTab.value = 'weeklyschedule';
+        // } else if (path.includes('myschedule')) {
+        //     activeTab.value = 'myschedule';
+        // } else if (path.includes('worktime')) {
+        //     activeTab.value = 'worktime';
+        } else if (path === '/schedule') {
+            activeTab.value = 'scheduleinfo';
+        } 
     }
-}
 
-onMounted(() => {
-    updateActiveTabFromRoute();
-});
+    onMounted(() => {
+        updateActiveTabFromRoute();
+    });
 
-watchEffect(() => {
-    updateActiveTabFromRoute();
-});
+    watchEffect(() => {
+        updateActiveTabFromRoute();
+    });
 </script>
 
 <style scoped>
@@ -99,7 +100,6 @@ watchEffect(() => {
     transition: background-color 0.3s ease;
 }
 
-/* v-deep을 정확히 사용한 hover 스타일 */
 .tab-item:hover {
     background-color: #f0f0f0;
 }
