@@ -64,17 +64,19 @@ const goToDetailPage = () => {
 
 .fixed-task .task-header {
   background-color: #f28b82;
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 .non-fixed-task .task-header {
   background-color: #aecbfa;
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 .task-body {
   font-size: 14px;
   color: #555;
+  padding-left: 25px;
+  font-weight: bold;
 }
 
 .fixed-indicator {
