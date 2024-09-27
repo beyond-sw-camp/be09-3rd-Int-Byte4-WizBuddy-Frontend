@@ -2,7 +2,9 @@
   <div class="main-container">
     <aside class="left-side">
       <ScheduleTab/>
-      <EmployerSideMenu/>
+      <div class="side">
+        <EmployerSideMenu/>
+      </div>
     </aside>
     <!-- 나중에 json 하면서 아래 코드처럼 바꿔줘야 함 (확정 X)-->
     <!-- <aside class="left-side" v-if="userType = 'EMPLOYEE'">
@@ -58,11 +60,10 @@
 </template>
   
 <script setup>
-
   import {ref} from 'vue';
   import ScheduleTab from './ScheduleTab.vue';
   import UserProfileMenu from '../UserProfileMenu.vue';
-import EmployerSideMenu from './EmployerSideMenu.vue';
+  import EmployerSideMenu from './EmployerSideMenu.vue';
 
   const currentDate = ref(new Date());
   const currentMonth = ref(currentDate.value.getMonth());
