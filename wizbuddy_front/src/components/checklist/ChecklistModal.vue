@@ -6,10 +6,11 @@
             <!-- 고정 업무 구역 -->
             <div class="task-list">
                 <h3>고정 업무</h3>
-                <div v-for="task in fixedTasks" :key="task.id" class="task-item fixed-task">
-                    <div class="task-number">{{ task.number }}번 업무</div>
-                    <div class="task-content">{{ task.content }}</div>
-                    <span class="fixed-indicator">●</span>
+                <div class="task-items-container">
+                    <div v-for="task in fixedTasks" :key="task.id" class="task-item fixed-task">
+                        <div class="task-content">{{ task.content }}</div>
+                        <button class="remove-task-button" @click="removeTask(task)">x</button>
+                    </div>
                 </div>
             </div>
 
@@ -19,9 +20,11 @@
             <!-- 비고정 업무 구역 -->
             <div class="task-list non-fixed-tasks">
                 <h3>비고정 업무</h3>
-                <div v-for="task in nonFixedTasks" :key="task.id" class="task-item non-fixed-task">
-                    <div class="task-number">{{ task.number }}번 업무</div>
-                    <div class="task-content">{{ task.content }}</div>
+                <div class="task-items-container">
+                    <div v-for="task in nonFixedTasks" :key="task.id" class="task-item non-fixed-task">
+                        <div class="task-content">{{ task.content }}</div>
+                        <button class="remove-task-button" @click="removeTask(task)">x</button>
+                    </div>
                 </div>
             </div>
 
@@ -54,6 +57,11 @@ const fixedTasks = computed(() =>
 const nonFixedTasks = computed(() =>
     props.checklist.tasks.filter(task => !task.isFixed)
 );
+
+// 더미 함수 (나중에 로직 추가)
+const removeTask = (task) => {
+    console.log('Remove task:', task);
+};
 </script>
 
 <style scoped>
@@ -86,13 +94,29 @@ h2 {
     margin-bottom: 30px;
 }
 
+.task-items-container {
+    display: flex;
+    flex-wrap: wrap;
+    /* 줄 넘침을 허용하여 다음 줄에 배치 */
+    gap: 10px;
+    /* 각 업무 간 간격 */
+    justify-content: flex-start;
+    /* 태스크들을 왼쪽 정렬 */
+}
+
 .task-item {
     padding: 10px;
     border-radius: 10px;
-    margin-bottom: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    word-wrap: break-word;
+    /* flex-grow: 1; */
+    min-width: 150px;
+    /* 최소 너비 설정 */
+    max-width: calc(50% - 10px);
+    /* 반 줄에 배치 가능, 너비 설정 */
 }
 
 .fixed-task {
@@ -103,9 +127,26 @@ h2 {
     background-color: #e3f2fd;
 }
 
-.fixed-indicator {
-    color: red;
-    font-size: 20px;
+.task-content {
+    font-size: 16px;
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 10px;
+    /* X 버튼과의 간격 */
+}
+
+.remove-task-button {
+    background-color: transparent;
+    border: none;
+    color: #f44336;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.remove-task-button:hover {
+    color: #d32f2f;
 }
 
 .close-button {
@@ -121,24 +162,9 @@ h2 {
     background-color: #2f3a9d;
 }
 
-/* 고정 업무와 비고정 업무를 나누는 실선 */
 .separator {
     border: none;
     border-top: 2px solid #ccc;
     margin: 30px 0;
-}
-
-/* 비고정 업무와 모달창 아래 간격 */
-.non-fixed-tasks {
-    margin-bottom: 40px;
-}
-
-/* 텍스트 중앙 정렬 */
-.task-content {
-    text-align: center;
-    font-size: 16px;
-    color: #333;
-    margin-left: 10px;
-    flex-grow: 1;
 }
 </style>

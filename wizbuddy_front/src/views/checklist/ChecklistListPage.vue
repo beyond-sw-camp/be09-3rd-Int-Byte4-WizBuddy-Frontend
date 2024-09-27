@@ -21,7 +21,13 @@ const checklists = ref([
         tasks: [
             { id: 1, number: 1, title: '첫 번째 업무', content: '화장실 청소', isFixed: true },
             { id: 2, number: 2, title: '두 번째 업무', content: '매장 정리', isFixed: false },
-            { id: 3, number: 3, title: '세 번째 업무', content: '커피 머신 청소', isFixed: true },
+            { id: 3, number: 3, title: '세 번째 업무', content: '커피 머신 청소하기', isFixed: true },
+            { id: 4, number: 4, title: '네 번째 업무', content: '머신 청소', isFixed: true },
+            { id: 5, number: 5, title: '다섯 번째 업무', content: '머신 청소', isFixed: true },
+            { id: 6, number: 6, title: '여섯 번째 업무', content: '머신 청소', isFixed: true },
+            { id: 7, number: 7, title: '일곱 번째 업무', content: '머신 청소', isFixed: true },
+            { id: 8, number: 8, title: '여덟 번째 업무', content: '머신 청소', isFixed: true },
+            { id: 11, number: 9, title: '열한 번째 업무', content: '머신 청소', isFixed: true },
         ],
     },
     {
