@@ -4,7 +4,7 @@ const ManualBoardRoutes = [
     {
         path: "/manualboard",
         component: ManualBoard
-    }
+    },
 ];
 
 export default ManualBoardRoutes;

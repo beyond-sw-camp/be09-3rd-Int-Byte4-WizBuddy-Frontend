@@ -1,11 +1,9 @@
 <template>
     <div>
         <BoardBackground/>
-        <ManualBoardList/>
     </div>
 </template>
 
 <script setup>
     import BoardBackground from "@/components/board/BoardBackground.vue";
-    import ManualBoardList from "@/components/board/ManualBoardList.vue";
 </script>

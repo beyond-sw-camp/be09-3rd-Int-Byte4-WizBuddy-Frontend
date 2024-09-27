@@ -19,9 +19,9 @@ const routes = [
     path: "/signup",
     component: SignupPage
   },
-  {
-    path: "/task", name: 'TaskMainPage', component: TaskMainPage 
-  },
+  // {
+  //   path: "/task", name: 'TaskMainPage', component: TaskMainPage 
+  // },
   { 
     path: "/task/insert", 
     name: 'TaskInsertPage', 
