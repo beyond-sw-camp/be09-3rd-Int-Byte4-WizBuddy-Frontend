@@ -4,12 +4,13 @@ import PostDetail from '@/components/board/ManualPostDetail.vue';
 const ManualBoardRoutes = [
     {
         path: "/manualboard",
-        component: ManualBoard
+        component: ManualBoard,
+        // meta: { requiresAuth: true }
     },
     {
         path: '/manualboard/:id',  // Dynamic route parameter for the board ID
         component: PostDetail,      // The component that displays the post details
-        props: true,                // Pass route params as props
+        props: true               // Pass route params as props
     }
 ];
 
