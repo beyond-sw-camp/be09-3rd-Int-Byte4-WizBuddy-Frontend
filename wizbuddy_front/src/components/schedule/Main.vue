@@ -35,7 +35,6 @@
         </div>
         <div class="calendar-days">
           <div v-for="(blank, index) in blanks" :key="index" class="calendar-day blank"></div>
-          
           <div 
             v-for="day in daysInMonth"
             :key="day"
@@ -53,6 +52,14 @@
         </div>
       </div>
     </div>
+    <ScheduleInfoModal 
+      v-if="isScheduleModalOpen"
+      :isOpen="isScheduleModalOpen"
+      :selectedDate="selectedDay"
+      :schedules="selectedSchedules"
+      :currentMonth="months[currentMonth]"
+      @close="closeScheduleModal"
+    />
     <aside class="right-side">
       <UserProfileMenu/>
     </aside>
@@ -64,10 +71,14 @@
   import ScheduleTab from './ScheduleTab.vue';
   import UserProfileMenu from '../UserProfileMenu.vue';
   import EmployerSideMenu from './EmployerSideMenu.vue';
+  import ScheduleInfoModal from '../schedule/modal/ScheduleInfoModal.vue'
 
   const currentDate = ref(new Date());
   const currentMonth = ref(currentDate.value.getMonth());
   const currentYear = ref(currentDate.value.getFullYear());
+
+  const selectedSchedules = ref([]);
+  const isScheduleModalOpen = ref(false);
   
   const today = ref(new Date());
   
@@ -86,11 +97,6 @@
     { day: 15, title: '이나현', type: 'personal' },
     // 다른 스케줄 데이터 추가 가능
   ];
-  
-  // 특정 날짜의 스케줄을 가져오는 함수
-  const getSchedulesForDay = (day) => {
-    return scheduleData.filter(schedule => schedule.day === day).slice(0, 2); // 최대 2개의 항목만 반환
-  };
   
   // 특정 달의 첫 번째 날과 마지막 날 계산
   const getFirstDayOfMonth = (year, month) => new Date(year, month, 1);
@@ -150,11 +156,19 @@
     updateCalendar();
   };
   
-  // 날짜 선택 함수
-  const selectDay = (day) => {
-    selectedDay.value = day;
-    console.log('선택한 날짜:', `${currentYear.value}-${currentMonth.value + 1}-${day}`);
-  };
+  const getSchedulesForDay = (day) => {
+  return scheduleData.filter(schedule => schedule.day === day);
+};
+
+const selectDay = (day) => {
+  selectedDay.value = day;
+  selectedSchedules.value = getSchedulesForDay(day);
+  isScheduleModalOpen.value = true;
+};
+
+const closeScheduleModal = () => {
+  isScheduleModalOpen.value = false;
+};
   
   // 초기 달력 데이터 업데이트
   updateCalendar();

@@ -3,7 +3,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-    min-height: calc(100vh - 151.6px);
+    min-height: 100vh;
     padding-bottom: 41.6px;
     background-color: #F3F7FA;
     padding: 0 20px;
@@ -75,7 +75,6 @@
 
 .calendar-header h2 {
     font-size: auto;
-    margin-bottom: 10px;
     padding-left: 30px;
     padding-right: 30px;
 }
@@ -83,6 +82,7 @@
 /* 이전, 다음 버튼 스타일 */
 .prev-next-button {
     font-size: 18px;
+    margin-top: 5px;
     padding: 5px 10px;
     cursor: pointer;
     border: none;
@@ -117,15 +117,14 @@
     grid-template-columns: repeat(7, 1fr);
     text-align: center;
     font-weight: bold;
-    margin-bottom: 10px;
 }
 
 /* 날짜 셀 */
 .calendar-days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-auto-rows: minmax(70px, auto);
-    gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+    gap: 5px;
 }
 
 .calendar-day {
@@ -151,7 +150,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 5px;
     background-color: transparent;
 }
 
