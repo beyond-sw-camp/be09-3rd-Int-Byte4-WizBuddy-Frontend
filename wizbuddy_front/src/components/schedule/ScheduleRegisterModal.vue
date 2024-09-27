@@ -1,55 +1,79 @@
 <template>
   <div v-if="isOpen" class="modal-overlay" @click.self="closeModal">
     <div class="modal-container">
-      <h3 class="modal-title">근무자 등록</h3>
-      <form @submit.prevent="submitForm" class="modal-form">
-        <div class="form-group">
-          <label for="date">날짜:</label>
-          <input type="date" id="date" v-model="schedule.date" required class="input-field" />
-        </div>
-        <div class="form-group">
-          <label for="employee">근무자:</label>
-          <input type="text" id="employee" v-model="schedule.employee" required class="input-field" />
-        </div>
-        <div class="form-group">
-          <label for="time">시간대:</label>
-          <select id="time" v-model="schedule.time" required class="input-field">
-            <option value="1T">1T (9:00 ~ 14:00)</option>
-            <option value="2T">2T (14:00 ~ 17:00)</option>
-            <option value="3T">3T (17:00 ~ 21:00)</option>
-          </select>
-        </div>
-        <div class="modal-actions">
-          <button type="button" class="cancel-btn" @click="closeModal">취소</button>
-          <button type="submit" class="submit-btn">등록</button>
-        </div>
-      </form>
-    </div>
+        <h3 class="modal-title">스케줄 등록</h3>
+        <form @submit.prevent="submitForm" class="modal-form">
+          <div class="form-group">
+            <label for="date">시작일 선택 (월요일):</label>
+            <input 
+              type="date" 
+              id="date" 
+              v-model="schedule.date" 
+              :min="minDate" 
+              :disabled="isDateDisabled(schedule.date)"
+              @change="validateMonday" 
+              required 
+              class="input-field" 
+            />
+          </div>
+          <p v-if="!isValid" class="error-message">선택한 날짜는 월요일이 아닙니다.</p>
+          <div class="modal-actions">
+            <button type="button" class="cancel-btn" @click="closeModal">취소</button>
+            <button type="submit" class="submit-btn" :disabled="!isValid">등록</button>
+          </div>
+        </form>
+      </div>
   </div>
 </template>
 
 <script setup>
-import {ref} from 'vue';
+import { ref, computed } from 'vue';
 
 const props = defineProps({
   isOpen: Boolean,
+  disabledMondays: {
+    type: Array,
+    default: () => []
+  }
 });
 
 const emit = defineEmits(["close", "submit"]);
 
+function formatDate(date) {
+  if (!date) return '';
+  const d = new Date(date);
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  const year = d.getFullYear();
+  return `${year}-${month}-${day}`;
+}
+
 const schedule = ref({
-  date: "",
-  employee: "",
-  time: "",
+  date: ""
 });
+
+const isValid = ref(true);
+const minDate = ref(formatDate(new Date()));
 
 function closeModal() {
   emit("close");
 }
 
 function submitForm() {
-  emit("submit", schedule.value);
-  closeModal();
+  if (isValid.value) {
+    emit("submit", schedule.value);
+    closeModal();
+  }
+}
+
+function validateMonday() {
+  const selectedDate = new Date(schedule.value.date);
+  isValid.value = selectedDate.getDay() === 1;
+}
+
+function isDateDisabled(date) {
+  if (!date) return false;
+  return props.disabledMondays.includes(formatDate(date));
 }
 </script>
 
