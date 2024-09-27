@@ -157,7 +157,7 @@
 
 /* 선택된 날짜 */
 .calendar-day.selected {
-    background-color: #fffcd5;
+    background-color: #f44336;
 }
 
 /* 오늘 날짜 */
@@ -196,7 +196,7 @@
 
 /* 날짜 셀 hover 효과 */
 .calendar-day:hover {
-    background-color: #e0e0e0;
+    background-color: #f44336;
 }
 
 /* 빈 날짜 */
