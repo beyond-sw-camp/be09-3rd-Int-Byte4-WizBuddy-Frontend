@@ -31,9 +31,11 @@ const updateTask = (updatedTask) => {
     if (index !== -1) {
         tasks.value[index] = { ...updatedTask };
         // 수정 후, 목록 페이지로 이동
+        console.log(tasks.value[index]);
         router.push('/task');
     }
 };
+
 </script>
 
 <style scoped>
