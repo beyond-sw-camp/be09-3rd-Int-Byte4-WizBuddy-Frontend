@@ -1,31 +1,67 @@
-/* 화면 전체를 채우는 컨테이너 설정 */
 .main-container {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
     min-height: calc(100vh - 151.6px);
     padding-bottom: 41.6px;
     background-color: #F3F7FA;
-    box-sizing: border-box;
+    padding: 0 20px;
 }
 
-/* 달력 컨테이너 중앙 정렬 */
+.left-side {
+    width: 16%; 
+    background-color: #F3F7FA;
+    padding: 20px;
+    margin-left : 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 100px;
+}
+
+.side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background: #f3f7fa;
+  }
+  
+  .side-tab-item {
+    display: block;
+    padding: 10px 10px;
+    font-size: 16px;
+    width: 50%;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+  
+  .side-tab-item:hover {
+    background-color: #f0f0f0;
+  }
+
 .calendar-container {
     max-width: 850px;
     width: 100%;
-    margin: 10px auto 0 auto; /* 위쪽에 10px의 마진 추가 */
+    margin-top: 10px;
     background-color: white;
     border: 1px solid #ccc;
     border-radius: 20px;
     padding: 5px 40px 14px 40px;
-    box-shadow: 0px 8px 33px 0px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box; /* 패딩이 컨테이너 크기에 포함되도록 */
+    box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
     overflow: hidden;
+    flex: 1;
 }
 
 /* 달력의 헤더 부분 */
 .calendar-header {
-    display: flex;
+    display:flex;
     justify-content: center;
     align-items: center;
     padding: 8px 5px;
@@ -33,11 +69,15 @@
     font-weight: bold;
     position: relative;
     margin-bottom: 5px;
+    margin-left: 200px;
+    margin-right: 200px;
 }
 
 .calendar-header h2 {
+    font-size: auto;
     margin-bottom: 10px;
-    padding: 0 10px;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 /* 이전, 다음 버튼 스타일 */
@@ -54,12 +94,10 @@
 
 .prev-next-button:first-of-type {
     left: 10px;
-    margin-left: 200px;
 }
 
 .prev-next-button:last-of-type {
     right: 10px;
-    margin-right: 200px;
 }
 
 .prev-next-button:hover {
@@ -164,4 +202,10 @@
 /* 빈 날짜 */
 .calendar-day.blank {
     visibility: hidden;
+}
+
+.right-side {
+    width: 20%; 
+    background-color: #F3F7FA;
+    padding: 20px;
 }

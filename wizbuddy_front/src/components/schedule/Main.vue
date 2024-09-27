@@ -1,5 +1,19 @@
 <template>
   <div class="main-container">
+    <aside class="left-side">
+      <ScheduleTab/>
+      <div class="side">
+        <EmployerSideMenu/>
+      </div>
+    </aside>
+    <!-- 나중에 json 하면서 아래 코드처럼 바꿔줘야 함 (확정 X)-->
+    <!-- <aside class="left-side" v-if="userType = 'EMPLOYEE'">
+      <ScheduleTab/>
+    </aside>
+    <aside class="left-side" v-else>
+      <ScheduleTab/>
+      <EmployerSideMenu/>
+    </aside> -->
     <div class="calendar-container">
       <div class="calendar-header">
         <button @click="prevMonth" class="prev-next-button">
@@ -20,10 +34,8 @@
           <div v-for="day in weekdays" :key="day" class="weekday">{{ day }}</div>
         </div>
         <div class="calendar-days">
-          <!-- 빈 셀 추가 -->
           <div v-for="(blank, index) in blanks" :key="index" class="calendar-day blank"></div>
           
-          <!-- 날짜 및 스케줄 표시 -->
           <div 
             v-for="day in daysInMonth"
             :key="day"
@@ -33,7 +45,6 @@
           >
             <div class="day-number">{{ day }}</div>
             <div class="schedules">
-              <!-- 예시 스케줄 데이터 -->
               <div v-for="(schedule, index) in getSchedulesForDay(day)" :key="index" :class="['schedule', schedule.type]">
                 {{ schedule.title }}
               </div>
@@ -42,13 +53,18 @@
         </div>
       </div>
     </div>
-    </div>
-  </template>
+    <aside class="right-side">
+      <UserProfileMenu/>
+    </aside>
+  </div>
+</template>
   
-  <script setup>
-  import { ref } from 'vue';
-  
-  // 현재 날짜를 기준으로 설정
+<script setup>
+  import {ref} from 'vue';
+  import ScheduleTab from './ScheduleTab.vue';
+  import UserProfileMenu from '../UserProfileMenu.vue';
+  import EmployerSideMenu from './EmployerSideMenu.vue';
+
   const currentDate = ref(new Date());
   const currentMonth = ref(currentDate.value.getMonth());
   const currentYear = ref(currentDate.value.getFullYear());
