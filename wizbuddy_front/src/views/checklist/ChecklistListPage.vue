@@ -12,6 +12,8 @@
 <script setup>
 import { ref } from 'vue';
 import ChecklistModal from '@/components/checklist/ChecklistModal.vue'; // 모달창 컴포넌트 import
+import SideMenu from '@/components/SideMenu.vue';
+import ShopMenu from '@/components/shop/ShopMenu.vue';
 
 // 체크리스트 목록 더미 데이터
 const checklists = ref([
