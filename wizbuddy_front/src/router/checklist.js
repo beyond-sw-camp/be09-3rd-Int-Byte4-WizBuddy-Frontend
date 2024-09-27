@@ -16,7 +16,7 @@ const ChecklistRoutes = [
     component: ChecklistCreatePage,
   },
   {
-    path: "/",
+    path: "/sssssssssssssss",
     component: ChecklistDetailPage, // 이게 필요하려나,,?
   },
 ];
