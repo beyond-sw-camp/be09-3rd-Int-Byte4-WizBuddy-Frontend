@@ -1,0 +1,120 @@
+.weekly-schedule-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    min-height: calc(100vh - 151.6px);
+    padding-bottom: 41.6px;
+    background-color: #F3F7FA;
+    padding: 0 20px;
+    gap: 10px;
+  }
+
+  .left-side {
+    width: 16%; 
+    background-color: #F3F7FA; 
+    padding: 20px;
+}
+
+  .schedule-container {
+    max-width: 850px;
+    width: 100%;
+    margin-top: 20px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 5px 40px 14px 40px;
+    box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    overflow: hidden;
+    flex: 1;
+}
+  
+  .schedule-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-left: 180px;
+    margin-right: 180px;
+  }
+  
+  .date-range {
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .time-header {
+    display: flex;
+    justify-content: space-around;
+    padding-left: 50px;
+    padding-right: 25px;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .schedule-grid {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
+
+  .day-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .day-column {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .day-header {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .day-margin {
+    margin-right: 20px;
+  }
+  
+  .time-slot {
+    height: 40px;
+    width: 220px;
+    border: 1px solid #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .schedule-item {
+    background-color: #d2f0ff;
+    padding: 10px;
+    font-size: 12px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .prev-next-button {
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+  
+  .prev-next-button svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .right-side {
+    width: 20%; 
+    background-color: #F3F7FA;
+    padding: 20px;
+}

@@ -2,6 +2,9 @@
     <div class="side">
         <aside class="left-side">
         </aside>
+        <div class="main-container">
+            <slot></slot>
+        </div>
         <aside class="right-side">
             <UserProfileMenu />
         </aside>

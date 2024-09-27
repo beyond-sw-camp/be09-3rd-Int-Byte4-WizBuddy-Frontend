@@ -40,13 +40,13 @@
   </div>
 </template>
   
-<script>
-  export default {
-    name: 'MainPage', 
-  };
-</script>
 <script setup>
-</script>
+    
+  const onSubmit = async () => {
+  // 회원가입
+  };
+  
+  </script>
   
 <style scoped>
 
@@ -75,7 +75,7 @@
   }
 
   .signup-form {
-    width: 100%;
+    width: 100%;  
     max-width: 400px;
     text-align: center;
     background-color: white;
