@@ -8,7 +8,7 @@
         <p class="profile-email">babo22@gmail.com</p>
       </div>
       <div class="profile-menu">
-        <!-- 클릭하면 그에 해당하는 메뉴로 이동? 근데 알바생은 여러개 매장에서 일할수있다고했는데 매장 선택 전에 이런 버튼이 있는게 맞나 -->
+        <!--/main에서 매장 고르기 전에는 버튼을 눌러도 어떤 매장의 기능인지 알 수 없기 때문에 매장을 먼저 선택해달라는 알림창이 뜨도록 해야함 -->
         <button class="profile-button"><img src="@/assets/icons/right-profile-notice-button.svg" alt="notice-button"></button>
         <button class="profile-button"><img src="@/assets/icons/right-profile-calendars-button.svg" alt="calendars-button"></button>
         <button class="profile-button"><img src="@/assets/icons/right-profile-manual-button.svg" alt="manual-button"></button>

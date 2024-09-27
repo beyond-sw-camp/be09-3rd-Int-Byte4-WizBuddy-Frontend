@@ -1,9 +1,30 @@
 {
-    "users": [
-      {
-        "id": 1,
-        "username": "admin",
-        "password": "admin"
-      }
-    ]
-  }
+  "users": [
+    {
+      "role": "관리자",
+      "email": "admin",
+      "password": "admin",
+      "name": "김용승",
+      "phone": null,
+      "health": null
+    },
+    {
+      "id": "6da1",
+      "email": "ㄴㅇㄹㄴㅇ",
+      "password": "dfsdf",
+      "name": "sdfsd",
+      "phone": "sdfsdf",
+      "health": "2024-09-24",
+      "role": "employer"
+    },
+    {
+      "id": "6445",
+      "email": "ㄴㅇㄹㄴㅇㄹ",
+      "password": "qafa",
+      "name": "fsafa",
+      "phone": "fasfasf",
+      "health": "2024-10-01",
+      "role": "employee"
+    }
+  ]
+}
