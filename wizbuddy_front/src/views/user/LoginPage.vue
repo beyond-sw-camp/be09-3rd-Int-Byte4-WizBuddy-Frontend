@@ -6,7 +6,6 @@
       </div>
       <div class="right-section">
         <div class="login-form">
-          <h2>로그인</h2>
           <form @submit.prevent="onSubmit">
             <div class="input-group">
               <label for="username">아이디</label>
@@ -161,7 +160,7 @@
     border: none;
     color: #B7B7B8;
     cursor: pointer;
-    text-decoration: none;
+    text-decoration: none; 
   }
 
   .login-bottom-btn p {
