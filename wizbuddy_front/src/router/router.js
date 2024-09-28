@@ -3,10 +3,11 @@ import { createRouter, createWebHistory } from 'vue-router';
 import MainPage from "@/views/user/MainPage.vue";
 import LoginPage from "@/views/user/LoginPage.vue";
 import SignupPage from "@/views/user/SignupPage.vue";
+import WelcomePage from '@/views/welcome/WelcomePage.vue';
 
 import ManualBoardRoutes from './manualBoard';
-import ScheduleRoutes from './schedule.js';
-
+import NoticeBoardRoutes from './noticeBoard';
+import ScheduleRoutes from './schedule';
 import ChecklistRoutes from './checklist';
 import TaskRoutes from './task';
 
@@ -17,7 +18,7 @@ function isLoggedIn() {
 
 // meta: {requireAuth: true} 로그인이 필요한 페이지에 추가하기
 const routes = [
-  { path: "/", component: MainPage },
+  { path: "/", component: WelcomePage },
   { 
     path: "/login", 
     component: LoginPage,
@@ -31,12 +32,11 @@ const routes = [
     path: "/main",
     component: MainPage
   },
-
   ...ManualBoardRoutes,
+  ...NoticeBoardRoutes,
   ...ScheduleRoutes,
   ...ChecklistRoutes,
   ...TaskRoutes
-
 ];
 
 const router = createRouter({

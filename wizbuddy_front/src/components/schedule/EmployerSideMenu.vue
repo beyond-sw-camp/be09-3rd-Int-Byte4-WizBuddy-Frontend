@@ -1,7 +1,9 @@
 <template>
   <div class="side">
-      <button class="side-tab-item" @click="openRegisterModal">스케줄 등록</button>
-      <button class="side-tab-item" @click="setActiveTab('navigateToDelete')">삭제</button>
+      <button class="side-tab-item" @click="openRegisterModal" v-if="!(isScheduleRegisterPage|isScheduleDeletePage)">스케줄 등록</button>
+      <button class="side-tab-item" @click="setActiveTab('navigateToDelete')" v-if="!(isScheduleRegisterPage|isScheduleDeletePage)">삭제</button>
+      <button class="side-tab-item" @click="setActiveTab('navigateToRegisterEmployee')" v-if="!(isScheduleRegisterPage|isScheduleDeletePage)">직원 등록</button>
+      <button class="side-tab-item" @click="setActiveTab('navigateToMain')" v-if="isScheduleRegisterPage|isScheduleDeletePage">완료</button>
 
       <Register v-if="isRegisterModalOpen" :isOpen="isRegisterModalOpen" @close="closeRegisterModal" @submit="handleSubmit" />
   </div>
@@ -9,14 +11,25 @@
 
 <script setup>
 import { useRoute, useRouter } from 'vue-router';
-import { ref, watch, onMounted, watchEffect } from 'vue';
-import Register from './ScheduleRegisterModal.vue';
+import { ref, watch} from 'vue';
+import Register from './modal/ScheduleRegisterModal.vue';
 
 const router = useRouter();
 const route = useRoute();
+const isScheduleRegisterPage = ref(false);
+const isScheduleDeletePage = ref(false);
 
 const isRegisterModalOpen = ref(false);
 const activeTab = ref('');
+
+watch(() => route.path, (newPath) => {
+    isScheduleRegisterPage.value = newPath === '/schedule/regist';
+    isScheduleDeletePage.value = newPath === '/schedule/delete';
+    }
+    , 
+    {
+        immediate: true 
+    });
 
 // 모달 열기 함수
 function openRegisterModal() {
@@ -41,6 +54,12 @@ const setActiveTab = (tab) => {
       case 'navigateToDelete':
           router.push('/schedule/delete');
           break;
+      case 'navigateToMain':
+          router.push('/schedule');
+          break;
+      case 'navigateToRegisterEmployee':
+        router.push('/schedule/regist');
+        break;
   }
 };
 
@@ -48,6 +67,10 @@ const setActiveTab = (tab) => {
 watch(() => route.path, (newPath) => {
   if (newPath === '/schedule/delete') {
       activeTab.value = 'navigateToDelete';
+  } else if (newPath === '/schedule') {
+      activeTab.value = 'navigateToMain';
+  } else if (newPath === '/schedule/regist') {
+    activeTab.value = 'navigateToRegisterEmployee';
   }
 }, { immediate: true });
 </script>
@@ -65,7 +88,7 @@ watch(() => route.path, (newPath) => {
 .side-tab-item {
   display: block;
   padding: 10px 10px;
-  font-size: 16px;
+  font-size: 14px;
   width: 50%;
   background-color: white;
   border: 1px solid #ccc;
