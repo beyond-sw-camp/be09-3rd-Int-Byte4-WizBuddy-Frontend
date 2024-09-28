@@ -1,11 +1,11 @@
 <template>
-  <AppHeader/>
+  <AppHeader v-if="!(isWelcomePage)"/>
   <main>
     <RouterView/>  <!-- 라우트에 따라 페이지가 출력됨 -->
   </main>
   
   <!-- v-if로 LoginPage일 경우에는 AppFooter가 보이지 않도록 함 -->
-  <AppFooter v-if="!(isLoginPage|isSignupPage)"/>    <!-- 푸터 컴포넌트 -->
+  <AppFooter v-if="!(isLoginPage|isSignupPage|isWelcomePage)"/>    <!-- 푸터 컴포넌트 -->
 
 </template>
 
@@ -28,8 +28,10 @@ const isCheckListPage = ref(false);
 const isNoticeBoardPage = ref(false);
 const isManualBoardPage = ref(false);
 const isSubsBoardPage = ref(false);
+const isWelcomePage = ref(false);
 
 watch(() => route.path, (newPath) => {
+  isWelcomePage.value = newPath === '/';
   isLoginPage.value = newPath === '/login';
   isSignupPage.value = newPath === '/signup';
   isMainPage.value = newPath === '/main';
