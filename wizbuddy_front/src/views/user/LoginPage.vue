@@ -72,7 +72,8 @@
         if (data.length > 0) {
           const user = data[0];
           localStorage.setItem('user', JSON.stringify(user));
-
+          username.value = user.name;
+          
           if (user.role === 'admin') {
             router.push('/admin'); // 관리자 페이지로 이동
           } else if (user.role === 'employer') {
@@ -97,7 +98,7 @@
     const goToSignup = () => {
       router.push('/signup');
     };
-</script>
+</script> 
 
   
 <style scoped>

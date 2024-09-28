@@ -10,7 +10,7 @@
                 {{ option }}
             </button>
         </div>
-        <button class="invite-button">초대</button>
+        <button v-if="userType ==='employer'" class="invite-button">초대</button>
       </div>
     </div>
   </template>

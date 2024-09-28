@@ -5,7 +5,8 @@
           <img src="@/assets/icons/wizbuddy_logo.svg" alt="Wiz Buddy Logo" class="logo-img" />
         </div>
         <div class="right-section" v-if="!(isLoginPage|isSignupPage)">
-          <p>알바생 {{ username }}님, 환영합니다.</p>
+          <p v-if="userRole === 'employer'">사장 {{ username }}님, 환영합니다.</p>
+          <p v-else-if="userRole === 'employee'">알바생 {{ username }}님, 환영합니다.</p>
           <img src="@/assets/icons/Profile.svg" alt="Profile" class="profile-img" />
         </div>
       </div>
@@ -30,6 +31,10 @@
     const isMainPage = ref(false);
     const isSchedulePage = ref(false);
     const isManualBoardPage = ref(false);
+
+    const user = ref(JSON.parse(localStorage.getItem('user')));
+    const username = ref(user.value ? user.value.name : '');
+    const userRole = ref(user.value ? user.value.role : '');
 
     watch(() => route.path, (newPath) => {
       isLoginPage.value = newPath === '/login';
