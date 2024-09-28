@@ -1,4 +1,3 @@
-
 <template>
   <div v-if="post" class="post-container">
     <div class="post-inner-container">
