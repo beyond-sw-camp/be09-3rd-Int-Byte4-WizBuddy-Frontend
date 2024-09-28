@@ -1,11 +1,13 @@
 <template>
   <div class="side">
-      <button class="side-tab-item" @click="openRegisterModal" v-if="!(isScheduleRegisterPage|isScheduleDeletePage)">스케줄 등록</button>
-      <button class="side-tab-item" @click="setActiveTab('navigateToDelete')" v-if="!(isScheduleRegisterPage|isScheduleDeletePage)">삭제</button>
-      <button class="side-tab-item" @click="setActiveTab('navigateToRegisterEmployee')" v-if="!(isScheduleRegisterPage|isScheduleDeletePage)">직원 등록</button>
-      <button class="side-tab-item" @click="setActiveTab('navigateToMain')" v-if="isScheduleRegisterPage|isScheduleDeletePage">완료</button>
+    <button class="side-tab-item" @click="openRegisterModal" v-if="isScheduleMainPage">스케줄 등록</button>
+    <button class="side-tab-item" @click="setActiveTab('navigateToDelete')" v-if="isScheduleMainPage">삭제</button>
+    <button class="side-tab-item" @click="setActiveTab('navigateToRegisterEmployee')" v-if="isScheduleMainPage">직원 등록</button>
+    <button class="side-tab-item" @click="setActiveTab('navigateToMain')" 
+      v-if="isScheduleRegisterPage|isScheduleDeletePage">완료
+    </button>
 
-      <Register v-if="isRegisterModalOpen" :isOpen="isRegisterModalOpen" @close="closeRegisterModal" @submit="handleSubmit" />
+    <Register v-if="isRegisterModalOpen" :isOpen="isRegisterModalOpen" @close="closeRegisterModal" @submit="handleSubmit" />
   </div>
 </template>
 
@@ -16,6 +18,9 @@ import Register from '@/components/schedule/modal/ScheduleRegisterModal.vue';
 
 const router = useRouter();
 const route = useRoute();
+
+const isScheduleMainPage = ref(false);
+const isWeeklySchedulePage = ref(false);
 const isScheduleRegisterPage = ref(false);
 const isScheduleDeletePage = ref(false);
 
@@ -23,52 +28,50 @@ const isRegisterModalOpen = ref(false);
 const activeTab = ref('');
 
 watch(() => route.path, (newPath) => {
-    isScheduleRegisterPage.value = newPath === '/schedule/regist';
-    isScheduleDeletePage.value = newPath === '/schedule/delete';
-    }
-    , 
-    {
-        immediate: true 
-    });
+  isScheduleMainPage.value = newPath === '/schedule';
+  isWeeklySchedulePage.value = newPath ==='/schedule/schedules';
+  isScheduleRegisterPage.value = newPath === '/schedule/regist';
+  isScheduleDeletePage.value = newPath === '/schedule/delete';
+  }
+  , 
+  {
+    immediate: true 
+  });
 
-// 모달 열기 함수
 function openRegisterModal() {
   isRegisterModalOpen.value = true;
 }
 
-// 모달 닫기 함수
 function closeRegisterModal() {
   isRegisterModalOpen.value = false;
 }
 
-// 스케줄 등록 처리 함수
 function handleSubmit(schedule) {
   console.log('등록된 스케줄:', schedule);
   closeRegisterModal();
 }
 
-// 삭제 버튼 클릭 시 라우팅
 const setActiveTab = (tab) => {
   activeTab.value = tab;
   switch (tab) {
-      case 'navigateToDelete':
-          router.push('/schedule/delete');
-          break;
-      case 'navigateToMain':
-          router.push('/schedule');
-          break;
-      case 'navigateToRegisterEmployee':
-        router.push('/schedule/regist');
-        break;
+    case 'navigateToDelete':
+      router.push('/schedule/delete');
+      break;
+    case 'navigateToMain':
+      router.push('/schedule');
+      break;
+    case 'navigateToRegisterEmployee':
+      router.push('/schedule/regist');
+      break;
   }
 };
 
 // 라우터 상태에 따른 탭 활성화
 watch(() => route.path, (newPath) => {
   if (newPath === '/schedule/delete') {
-      activeTab.value = 'navigateToDelete';
+    activeTab.value = 'navigateToDelete';
   } else if (newPath === '/schedule') {
-      activeTab.value = 'navigateToMain';
+    activeTab.value = 'navigateToMain';
   } else if (newPath === '/schedule/regist') {
     activeTab.value = 'navigateToRegisterEmployee';
   }
