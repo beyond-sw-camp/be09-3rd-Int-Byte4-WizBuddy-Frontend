@@ -207,7 +207,37 @@ height: 150px;" />
 </section>
 
 
+<section class="start-section">
+  <div class="start-content">
+    <div class="start-text">
+      <h2>한번 시작해보세요!</h2>
+      <p>위즈버디의 가치를 느끼실거예요.</p>
+    </div>
+    <div class="start-images">
+      <img src="@/assets/icons/welcome/mockupfinal.svg" alt="Phone Image 1" class="phone-img" />
+    </div>
+  </div>
 
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="company-info">
+        <img src="@/assets/icons/welcome/logo2.svg" alt="Wiz Buddy Logo" class="footer-logo" />
+        <p>회사명: 위즈버디<br>대표자: 아이브<br>사업자 등록번호: 123-456-7890<br>주소: 동작구 보라매로<br>문의: int4byte@gmail.com</p>
+      </div>
+      <div class="footer-menu">
+        <h3>메뉴</h3>
+        <ul>
+          <li><a href="#">FAQ</a></li>
+          <li @click="goToLogin"><a href="#">로그인</a></li>
+          <li @click="goToSignup"><a href="#">회원가입</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <p>© 2024 Int4byte</p>
+    </div>
+  </footer>
+</section>
 
 
 </div>
