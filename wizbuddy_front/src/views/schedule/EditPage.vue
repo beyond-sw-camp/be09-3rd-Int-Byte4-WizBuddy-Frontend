@@ -3,7 +3,7 @@
         <aside class="left-side">
             <ScheduleTab />
             <div class="side">
-                <EmployerSideMenu />
+                <LeftSideMenu />
             </div>
         </aside>
 
@@ -44,7 +44,7 @@
     import { useRouter, useRoute } from 'vue-router';
     import ScheduleTab from '@/components/schedule/ScheduleTab.vue';
     import UserProfileMenu from '@/components/UserProfileMenu.vue';
-    import EmployerSideMenu from '@/components/schedule/EmployerSideMenu.vue';
+    import LeftSideMenu from '../../components/LeftSideMenu.vue';
 
     const router = useRouter();
     const route = useRoute();

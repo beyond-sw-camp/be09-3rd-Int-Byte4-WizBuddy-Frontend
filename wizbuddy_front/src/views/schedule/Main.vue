@@ -3,7 +3,7 @@
     <aside class="left-side">
       <ScheduleTab />
       <div class="side">
-        <EmployerSideMenu />
+        <LeftSideMenu />
       </div>
     </aside>
 
@@ -40,7 +40,7 @@
 import { ref } from 'vue';
 import ScheduleTab from '@/components/schedule/ScheduleTab.vue';
 import UserProfileMenu from '@/components/UserProfileMenu.vue';
-import EmployerSideMenu from '@/components/schedule/EmployerSideMenu.vue';
+import LeftSideMenu from '@/components/LeftSideMenu.vue';
 import ScheduleInfoModal from '@/components/schedule/modal/ScheduleInfoModal.vue';
 import ScheduleCalendar from '@/components/schedule/ScheduleCalendar.vue';
 

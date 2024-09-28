@@ -12,7 +12,7 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router';
 import { ref, watch} from 'vue';
-import Register from './modal/ScheduleRegisterModal.vue';
+import Register from '@/components/schedule/modal/ScheduleRegisterModal.vue';
 
 const router = useRouter();
 const route = useRoute();

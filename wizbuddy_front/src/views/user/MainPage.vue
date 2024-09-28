@@ -6,7 +6,7 @@
   
 <script setup>
   import { ref,onMounted } from 'vue';
-  import SideMenu from '@/components/SideMenu.vue';
+  import SideMenu from '@/components/RightSideMenu.vue';
   import ShopMenu from '@/components/shop/ShopMenu.vue';
 
   const userType = ref('');

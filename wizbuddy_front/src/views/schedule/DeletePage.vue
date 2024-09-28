@@ -3,7 +3,7 @@
         <aside class="left-side">
             <ScheduleTab />
             <div class="side">
-                <EmployerSideMenu />
+                <LeftSideMenu />
             </div>
         </aside>
         
@@ -49,10 +49,10 @@
     import { ref } from 'vue';
     import ScheduleTab from '@/components/schedule/ScheduleTab.vue';
     import UserProfileMenu from '@/components/UserProfileMenu.vue';
-    import EmployerSideMenu from '@/components/schedule/EmployerSideMenu.vue';
     import ScheduleCalendar from '@/components/schedule/ScheduleCalendar.vue';
     import ScheduleInfoModalForDelete from '@/components/schedule/modal/ScheduleInfoModalForDelete.vue';
     import DeleteModal from '@/components/schedule/modal/DeleteModal.vue';
+    import LeftSideMenu from '../../components/LeftSideMenu.vue';
 
     const selectedDay = ref(null);
     const currentDate = ref(new Date());
