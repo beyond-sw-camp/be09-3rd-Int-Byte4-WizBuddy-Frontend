@@ -161,7 +161,26 @@ height: 150px;" />
     </div>
   </section>
 
-  
+  <section class="slider-section">
+    <h2>다양한 게시판 기능</h2>
+    <div class="slider">
+      <button @click="prevSlide" class="arrow left-arrow">&lt;</button>
+      <div class="slider-track">
+        <div
+          v-for="(card, index) in cards"
+          :key="index"
+          class="card"
+          :class="{ active: index === activeSlide }"
+        >
+          <img :src="card.image" alt="" />
+        </div>
+      </div>
+      <button @click="nextSlide" class="arrow right-arrow">&gt;</button>
+    </div>
+  </section>
+
+
+ 
 
 
 </div>
