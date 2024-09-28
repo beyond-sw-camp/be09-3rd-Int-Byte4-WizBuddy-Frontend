@@ -133,7 +133,35 @@ height: 150px;" />
     </div>
   </section>
 
- 
+  <section class="extra4-section">
+    <div class="icon-columns2">
+      <!-- 첫 번째 컬럼: 왼쪽 이미지 -->
+      <div class="icon-column22" >
+        <img src="@/assets/icons/welcome/mockup3.svg" alt="Wiz Buddy Mockup" class="character-img4"/>
+      </div>
+
+      <!-- 두 번째 컬럼: 중앙 텍스트 -->
+      <div class="icon-column2" >
+        <h2>출퇴근 관리</h2>
+        <p>출퇴근 기록을 손쉽게 관리할 수 있는 기능을 제공합니다.  <br>
+            직원들은 출근과 퇴근 시 간편하게 기록을 남길 수 있으며,  <br>
+            자동으로 근무 시간이 집계되어 관리자는 쉽게 보고서를 <br>작성할 수 있습니다.</p>
+        <ul>
+          <li>출퇴근 시간 자동 기록</li>
+          <li>실시간 근무 시간 집계</li>
+          <li>출퇴근 기록 조회 및 수정</li>
+        </ul>
+        <button @click="goToLogin">위즈버디 시작하기</button>
+      </div>
+
+      <!-- 세 번째 컬럼: 오른쪽 이미지 -->
+      <div class="icon-column2">
+        <img src="@/assets/icons/welcome/image3.svg" alt="Additional Image" class="character-img2" style=" margin-left: 20px;"/>
+      </div>
+    </div>
+  </section>
+
+  
 
 
 </div>
