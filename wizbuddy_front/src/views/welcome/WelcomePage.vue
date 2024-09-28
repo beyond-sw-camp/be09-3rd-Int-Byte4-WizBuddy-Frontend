@@ -106,7 +106,34 @@ height: 150px;" />
   </section>
 
 
-  
+  <section class="extra3-section">
+    <div class="icon-columns2">
+      <!-- 첫 번째 컬럼: 왼쪽 이미지 -->
+      <div class="icon-column2">
+        <img src="@/assets/icons/welcome/image2.svg" alt="Additional Image" class="character-img3" />
+      </div>
+
+      <!-- 두 번째 컬럼: 중앙 텍스트 -->
+      <div class="icon-column2-1">
+        <h2 style="text-align: right;"> 업무 체크리스트</h2>
+        <p>직원들은 할당된 업무를 실시간으로 확인하고 <br> 완료 여부를 체크할 수 있습니다.   <br> <br>
+            관리자는 체크리스트를 통해 <br>업무의 진행 상황을 <br>쉽게 모니터링할 수 있어 <br>업무 관리가 한층 더 편리해집니다.</p>
+        <ul>
+          <li>실시간 체크리스트 업데이트</li>
+          <li> 완료 여부 실시간 확인</li>
+          <li>중요한 업무에 대한 알림 기능</li>
+        </ul>
+        <button style="margin-left: 70px" @click="goToLogin">위즈버디 시작하기</button>
+      </div>
+
+      <!-- 세 번째 컬럼: 오른쪽 이미지 -->
+      <div class="icon-column22">
+        <img src="@/assets/icons/welcome/mockup2.svg" alt="Wiz Buddy Mockup" class="character-img2-1" />
+      </div>
+    </div>
+  </section>
+
+ 
 
 
 </div>
