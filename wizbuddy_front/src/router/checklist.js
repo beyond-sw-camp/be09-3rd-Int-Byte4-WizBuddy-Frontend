@@ -9,15 +9,11 @@ const ChecklistRoutes = [
   },
   {
     path: "/checklist/:id",
-    component: ChecklistListPage,
+    component: ChecklistDetailPage,
   },
   {
     path: "/checklist/create",
     component: ChecklistCreatePage,
-  },
-  {
-    path: "/sssssssssssssss",
-    component: ChecklistDetailPage, // 이게 필요하려나,,?
   },
 ];
 

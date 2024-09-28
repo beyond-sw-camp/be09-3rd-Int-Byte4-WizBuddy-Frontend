@@ -36,10 +36,10 @@
                         <div class="day-number">{{ day }}</div>
                         <div class="schedules">
                             <div
-                                v-for="(schedule, index) in getSchedulesForDay(day)"
+                                v-for="(group, index) in groupSchedulesByType(day)"
                                 :key="index"
-                                :class="['schedule', schedule.type]">
-                                {{ schedule.title }}
+                                :class="['schedule', group.type]">
+                                {{ group.names.join(', ') }}
                             </div>
                         </div>
                     </div>
@@ -66,7 +66,7 @@
     import ScheduleTab from './ScheduleTab.vue';
     import UserProfileMenu from '../UserProfileMenu.vue';
     import EmployerSideMenu from './EmployerSideMenu.vue';
-    import EmployeeRegisterModal from './EmployeeRegisterModal.vue';
+    import EmployeeRegisterModal from './modal/EmployeeRegisterModal.vue';
 
     const selectedDay = ref(null);
     const currentDate = ref(new Date());
@@ -86,13 +86,32 @@
     
     // 스케줄 데이터 예시
     const scheduleData = [
-      { day: 15, title: '유제은, 백경석, 조제훈', type: 'fun' },
-      { day: 15, title: '이서현', type: 'important' },
-      { day: 15, title: '이나현', type: 'personal' },
+    { day: 15, title: '유제은', type: 'fun', time: '1T (09:00 ~ 14:00)' },
+    { day: 15, title: '백경석', type: 'fun', time: '1T (09:00 ~ 14:00)' },
+    { day: 15, title: '조제훈', type: 'fun', time: '1T (09:00 ~ 14:00)' },
+    { day: 15, title: '이서현', type: 'important', time: '2T (14:00 ~ 17:00)' },
+    { day: 15, title: '이나현', type: 'personal', time: '3T (17:00 ~ 21:00)' },
     ];
     
+    const groupSchedulesByType = (day) => {
+    const daySchedules = getSchedulesForDay(day);
+    const groupedSchedules = {};
+
+    daySchedules.forEach((schedule) => {
+        if (!groupedSchedules[schedule.type]) {
+            groupedSchedules[schedule.type] = {
+                type: schedule.type,
+                time: schedule.time,
+                names: []
+            };
+        }
+        groupedSchedules[schedule.type].names.push(schedule.title);
+      });
+      return Object.values(groupedSchedules);
+    };
+
     const getSchedulesForDay = (day) => {
-      return scheduleData.filter(schedule => schedule.day === day).slice(0, 2); // 최대 2개의 항목만 반환
+        return scheduleData.filter(schedule => schedule.day === day);
     };
     
     const getFirstDayOfMonth = (year, month) => new Date(year, month, 1);
@@ -143,7 +162,7 @@
     
     const selectDay = (day) => {
       selectedDay.value = day;
-      openRegisterModal(); // 날짜를 선택하면 모달을 엽니다.
+      openRegisterModal();
     };
 
     function openRegisterModal() {

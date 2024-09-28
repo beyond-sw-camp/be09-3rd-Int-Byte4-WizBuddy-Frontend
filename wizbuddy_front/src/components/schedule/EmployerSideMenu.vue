@@ -1,9 +1,9 @@
 <template>
   <div class="side">
-      <button class="side-tab-item" @click="openRegisterModal" v-if="!isScheduleRegisterPage">스케줄 등록</button>
-      <button class="side-tab-item" @click="setActiveTab('navigateToDelete')" v-if="!isScheduleRegisterPage">삭제</button>
-      <button class="side-tab-item" @click="setActiveTab('navigateToRegisterEmployee')" v-if="!isScheduleRegisterPage">직원 등록</button>
-      <button class="side-tab-item" @click="setActiveTab('navigateToMain')" v-if="isScheduleRegisterPage">완료</button>
+      <button class="side-tab-item" @click="openRegisterModal" v-if="!(isScheduleRegisterPage|isScheduleDeletePage)">스케줄 등록</button>
+      <button class="side-tab-item" @click="setActiveTab('navigateToDelete')" v-if="!(isScheduleRegisterPage|isScheduleDeletePage)">삭제</button>
+      <button class="side-tab-item" @click="setActiveTab('navigateToRegisterEmployee')" v-if="!(isScheduleRegisterPage|isScheduleDeletePage)">직원 등록</button>
+      <button class="side-tab-item" @click="setActiveTab('navigateToMain')" v-if="isScheduleRegisterPage|isScheduleDeletePage">완료</button>
 
       <Register v-if="isRegisterModalOpen" :isOpen="isRegisterModalOpen" @close="closeRegisterModal" @submit="handleSubmit" />
   </div>
@@ -12,17 +12,19 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router';
 import { ref, watch} from 'vue';
-import Register from './ScheduleRegisterModal.vue';
+import Register from './modal/ScheduleRegisterModal.vue';
 
 const router = useRouter();
 const route = useRoute();
 const isScheduleRegisterPage = ref(false);
+const isScheduleDeletePage = ref(false);
 
 const isRegisterModalOpen = ref(false);
 const activeTab = ref('');
 
 watch(() => route.path, (newPath) => {
     isScheduleRegisterPage.value = newPath === '/schedule/regist';
+    isScheduleDeletePage.value = newPath === '/schedule/delete';
     }
     , 
     {

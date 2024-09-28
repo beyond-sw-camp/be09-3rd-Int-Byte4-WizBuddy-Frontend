@@ -1,4 +1,10 @@
 
+<!-- 
+  관리자로 로그인 -> 관리자 페이지가 뜨도록 /admin 
+  사장으로 로그인 -> /main이 뜨는데 옆에 수정삭제등록버튼이 있는 화면으로
+  직원으로 로그인 - > /main이 뜨는데 옆에 수정삭제등록버튼이 없는 화면으로  
+-->
+
 <template>
     <div class="login-page">
       <div class="left-section">
@@ -64,8 +70,16 @@
         const data = await response.json();
         
         if (data.length > 0) {
-          console.log('로그인 성공:', data[0]);
-          router.push('/main');
+          const user = data[0];
+          localStorage.setItem('user', JSON.stringify(user));
+
+          if (user.role === 'admin') {
+            router.push('/admin'); // 관리자 페이지로 이동
+          } else if (user.role === 'employer') {
+            router.push('/main?type=employer'); // 사장 화면으로 이동
+          } else if (user.role === 'employee') {
+            router.push('/main?type=employee'); // 직원 화면으로 이동
+          }
         } else {
           errorMessage.value = '일치하는 회원정보가 없습니다.';
 
@@ -161,8 +175,8 @@
   .login-btn {
   width: 80%;
   padding: 0;
-  background-color: transparent; /* 버튼 배경 투명 */
-  border: none; /* 테두리 제거 */
+  background-color: transparent;
+  border: none;
   cursor: pointer;
   margin-top: 50px;
   margin-bottom: 10px;
