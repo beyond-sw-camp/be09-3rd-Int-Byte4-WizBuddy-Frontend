@@ -5,10 +5,10 @@
   
         <!-- 고정 업무 선택 -->
         <div class="task-list">
-          <div v-for="task in FixedTasks" :key="task.id" class="task-item fixed-task">
+          <div v-for="task in fixedTasks" :key="task.id" class="task-item fixed-task">
             <label>
               <input type="checkbox" v-model="selectedTasks" :value="task" />
-              {{ task.content }}
+              {{ task.title }}
             </label>
           </div>
         </div>
@@ -24,7 +24,7 @@
   
   // 고정 업무 목록을 props로 받음
   const props = defineProps({
-    FixedTasks: {
+    fixedTasks: {
       type: Array,
       required: true,
     },
@@ -45,11 +45,7 @@
     close(); // 모달 닫기
   };
   </script>
-  
-  <style scoped>
-  /* 기존 스타일 그대로 사용 */
-  </style>
-  
+    
 
 <style scoped>
 .modal-overlay {
