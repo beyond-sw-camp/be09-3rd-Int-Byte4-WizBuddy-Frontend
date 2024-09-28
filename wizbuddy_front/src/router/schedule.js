@@ -6,14 +6,14 @@ const ScheduleRoutes = [
         path: '/schedule', 
         component: ScheduleMainPage,
         // meta: { requiresAuth: true }
-    }
+    },
         // children: [
         //     {
         //         path: 'regist',
         //         component: RegisterWeeklySchedule
         //     },
         // ]
-    },
+    
     {
         path: '/schedule/schedules',
         component: FindAllSchedules
