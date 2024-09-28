@@ -1,6 +1,8 @@
 <template>
     <div class="side">
         <aside class="left-side">
+            <LeftTab />
+            <LeftSideMenu/>
         </aside>
         <div class="main-container">
             <slot></slot>
@@ -12,7 +14,9 @@
   </template>
   
 <script setup>
+    import LeftTab from './LeftTab.vue';
     import UserProfileMenu from './UserProfileMenu.vue';
+    import LeftSideMenu from './LeftSideMenu.vue';
 
 </script>
   
@@ -21,7 +25,7 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    height: calc(100vh - 80px);
+    height: 100vh;
     background: #F3F7FA;
 }
 
@@ -29,14 +33,14 @@
     width: 16%; 
     background-color: #F3F7FA; 
     padding: 20px;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25) inset;
 }
 
 .right-side {
     width: 20%; 
     background-color: #F3F7FA;
     padding: 20px;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25) inset;
 }
 
 </style>

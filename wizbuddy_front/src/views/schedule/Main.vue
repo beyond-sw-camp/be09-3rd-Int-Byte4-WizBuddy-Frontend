@@ -1,12 +1,5 @@
 <template>
-  <div class="main-container">
-    <aside class="left-side">
-      <ScheduleTab />
-      <div class="side">
-        <LeftSideMenu />
-      </div>
-    </aside>
-
+  <SideMenu>
     <ScheduleCalendar
       :currentYear="currentYear"
       :currentMonth="currentMonth"
@@ -24,25 +17,20 @@
 
     <ScheduleInfoModal
       v-if="isScheduleModalOpen"
-      :isOpen="isScheduleModalOpen"
+      :isOpen="isScheduleModalOpen" 
       :selectedDate="selectedDay"
       :schedules="selectedSchedules"
       :currentMonth="months[currentMonth]"
       @close="closeScheduleModal"
     />
-    <aside class="right-side">
-      <UserProfileMenu />
-    </aside>
-  </div>
+  </SideMenu>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import ScheduleTab from '@/components/schedule/ScheduleTab.vue';
-import UserProfileMenu from '@/components/UserProfileMenu.vue';
-import LeftSideMenu from '@/components/LeftSideMenu.vue';
-import ScheduleInfoModal from '@/components/schedule/modal/ScheduleInfoModal.vue';
+import SideMenu from '@/components/SideMenu.vue';
 import ScheduleCalendar from '@/components/schedule/ScheduleCalendar.vue';
+import ScheduleInfoModal from '@/components/schedule/modal/ScheduleInfoModal.vue';
 
 const selectedDay = ref(null);
 const currentDate = ref(new Date());
