@@ -10,19 +10,23 @@
       :selectedDay="selectedDay"
       :isToday="isToday"
       :groupSchedulesByType="groupSchedulesByType"
-      :selectSchedule="selectSchedule"
+      @selectSchedule="selectSchedule"
       :prevMonth="prevMonth"
       :nextMonth="nextMonth"
+      :enableDaySelect="enableDaySelect"
+      :enableScheduleSelect="enableScheduleSelect"
     />
 
     <ScheduleInfoModal
-      v-if="isScheduleModalOpen"
-      :isOpen="isScheduleModalOpen" 
-      :selectedDate="selectedDay"
-      :schedules="selectedSchedules"
-      :currentMonth="months[currentMonth]"
-      @close="closeScheduleModal"
-    />
+    v-if="isScheduleModalOpen"
+    :isOpen="isScheduleModalOpen"
+    :schedules="selectedSchedules"
+    :currentMonth="months[currentMonth]"
+    :selectedDate="selectedDay"
+    @close="closeScheduleModal"
+/>
+
+
   </SideMenu>
 </template>
 
@@ -39,6 +43,9 @@ const currentYear = ref(currentDate.value.getFullYear());
 
 const selectedSchedules = ref([]);
 const isScheduleModalOpen = ref(false);
+
+const enableDaySelect = ref(false);
+const enableScheduleSelect = ref(true);
 
 const today = ref(new Date());
 
@@ -101,12 +108,12 @@ const nextMonth = () => {
   }
   updateCalendar();
 };
-
+  
 const groupSchedulesByType = (day) => {
   const daySchedules = getSchedulesForDay(day);
-  const groupedSchedules = {};
 
-  daySchedules.forEach((schedule) => {
+  const groupedSchedules = {};
+  daySchedules.forEach(schedule => {
     if (!groupedSchedules[schedule.type]) {
       groupedSchedules[schedule.type] = {
         type: schedule.type,
@@ -116,23 +123,27 @@ const groupSchedulesByType = (day) => {
     }
     groupedSchedules[schedule.type].names.push(schedule.title);
   });
-
   return Object.values(groupedSchedules);
 };
+
+
 
 const getSchedulesForDay = (day) => {
   return scheduleData.filter(schedule => schedule.day === day);
 };
 
-const selectSchedule = (day, scheduleGroup) => {
-  selectedSchedules.value = scheduleGroup.names.map(name => ({
-    title: name,
-    time: scheduleGroup.time,
-    type: scheduleGroup.type
-  }));
-  selectedDay.value = day;
-  isScheduleModalOpen.value = true;
+const selectSchedule = ({ day, group }) => {
+    if (enableScheduleSelect.value) {
+        selectedDay.value = day;
+        selectedSchedules.value = group.names.map(name => ({
+            title: name,
+            time: group.time,
+            type: group.type,
+        }));
+        isScheduleModalOpen.value = true;
+    }
 };
+
 
 const closeScheduleModal = () => {
   isScheduleModalOpen.value = false;

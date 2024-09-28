@@ -24,8 +24,13 @@ const ScheduleRoutes = [
     },
     { 
         path: "/schedule/edit", 
-        name: "ScheduleEdit",
-        component: ScheduleEditPage 
+        name: 'ScheduleEdit',
+        component: ScheduleEditPage,
+        props: (route) => ({
+            date: route.query.date,
+            title: route.query.title,
+            time: route.query.time
+        })
     }
 ];
 

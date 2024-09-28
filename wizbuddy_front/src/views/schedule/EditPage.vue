@@ -1,12 +1,5 @@
 <template>
-    <div class="main-container">
-        <aside class="left-side">
-            <ScheduleTab />
-            <div class="side">
-                <LeftSideMenu />
-            </div>
-        </aside>
-
+    <SideMenu>
         <div class="edit-container">
             <div class="edit-header">
                 <h2>{{ selectedDate }} 근무자 수정</h2>
@@ -33,18 +26,13 @@
                 </div>
             </form>
         </div>
-        <aside class="right-side">
-            <UserProfileMenu />
-        </aside>
-    </div>
+    </SideMenu>
 </template>
 
 <script setup>
     import { ref, onMounted } from 'vue';
     import { useRouter, useRoute } from 'vue-router';
-    import ScheduleTab from '@/components/schedule/ScheduleTab.vue';
-    import UserProfileMenu from '@/components/UserProfileMenu.vue';
-    import LeftSideMenu from '../../components/LeftSideMenu.vue';
+    import SideMenu from '@/components/SideMenu.vue';
 
     const router = useRouter();
     const route = useRoute();
@@ -57,8 +45,9 @@
     onMounted(() => {
         selectedDate.value = route.query.date || '';
         selectedWorker.value = route.query.worker || '';
-        timeSlot.value = route.query.timeSlot || '';
+        timeSlot.value = route.query.timeSlot || '';  // timeSlot 값 설정
     });
+
 
     function updateSchedule() {
         alert(`${selectedDate.value}에 ${timeSlot.value}의 근무자는 ${selectedWorker.value}으로(로) 수정되었습니다.`);

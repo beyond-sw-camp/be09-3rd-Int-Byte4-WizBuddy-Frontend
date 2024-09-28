@@ -25,6 +25,7 @@
           :key="day"
           class="calendar-day"
           :class="{ today: isToday(day), selected: day === selectedDay }"
+          @click="handleDayClick(day)"
         >
           <div class="day-number">{{ day }}</div>
           <div class="schedules">
@@ -32,7 +33,7 @@
               v-for="(group, type) in groupSchedulesByType(day)"
               :key="type"
               :class="['schedule', group.type]"
-              @click="selectSchedule(day, group)"
+              @click.stop="handleScheduleClick(day, group)"
             >
               {{ group.names.join(', ') }}
             </div>
@@ -44,7 +45,7 @@
 </template>
 
 <script setup>
-defineProps({
+const props = defineProps({
   currentYear: Number,
   currentMonth: Number,
   months: Array,
@@ -54,10 +55,30 @@ defineProps({
   selectedDay: Number,
   isToday: Function,
   groupSchedulesByType: Function,
-  selectSchedule: Function,
   prevMonth: Function,
   nextMonth: Function,
+  selectDay: Function, // 부모 컴포넌트에서 날짜 선택을 처리하는 함수
+  selectSchedule: Function, // 부모 컴포넌트에서 스케줄 선택을 처리하는 함수
+  enableDaySelect: Boolean, // 날짜 선택 기능을 활성화할지 여부
+  enableScheduleSelect: Boolean // 스케줄 선택 기능을 활성화할지 여부
 });
+
+const emit = defineEmits(['selectDay', 'selectSchedule']);
+
+// 날짜 클릭 시 처리
+function handleDayClick(day) {
+  if (props.enableDaySelect) {
+    emit('selectDay', day);
+  }
+}
+
+// 스케줄 클릭 시 처리
+function handleScheduleClick(day, group) {
+  console.log("Schedule clicked:", day, group);
+  if (props.enableScheduleSelect) {
+    emit('selectSchedule', { day, group });
+  }
+}
 </script>
 
 <style scoped>

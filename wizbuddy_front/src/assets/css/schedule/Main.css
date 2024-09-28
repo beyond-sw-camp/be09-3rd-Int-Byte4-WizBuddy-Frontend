@@ -8,23 +8,6 @@
     background-color: #F3F7FA;
 }
 
-.left-side {
-    width: 16%; 
-    background-color: #F3F7FA; 
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px; /* 컴포넌트 간 간격 */
-}
-
-.right-side {
-    width: 20%; 
-    background-color: #F3F7FA;
-    padding: 20px;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
-}
-
 .main-content {
     width: 60%; /* 중앙 컨텐츠 넓이 설정 */
     display: flex;
