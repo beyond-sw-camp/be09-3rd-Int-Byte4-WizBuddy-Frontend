@@ -180,7 +180,34 @@ height: 150px;" />
   </section>
 
 
- 
+  <section class="testimonial-section">
+  <div class="testimonial-slider">
+    <button @click="prevTestimonialSlide" class="arrow2 left-arrow2">
+      <img src="@/assets/icons/welcome/left.svg" alt="leftarrow">
+    </button>
+    <div class="testimonial-card">
+        <div
+        v-for="(testimonial, index) in testimonials"
+        :key="index"
+        class="testimonial"
+        :class="{ active: index === activeTestimonialSlide }"
+        >
+          <img :src="testimonial.img" alt="" />
+          <h3>{{ testimonial.name }}</h3>
+          <p class="p1" >{{ testimonial.quote }}</p>
+          <p class="p2" v-html="testimonial.description.replace(/\n/g, '<br>')"></p>
+          
+        </div>
+    </div>
+    <button @click="nextTestimonialSlide" class="arrow2 right-arrow2"><img src="@/assets/icons/welcome/right.svg" alt="rightarrow"></button>
+  </div>
+</section>
+<section class="button-section">
+  <button class="cta-button" @click="goToLogin">위즈버디 시작하기</button>
+</section>
+
+
+
 
 
 </div>
