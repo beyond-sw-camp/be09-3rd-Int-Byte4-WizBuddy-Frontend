@@ -19,7 +19,6 @@
       <button class="side-tab-item">수정</button>
       <button class="side-tab-item">삭제</button>
     </div>
-    <ScheduleRegister v-if="isRegisterModalOpen" :isOpen="isRegisterModalOpen" @close="closeRegisterModal" @submit="handleScheduleSubmit" />
   </div>
 </template>
 
