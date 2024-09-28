@@ -56,6 +56,7 @@ function requestDelete(schedule) {
 }
 
 ul {
+  margin-top: 20px;
   list-style: none;
   padding: 0;
 }

@@ -1,19 +1,32 @@
 <template>
   <div class="board-info">
     <div class="board-id">{{ board.id }}</div>
-    <router-link :to="`/manualboard/${board.id}`" class="board-title">{{ board.title }}</router-link>
+    <div class="board-title" @click="navigateToDetail">{{ board.title }}</div>
     <div class="board-writer">{{ board.writer }}</div>
     <div class="board-registerdate">{{ board.registerdate }}</div>
   </div>
 </template>
 
 <script setup>
+  import { useRouter, useRoute } from 'vue-router';
+
   const props = defineProps({
     board: {
       type: Object,
       required: true
     }
   });
+
+  const router = useRouter();
+  const route = useRoute();
+
+  const navigateToDetail = () => {
+    if (route.path.includes('/manualboard')) {
+      router.push(`/manualboard/${props.board.id}`);
+    } else if (route.path.includes('/noticeboard')) {
+      router.push(`/noticeboard/${props.board.id}`);
+    }
+  };
 </script>
 
 <style scoped>

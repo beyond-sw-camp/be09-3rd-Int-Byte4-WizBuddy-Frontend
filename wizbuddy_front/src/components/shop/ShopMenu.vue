@@ -16,14 +16,21 @@
   </template>
     
   <script setup>
+    import { defineProps } from 'vue';
     import { useRouter } from 'vue-router';
 
+    const props = defineProps({
+      userType: {
+        type: String,
+      }
+});
+
     const stores = [
-    {
-      id: 1,
-      name: '1번 매장',
-      options: ['근무일정 조회', '체크리스트 조회', '업무 조회', '게시판 조회'],
-    },
+    // {
+    //   id: 1,
+    //   name: '1번 매장',
+    //   options: ['근무일정 조회', '체크리스트 조회', '업무 조회', '게시판 조회'],
+    // },
     // {
     //   id: 2,
     //   name: '2번 매장',

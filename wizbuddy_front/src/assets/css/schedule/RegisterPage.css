@@ -1,0 +1,43 @@
+.main-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding-bottom: 41.6px;
+    background-color: #F3F7FA;
+    padding: 0 20px;
+}
+
+.schedule {
+    padding: 5px;
+    border-radius: 5px;
+    margin: 2px 0;
+    font-size: 10px;
+    text-align: center;
+}
+
+.schedule.fun {
+    font-size: 9px;
+    background-color: #D2F0FF;
+}
+
+.schedule.important {
+    font-size: 9px;
+    background-color: #FFD9D9;
+}
+
+.schedule.personal {
+    font-size: 9px;
+    background-color: #FEE6C9;
+}
+
+/* 날짜 셀 hover 효과 */
+.calendar-day:hover {
+    background-color: #e0e0e0;
+}
+
+/* 빈 날짜 */
+.calendar-day.blank {
+    visibility: hidden;
+}

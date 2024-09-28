@@ -4,12 +4,13 @@
       <div class="inner-container">
         <BoardTable/>
       </div>
-      <div class="bottom-controls">
+      <!-- bottom-controls는 ManualPostCreate화면일 때 나오면 안된다 -->
+      <div class="bottom-controls" v-if="!isPostCreate">
         <div class="search-container">
           <input type="text" class="search-input" placeholder="검색">
           <button class="search-button">검색</button>
         </div>
-        <button class="write-button">글쓰기</button>
+        <button class="write-button" @click="goToPostCreate">글쓰기</button>
       </div>
     </div>
   </div>
@@ -17,10 +18,39 @@
   
 <script setup>
     import {useRoute, useRouter} from 'vue-router';
+    import {ref, watch} from 'vue';
     import BoardTable from './BoardTable.vue';
 
-    const currentRoute = useRoute();
+    const route = useRoute();
     const router = useRouter();
+    const isPostCreate = ref(false);
+
+    // 라우트 감시하여 'ManualPostCreate'일 때는 bottom-controls를 숨김
+    // watch(
+    //   () => route.path,
+    //   (newpath) => {
+    //     isPostCreate.value = (newpath === '/manualboard/register');
+    //   }
+    // );
+
+    // '글쓰기' 버튼을 누르면 PostCreate로 이동
+    // const goToPostCreate = () => {
+    //   router.push({ path: '/manualboard/register' });
+    // };
+
+    watch(
+      () => route.path,
+      (newpath) => {
+        isPostCreate.value = newpath.includes('/register');
+      }
+    );
+
+    // '글쓰기' 버튼을 누르면 현재 경로에 따라 /register로 이동
+    const goToPostCreate = () => {
+      const basePath = route.path.split('/')[1];
+      router.push(`/${basePath}/register`);
+    };
+
 </script>
   
 <style scoped>
