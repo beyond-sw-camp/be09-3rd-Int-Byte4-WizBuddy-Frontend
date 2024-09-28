@@ -5,6 +5,7 @@
         <!-- <button class="tab-item" :class="{ active: activeTab === 'myschedule' }" @click="setActiveTab('myschedule')">나의 스케줄표</button>
         <button class="tab-item" :class="{ active: activeTab === 'worktime' }" @click="setActiveTab('worktime')">출퇴근 시간 확인</button> -->
     </nav>
+    
 </template>
 
 <script setup>

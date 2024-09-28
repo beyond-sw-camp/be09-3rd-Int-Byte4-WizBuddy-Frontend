@@ -1,8 +1,8 @@
 <template>
     <div class="side">
         <aside class="left-side">
-            <LeftTab />
-            <LeftSideMenu/>
+            <LeftTab v-if="!isMainPage"/>
+            <LeftSideMenu v-if="userType === 'employer'"/>
         </aside>
         <div class="main-container">
             <slot></slot>
@@ -14,10 +14,35 @@
   </template>
   
 <script setup>
+    import { ref, watch, onMounted } from 'vue';
+    import { useRoute } from 'vue-router';
+
     import LeftTab from './LeftTab.vue';
     import UserProfileMenu from './UserProfileMenu.vue';
     import LeftSideMenu from './LeftSideMenu.vue';
 
+    const route = useRoute();
+
+    const isMainPage = ref(false);
+    const userType = ref('');
+
+    watch(() => route.path, (newPath) => {
+        isMainPage.value = newPath === '/main';    
+    }
+    , 
+    {
+      immediate: true 
+    }
+    
+);
+
+    onMounted(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+        const user = JSON.parse(storedUser);
+        userType.value = user.role; 
+    }
+    });
 </script>
   
 <style scoped>

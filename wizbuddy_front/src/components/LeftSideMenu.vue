@@ -6,7 +6,11 @@
     <button class="side-tab-item" @click="setActiveTab('navigateToScheduleMain')" 
       v-if="isScheduleRegisterPage|isScheduleDeletePage">완료
     </button>
-
+    <div class="shop-side" v-if="isMainPage">
+      <button class="side-tab-item">등록</button>
+      <button class="side-tab-item">수정</button>
+      <button class="side-tab-item">삭제</button>
+    </div>
     <ScheduleRegister v-if="isRegisterModalOpen" :isOpen="isRegisterModalOpen" @close="closeRegisterModal" @submit="handleScheduleSubmit" />
   </div>
 </template>
@@ -23,6 +27,8 @@ const isScheduleMainPage = ref(false);
 const isWeeklySchedulePage = ref(false);
 const isScheduleRegisterPage = ref(false);
 const isScheduleDeletePage = ref(false);
+const isMainPage = ref(false);
+
 
 const isRegisterModalOpen = ref(false);
 const activeTab = ref('');
@@ -32,6 +38,7 @@ watch(() => route.path, (newPath) => {
   isWeeklySchedulePage.value = newPath ==='/schedule/schedules';
   isScheduleRegisterPage.value = newPath === '/schedule/regist';
   isScheduleDeletePage.value = newPath === '/schedule/delete';
+  isMainPage.value = newPath === '/main';
   }
   , 
   {
@@ -83,9 +90,18 @@ watch(() => route.path, (newPath) => {
   height: 476.6px;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content:end;
   width: 100%;
   background: #f3f7fa;
+}
+
+
+.shop-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* gap: 20px; */
+  margin-top: 20px;
 }
 
 .side-tab-item {
@@ -98,6 +114,22 @@ watch(() => route.path, (newPath) => {
   border-radius: 30px;
   margin-bottom: 20px;
   cursor: pointer;
+}
+
+.shop-side .side-tab-item {
+  padding: 10px 10px;
+  font-size: 14px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  cursor: pointer;
+  width: 70px;
+  height: 50px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease; 
 }
 
 .side-tab-item:hover {
