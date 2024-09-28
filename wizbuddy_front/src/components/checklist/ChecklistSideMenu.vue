@@ -1,5 +1,3 @@
-
-코드 복사
 <template>
   <div class="side-menu">
     <button class="side-menu-item" @click="openInsertModal">등록</button>

@@ -2,10 +2,9 @@
   <div class="task-list-page">
     <aside class="left-side">
       <TaskTab/>
+      <SideMenu :tasks="tasks" />
     </aside>
-    <div class="sidebar">
-      <button @click="goToTaskCreatePage" class="register-button">등록</button>
-    </div>
+    
     <div class="main-content">
       <h1>업무 리스트</h1>
       <div class="task-container">
@@ -19,29 +18,50 @@
   </div>
 </template>
 
-
 <script setup>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import TaskItem from '@/components/task/TaskItem.vue'; // TaskItem 컴포넌트 경로 확인
+import { ref, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
+import TaskItem from '@/components/task/TaskItem.vue';
 import TaskTab from '@/components/task/TaskTab.vue';
 import UserProfileMenu from '@/components/UserProfileMenu.vue';
+import SideMenu from '@/components/task/TaskSideMenu.vue';
 
-// Task 데이터 예시
-const tasks = ref([
-  { id: 1, number: 1, title: '첫 번째 업무', content: '화장실 청소', isFixed: true },
-  { id: 2, number: 2, title: '두 번째 업무', content: '매장 정리', isFixed: false },
-  { id: 3, number: 3, title: '세 번째 업무', content: '커피 머신 청소', isFixed: true },
-  { id: 4, number: 4, title: '네 번째 업무', content: '재고 확인', isFixed: false }
-]);
+const tasks = ref([]);
 
-const router = useRouter();
+// // Task 리스트 초기 데이터
+// const tasks = ref([
+//   { id: 1, number: 1, title: '첫 번째 업무', content: '화장실 청소', isFixed: true },
+//   { id: 2, number: 2, title: '두 번째 업무', content: '매장 정리', isFixed: false },
+//   { id: 3, number: 3, title: '세 번째 업무', content: '커피 머신 청소', isFixed: true },
+//   { id: 4, number: 4, title: '네 번째 업무', content: '재고 확인', isFixed: false }
+// ]);
 
+const route = useRoute();
 
-const goToTaskCreatePage = () => {
-  router.push('/task/create');
-}
+// 페이지가 로드될 때 API로부터 데이터를 가져옴
+onMounted(async () => {
+  try {
+    const response = await fetch('http://localhost:8080/tasks'); // JSON 서버에서 데이터를 가져옴
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log(data);    
+    if (data.length > 0) {
+      tasks.value = data;  // 가져온 데이터를 tasks에 할당
+      console.log('서버로부터 받아온 tasks:', tasks.value);
+    }
+  } catch (error) {
+    console.error('데이터를 가져오는 중 오류가 발생했습니다:', error);
+  }
 
+  // 더미데이터 사용시
+  // if (newTask) {const response = await axios.get('/api/tasks');
+  //   // 기존 tasks 리스트에 새로 등록된 업무 추가
+  //   tasks.value = [...tasks.value, newTask]; // 새롭게 배열을 할당하여 Vue가 변화를 확실히 감지하도록 함
+  //   console.log('새로 등록된 업무가 추가되었습니다:', newTask);    
+  // }
+});
 
 </script>
 
@@ -54,7 +74,6 @@ const goToTaskCreatePage = () => {
     min-height: calc(100vh - 151.6px);
     padding-bottom: 41.6px;
     background-color: #F3F7FA;
-    
     padding: 0 20px;
 }
 
@@ -69,40 +88,18 @@ const goToTaskCreatePage = () => {
     gap: 100px;
 }
 
-.sidebar {
-  width: 100px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  left: 20px;
-  top: 0;
-  bottom: 0;
-}
-
-.register-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  color: white;
-  background-color: #4caf50;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-}
-
 .main-content {
   flex: 1;
   margin-left: 120px;
   /* 사이드바 너비 + 여백 */
-
   margin-right: 120px;
 }
 
-h1 {text-align: center;
+h1 {
+  text-align: center;
   margin-top: 20px; /* 상단에 여백을 추가 */
-    margin-bottom: 20px; /* 하단에도 여백을 추가하여 항목과 구분 */
-    font-weight: bold;
+  margin-bottom: 20px; /* 하단에도 여백을 추가하여 항목과 구분 */
+  font-weight: bold;
 }
 
 .task-container {
@@ -114,13 +111,6 @@ h1 {text-align: center;
 @media (max-width: 768px) {
   .task-list-page {
     flex-direction: column;
-  }
-
-  .sidebar {
-    position: static;
-    width: 100%;
-    flex-direction: row;
-    padding: 20px 0;
   }
 
   .main-content {
