@@ -25,8 +25,8 @@
         </div>
 
         <div class="post-actions">
-          <div class="like-counter">
-            <span>❤️ 5</span> <!-- You can make this dynamic -->
+          <div class="like-counter" @click="incrementLike">
+            <span>{{ likeClicked ? '❤️' : '🤍' }} {{ likes }}</span> <!-- You can make this dynamic -->
           </div>
           <div class="file-actions">
             <input type="button" value=".pdf" class="file-input" />
@@ -58,6 +58,9 @@ const posts = [
 // Use Vue Router's useRoute to get the ID parameter from the route
 const route = useRoute();
 const post = ref(null);
+const likes = ref(0);
+
+const likeClicked = ref(false);
 
 // 현재 게시글 ID
 const postId = computed(() => parseInt(route.params.id));
@@ -86,6 +89,15 @@ const previousPostId = computed(() => {
 const nextPostId = computed(() => {
   return postId.value < posts.length ? postId.value + 1 : null;
 });
+
+// 좋아요 증가 함수
+const incrementLike = () => {
+  if (!likeClicked.value) {
+    likes.value += 1;
+    likeClicked.value = true; // 한 번만 클릭 가능
+  }
+};
+
 </script>
 
 <style scoped>
@@ -252,9 +264,14 @@ const nextPostId = computed(() => {
   margin-right: 10px;
 }
 
-
 .arrow-text-left, .arrow-text-right {
   text-decoration: none;
+}
+
+.like-counter {
+  font-size: 18px;
+  color: #333;
+  cursor: pointer; /* 클릭 가능하게 커서 변경 */
 }
 
 </style>
