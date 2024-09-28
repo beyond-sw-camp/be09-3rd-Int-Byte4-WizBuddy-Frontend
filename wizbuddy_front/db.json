@@ -123,5 +123,111 @@
       "type": "personal",
       "time": "3T (17:00 ~ 21:00)"
     }
+  ],
+  "tasks": [
+    {
+      "id": "2",
+      "title": "두 번째 업무",
+      "content": "매장 정리",
+      "isFixed": false
+    },
+    {
+      "id": "4",
+      "title": "네 번째 업무",
+      "content": "재고 확인",
+      "isFixed": false
+    },
+    {
+      "id": "5",
+      "title": "task의 이름이 이렇게 길면 너가 뭘 할수 있지?",
+      "content": "재고 확인",
+      "isFixed": true
+    },
+    {
+      "id": "6",
+      "title": "짧음",
+      "content": "재고 확인",
+      "isFixed": true
+    }
+  ],
+  "checklists": [
+    {
+      "id": "1",
+      "title": "9월 16일 1T 필독",
+      "tasks": [
+        {
+          "id": "1",
+          "title": "첫 번째 업무",
+          "content": "화장실 청소",
+          "isFixed": true
+        },
+        {
+          "id": "2",
+          "title": "두 번째 업무",
+          "content": "매장 정리",
+          "isFixed": false
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "title": "9월 17일 2T 필독",
+      "tasks": [
+        {
+          "id": "5",
+          "title": "task의 이름이 이렇게 길면 너가 뭘 할수 있지?",
+          "content": "재고 확인",
+          "isFixed": true
+        },
+        {
+          "id": "6",
+          "title": "짧음",
+          "content": "재고 확인",
+          "isFixed": false
+        },
+        {
+          "id": "7",
+          "title": "fixed가 아닌데 task의 이름이 이렇게 길면 너가 뭘할수있는데",
+          "content": "재고 확인",
+          "isFixed": false
+        }
+      ]
+    },
+    {
+      "id": "d07c",
+      "title": "5",
+      "tasks": [
+        {
+          "id": "1",
+          "title": "첫 번째 업무",
+          "content": "화장실 청소",
+          "isFixed": true
+        },
+        {
+          "id": "5",
+          "title": "task의 이름이 이렇게 길면 너가 뭘 할수 있지?",
+          "content": "재고 확인",
+          "isFixed": true
+        }
+      ]
+    },
+    {
+      "id": "1",
+      "title": "9월 16일 1T 필독",
+      "tasks": [
+        {
+          "id": "1",
+          "title": "첫 번째 업무",
+          "content": "화장실 청소",
+          "isFixed": true
+        },
+        {
+          "id": "2",
+          "title": "두 번째 업무",
+          "content": "매장 정리",
+          "isFixed": false
+        }
+      ]
+    }
   ]
 }

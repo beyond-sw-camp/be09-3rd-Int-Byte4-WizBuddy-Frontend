@@ -8,7 +8,7 @@
                 <div v-for="task in nonFixedTasks" :key="task.id" class="task-item non-fixed-task">
                     <label>
                         <input type="checkbox" v-model="selectedTasks" :value="task" />
-                        {{ task.content }}
+                        {{ task.title }}
                     </label>
                 </div>
             </div>
