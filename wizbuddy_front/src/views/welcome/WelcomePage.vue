@@ -77,7 +77,36 @@ height: 150px;" />
     </div>
   </section>
 
- 
+  <section class="extra2-section">
+    <div class="icon-columns2">
+      <!-- 첫 번째 컬럼: 왼쪽 이미지 -->
+      <div class="icon-column22">
+        <img src="@/assets/icons/welcome/mockup1.svg" alt="Wiz Buddy Mockup" class="character-img2" />
+      </div>
+
+      <!-- 두 번째 컬럼: 중앙 텍스트 -->
+      <div class="icon-column2" >
+        <h2>스케줄 관리를 한번에</h2>
+        <p>알바생들의 근무 스케줄을 쉽고 간편하게 <br>관리할 수 있도록 도와줍니다. <br>
+          근무 시간표를 손쉽게 설정하고 수정할 수 있으며, <br>
+          직원들은 근무 일정을 실시간으로 확인할 수 있습니다.</p>
+        <ul>
+          <li>근무 스케줄 설정 및 변경</li>
+          <li>직원별 근무 일정 조회</li>
+          <li>공휴일, 변경된 스케줄 실시간 알림</li>
+        </ul>
+        <button @click="goToLogin">위즈버디 시작하기</button>
+      </div>
+
+      <!-- 세 번째 컬럼: 오른쪽 이미지 -->
+      <div class="icon-column2">
+        <img src="@/assets/icons/welcome/image1.svg" alt="Additional Image" class="character-img3" />
+      </div>
+    </div>
+  </section>
+
+
+  
 
 
 </div>
