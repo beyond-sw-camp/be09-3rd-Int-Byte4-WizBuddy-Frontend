@@ -28,14 +28,6 @@ import SideMenu from '@/components/task/TaskSideMenu.vue';
 
 const tasks = ref([]);
 
-// // Task 리스트 초기 데이터
-// const tasks = ref([
-//   { id: 1, number: 1, title: '첫 번째 업무', content: '화장실 청소', isFixed: true },
-//   { id: 2, number: 2, title: '두 번째 업무', content: '매장 정리', isFixed: false },
-//   { id: 3, number: 3, title: '세 번째 업무', content: '커피 머신 청소', isFixed: true },
-//   { id: 4, number: 4, title: '네 번째 업무', content: '재고 확인', isFixed: false }
-// ]);
-
 const route = useRoute();
 
 // 페이지가 로드될 때 API로부터 데이터를 가져옴
@@ -55,12 +47,6 @@ onMounted(async () => {
     console.error('데이터를 가져오는 중 오류가 발생했습니다:', error);
   }
 
-  // 더미데이터 사용시
-  // if (newTask) {const response = await axios.get('/api/tasks');
-  //   // 기존 tasks 리스트에 새로 등록된 업무 추가
-  //   tasks.value = [...tasks.value, newTask]; // 새롭게 배열을 할당하여 Vue가 변화를 확실히 감지하도록 함
-  //   console.log('새로 등록된 업무가 추가되었습니다:', newTask);    
-  // }
 });
 
 </script>
