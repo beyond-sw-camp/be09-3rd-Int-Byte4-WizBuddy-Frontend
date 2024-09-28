@@ -42,9 +42,9 @@
 <script setup>
     import { ref, onMounted } from 'vue';
     import { useRouter, useRoute } from 'vue-router';
-    import ScheduleTab from './ScheduleTab.vue';
-    import UserProfileMenu from '../UserProfileMenu.vue';
-    import EmployerSideMenu from './EmployerSideMenu.vue';
+    import ScheduleTab from '@/components/schedule/ScheduleTab.vue';
+    import UserProfileMenu from '@/components/UserProfileMenu.vue';
+    import EmployerSideMenu from '@/components/schedule/EmployerSideMenu.vue';
 
     const router = useRouter();
     const route = useRoute();
