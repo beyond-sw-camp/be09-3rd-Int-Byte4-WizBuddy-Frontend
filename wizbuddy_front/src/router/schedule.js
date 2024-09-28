@@ -1,8 +1,8 @@
-import ScheduleMainPage from "@/components/schedule/Main.vue";
-import FindAllSchedules from "@/components/schedule/FindAllSchedules.vue";
-import ScheduleRegisterPage from "@/components/schedule/RegisterPage.vue";
-import ScheduleDeletePage from "@/components/schedule/DeletePage.vue";
-import ScheduleEditPage from '@/components/schedule/EditPage.vue';
+import ScheduleMainPage from "@/views/schedule/Main.vue";
+import WeeklySchedule from "@/views/schedule/WeeklySchedule.vue";
+import ScheduleRegisterPage from "@/views/schedule/RegisterPage.vue";
+import ScheduleDeletePage from "@/views/schedule/DeletePage.vue";
+import ScheduleEditPage from '@/views/schedule/EditPage.vue';
 
 const ScheduleRoutes = [
     {
@@ -20,7 +20,7 @@ const ScheduleRoutes = [
     },
     {
         path: "/schedule/schedules",
-        component: FindAllSchedules
+        component: WeeklySchedule
     },
     { 
         path: "/schedule/edit", 

@@ -7,45 +7,21 @@
             </div>
         </aside>
 
-        <div class="calendar-container">
-            <div class="calendar-header">
-                <button @click="prevMonth" class="prev-next-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                    </svg>
-                </button>
-                <h2>{{ currentYear }}년 {{ months[currentMonth] }} 스케줄 </h2>
-                <button @click="nextMonth" class="prev-next-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                </button>
-            </div>
-    
-            <div class="calendar-body">
-                <div class="calendar-weekdays">
-                    <div v-for="day in weekdays" :key="day" class="weekday">{{ day }}</div>
-                </div>
-                <div class="calendar-days">
-                    <div
-                        v-for="day in daysInMonth"
-                        :key="day"
-                        class="calendar-day"
-                        :class="{ today: isToday(day), selected: day === selectedDay }"
-                        @click="selectDay(day)">
-                        <div class="day-number">{{ day }}</div>
-                        <div class="schedules">
-                            <div
-                                v-for="(group, index) in groupSchedulesByType(day)"
-                                :key="index"
-                                :class="['schedule', group.type]">
-                                {{ group.names.join(', ') }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <ScheduleCalendar
+          :currentYear="currentYear"
+          :currentMonth="currentMonth"
+          :months="months"
+          :weekdays="weekdays"
+          :blanks="blanks"
+          :daysInMonth="daysInMonth"
+          :selectedDay="selectedDay"
+          :isToday="isToday"
+          :groupSchedulesByType="groupSchedulesByType"
+          :selectSchedule="selectSchedule"
+          :prevMonth="prevMonth"
+          :nextMonth="nextMonth"
+        />
+
         <aside class="right-side">
             <UserProfileMenu/>
         </aside>
@@ -63,10 +39,11 @@
 
 <script setup>
     import { ref } from 'vue';
-    import ScheduleTab from './ScheduleTab.vue';
-    import UserProfileMenu from '../UserProfileMenu.vue';
-    import EmployerSideMenu from './EmployerSideMenu.vue';
-    import EmployeeRegisterModal from './modal/EmployeeRegisterModal.vue';
+    import ScheduleTab from '@/components/schedule/ScheduleTab.vue';
+    import UserProfileMenu from '@/components/UserProfileMenu.vue';
+    import EmployerSideMenu from '@/components/schedule/EmployerSideMenu.vue';
+    import EmployeeRegisterModal from '@/components/schedule/modal/EmployeeRegisterModal.vue';
+    import ScheduleCalendar from '@/components/schedule/ScheduleCalendar.vue';
 
     const selectedDay = ref(null);
     const currentDate = ref(new Date());
@@ -75,7 +52,6 @@
     
     const today = ref(new Date());
 
-    // 모달 상태 관리 변수
     const isRegisterModalOpen = ref(false);
     
     const months = [
@@ -84,7 +60,6 @@
     
     const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
     
-    // 스케줄 데이터 예시
     const scheduleData = [
     { day: 15, title: '유제은', type: 'fun', time: '1T (09:00 ~ 14:00)' },
     { day: 15, title: '백경석', type: 'fun', time: '1T (09:00 ~ 14:00)' },
@@ -183,5 +158,5 @@
 
 
 <style scoped>
-  @import url('@/assets/css/schedule/ScheduleRegisterPage.css');
+  @import url('@/assets/css/schedule/RegisterPage.css');
 </style>

@@ -7,48 +7,20 @@
       </div>
     </aside>
 
-    <div class="calendar-container">
-      <div class="calendar-header">
-        <button @click="prevMonth" class="prev-next-button">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-        <h2>{{ currentYear }}년 {{ months[currentMonth] }} 스케줄 </h2>
-        <button @click="nextMonth" class="prev-next-button">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
-      </div>
-
-      <div class="calendar-body">
-        <div class="calendar-weekdays">
-          <div v-for="day in weekdays" :key="day" class="weekday">{{ day }}</div>
-        </div>
-        <div class="calendar-days">
-          <div v-for="(blank, index) in blanks" :key="index" class="calendar-day blank"></div>
-          <div
-            v-for="day in daysInMonth"
-            :key="day"
-            class="calendar-day"
-            :class="{ today: isToday(day), selected: day === selectedDay }"
-          >
-            <div class="day-number">{{ day }}</div>
-            <div class="schedules">
-              <div 
-                v-for="(group, type) in groupSchedulesByType(day)" 
-                :key="type" 
-                :class="['schedule', group.type]"
-                @click="selectSchedule(day, group)"
-              >
-                {{ group.names.join(', ') }}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <ScheduleCalendar
+      :currentYear="currentYear"
+      :currentMonth="currentMonth"
+      :months="months"
+      :weekdays="weekdays"
+      :blanks="blanks"
+      :daysInMonth="daysInMonth"
+      :selectedDay="selectedDay"
+      :isToday="isToday"
+      :groupSchedulesByType="groupSchedulesByType"
+      :selectSchedule="selectSchedule"
+      :prevMonth="prevMonth"
+      :nextMonth="nextMonth"
+    />
 
     <ScheduleInfoModal
       v-if="isScheduleModalOpen"
@@ -65,11 +37,12 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
-import ScheduleTab from './ScheduleTab.vue';
-import UserProfileMenu from '../UserProfileMenu.vue';
-import EmployerSideMenu from './EmployerSideMenu.vue';
-import ScheduleInfoModal from '../schedule/modal/ScheduleInfoModal.vue';
+import { ref } from 'vue';
+import ScheduleTab from '@/components/schedule/ScheduleTab.vue';
+import UserProfileMenu from '@/components/UserProfileMenu.vue';
+import EmployerSideMenu from '@/components/schedule/EmployerSideMenu.vue';
+import ScheduleInfoModal from '@/components/schedule/modal/ScheduleInfoModal.vue';
+import ScheduleCalendar from '@/components/schedule/ScheduleCalendar.vue';
 
 const selectedDay = ref(null);
 const currentDate = ref(new Date());
@@ -99,7 +72,6 @@ const getFirstDayOfMonth = (year, month) => new Date(year, month, 1);
 const getLastDayOfMonth = (year, month) => new Date(year, month + 1, 0);
 
 const blanks = ref([]);
-
 const daysInMonth = ref([]);
 
 const updateCalendar = () => {
@@ -126,7 +98,6 @@ const isToday = (day) => {
 
 const prevMonth = () => {
   currentMonth.value--;
-
   if (currentMonth.value < 0) {
     currentMonth.value = 11;
     currentYear.value--;
@@ -136,7 +107,6 @@ const prevMonth = () => {
 
 const nextMonth = () => {
   currentMonth.value++;
-
   if (currentMonth.value > 11) {
     currentMonth.value = 0;
     currentYear.value++;
