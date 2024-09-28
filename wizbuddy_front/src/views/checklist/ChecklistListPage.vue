@@ -1,43 +1,23 @@
 <template>
     <div class="checklist-list-page">
-     <aside class="left-side">
-        <!-- 
-            상단 왼쪽 바
-            "체크리스트",
-            "체크리스트 이력",
-            "업무 리스트"
-            이렇게 3개의 div가 존재하고 클릭시 각각 이동하는 url이 매핑되어있다.
-        -->
-        <TaskTab /> 
-
-        <!-- 
-            체크리스트에서 사용하는 side menu바
-            "등록", "수정", "삭제"
-            이렇게 3개의 버튼이 존재한다.
-            page에서 가지고있는 checklists 정보와 tasks 정보를 보내줘야 하므로 props, emit 메서드를 사용해서 데이터를 자식으로 넘겨줘야한다.
-            "등록" 버튼을 누르면 모달창이 뜨면서 고정업무가 자동으로 추가되어야함.
-            "수정", "삭제" 버튼을 누르면 체크리스트에 "선택" 버튼이 보여지게해야한다.
-            "addChecklist", "handleMode" 이벤트(메서드)를 관리한다.
-        -->
+      <aside class="left-side">
+        <TaskTab />
         <ChecklistSideMenu
-            :tasks="tasks"
-            :selectedChecklist="selectedChecklist"
-            @add-checklist="addChecklist"
-            @trigger-mode="handleMode"
+          :tasks="tasks"
+          :selectedChecklist="selectedChecklist"
+          @add-checklist="addChecklist"
+          @trigger-mode="handleMode"
         />
       </aside>
   
       <div class="main-content">
         <h1>체크리스트 목록</h1>
-        <!-- page가 가지고 있는(나중에는 db.json에서 받아올 데이터) checklists 데이터를 보여주는 div이다.-->
         <div v-for="checklist in checklists" :key="checklist.id">
-          <!-- 클릭시 realSelectChecklist 이벤트를 발생시키고 이는 어떤 체크리스트인지 + 어떤 모달을 킬지를 결정해준다. -->
           <div @click="realSelectChecklist(checklist)" class="checklist-header">
             {{ checklist.title }}
           </div>
   
-          <!-- 선택 버튼: 수정 모드/삭제 모드에 따라 동작
-                -> 수정, 삭제모드시에만 버튼이 보이고 클릭시 이벤트도 어떤 모드인지에 따라 다르다. -->
+          <!-- 선택 버튼: 수정 모드/삭제 모드에 따라 동작 -->
           <button
             v-if="isSelecting"
             class="select-button"
@@ -46,30 +26,14 @@
             선택
           </button>
   
-          
-          <!-- 
-            isModalOpen이 true인 경우에만 ChecklistDetailModal이 열린다.
-            위에서 realSelectChecklist 이벤트가 발생할 경우 띄워지는 모달창이고 체크리스트 상세모달창을 띄운다.
-            체크리스트의 정보(제목, 업무 등)들을 가지고 있어야하기 때문에 checklist="selectedChecklist"로 props 문법을 써서 정보를 자식(detailModal)으로 넘겨준다. 
-            아직도 헷갈리지만 자식에게 넘겨주는 부모의 변수명은 오른쪽(selectedChecklist)이고 자식이 받는 변수는(checklist) 이다.
-            const props = defineProps({
-                checklist: {
-                type: Object,
-                required: true,
-                }
-            }); -> 자식은 이런식으로 사용하게된다.
-          -->
+          <!-- ChecklistDetailModal -->
           <ChecklistDetailModal
             v-if="isModalOpen"
             :checklist="selectedChecklist"
             @close="closeModal"
           />
   
-          <!-- 
-            이는 수정모드인 경우 "선택" 버튼을 누를 때 발생하는 모달창이다. 선택된 체크리스트 정보(selectedChecklist)와 
-            수정해야하므로 존재하는 tasks 중에 추가하거나 삭제해야하기 때문에 tasks로 현재 존재하는 tasks 정보도 같이 보내준다.
-            @close, @save 이벤트를 통해 모달창 닫기, 수정된 정보 저장 메서드를 수행할 수 있다.
-          -->
+          <!-- EditModal -->
           <EditModal
             v-if="isEditModalOpen"
             :checklist="selectedChecklist"
