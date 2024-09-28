@@ -1,161 +1,53 @@
 .main-container {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-    min-height: 100vh;
-    padding-bottom: 41.6px;
-    background-color: #F3F7FA;
+    flex-direction: row; /* 가로로 나란히 */
+    justify-content: space-between; 
+    align-items: flex-start; 
+    height: 100vh; /* 100% 화면 높이 */
     padding: 0 20px;
+    background-color: #F3F7FA;
 }
 
 .left-side {
-    width: 16%;
-    background-color: #F3F7FA;
+    width: 16%; 
+    background-color: #F3F7FA; 
     padding: 20px;
-    margin-left: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 100px;
+    gap: 20px; /* 컴포넌트 간 간격 */
 }
 
-.side {
+.right-side {
+    width: 20%; 
+    background-color: #F3F7FA;
+    padding: 20px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+}
+
+.main-content {
+    width: 60%; /* 중앙 컨텐츠 넓이 설정 */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    width: 100%;
-    background: #f3f7fa;
+    justify-content: flex-start;
 }
 
 .side-tab-item {
     display: block;
     padding: 10px 10px;
     font-size: 16px;
-    width: 50%;
+    width: 100%; /* 버튼을 가득 채움 */
     background-color: white;
     border: 1px solid #ccc;
     border-radius: 30px;
     margin-bottom: 20px;
     cursor: pointer;
+    text-align: center; /* 텍스트 가운데 정렬 */
 }
 
 .side-tab-item:hover {
     background-color: #f0f0f0;
-}
-
-.calendar-container {
-    max-width: 900px;
-    width: 100%;
-    margin-top: 20px;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    padding: 5px 40px 14px 40px;
-    box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
-    overflow: hidden;
-    flex: 1;
-}
-
-.calendar-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 8px 5px;
-    font-size: 16px;
-    font-weight: bold;
-    position: relative;
-    margin-bottom: 5px;
-    margin-left: 190px;
-    margin-right: 190px;
-}
-
-.calendar-header h2 {
-    font-size: auto;
-}
-
-.prev-next-button {
-    font-size: 18px;
-    margin-top: 5px;
-    cursor: pointer;
-    border: none;
-    background-color: transparent;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.prev-next-button:first-of-type {
-    left: 10px;
-}
-
-.prev-next-button:last-of-type {
-    right: 10px;
-}
-
-.prev-next-button:hover {
-    background-color: #f0f0f0;
-    border-radius: 5px;
-}
-
-.calendar-body {
-    display: flex;
-    flex-direction: column;
-}
-
-.calendar-weekdays {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    text-align: center;
-    font-weight: bold;
-}
-
-.calendar-days {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    grid-auto-rows: minmax(100px, auto);
-    gap: 5px;
-}
-
-.calendar-day {
-    text-align: center;
-    padding: 5px;
-    background-color: #FFF;
-    border-radius: 10px;
-    box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.calendar-day .day-number {
-    font-size: 10px;
-    font-weight: bold;
-    background-color: transparent;
-    border-radius: 50%;
-    width: 15px;
-    height: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: transparent;
-}
-
-.calendar-day.selected {
-    background-color: #fffcd5;
-}
-
-.calendar-day.today .day-number {
-    background-color: #000000;
-    color: white;
-}
-
-.calendar-day .schedules {
-    margin-top: 5px;
-    width: 100%;
 }
 
 .schedule {
@@ -165,10 +57,6 @@
     font-size: 10px;
     text-align: center;
     cursor: pointer;
-}
-
-.schedule:hover {
-    background-color: #e0e0e0;
 }
 
 .schedule-group {
@@ -216,56 +104,4 @@
 
 .calendar-day.blank {
     visibility: hidden;
-}
-
-.right-side {
-    width: 20%;
-    background-color: #F3F7FA;
-    padding: 20px;
-}
-
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.modal-container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    width: 450px;
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.modal-title {
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.close-btn {
-    background-color: transparent;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-.schedule-item {
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
 }

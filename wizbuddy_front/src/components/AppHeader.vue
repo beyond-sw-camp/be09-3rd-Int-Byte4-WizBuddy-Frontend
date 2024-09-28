@@ -5,7 +5,8 @@
           <img src="@/assets/icons/wizbuddy_logo.svg" alt="Wiz Buddy Logo" class="logo-img" />
         </div>
         <div class="right-section" v-if="!(isLoginPage|isSignupPage)">
-          <p>알바생 {{ username }}님, 환영합니다.</p>
+          <p v-if="userRole === 'employer'">사장 {{ userName }}님, 환영합니다.</p>
+          <p v-else-if="userRole === 'employee'">알바생 {{ userName }}님, 환영합니다.</p>
           <img src="@/assets/icons/Profile.svg" alt="Profile" class="profile-img" />
         </div>
       </div>
@@ -31,6 +32,10 @@
     const isSchedulePage = ref(false);
     const isManualBoardPage = ref(false);
 
+    const user = ref(JSON.parse(localStorage.getItem('user')));
+    const userName = ref(user.value ? user.value.name : '');
+    const userRole = ref(user.value ? user.value.role : '');
+
     watch(() => route.path, (newPath) => {
       isLoginPage.value = newPath === '/login';
       isSignupPage.value = newPath === '/signup';
@@ -41,7 +46,8 @@
     , 
     {
       immediate: true 
-    });
+    }
+  );
 
     const activeTab = ref('');
 
@@ -87,6 +93,16 @@ onMounted(() => {
 
 watchEffect(() => {
   updateActiveTabFromRoute();
+  const loginUser = localStorage.getItem('user');
+    if (loginUser) {
+      try {
+        const parsedUser = JSON.parse(loginUser);
+        userName.value = parsedUser.name;
+        userRole.value = parsedUser.role;
+      } catch (error) {
+        console.error("JSON 파싱 오류:", error);
+      }
+    }
 });
   </script>
   
@@ -96,7 +112,7 @@ watchEffect(() => {
     flex-direction: column;
     background-color: #3A4E8B;
     color: white;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25));
 
   }
 

@@ -1,19 +1,19 @@
-<template>
-    <div class="side-menu">
-        <button class="side-menu-item" @click="openInsertModal">등록</button>
-        <button class="side-menu-item" @click="openEditModal" v-if="selectedChecklist">수정</button>
-        <button class="side-menu-item" @click="deleteChecklist" v-if="selectedChecklist">삭제</button>
 
-        <!-- ChecklistInsertModal 모달 -->
-        <ChecklistInsertModal
-            v-if="isInsertModalOpen"
-            :tasks="tasks" 
-            @close="closeInsertModal"
-            @submit="submitNewChecklist"
-        />
-        <!-- ChecklistListPage.vue에서 전달받은 tasks 데이터 -->
-         <!-- 새로운 체크리스트 등록 시 이벤트 -->
-    </div>
+코드 복사
+<template>
+  <div class="side-menu">
+    <button class="side-menu-item" @click="openInsertModal">등록</button>
+    <button class="side-menu-item" @click="toggleEditMode">수정</button>
+    <button class="side-menu-item" @click="toggleDeleteMode">삭제</button>
+
+    <!-- ChecklistInsertModal 모달 -->
+    <ChecklistInsertModal
+      v-if="isInsertModalOpen"
+      :tasks="tasks"
+      @close="closeInsertModal"
+      @submit="submitNewChecklist"
+    />
+  </div>
 </template>
 
 <script setup>
@@ -21,31 +21,65 @@ import { ref } from 'vue';
 import ChecklistInsertModal from '@/components/checklist/modal/ChecklistInsertModal.vue';
 
 const props = defineProps({
-    tasks: {
-        type: Array,
-        required: true,
-    },
+  tasks: {
+    type: Array,
+    required: true,
+  },
+  selectedChecklist: {
+    type: Object,
+    default: null,
+  },
 });
+
+const emit = defineEmits(['add-checklist', 'trigger-mode']);
 
 const isInsertModalOpen = ref(false);
 
 // 모달 열기
 const openInsertModal = () => {
-    isInsertModalOpen.value = true;
+  isInsertModalOpen.value = true;
 };
 
 // 모달 닫기
 const closeInsertModal = () => {
-    isInsertModalOpen.value = false;
+  isInsertModalOpen.value = false;
 };
 
 // 새로운 체크리스트 등록
-const emit = defineEmits(['add-checklist']);
 const submitNewChecklist = (newChecklist) => {
-    emit('add-checklist', newChecklist); // 부모 컴포넌트로 새로운 체크리스트 전달
-    closeInsertModal(); // 모달 닫기
+  emit('add-checklist', newChecklist);
+  closeInsertModal();
+};
+
+// 수정 모드 토글 (수정 모드 <-> 일반 모드)
+const isEditingMode = ref(false);
+const toggleEditMode = () => {
+  if (isEditingMode.value) {
+    emit('trigger-mode', 'normal');
+    isEditingMode.value = false;
+    console.log('일반 모드로 전환');
+  } else {
+    emit('trigger-mode', 'edit');
+    isEditingMode.value = true;
+    console.log('수정 모드로 전환');
+  }
+};
+
+// 삭제 모드 토글 (삭제 모드 <-> 일반 모드)
+const isDeletingMode = ref(false);
+const toggleDeleteMode = () => {
+  if (isDeletingMode.value) {
+    emit('trigger-mode', 'normal');
+    isDeletingMode.value = false;
+    console.log('일반 모드로 전환');
+  } else {
+    emit('trigger-mode', 'delete');
+    isDeletingMode.value = true;
+    console.log('삭제 모드로 전환');
+  }
 };
 </script>
+
   
   <style scoped>
   .side-menu {
@@ -69,6 +103,11 @@ const submitNewChecklist = (newChecklist) => {
     font-size: 16px;
     cursor: pointer;
     text-align: center;
+  }
+  
+  .side-menu-item:disabled {
+    background-color: #e0e0e0;
+    cursor: not-allowed;
   }
   
   .side-menu-item:hover {

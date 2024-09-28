@@ -14,15 +14,15 @@
         <div class="login-form">
           <form @submit.prevent="onSubmit">
             <div class="input-group">
-              <label for="username">아이디</label>
-              <input type="text" id="username" v-model="username" placeholder="아이디 입력" />
+              <label for="userName">아이디</label>
+              <input type="text" id="userName" v-model="userName" placeholder="아이디 입력" />
             </div>
             <div class="input-group">
               <label for="password">비밀번호</label>
               <input type="password" id="password" v-model="password" placeholder="비밀번호 입력" />
 
             </div>
-            <P v-if="errorMessage" class="error-Message">
+            <p v-if="errorMessage" class="error-Message">
               <span v-if="errorMessage === '아이디 또는 비밀번호를 입력해주세요.'">
                 <strong>아이디 또는 비밀번호</strong>를 입력해주세요.
               </span>
@@ -50,31 +50,40 @@
   </template>
   
   <script setup>
-    import { ref } from 'vue';
+    import { ref, onMounted } from 'vue';
     import { useRouter } from 'vue-router';
     
-    const username = ref('');
+    const userName = ref('');
     const password = ref('');
+    const userEmail = ref('');
+    const userRole = ref('');
     const errorMessage = ref('');
 
     const router = useRouter();
   
     const onSubmit = async () => {
       errorMessage.value = '';
-      if(!username.value || !password.value) {
+      if(!userName.value || !password.value) {
         errorMessage.value = '아이디 또는 비밀번호를 입력해주세요.';
         return;
       }
       try {
-        const response = await fetch('http://localhost:8080/users?username=' + username.value + '&password=' + password.value);
+        const response = await fetch('http://localhost:8080/users?username=' + userName.value + '&password=' + password.value);
+        if (!response.ok) {
+          throw new Error('서버 응답이 잘못되었습니다.');
+        }
         const data = await response.json();
         
         if (data.length > 0) {
           const user = data[0];
           localStorage.setItem('user', JSON.stringify(user));
-
+          userName.value = user.name;
+          userEmail.value = user.email;
+          userRole.value = user.role;
+          
+          
           if (user.role === 'admin') {
-            router.push('/admin'); // 관리자 페이지로 이동
+            // router.push('/admin'); // 관리자 페이지로 이동
           } else if (user.role === 'employer') {
             router.push('/main?type=employer'); // 사장 화면으로 이동
           } else if (user.role === 'employee') {
@@ -88,6 +97,10 @@
         console.error('로그인 중 오류가 발생했습니다:', error);
       }
     };
+    
+    onMounted(() => {
+      localStorage.removeItem('user');
+    });
 
     
     const kakaoLogin = () => {
@@ -97,7 +110,7 @@
     const goToSignup = () => {
       router.push('/signup');
     };
-</script>
+</script> 
 
   
 <style scoped>
