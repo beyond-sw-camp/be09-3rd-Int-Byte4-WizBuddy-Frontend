@@ -4,8 +4,8 @@
         <!-- 로그인한 유저의 이미지 - 클릭하면 마이페이지로 가야함 -->
         <img class="profile-image" src="@/assets/icons/default-profile-img.svg" alt="Profile Image" />
         <!-- 로그인한 유저의 이름과 id(email)로 설정되어야 함 -->
-        <p class="profile-name">백경석</p>
-        <p class="profile-email">babo22@gmail.com</p>
+        <p class="profile-name">{{ userName }}</p>
+        <p class="profile-email">{{ userEmail }}</p>
       </div>
       <div class="profile-menu">
         <!--/main에서 매장 고르기 전에는 버튼을 눌러도 어떤 매장의 기능인지 알 수 없기 때문에 매장을 먼저 선택해달라는 알림창이 뜨도록 해야함 -->
@@ -18,6 +18,20 @@
   </template>
   
   <script setup>
+  import { ref, onMounted } from 'vue';
+
+  const userName = ref('');
+  const userEmail = ref('');
+
+  onMounted(() => {
+    const loginUser = localStorage.getItem('user');
+    if (loginUser) {
+      const user = JSON.parse(loginUser);
+      userName.value = user.name;
+      userEmail.value = user.email; 
+    }
+  });
+
   </script>
   
   <style scoped>

@@ -6,7 +6,8 @@
       "password": "admin",
       "name": "김용승",
       "phone": null,
-      "health": null
+      "health": null,
+      "id": "53c6"
     },
     {
       "id": "6da1",
@@ -24,6 +25,60 @@
       "name": "fsafa",
       "phone": "fasfasf",
       "health": "2024-10-01",
+      "role": "employee"
+    },
+    {
+      "id": "72f2",
+      "email": "wpdmsdkdlel",
+      "password": "123123",
+      "name": "유제은",
+      "phone": "01045901841",
+      "health": "2024-09-19",
+      "role": "employee"
+    },
+    {
+      "id": "f4a5",
+      "email": "test@gmalmglka.com",
+      "password": "wwwww",
+      "name": "테스투",
+      "phone": "123123",
+      "health": "2024-10-10",
+      "role": "employee"
+    },
+    {
+      "id": "14ae",
+      "email": "wpdmswpdms",
+      "password": "wwww",
+      "name": "유제은",
+      "phone": "01045901841",
+      "health": "2024-09-18",
+      "role": "employee"
+    },
+    {
+      "id": "a3aa",
+      "email": "qwe@naver.com",
+      "password": "qwe",
+      "name": "유싸장",
+      "phone": "123123",
+      "health": "2024-09-26",
+      "role": "employer"
+    },
+    {
+      "id": "5010",
+      "email": "test1",
+      "password": "test",
+      "name": "조제훈",
+      "phone": "01010101001",
+      "health": "2024-10-10",
+      "role": "employee"
+    },
+    {
+      "id": "130a",
+      "email": "test2",
+      "password": "123",
+      "name": "이나현",
+      "phone": "123123123",
+      "health": "2024-09-25",
       "role": "employee"
     }
   ]
