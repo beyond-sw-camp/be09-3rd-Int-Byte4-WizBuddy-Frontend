@@ -30,6 +30,54 @@
       </section>
 
       <!-- 새로운 섹션 추가 -->
+      <section class="extra-section">
+    <div class="icon-columns">
+        <div class="icon-column">
+        <div class="extra-content" >
+          <h2>동료들과 즐겁게!</h2>
+          <p><strong style="font-weight: bold; font-size: x-large; color: #6F6C6C;">WIZ BUDDY</strong>는 사장님과 직원들을 위한 스마트 관리 솔루션입니다. 업무의 효율성을 높이고 커뮤니케이션을 원활하게 도와주는 다양한 기능을 제공합니다. 
+            <br><br>특히 아르바이트생의 스케줄 관리와 출퇴근 기록, 그리고 체크리스트를 통해 실시간으로 업무를 점검할 수 있어, 매장 운영을 더욱 스마트하게 할 수 있습니다.</p>
+        </div>
+        </div>
+
+        
+      <div class="icon-column">
+        <div class="icon-box">
+        <img src="@/assets/icons/welcome/store.svg" alt="매장 관리" style="width: 130px;
+height: 150px;"/>
+      </div>
+        <div class="icon-box">
+          <img src="@/assets/icons/welcome/people.svg" alt="자영업자라면 누구나" />
+          <p style="color:#5DA0BD;">자영업자라면 누구나</p>
+          <p>자영업을 하는 사장님이라면<br> 누구든 위즈버디와 함께 <br>하실 수 있어요.</p>
+        </div>
+        <div class="icon-box">
+          <img src="@/assets/icons/welcome/Calculator.svg" alt="계산은 이제 그만" />
+          <p style="color:#5DA0BD;">계산은 이제 그만</p>
+          <p>월급 계산, 보건증 만료일 계산, <br>근로계약서 날짜 계산, 모든 계산 <br>저희가 자동으로 알려드릴게요</p>
+        </div>
+      </div>
+
+      <div class="icon-column">
+        <div class="icon-box">
+        <img src="@/assets/icons/welcome/employee.svg" alt="직원 관리"  style="width: 130px;
+height: 150px;" />
+      </div>
+        <div class="icon-box">
+          <img src="@/assets/icons/welcome/call.svg" alt="불편함 해소" />
+          <p style="color:#E7C61C;">불편함 해소</p>
+          <p>쉬는날 원치않는 연락받을 일이 <br>사라져요!</p>
+        </div>
+        <div class="icon-box" style="padding-top: 20px;">
+          <img src="@/assets/icons/welcome/Arrow.svg" alt="대타 걱정 NO"  />
+          <p style="color:#E7C61C;">대타 걱정 NO</p>
+          <p>‘그날 안되는데 어쩌지...’ <br>항상 하는 고민 <br>글작성과 댓글채택으로 간편하게</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+ 
 
 
 </div>
