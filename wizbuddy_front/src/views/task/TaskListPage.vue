@@ -46,7 +46,6 @@ onMounted(async () => {
   } catch (error) {
     console.error('데이터를 가져오는 중 오류가 발생했습니다:', error);
   }
-
 });
 
 </script>
@@ -57,56 +56,72 @@ onMounted(async () => {
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-    min-height: calc(100vh - 151.6px);
-    padding-bottom: 41.6px;
+    height: calc(100vh - 151.6px);
     background-color: #F3F7FA;
     padding: 0 20px;
+    position: relative;
 }
 
 .left-side {
     width: 16%; 
     background-color: #F3F7FA;
     padding: 20px;
-    margin-left : 20px;
+    margin-left: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 100px;
+    height: 100%;
+    overflow-y: auto;
 }
 
 .main-content {
-  flex: 1;
-  margin-left: 120px;
-  /* 사이드바 너비 + 여백 */
-  margin-right: 120px;
+    flex: 1;
+    margin-left: 120px;
+    margin-right: 120px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 h1 {
-  text-align: center;
-  margin-top: 20px; /* 상단에 여백을 추가 */
-  margin-bottom: 20px; /* 하단에도 여백을 추가하여 항목과 구분 */
-  font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-weight: bold;
 }
 
 .task-container {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-@media (max-width: 768px) {
-  .task-list-page {
-    flex-direction: column;
-  }
-
-  .main-content {
-    margin-left: 0;
-  }
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 20px;
+    padding-bottom: 30px; /* AppFooter의 높이만큼 여백 추가 */
 }
 
 .right-side {
     width: 20%; 
     background-color: #F3F7FA;
     padding: 20px;
+    height: 100%;
+    overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+    .task-list-page {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .main-content {
+        margin-left: 0;
+        margin-right: 0;
+        height: auto;
+    }
+
+    .left-side, .right-side {
+        width: 100%;
+        height: auto;
+    }
 }
 </style>
