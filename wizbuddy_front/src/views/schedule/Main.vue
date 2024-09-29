@@ -22,6 +22,7 @@
       :isOpen="isScheduleModalOpen"
       :schedules="selectedSchedules"
       :currentMonth="months[currentMonth - 1]"
+      :scheduleId="currentScheduleId"
       :selectedDate="selectedDay"
       @close="closeScheduleModal"
     />
@@ -48,6 +49,8 @@ const enableScheduleSelect = ref(true);
 
 const today = ref(new Date());
 
+const currentScheduleId = ref(null);
+
 const months = [
   '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'
 ];
@@ -67,7 +70,7 @@ const loadScheduleData = async () => {
     scheduleData.value = response.data;
     updateCalendar();
   } catch (error) {
-    console.error('Failed to fetch schedule data:', error);
+    console.error('스케줄 데이터를 불러오지 못했습니다:', error);
   }
 };
 
@@ -99,7 +102,7 @@ const prevMonth = () => {
     currentMonth.value = 12;
     currentYear.value--;
   }
-  loadScheduleData();  // 이전 달로 갈 때 스케줄을 다시 불러옵니다.
+  loadScheduleData();
   updateCalendar();
 };
 
@@ -109,16 +112,15 @@ const nextMonth = () => {
     currentMonth.value = 1;
     currentYear.value++;
   }
-  loadScheduleData();  // 다음 달로 갈 때 스케줄을 다시 불러옵니다.
+  loadScheduleData();
   updateCalendar();
 };
-
 
 const groupSchedulesByType = (day) => {
   const daySchedules = getSchedulesForDay(day);
 
   if (!daySchedules.length) {
-    return [];  // 스케줄이 없는 경우 빈 배열을 반환합니다.
+    return [];
   }
 
   const groupedSchedules = {};
@@ -136,23 +138,48 @@ const groupSchedulesByType = (day) => {
   return Object.values(groupedSchedules);
 };
 
-
 const getSchedulesForDay = (day) => {
-  return scheduleData.value.filter(schedule => schedule.day === day && schedule.month === currentMonth.value);
+  const matchingSchedules = scheduleData.value.filter(schedule => 
+    new Date(schedule.schedule_start_date).getMonth() + 1 === currentMonth.value &&
+    new Date(schedule.schedule_start_date).getFullYear() === currentYear.value
+  );
+
+  return matchingSchedules.flatMap(schedule => 
+    schedule.employee_working_part.filter(
+      part => part.day === day && part.month === currentMonth.value && part.year === currentYear.value
+    )
+  );
 };
 
 const selectSchedule = ({ day, group }) => {
   if (enableScheduleSelect.value) {
     selectedDay.value = day;
-    selectedSchedules.value = group.names.map(name => ({
-      name: name,
-      time: group.time,
-      type: group.type,
-      id: group.id  // id로 변경
-    }));
-    isScheduleModalOpen.value = true;
+
+    const matchingSchedule = scheduleData.value.find(schedule => 
+      schedule.employee_working_part.some(part => part.day === day)
+    );
+
+    if (matchingSchedule) {
+      currentScheduleId.value = matchingSchedule.id; 
+      
+      const employeeWorkingPart = matchingSchedule.employee_working_part.find(
+        (part) => part.day === day && part.month === currentMonth.value && part.year === currentYear.value
+      );
+
+      if (employeeWorkingPart) {
+        selectedSchedules.value = [{
+          name: employeeWorkingPart.name,
+          time: employeeWorkingPart.time,
+          type: employeeWorkingPart.type,
+          id: employeeWorkingPart.id
+        }];
+
+        isScheduleModalOpen.value = true;
+      }
+    }
   }
 };
+
 
 const closeScheduleModal = () => {
   isScheduleModalOpen.value = false;
@@ -163,6 +190,7 @@ onMounted(() => {
   updateCalendar();
 });
 </script>
+
 
 <style scoped>
   @import url('@/assets/css/schedule/Main.css');
