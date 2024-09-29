@@ -170,6 +170,24 @@
       "title": "fixed가 아닌데 task의 이름이 이렇게 길면 너가 뭘할수있는데",
       "content": "재고 확인",
       "isFixed": false
+    },
+    {
+      "id": "8",
+      "title": "3",
+      "content": "3",
+      "isFixed": false
+    },
+    {
+      "id": "9",
+      "title": "3",
+      "content": "3",
+      "isFixed": false
+    },
+    {
+      "id": "10",
+      "title": "3",
+      "content": "3",
+      "isFixed": false
     }
   ],
   "checklists": [
@@ -187,13 +205,7 @@
           "id": "6",
           "title": "짧음",
           "content": "재고 확인",
-          "isFixed": false
-        },
-        {
-          "id": "7",
-          "title": "fixed가 아닌데 task의 이름이 이렇게 길면 너가 뭘할수있는데",
-          "content": "재고 확인",
-          "isFixed": false
+          "isFixed": true
         }
       ]
     },
@@ -212,6 +224,18 @@
           "title": "두 번째 업무",
           "content": "매장 정리",
           "isFixed": false
+        }
+      ]
+    },
+    {
+      "id": "e68f",
+      "title": "1",
+      "tasks": [
+        {
+          "id": "6",
+          "title": "짧음",
+          "content": "재고 확인",
+          "isFixed": true
         }
       ]
     }
