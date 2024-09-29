@@ -67,7 +67,6 @@ const activeTab = ref('');
 
 const isMainPage = ref(false);
 
-const isRegisterModalOpen = ref(false);
 
 // 현재 페이지 경로에 따른 상태 업데이트
 watch(() => route.path, (newPath) => {
