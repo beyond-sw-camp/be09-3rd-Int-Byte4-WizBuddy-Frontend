@@ -24,11 +24,11 @@
       <div class="schedule-grid">
         <div class="day-container">
           <div class="day-column" v-for="(day, index) in days" :key="index">
-            <div class="day-header">{{ day }} </div>
+            <div class="day-header">{{ day }}</div>
             <div class="day-margin"></div>
             <div class="time-slot" v-for="time in 3" :key="time">
               <div class="schedule-item" v-if="hasSchedule(day, time)">
-                {{ getSchedule(day, time).title }}
+                {{ getSchedule(day, time).name }} - {{ getSchedule(day, time).time }}
               </div>
             </div>
           </div>
@@ -38,9 +38,9 @@
   </template>
   
   <script setup>
-  import { ref } from 'vue';
+  import { ref, onMounted } from 'vue';
+  import axios from 'axios';
   
-  // 기존 데이터 및 함수들을 그대로 가져옵니다.
   const currentDate = ref(new Date());
   const currentYear = ref(currentDate.value.getFullYear());
   const currentMonth = ref(currentDate.value.getMonth());
@@ -50,6 +50,9 @@
   const months = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
   const days = ['월', '화', '수', '목', '금', '토', '일'];
   
+  const schedules = ref([]);
+  const activeSchedules = ref([]);
+  
   function getWeekOfMonth(date) {
     const firstDay = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
     const currentDay = date.getDate();
@@ -58,9 +61,7 @@
   
   function getWeekRange(year, month, week) {
     const firstDayOfMonth = new Date(year, month, 1);
-    const firstDayWeekday = firstDayOfMonth.getDay();
-    const firstMonday = new Date(firstDayOfMonth);
-    firstMonday.setDate(firstDayOfMonth.getDate() + (1 - firstDayWeekday + 7) % 7);
+    const firstMonday = new Date(firstDayOfMonth.setDate(1 + ((8 - firstDayOfMonth.getDay()) % 7)));
   
     const startDate = new Date(firstMonday);
     startDate.setDate(startDate.getDate() + (week - 1) * 7);
@@ -77,7 +78,7 @@
   function formatDate(date) {
     const month = date.getMonth() + 1;
     const day = date.getDate();
-    return `${month}/${day}`;
+    return `${date.getFullYear()}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
   }
   
   function getWeeksInMonth(year, month) {
@@ -86,36 +87,52 @@
   }
   
   const prevWeek = () => {
-    if (currentWeek.value === 1) {
-      currentMonth.value--;
-      if (currentMonth.value < 0) {
-        currentMonth.value = 11;
-        currentYear.value--;
-      }
-      currentWeek.value = getWeeksInMonth(currentYear.value, currentMonth.value);
-    } else {
-      currentWeek.value--;
-    }
+    const newDate = new Date(currentDate.value.setDate(currentDate.value.getDate() - 7));
+    currentDate.value = newDate;
+    currentWeek.value = getWeekOfMonth(newDate);
     currentWeekRange.value = getWeekRange(currentYear.value, currentMonth.value, currentWeek.value);
+    loadScheduleData(); 
   };
   
   const nextWeek = () => {
-    const totalWeeks = getWeeksInMonth(currentYear.value, currentMonth.value);
-    if (currentWeek.value === totalWeeks) {
-      currentMonth.value++;
-      if (currentMonth.value > 11) {
-        currentMonth.value = 0;
-        currentYear.value++;
-      }
-      currentWeek.value = 1;
-    } else {
-      currentWeek.value++;
-    }
+    const newDate = new Date(currentDate.value.setDate(currentDate.value.getDate() + 7));
+    currentDate.value = newDate;
+    currentWeek.value = getWeekOfMonth(newDate);
     currentWeekRange.value = getWeekRange(currentYear.value, currentMonth.value, currentWeek.value);
+    loadScheduleData(); 
   };
   
-  const hasSchedule = (day, time) => true;
-  const getSchedule = (day, time) => ({ title: '유제은' });
+  onMounted(async () => {
+    await loadScheduleData();
+  });
+  
+  const loadScheduleData = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/schedules');
+      const startDateFormatted = formatDate(new Date(currentWeekRange.value.start));
+  
+      activeSchedules.value = response.data.filter(schedule => 
+        schedule.schedule_start_date === startDateFormatted
+      );
+  
+      schedules.value = activeSchedules.value.flatMap(schedule => schedule.employee_working_part);
+    } catch (error) {
+      console.error('Failed to fetch schedule data:', error);
+    }
+  };
+  
+  const hasSchedule = (day, time) => {
+    return schedules.value.some(part => part.day === getDayOfWeek(day) && part.time.startsWith(`${time}T`));
+  };
+  
+  const getSchedule = (day, time) => {
+    return schedules.value.find(part => part.day === getDayOfWeek(day) && part.time.startsWith(`${time}T`)) || { name: '', time: '' };
+  };
+  
+  function getDayOfWeek(day) {
+    const daysMapping = { '월': 1, '화': 2, '수': 3, '목': 4, '금': 5, '토': 6, '일': 7 };
+    return daysMapping[day];
+  }
   </script>
   
   <style scoped>
