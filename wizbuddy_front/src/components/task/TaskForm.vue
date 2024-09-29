@@ -2,12 +2,12 @@
     <div class="task-form">
         <div class="form-group">
             <label for="title">업무 제목</label>
-            <input type="text" id="title" v-model="localTask.title" placeholder="업무 제목을 입력하세요" />
+            <input type="text" id="title" v-model="localTask.title" placeholder="업무 제목을 입력하세요" required />
         </div>
 
         <div class="form-group">
             <label for="content">세부 내용</label>
-            <textarea id="content" v-model="localTask.content" placeholder="업무의 세부 내용을 입력하세요"></textarea>
+            <textarea id="content" v-model="localTask.content" placeholder="업무의 세부 내용을 입력하세요" required></textarea>
         </div>
 
         <div class="form-group">
@@ -15,7 +15,6 @@
             <input type="checkbox" v-model="localTask.isFixed" />
         </div>
 
-        <!-- 라벨을 부모로부터 받아서 사용 -->
         <button class="submit-button" @click="submitTask">{{ submitButtonLabel }}</button>
     </div>
 </template>
@@ -23,7 +22,6 @@
 <script setup>
 import { ref, watch } from 'vue';
 
-// task와 버튼 라벨을 props로 받음
 const props = defineProps({
     task: {
         type: Object,
@@ -39,13 +37,10 @@ const props = defineProps({
     },
 });
 
-// 부모로 이벤트 전달
 const emit = defineEmits(['submitTask']);
 
-// 로컬에서 사용할 task 복사
 const localTask = ref({ ...props.task });
 
-// props.task가 변경되면 localTask도 변경되도록 watch 추가
 watch(
     () => props.task,
     (newTask) => {
@@ -54,8 +49,11 @@ watch(
     { deep: true }
 );
 
-// 버튼 클릭 시 부모에게 이벤트 전달
 const submitTask = () => {
+    if (!localTask.value.title.trim() || !localTask.value.content.trim()) {
+        alert("업무 제목과 세부내용을 작성해주세요");
+        return;
+    }
     emit('submitTask', { ...localTask.value });
 };
 </script>
