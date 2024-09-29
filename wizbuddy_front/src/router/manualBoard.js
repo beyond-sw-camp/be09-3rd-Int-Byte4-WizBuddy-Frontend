@@ -4,9 +4,9 @@ import PostCreate from '@/components/board/PostCreate.vue';
 
 const ManualBoardRoutes = [
     {
-        path: "/manualboard",
-        component: ManualBoard,
-        // meta: { requiresAuth: true }
+      path: "/:boardType",
+      component: ManualBoard,
+      props: true // boardType을 제대로 전달하는지 확인
     },
     {
         path: '/manualboard/:id',  // Dynamic route parameter for the board ID
@@ -18,6 +18,6 @@ const ManualBoardRoutes = [
         component: PostCreate,
         props: true
     }
-];
+  ];
 
 export default ManualBoardRoutes;

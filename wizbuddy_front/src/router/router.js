@@ -7,6 +7,7 @@ import WelcomePage from '@/views/welcome/WelcomePage.vue';
 
 import ManualBoardRoutes from './manualBoard';
 import NoticeBoardRoutes from './noticeBoard';
+import SubsBoardRoutes from './subsBoard';
 import ScheduleRoutes from './schedule';
 import ChecklistRoutes from './checklist';
 import TaskRoutes from './task';
@@ -36,7 +37,8 @@ const routes = [
   ...NoticeBoardRoutes,
   ...ScheduleRoutes,
   ...ChecklistRoutes,
-  ...TaskRoutes
+  ...TaskRoutes,
+  ...SubsBoardRoutes
 ];
 
 const router = createRouter({
