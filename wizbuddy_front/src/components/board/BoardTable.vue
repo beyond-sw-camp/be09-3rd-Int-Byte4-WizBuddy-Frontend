@@ -6,15 +6,44 @@
       <div class="board-header-writer">작성자</div>
       <div class="board-header-registerdate">작성날짜</div>
     </div>
-    <BoardItem v-for="board in boards" :board="board" :key="board.id" :comments="getCommentsForBoard(board.id)"/>
+    
+    <!-- 현재 페이지에 해당하는 게시글만 렌더링 -->
+    <BoardItem v-for="board in paginatedBoards" :key="board.id" :board="board" :comments="getCommentsForBoard(board.id)"  />
+
+    <!-- 페이징 버튼 -->
+    <div class="pagination">
+      <button @click="prevPage" :disabled="currentPage === 1">이전</button>
+      <span>{{ currentPage }} / {{ totalPages }}</span>
+      <button @click="nextPage" :disabled="currentPage === totalPages">다음</button>
+    </div>
   </div>
 </template>
 
 <script setup>
-  import { ref, onMounted } from 'vue';
-  import BoardItem from './BoardItem.vue';
 
-  const boards = ref([]);
+import { ref, computed, onMounted } from 'vue';
+import BoardItem from './BoardItem.vue';
+import axios from 'axios';
+
+// 게시글 및 댓글 데이터
+const boards = ref([]);
+const comments = ref([]);
+
+// 페이징 관련 상태
+const currentPage = ref(1);
+const itemsPerPage = ref(5); // 한 페이지에 보여줄 게시글 수
+
+// 총 페이지 수 계산
+const totalPages = computed(() => {
+  return Math.ceil(boards.value.length / itemsPerPage.value);
+});
+
+// 현재 페이지에 해당하는 게시글 반환
+const paginatedBoards = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage.value;
+  const end = start + itemsPerPage.value;
+  return boards.value.slice().reverse().slice(start, end); // 최신 게시글이 위로 오도록 reverse() 추가
+});
 
   onMounted (async () => {
     try {
@@ -31,18 +60,49 @@
     }
   });
 
-  const comments = ref([
-  { boardId: 1, content: '댓글1' },
-  { boardId: 2, content: '댓글2' },
-  { boardId: 2, content: '댓글3' },
-  { boardId: 3, content: '댓글4' },
-  { boardId: 3, content: '댓글5' },
-  { boardId: 5, content: '댓글6' },
-]);
-
-const getCommentsForBoard = (boardId) => {
-  return comments.value.filter(comment => comment.boardId === boardId);
+// 이전 페이지로 이동
+const prevPage = () => {
+  if (currentPage.value > 1) {
+    currentPage.value--;
+  }
 };
+
+// 다음 페이지로 이동
+const nextPage = () => {
+  if (currentPage.value < totalPages.value) {
+    currentPage.value++;
+  }
+};
+
+// 특정 게시글에 대한 댓글 필터링
+const getCommentsForBoard = (boardId) => {
+  return comments.value.filter(comment => comment.postId === boardId);
+};
+
+// 게시글 및 댓글 데이터를 로드하는 함수
+const loadBoards = async () => {
+  try {
+    const response = await axios.get('http://localhost:8080/posts');
+    boards.value = response.data;
+  } catch (error) {
+    console.error('게시글 데이터를 불러오지 못했습니다.', error);
+  }
+};
+
+const loadComments = async () => {
+  try {
+    const response = await axios.get('http://localhost:8080/comments');
+    comments.value = response.data;
+  } catch (error) {
+    console.error('댓글 데이터를 불러오지 못했습니다.', error);
+  }
+};
+
+// 컴포넌트가 마운트될 때 게시글과 댓글 데이터를 로드
+onMounted(() => {
+  loadBoards();
+  loadComments();
+});
 </script>
 
 <style scoped>
@@ -57,7 +117,36 @@ const getCommentsForBoard = (boardId) => {
 }
 
 .board-container {
+  z-index: 0;
+ 
   width: 95%;
   overflow: hidden;
+}
+
+.pagination {
+  margin-left: 450px;
+  margin-bottom: 20px;
+  z-index: 1;
+  padding-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  position: fixed; /* 하단 고정 */
+  bottom: 0; /* 화면 하단에 위치 */
+}
+
+button {
+  padding: 8px 12px;
+  margin: 0 5px;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  border: none;
+}
+
+button:disabled {
+  cursor: not-allowed;
+ 
 }
 </style>

@@ -49,6 +49,19 @@
     title: '',
     content: ''
   });
+
+//   // 게시글 등록 함수
+// const submitPost = async () => {
+//   const newPost = {
+//     title: '새 게시글',
+//     writer: '사용자 이름',
+//     content: '게시글 내용',
+//     registerdate: new Date().toISOString().split('T')[0],
+//   };
+//   const response = await axios.post('http://localhost:8080/posts', newPost);
+//   post.value = response.data;
+// };
+
   
   const selectedName = ref('');
   const selectedDateAndTime = ref('');

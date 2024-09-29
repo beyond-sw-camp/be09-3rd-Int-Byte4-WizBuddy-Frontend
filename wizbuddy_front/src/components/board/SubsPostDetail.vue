@@ -80,58 +80,40 @@
   </div>
 </template>
 
+
 <script setup>
 import { ref, onMounted, computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
-import commentImg from '@/assets/icons/board/avatar.svg';
-
+import axios from 'axios'; // Axios 추가
+import commentImg from '@/assets/icons/board/avater0.svg';
 
 // 게시글 데이터 샘플
-const posts = [
-  { id: 1, title: '대타 구합니다.', writer: '조제훈', registerdate: '2024.09.01', content: '9월 30일에 우리 매장의 마스크 나랭이가 고향에 다녀와야 한다고 해서 대타가 급하게 필요합니다. 가능한 직원들은 댓글 달아주세요!' },
-  { id: 2, title: '대타 구구 비둘기', writer: '조제훈', registerdate: '2024.09.02', content: '우리 나현이 대타좀 해주세요. 이번에는 학교를 가야한답디다?' },
-  { id: 3, title: '시급 ㄷㄷ', writer: '조제훈', registerdate: '2024.09.03', content: '9월 3일에 우리 매장의 마스코트 나짱이가 고향에 다녀와야한다고해서 대타가 급하게 필요합니다. 가능한 직원들은 댓글 달아주세요! ' },
-];
+const posts = ref([]);
 
 // 댓글 데이터 (빈 배열로 시작)
 const comments = ref([]);
-
-// 새 댓글 입력 값
-const newComment = ref('');
-
-// 댓글 추가 함수
-const addComment = () => {
-  if (newComment.value.trim() !== '') {
-    const newCommentData = {
-      id: comments.value.length + 1,
-      writer: '사용자', // 실제 사용자 이름으로 변경 필요
-      content: newComment.value,
-      avatar: commentImg, // 기본 아바타 이미지 설정
-    };
-    comments.value.push(newCommentData);
-    newComment.value = ''; // 입력창 초기화
-  }
-};
+const newComment = ref(''); // 새 댓글 입력 값
+const editMode = ref(false); // 수정 모드 여부
+const editCommentId = ref(null); // 수정 중인 댓글 ID
 
 // 라우터에서 현재 게시글 ID 가져오기
 const route = useRoute();
 const post = ref(null);
 const postId = computed(() => parseInt(route.params.id));
 
-// 게시글 데이터 로드 함수
-const loadPost = () => {
-  post.value = posts.find(p => p.id === postId.value);
+const loadPost = async () => {
+  try {
+    console.log(postId.value); // postId 값 확인
+    const response = await axios.get(`http://localhost:8080/posts?id=${postId.value}`);
+    post.value = response.data[0]; 
+  } catch (error) {
+    if (error.response && error.response.status === 404) {
+      console.error(`게시글 ID ${postId.value}를 찾을 수 없습니다. (404 오류)`);
+    } else {
+      console.error('게시글 데이터를 불러오는 중 오류 발생:', error);
+    }
+  }
 };
-
-// 컴포넌트가 로드될 때 게시글 데이터 로드
-onMounted(() => {
-  loadPost();
-});
-
-// 경로 변경 시(postId 변경 시) 게시글 데이터 다시 로드
-watch(postId, (newId) => {
-  loadPost();
-});
 
 // 이전 글 ID (현재 ID가 1보다 크면)
 const previousPostId = computed(() => {
@@ -142,7 +124,76 @@ const previousPostId = computed(() => {
 const nextPostId = computed(() => {
   return postId.value < posts.length ? postId.value + 1 : null;
 });
+
+// 댓글 데이터 로드 함수
+const loadComments = async () => {
+  try {
+    const response = await axios.get(`http://localhost:8080/comments?postId=${postId.value}`);
+    comments.value = response.data;
+  } catch (error) {
+    console.error('댓글을 불러오는 중 오류 발생:', error);
+  }
+};
+
+// 댓글 추가 또는 수정 함수
+const addComment = async () => {
+  try {
+    if (newComment.value.trim() === '') return;
+
+    if (editMode.value) {
+      // 수정 모드일 때
+      await axios.patch(`http://localhost:8080/comments/${editCommentId.value}`, {
+        content: newComment.value,
+      });
+      editMode.value = false;
+      editCommentId.value = null;
+    } else {
+      // 새 댓글 추가
+      await axios.post('http://localhost:8080/comments', {
+        content: newComment.value,
+        postId: post.value.id,
+        writer: '사용자', // 실제 사용자 이름으로 대체
+        avatar: commentImg, // 기본 아바타 이미지 설정
+      });
+    }
+
+    newComment.value = ''; // 입력창 초기화
+    loadComments(); // 댓글 목록 다시 로드
+  } catch (error) {
+    console.error('댓글 추가/수정 중 오류 발생:', error);
+  }
+};
+
+// 댓글 수정 모드 진입 함수
+const editComment = (comment) => {
+  newComment.value = comment.content;
+  editMode.value = true;
+  editCommentId.value = comment.id;
+};
+
+// 댓글 삭제 함수
+const deleteComment = async (id) => {
+  try {
+    await axios.delete(`http://localhost:8080/comments/${id}`);
+    loadComments(); // 댓글 목록 다시 로드
+  } catch (error) {
+    console.error('댓글 삭제 중 오류 발생:', error);
+  }
+};
+
+// 컴포넌트가 마운트될 때 게시글 및 댓글 데이터 로드
+onMounted(() => {
+  loadPost();
+  loadComments();
+});
+
+// 경로 변경 시(postId 변경 시) 게시글 및 댓글 데이터 다시 로드
+watch(postId, () => {
+  loadPost();
+  loadComments();
+});
 </script>
+
 
 <style scoped>
 .post-container {
