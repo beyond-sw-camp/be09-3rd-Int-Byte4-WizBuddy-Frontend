@@ -51,6 +51,7 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router'; 
 
+const id = ref(0);
 const email = ref('');
 const password = ref('');
 const name = ref('');
@@ -97,22 +98,36 @@ const onSubmit = async () => {
   }
 
   try {
-    const response = await fetch('http://localhost:8080/users', {
+    const response = await fetch('http://localhost:8080/users');
+    const users = await response.json();
+
+    // 최대 ID 값 찾기
+    const maxId = users.length > 0 
+      ? Math.max(...users.map(user => parseInt(user.id, 10))) 
+      : 0;
+
+    // 새 유저 생성
+    const newUser = {
+      id: (maxId + 1).toString(), // ID는 문자열로 설정
+      email: email.value,
+      password: password.value,
+      name: name.value,
+      phone: phone.value,
+      health: health.value,
+      role: role.value,
+      invitations: [],  // 추가: 초대 목록
+      employedAt: [] 
+    };
+
+    const createResponse = await fetch('http://localhost:8080/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        email: email.value,
-        password: password.value,
-        name: name.value,
-        phone: phone.value,
-        health: health.value,
-        role: role.value,
-      }),
+      body: JSON.stringify(newUser),
     });
 
-    if (response.ok) {
+    if (createResponse.ok) {
       alert('회원가입이 완료되었습니다.');
       router.push('/login');
     } else {

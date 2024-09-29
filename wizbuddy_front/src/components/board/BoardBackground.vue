@@ -23,6 +23,7 @@
 
     const route = useRoute();
     const router = useRouter();
+
     const isPostCreate = ref(false);
 
     // 라우트 감시하여 'ManualPostCreate'일 때는 bottom-controls를 숨김
