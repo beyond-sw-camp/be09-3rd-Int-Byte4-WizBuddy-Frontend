@@ -82,6 +82,64 @@
       "role": "employee"
     }
   ],
+  "schedules": [
+    {
+      "id": "1001",
+      "day": 15,
+      "month": 9,
+      "name": "이서현",
+      "type": "fun",
+      "time": "1T (09:00 ~ 14:00)"
+    },
+    {
+      "id": "1002",
+      "day": 15,
+      "month": 9,
+      "name": "백경석",
+      "type": "fun",
+      "time": "1T (09:00 ~ 14:00)"
+    },
+    {
+      "id": "1003",
+      "day": 15,
+      "month": 9,
+      "name": "조제훈",
+      "type": "fun",
+      "time": "1T (09:00 ~ 14:00)"
+    },
+    {
+      "id": "1004",
+      "day": 15,
+      "month": 9,
+      "name": "이서현",
+      "type": "important",
+      "time": "2T (14:00 ~ 17:00)"
+    },
+    {
+      "id": "1005",
+      "day": 15,
+      "month": 9,
+      "name": "이나현",
+      "type": "personal",
+      "time": "3T (17:00 ~ 21:00)"
+    },
+    {
+      "id": "1006",
+      "day": 1,
+      "month": 10,
+      "name": "유제은",
+      "type": "fun",
+      "time": "1T (09:00 ~ 14:00)"
+    },
+    {
+      "id": "1007",
+      "day": 15,
+      "month": 10,
+      "name": "백경석",
+      "type": "important",
+      "time": "2T (14:00 ~ 17:00)"
+    }
+  ],
   "tasks": [
     {
       "id": "2",

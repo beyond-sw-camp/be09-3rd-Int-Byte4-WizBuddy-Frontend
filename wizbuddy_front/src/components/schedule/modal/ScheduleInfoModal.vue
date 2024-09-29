@@ -4,20 +4,20 @@
         <div class="modal-header">
           <h3 class="modal-title">{{ currentMonth }} {{ selectedDate }}일</h3>
           <ul>
-            <li v-for="schedule in schedules" :key="schedule.title">
-              {{ schedule.time }}: {{ schedule.title }}
+            <li v-for="schedule in schedules" :key="schedule.name">
+              {{ schedule.time }}: {{ schedule.name }}
               <button class="edit-btn" @click="editSchedule(schedule)">수정</button>
             </li>
           </ul>
         </div>
       </div>
     </div>
-  </template>
+</template>
   
-  <script setup>
+<script setup>
   import { useRouter } from 'vue-router';
   import { defineEmits } from 'vue';
-  
+
   const props = defineProps({
     isOpen: Boolean,
     selectedDate: Number,
@@ -31,18 +31,18 @@
   function closeModal() {
     emit('close');
   }
-  
-  function editSchedule(schedule) {
-  router.push({
-    name: 'ScheduleEdit',
-    query: {
-      date: `${props.currentMonth} ${props.selectedDate}일`,  // 날짜 정보
-      worker: schedule.title,  // 근무자 이름
-      timeSlot: schedule.time  // 근무 시간 (timeSlot)
-    }
-  });
-}
 
+  function editSchedule(schedule) {
+    router.push({
+      name: 'ScheduleEdit',
+      query: {
+        id: schedule.id,
+        date: `${props.currentMonth} ${props.selectedDate}일`,
+        worker: schedule.name,
+        timeSlot: schedule.time
+      }
+    });
+  }
 </script>
 
 <style scoped>

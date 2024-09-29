@@ -2,7 +2,7 @@
   <SideMenu>
     <ScheduleCalendar
       :currentYear="currentYear"
-      :currentMonth="currentMonth"
+      :currentMonth="currentMonth - 1"
       :months="months"
       :weekdays="weekdays"
       :blanks="blanks"
@@ -18,27 +18,26 @@
     />
 
     <ScheduleInfoModal
-    v-if="isScheduleModalOpen"
-    :isOpen="isScheduleModalOpen"
-    :schedules="selectedSchedules"
-    :currentMonth="months[currentMonth]"
-    :selectedDate="selectedDay"
-    @close="closeScheduleModal"
-/>
-
-
+      v-if="isScheduleModalOpen"
+      :isOpen="isScheduleModalOpen"
+      :schedules="selectedSchedules"
+      :currentMonth="months[currentMonth - 1]"
+      :selectedDate="selectedDay"
+      @close="closeScheduleModal"
+    />
   </SideMenu>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
 import SideMenu from '@/components/SideMenu.vue';
 import ScheduleCalendar from '@/components/schedule/ScheduleCalendar.vue';
 import ScheduleInfoModal from '@/components/schedule/modal/ScheduleInfoModal.vue';
 
 const selectedDay = ref(null);
 const currentDate = ref(new Date());
-const currentMonth = ref(currentDate.value.getMonth());
+const currentMonth = ref(currentDate.value.getMonth() + 1);
 const currentYear = ref(currentDate.value.getFullYear());
 
 const selectedSchedules = ref([]);
@@ -55,23 +54,26 @@ const months = [
 
 const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
 
-const scheduleData = [
-  { day: 15, title: '유제은', type: 'fun', time: '1T (09:00 ~ 14:00)' },
-  { day: 15, title: '백경석', type: 'fun', time: '1T (09:00 ~ 14:00)' },
-  { day: 15, title: '조제훈', type: 'fun', time: '1T (09:00 ~ 14:00)' },
-  { day: 15, title: '이서현', type: 'important', time: '2T (14:00 ~ 17:00)' },
-  { day: 15, title: '이나현', type: 'personal', time: '3T (17:00 ~ 21:00)' },
-];
+const scheduleData = ref([]);
+const blanks = ref([]);
+const daysInMonth = ref([]);
 
 const getFirstDayOfMonth = (year, month) => new Date(year, month, 1);
 const getLastDayOfMonth = (year, month) => new Date(year, month + 1, 0);
 
-const blanks = ref([]);
-const daysInMonth = ref([]);
+const loadScheduleData = async () => {
+  try {
+    const response = await axios.get('http://localhost:8080/schedules');
+    scheduleData.value = response.data;
+    updateCalendar();
+  } catch (error) {
+    console.error('Failed to fetch schedule data:', error);
+  }
+};
 
 const updateCalendar = () => {
-  const firstDay = getFirstDayOfMonth(currentYear.value, currentMonth.value);
-  const lastDay = getLastDayOfMonth(currentYear.value, currentMonth.value);
+  const firstDay = new Date(currentYear.value, currentMonth.value - 1, 1);
+  const lastDay = new Date(currentYear.value, currentMonth.value, 0);
 
   const numBlanks = firstDay.getDay();
   blanks.value = Array(numBlanks).fill(null);
@@ -86,31 +88,38 @@ const updateCalendar = () => {
 const isToday = (day) => {
   return (
     currentYear.value === today.value.getFullYear() &&
-    currentMonth.value === today.value.getMonth() &&
+    currentMonth.value === today.value.getMonth() + 1 &&
     day === today.value.getDate()
   );
 };
 
 const prevMonth = () => {
   currentMonth.value--;
-  if (currentMonth.value < 0) {
-    currentMonth.value = 11;
+  if (currentMonth.value < 1) {
+    currentMonth.value = 12;
     currentYear.value--;
   }
+  loadScheduleData();  // 이전 달로 갈 때 스케줄을 다시 불러옵니다.
   updateCalendar();
 };
 
 const nextMonth = () => {
   currentMonth.value++;
-  if (currentMonth.value > 11) {
-    currentMonth.value = 0;
+  if (currentMonth.value > 12) {
+    currentMonth.value = 1;
     currentYear.value++;
   }
+  loadScheduleData();  // 다음 달로 갈 때 스케줄을 다시 불러옵니다.
   updateCalendar();
 };
-  
+
+
 const groupSchedulesByType = (day) => {
   const daySchedules = getSchedulesForDay(day);
+
+  if (!daySchedules.length) {
+    return [];  // 스케줄이 없는 경우 빈 배열을 반환합니다.
+  }
 
   const groupedSchedules = {};
   daySchedules.forEach(schedule => {
@@ -118,38 +127,41 @@ const groupSchedulesByType = (day) => {
       groupedSchedules[schedule.type] = {
         type: schedule.type,
         time: schedule.time,
-        names: []
+        names: [],
+        id: schedule.id
       };
     }
-    groupedSchedules[schedule.type].names.push(schedule.title);
+    groupedSchedules[schedule.type].names.push(schedule.name);
   });
   return Object.values(groupedSchedules);
 };
 
 
-
 const getSchedulesForDay = (day) => {
-  return scheduleData.filter(schedule => schedule.day === day);
+  return scheduleData.value.filter(schedule => schedule.day === day && schedule.month === currentMonth.value);
 };
 
 const selectSchedule = ({ day, group }) => {
-    if (enableScheduleSelect.value) {
-        selectedDay.value = day;
-        selectedSchedules.value = group.names.map(name => ({
-            title: name,
-            time: group.time,
-            type: group.type,
-        }));
-        isScheduleModalOpen.value = true;
-    }
+  if (enableScheduleSelect.value) {
+    selectedDay.value = day;
+    selectedSchedules.value = group.names.map(name => ({
+      name: name,
+      time: group.time,
+      type: group.type,
+      id: group.id  // id로 변경
+    }));
+    isScheduleModalOpen.value = true;
+  }
 };
-
 
 const closeScheduleModal = () => {
   isScheduleModalOpen.value = false;
 };
 
-updateCalendar();
+onMounted(() => {
+  loadScheduleData();
+  updateCalendar();
+});
 </script>
 
 <style scoped>

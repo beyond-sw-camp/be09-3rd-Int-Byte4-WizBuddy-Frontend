@@ -57,24 +57,21 @@ const props = defineProps({
   groupSchedulesByType: Function,
   prevMonth: Function,
   nextMonth: Function,
-  selectDay: Function, // 부모 컴포넌트에서 날짜 선택을 처리하는 함수
-  selectSchedule: Function, // 부모 컴포넌트에서 스케줄 선택을 처리하는 함수
-  enableDaySelect: Boolean, // 날짜 선택 기능을 활성화할지 여부
-  enableScheduleSelect: Boolean // 스케줄 선택 기능을 활성화할지 여부
+  selectDay: Function,
+  selectSchedule: Function,
+  enableDaySelect: Boolean,
+  enableScheduleSelect: Boolean
 });
 
 const emit = defineEmits(['selectDay', 'selectSchedule']);
 
-// 날짜 클릭 시 처리
 function handleDayClick(day) {
   if (props.enableDaySelect) {
     emit('selectDay', day);
   }
 }
 
-// 스케줄 클릭 시 처리
 function handleScheduleClick(day, group) {
-  console.log("Schedule clicked:", day, group);
   if (props.enableScheduleSelect) {
     emit('selectSchedule', { day, group });
   }

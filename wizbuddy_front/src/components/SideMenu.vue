@@ -61,6 +61,17 @@
     box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25) inset;
 }
 
+.main-container {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; 
+    align-items: flex-start; 
+    height: 100vh;
+    padding: 0 20px;
+    background-color: #F3F7FA;
+}
+
 .right-side {
     width: 20%; 
     background-color: #F3F7FA;
