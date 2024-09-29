@@ -1,143 +1,219 @@
 {
   "users": [
     {
-      "role": "관리자",
-      "email": "admin",
-      "password": "admin",
-      "name": "김용승",
-      "phone": null,
-      "health": null,
-      "id": "53c6"
-    },
-    {
-      "id": "6da1",
-      "email": "ㄴㅇㄹㄴㅇ",
-      "password": "dfsdf",
-      "name": "sdfsd",
-      "phone": "sdfsdf",
-      "health": "2024-09-24",
-      "role": "employer"
-    },
-    {
-      "id": "6445",
-      "email": "ㄴㅇㄹㄴㅇㄹ",
-      "password": "qafa",
-      "name": "fsafa",
-      "phone": "fasfasf",
-      "health": "2024-10-01",
-      "role": "employee"
-    },
-    {
-      "id": "72f2",
-      "email": "wpdmsdkdlel",
-      "password": "123123",
-      "name": "유제은",
-      "phone": "01045901841",
-      "health": "2024-09-19",
-      "role": "employee"
-    },
-    {
-      "id": "f4a5",
-      "email": "test@gmalmglka.com",
-      "password": "wwwww",
-      "name": "테스투",
-      "phone": "123123",
-      "health": "2024-10-10",
-      "role": "employee"
-    },
-    {
-      "id": "14ae",
-      "email": "wpdmswpdms",
-      "password": "wwww",
-      "name": "유제은",
-      "phone": "01045901841",
-      "health": "2024-09-18",
-      "role": "employee"
-    },
-    {
-      "id": "a3aa",
+      "id": "1",
       "email": "qwe@naver.com",
       "password": "qwe",
-      "name": "유싸장",
+      "name": "조싸장",
       "phone": "123123",
       "health": "2024-09-26",
-      "role": "employer"
+      "role": "employer",
+      "shop_id": "1",
+      "invitations": [],
+      "employedAt": [
+        "1"
+      ]
     },
     {
-      "id": "5010",
-      "email": "test1",
-      "password": "test",
-      "name": "조제훈",
-      "phone": "01010101001",
-      "health": "2024-10-10",
-      "role": "employee"
+      "id": "2",
+      "email": "test",
+      "password": "1",
+      "name": "유제은",
+      "phone": "01045901841",
+      "health": "2024-09-24",
+      "role": "employee",
+      "invitations": [],
+      "employedAt": [
+        "2"
+      ]
     },
     {
-      "id": "130a",
+      "id": "3",
       "email": "test2",
-      "password": "123",
-      "name": "이나현",
-      "phone": "123123123",
-      "health": "2024-09-25",
-      "role": "employee"
+      "password": "1",
+      "name": "백경석",
+      "phone": "01010101010",
+      "health": "2024-09-16",
+      "role": "employee",
+      "invitations": [],
+      "employedAt": [
+        "3"
+      ]
+    }
+  ],
+  "shop": [
+    {
+      "id": "1",
+      "shop_name": "제훈치킨",
+      "shop_location": "인천 서구 당하동",
+      "shop_open_time": "09:00",
+      "business_num": "112233",
+      "created_at": "2024-09-29T13:41:02.440Z",
+      "updated_at": "2024-09-29T13:41:02.440Z",
+      "employer_code": "1",
+      "employees": [
+        "1"
+      ],
+      "invitations": []
+    },
+    {
+      "id": "2",
+      "shop_name": "조랭이떡집",
+      "shop_location": "123123",
+      "shop_open_time": "09:00",
+      "business_num": "11123",
+      "created_at": "2024-09-29T18:03:48.140Z",
+      "updated_at": "2024-09-29T18:03:48.140Z",
+      "invitations": [],
+      "employees": [
+        "2"
+      ]
+    },
+    {
+      "id": "3",
+      "shop_name": "er",
+      "shop_location": "er",
+      "shop_open_time": "09:00",
+      "business_num": "er",
+      "created_at": "2024-09-29T18:24:20.988Z",
+      "updated_at": "2024-09-29T18:24:20.988Z",
+      "invitations": [],
+      "employees": [
+        "3"
+      ]
     }
   ],
   "schedules": [
     {
-      "id": "1001",
-      "day": 15,
-      "month": 9,
-      "name": "이서현",
-      "type": "fun",
-      "time": "1T (09:00 ~ 14:00)"
+      "id": "1",
+      "title": "2024년 9월 1주차 스케줄",
+      "schedule_start_date": "2024-09-02",
+      "employee_working_part": [
+        {
+          "id": "1002",
+          "day": 5,
+          "month": 9,
+          "year": 2024,
+          "name": "백경석",
+          "type": "fun",
+          "time": "1T (09:00 ~ 14:00)"
+        }
+      ]
     },
     {
-      "id": "1002",
-      "day": 15,
-      "month": 9,
-      "name": "백경석",
-      "type": "fun",
-      "time": "1T (09:00 ~ 14:00)"
-    },
-    {
-      "id": "1003",
-      "day": 15,
-      "month": 9,
-      "name": "조제훈",
-      "type": "fun",
-      "time": "1T (09:00 ~ 14:00)"
-    },
-    {
-      "id": "1004",
-      "day": 15,
-      "month": 9,
-      "name": "이서현",
-      "type": "important",
-      "time": "2T (14:00 ~ 17:00)"
-    },
-    {
-      "id": "1005",
-      "day": 15,
-      "month": 9,
-      "name": "이나현",
-      "type": "personal",
-      "time": "3T (17:00 ~ 21:00)"
-    },
-    {
-      "id": "1006",
-      "day": 1,
-      "month": 10,
-      "name": "유제은",
-      "type": "fun",
-      "time": "1T (09:00 ~ 14:00)"
-    },
-    {
-      "id": "1007",
-      "day": 15,
-      "month": 10,
-      "name": "백경석",
-      "type": "important",
-      "time": "2T (14:00 ~ 17:00)"
+      "id": "2",
+      "title": "2024년 9월 2주차 스케줄",
+      "schedule_start_date": "2024-09-09",
+      "employee_working_part": [
+        {
+          "id": "4yip5u3",
+          "day": 13,
+          "month": 9,
+          "year": 2024,
+          "name": "이나현",
+          "type": "fun",
+          "time": "1T (09:00 ~ 14:00)"
+        },
+        {
+          "id": "q1oh0sn",
+          "day": 11,
+          "month": 9,
+          "year": 2024,
+          "name": "유제은",
+          "type": "fun",
+          "time": "1T (09:00 ~ 14:00)"
+        },
+        {
+          "id": "i9ahik4",
+          "day": 12,
+          "month": 9,
+          "year": 2024,
+          "name": "유제은",
+          "type": "fun",
+          "time": "1T (09:00 ~ 14:00)"
+        },
+        {
+          "id": "5xd6r9i",
+          "day": 11,
+          "month": 9,
+          "year": 2024,
+          "name": "조제훈",
+          "type": "fun",
+          "time": "1T (09:00 ~ 14:00)"
+        },
+        {
+          "id": "4u94bzk",
+          "day": 14,
+          "month": 9,
+          "year": 2024,
+          "name": "유제은",
+          "type": "fun",
+          "time": "1T (09:00 ~ 14:00)"
+        },
+        {
+          "id": "2p1smar",
+          "day": 12,
+          "month": 9,
+          "year": 2024,
+          "name": "백경석",
+          "type": "important",
+          "time": "2T (14:00 ~ 17:00)"
+        },
+        {
+          "id": "e1h8alf",
+          "day": 11,
+          "month": 9,
+          "year": 2024,
+          "name": "이서현",
+          "type": "important",
+          "time": "2T (14:00 ~ 17:00)"
+        },
+        {
+          "id": "ztjlsmz",
+          "day": 13,
+          "month": 9,
+          "year": 2024,
+          "name": "이서현",
+          "type": "important",
+          "time": "2T (14:00 ~ 17:00)"
+        },
+        {
+          "id": "69q5txy",
+          "day": 13,
+          "month": 9,
+          "year": 2024,
+          "name": "유제은",
+          "type": "important",
+          "time": "2T (14:00 ~ 17:00)"
+        },
+        {
+          "id": "ihx3vkz",
+          "day": 10,
+          "month": 9,
+          "year": 2024,
+          "name": "백경석",
+          "type": "important",
+          "time": "2T (14:00 ~ 17:00)"
+        },
+        {
+          "id": "pgfs99x",
+          "day": 11,
+          "month": 9,
+          "year": 2024,
+          "name": "이서현",
+          "type": "personal",
+          "time": "3T (17:00 ~ 21:00)"
+        },
+        {
+          "id": "dbt1cr7",
+          "day": 10,
+          "month": 9,
+          "year": 2024,
+          "name": "이서현",
+          "type": "personal",
+          "time": "3T (17:00 ~ 21:00)"
+        }
+      ]
     }
   ],
   "tasks": [
@@ -364,5 +440,42 @@
       "writer": "사용자",
       "avatar": "/src/assets/icons/board/avater0.svg"
     }
-  ]
+  ],
+  "manualboard": [
+    {
+      "id": 1,
+      "title": "아메리카노와 라떼의 차이",
+      "writer": "이서현",
+      "registerdate": "2024-09-25",
+      "content": "아메리카노와 라떼는 커피의 기본적인 두 가지 형태로, 아메리카노는 에스프레소에 물을 추가한 반면, 라떼는 우유를 더해 부드러운 맛을 냅니다."
+    },
+    {
+      "id": 2,
+      "title": "최고의 핸드드립 커피 원두 고르는 법",
+      "writer": "김지훈",
+      "registerdate": "2024-09-26",
+      "content": "핸드드립 커피를 즐기려면 원두 선택이 중요한데, 신선한 원두와 적절한 로스팅 정도를 고려하는 것이 중요합니다."
+    },
+    {
+      "id": 3,
+      "title": "카페 인테리어 트렌드 2024",
+      "writer": "박지민",
+      "registerdate": "2024-09-27",
+      "content": "2024년 카페 인테리어 트렌드는 미니멀리즘과 자연 친화적 디자인이 주류를 이루며, 따뜻한 조명과 나무 소재가 인기입니다."
+    },
+    {
+      "id": 4,
+      "title": "콜드브루 만들기: 집에서 쉽게 즐기는 법",
+      "writer": "최은지",
+      "registerdate": "2024-09-28",
+      "content": "콜드브루는 찬물로 오랜 시간 추출한 커피로, 집에서도 간단하게 만들 수 있는 방법과 함께 주의사항을 소개합니다."
+    },
+    {
+      "id": 5,
+      "title": "카페 운영에 꼭 필요한 장비 리스트",
+      "writer": "정현수",
+      "registerdate": "2024-09-29",
+      "content": "에스프레소 머신, 그라인더, 스티머 등 카페 운영에 필요한 필수 장비와 선택 장비 리스트를 소개합니다."
+    }
+  ]  
 }

@@ -9,12 +9,15 @@
         </div>
         <div class="form-group">
           <label for="employee">직원</label>
-          <input type="text" id="employee" v-model="schedule.employee" required class="input-field" />
+          <select id="employee" v-model="selectedWorker" class="input-field" required>
+            <option disabled value="">직원을 선택하세요</option>
+            <option v-for="worker in workers" :key="worker" :value="worker">{{ worker }}</option>
+          </select>
         </div>
         <div class="form-group">
           <label for="time">시간대</label>
           <select id="time" v-model="schedule.time" required class="input-field">
-            <option value="1T">1T (9:00 ~ 14:00)</option>
+            <option value="1T">1T (09:00 ~ 14:00)</option>
             <option value="2T">2T (14:00 ~ 17:00)</option>
             <option value="3T">3T (17:00 ~ 21:00)</option>
           </select>
@@ -29,28 +32,49 @@
 </template>
 
 <script setup>
-import { ref, toRefs } from 'vue';
+import { ref } from 'vue';
 
 const props = defineProps({
   isOpen: Boolean,
   selectedDate: String,
+  selectedDay: Number,
+  currentMonth: Number,
+  currentYear: Number,
+  scheduleData: Array,
 });
 
 const emit = defineEmits(["close", "submit"]);
 
 const schedule = ref({
-  date: props.selectedDate,
-  employee: "",
   time: "",
 });
+
+const selectedWorker = ref(""); 
+const workers = ["유제은", "백경석", "조제훈", "이서현", "이나현"];
 
 function closeModal() {
   emit("close");
 }
 
 function submitForm() {
-  emit("submit", schedule.value);
+  emit("submit", {
+    employee: selectedWorker.value,
+    time: schedule.value.time,
+  });
   closeModal();
+}
+
+function getTimeRange(time) {
+  switch (time) {
+    case '1T':
+      return '09:00 ~ 14:00';
+    case '2T':
+      return '14:00 ~ 17:00';
+    case '3T':
+      return '17:00 ~ 21:00';
+    default:
+      return '';
+  }
 }
 </script>
 
