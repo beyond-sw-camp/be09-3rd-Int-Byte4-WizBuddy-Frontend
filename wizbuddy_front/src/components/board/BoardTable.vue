@@ -6,23 +6,32 @@
       <div class="board-header-writer">작성자</div>
       <div class="board-header-registerdate">작성날짜</div>
     </div>
-    <BoardItem v-for="board in boards.slice().reverse()" :key="board.id" :board="board" :comments="getCommentsForBoard(board.id)"  />
+    <BoardItem v-for="board in boards" :board="board" :key="board.id" :comments="getCommentsForBoard(board.id)"/>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import BoardItem from './BoardItem.vue';
+  import { ref, onMounted } from 'vue';
+  import BoardItem from './BoardItem.vue';
 
-const boards = ref([
-  { id: 1, title: '제목1', writer: '사장1', registerdate: '2024.09.20' },
-  { id: 2, title: '제목2', writer: '사장2', registerdate: '2024.09.21' },
-  { id: 3, title: '제목3', writer: '사장3', registerdate: '2024.09.22' },
-  { id: 4, title: '제목4', writer: '사장4', registerdate: '2024.09.23' },
-  { id: 5, title: '제목5', writer: '사장5', registerdate: '2024.09.24' },
-]);
+  const boards = ref([]);
 
-const comments = ref([
+  onMounted (async () => {
+    try {
+      const response = await fetch('http://localhost:8080/manualboard');
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      } const data = await response.json();
+      if (data.length > 0) {
+        boards.value = data;
+        console.log('서버로부터 받아온 boards: ', boards.value);
+      }
+    } catch (error) {
+      console.error ('데이터를 가져오는 중 오류가 발생했습니다: ', error);
+    }
+  });
+
+  const comments = ref([
   { boardId: 1, content: '댓글1' },
   { boardId: 2, content: '댓글2' },
   { boardId: 2, content: '댓글3' },
