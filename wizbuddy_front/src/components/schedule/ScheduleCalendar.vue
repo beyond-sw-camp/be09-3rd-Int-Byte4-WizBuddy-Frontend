@@ -24,7 +24,8 @@
           v-for="day in daysInMonth"
           :key="day"
           class="calendar-day"
-          :class="{ today: isToday(day), selected: day === selectedDay }"
+          :class="{ today: isToday(day), selected: day === selectedDay, 'highlighted-week': isDayInHighlightedWeek(day) }"
+          @click="handleDayClick(day)"
         >
           <div class="day-number">{{ day }}</div>
           <div class="schedules">
@@ -32,7 +33,7 @@
               v-for="(group, type) in groupSchedulesByType(day)"
               :key="type"
               :class="['schedule', group.type]"
-              @click="selectSchedule(day, group)"
+              @click.stop="handleScheduleClick(day, group)"
             >
               {{ group.names.join(', ') }}
             </div>
@@ -44,7 +45,7 @@
 </template>
 
 <script setup>
-defineProps({
+const props = defineProps({
   currentYear: Number,
   currentMonth: Number,
   months: Array,
@@ -53,11 +54,39 @@ defineProps({
   daysInMonth: Array,
   selectedDay: Number,
   isToday: Function,
+  highlightedWeeks: {
+    type: Array,
+    default: () => []
+  },
   groupSchedulesByType: Function,
-  selectSchedule: Function,
   prevMonth: Function,
   nextMonth: Function,
+  selectDay: Function,
+  selectSchedule: Function,
+  enableDaySelect: Boolean,
+  enableScheduleSelect: Boolean
 });
+
+const emit = defineEmits(['selectDay', 'selectSchedule']);
+
+function handleDayClick(day) {
+  if (props.enableDaySelect) {
+    emit('selectDay', day);
+  }
+}
+
+function handleScheduleClick(day, group) {
+  if (props.enableScheduleSelect) {
+    emit('selectSchedule', { day, group });
+  }
+}
+
+function isDayInHighlightedWeek(day) {
+  const date = new Date(props.currentYear, props.currentMonth, day);
+  return props.highlightedWeeks.some(
+    week => date >= week.weekStart && date <= week.weekEnd
+  );
+}
 </script>
 
 <style scoped>

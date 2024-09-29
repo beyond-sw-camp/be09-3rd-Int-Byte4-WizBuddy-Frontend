@@ -1,25 +1,66 @@
 <template>
   <div class="task-create-page">
     <h1>업무 등록 화면</h1>
-    <!-- TaskForm 컴포넌트 사용, 버튼 라벨을 "등록"으로 설정 -->
     <TaskForm @submitTask="handleTaskSubmit" submitButtonLabel="등록" />
   </div>
 </template>
 
 <script setup>
-import TaskForm from '@/components/task/TaskForm.vue'; // TaskForm 컴포넌트 가져오기
+import TaskForm from '@/components/task/TaskForm.vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
 
-// TaskForm에서 넘겨받은 데이터를 처리하는 함수
-const handleTaskSubmit = (newTask) => {
-  console.log('등록된 업무:', newTask);
+const handleTaskSubmit = async (newTask) => {
+  try {
+    const addedTask = await fetchLastIdAndAddNewTask(newTask);
+    if (addedTask) {
+      console.log('등록된 업무:', addedTask);
+      router.push('/task');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('업무 등록 중 오류가 발생했습니다.');
+  }
+};
 
-  // 이곳에서 실제로 등록된 업무 데이터를 처리 (API 호출 등)
+const fetchLastIdAndAddNewTask = async (newTask) => {
+  const response = await fetch('http://localhost:8080/tasks');
+  const tasks = await response.json();
 
-  // 업무 등록 후 페이지 이동 (예: Task 리스트 페이지로 이동)
-  router.push('/task');  // 업무 리스트 페이지로 리다이렉트
+  if (tasks.length === 0) {
+    newTask.id = "1";
+  } else {
+    const lastTask = tasks[tasks.length - 1];
+    const lastId = lastTask.id;
+
+    let newId;
+    if (!isNaN(lastId)) {
+      newId = (parseInt(lastId, 10) + 1).toString();
+    } else {
+      newId = generateUniqueId();
+    }
+
+    newTask.id = newId;
+  }
+
+  const addResponse = await fetch('http://localhost:8080/tasks', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(newTask),
+  });
+
+  if (!addResponse.ok) {
+    throw new Error('Task 추가에 실패했습니다.');
+  }
+
+  return await addResponse.json();
+};
+
+const generateUniqueId = () => {
+  return Math.random().toString(36).substring(2, 10);
 };
 </script>
 
@@ -37,12 +78,5 @@ h1 {
   font-size: 24px;
   margin-bottom: 20px;
   text-align: center;
-}
-
-.task-create-page {
-  padding: 20px;
-  max-width: 1000px;
-  margin: 0 auto;
-  text-align: left;
 }
 </style>

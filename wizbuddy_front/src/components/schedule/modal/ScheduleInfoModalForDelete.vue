@@ -3,8 +3,8 @@
     <div class="modal-container">
       <h3 class="modal-title">{{ currentMonth }} {{ selectedDate }}일 스케줄</h3>
       <ul>
-        <li v-for="schedule in schedules" :key="schedule.title">
-          {{ schedule.time }}: {{ schedule.title }}
+        <li v-for="schedule in schedules" :key="schedule.id">
+          {{ schedule.time }}: {{ schedule.name }}
           <button @click="requestDelete(schedule)">삭제</button>
         </li>
       </ul>
@@ -56,6 +56,7 @@ function requestDelete(schedule) {
 }
 
 ul {
+  margin-top: 20px;
   list-style: none;
   padding: 0;
 }

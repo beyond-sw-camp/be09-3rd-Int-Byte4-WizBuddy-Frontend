@@ -8,22 +8,22 @@
                 <h3>고정 업무</h3>
                 <div class="task-items-container">
                     <div v-for="task in fixedTasks" :key="task.id" class="task-item fixed-task">
-                        <div class="task-content">{{ task.content }}</div>
-                        <button class="remove-task-button" @click="removeTask(task)">x</button>
+                        <div class="task-content">{{ task.title }}</div>
+                        <!-- <button class="remove-task-button" @click="removeTask(task)">x</button> -->
                     </div>
                 </div>
             </div>
 
             <!-- 고정 업무와 비고정 업무 사이 회색 실선 -->
             <hr class="separator">
-
+            <!-- task 상세페이지로 가능 모달창 하나 필요한가????????????????????-->
             <!-- 비고정 업무 구역 -->
             <div class="task-list non-fixed-tasks">
                 <h3>비고정 업무</h3>
                 <div class="task-items-container">
                     <div v-for="task in nonFixedTasks" :key="task.id" class="task-item non-fixed-task">
-                        <div class="task-content">{{ task.content }}</div>
-                        <button class="remove-task-button" @click="removeTask(task)">x</button>
+                        <div class="task-content">{{ task.title }}</div>
+                        <!-- <button class="remove-task-button" @click="removeTask(task)">x</button> -->
                     </div>
                 </div>
             </div>
@@ -58,10 +58,6 @@ const nonFixedTasks = computed(() =>
     props.checklist.tasks.filter(task => !task.isFixed)
 );
 
-// 더미 함수 (나중에 로직 추가)
-const removeTask = (task) => {
-    console.log('Remove task:', task);
-};
 </script>
 
 <style scoped>
@@ -75,96 +71,100 @@ const removeTask = (task) => {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  
+  .modal-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: #000000; /* 추가: 텍스트 색상을 검은색으로 명시적 지정 */
 }
-
-.modal-content {
-    background-color: white;
-    padding: 30px;
-    border-radius: 8px;
-    max-width: 600px;
-    width: 100%;
-}
-
-h2 {
+  
+  h2 {
     font-size: 24px;
     margin-bottom: 20px;
-}
-
-.task-list {
-    margin-bottom: 30px;
-}
-
-.task-items-container {
+    color: #000000;
+  }
+  
+  .task-list {
+    margin-bottom: 20px;
+  }
+  
+  .section-header {
     display: flex;
-    flex-wrap: wrap;
-    /* 줄 넘침을 허용하여 다음 줄에 배치 */
-    gap: 10px;
-    /* 각 업무 간 간격 */
-    justify-content: flex-start;
-    /* 태스크들을 왼쪽 정렬 */
-}
-
-.task-item {
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: space-between;
     align-items: center;
-    word-wrap: break-word;
-    /* flex-grow: 1; */
-    min-width: 150px;
-    /* 최소 너비 설정 */
-    max-width: calc(50% - 10px);
-    /* 반 줄에 배치 가능, 너비 설정 */
-}
-
-.fixed-task {
-    background-color: #fce4ec;
-}
-
-.non-fixed-task {
-    background-color: #e3f2fd;
-}
-
-.task-content {
-    font-size: 16px;
-    flex-grow: 1;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin-right: 10px;
-    /* X 버튼과의 간격 */
-}
-
-.remove-task-button {
-    background-color: transparent;
-    border: none;
-    color: #f44336;
+    margin-bottom: 15px;
+  }
+  
+  .section-header h3 {
     font-size: 18px;
-    cursor: pointer;
+    margin-right: 15px;
+    white-space: nowrap;
+    color: #555;
+  }
+  
+  .divider {
+    flex-grow: 1;
+    height: 1px;
+    background: repeating-linear-gradient(to right, #ccc 0, #ccc 5px, transparent 5px, transparent 7px);
+  }
+  
+  .task-items-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start;
 }
-
-.remove-task-button:hover {
-    color: #d32f2f;
+  
+.task-item {
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex: 0 1 auto;
+  max-width: 100%;
+  word-wrap: break-word;
+  word-break: break-all;
+  color: #000000; /* 추가: task-item 내 텍스트 색상을 검은색으로 명시적 지정 */
 }
-
-.close-button {
-    padding: 10px 20px;
-    background-color: #3f51b5;
-    color: white;
+  
+  .fixed-task {
+    background-color: #fce4ec;
+  }
+  
+  .non-fixed-task {
+    background-color: #e3f2fd;
+  }
+  
+  .task-content {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+}
+  .separator {
     border: none;
+    border-top: 1px solid #ddd;
+    margin: 20px 0;
+  }
+  
+  .close-button {
+    padding: 10px 20px;
+    border: 1px solid #f44336;
     border-radius: 5px;
     cursor: pointer;
-}
-
-.close-button:hover {
-    background-color: #2f3a9d;
-}
-
-.separator {
-    border: none;
-    border-top: 2px solid #ccc;
-    margin: 30px 0;
-}
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 16px;
+    background-color: white;
+    color: #f44336;
+  }
+  
+  .close-button:hover {
+    background-color: #f44336;
+    color: white;
+  }
 </style>

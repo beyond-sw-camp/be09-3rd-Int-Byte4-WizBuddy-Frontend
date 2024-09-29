@@ -19,4 +19,5 @@ const NoticeBoardRoutes = [
     }
 ];
 
+
 export default NoticeBoardRoutes;

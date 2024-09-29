@@ -1,254 +1,293 @@
 <template>
-    <div class="checklist-list-page">
-      <aside class="left-side">
-        <TaskTab />
-        <ChecklistSideMenu
-          :tasks="tasks"
-          :selectedChecklist="selectedChecklist"
-          @add-checklist="addChecklist"
-          @trigger-mode="handleMode"
-        />
-      </aside>
-  
-      <div class="main-content">
-        <h1>체크리스트 목록</h1>
-        <div v-for="checklist in checklists" :key="checklist.id">
-          <div @click="realSelectChecklist(checklist)" class="checklist-header">
-            {{ checklist.title }}
+  <div class="checklist-list-page">
+    <aside class="left-side">
+      <TaskTab />
+      <ChecklistSideMenu
+        :tasks="tasks"
+        :selectedChecklist="selectedChecklist"
+        @add-checklist="addChecklist"
+        @trigger-mode="handleMode"
+      />
+    </aside>
+
+    <div class="main-content">
+      <h1>체크리스트 목록</h1>
+      <div class="checklist-grid">
+        <div v-for="checklist in checklists" :key="checklist.id" class="checklist-card">
+          <div class="checklist-card-content" @click="realSelectChecklist(checklist)">
+            <h3>{{ checklist.title }}</h3>
+            <p>항목 수: {{ checklist.tasks ? checklist.tasks.length : 0 }}</p>
           </div>
-  
-          <!-- 선택 버튼: 수정 모드/삭제 모드에 따라 동작 -->
           <button
             v-if="isSelecting"
             class="select-button"
             @click="isEditing ? openEditModal(checklist) : (isDeleting ? confirmDelete(checklist) : selectChecklist(checklist))"
           >
-            선택
+            {{ isEditing ? '수정' : (isDeleting ? '삭제' : '선택') }}
           </button>
-  
-          <!-- ChecklistDetailModal -->
-          <ChecklistDetailModal
-            v-if="isModalOpen"
-            :checklist="selectedChecklist"
-            @close="closeModal"
-          />
-  
-          <!-- EditModal -->
-          <EditModal
-            v-if="isEditModalOpen"
-            :checklist="selectedChecklist"
-            :tasks="tasks"
-            @close="closeEditModal"
-            @save="handleSaveEdit"
-          />
         </div>
       </div>
-  
-      <aside class="right-side">
-        <UserProfileMenu />
-      </aside>
+
+      <ChecklistDetailModal
+        v-if="isModalOpen"
+        :checklist="selectedChecklist"
+        @close="closeModal"
+      />
+
+      <EditModal
+        v-if="isEditModalOpen"
+        :checklist="selectedChecklist"
+        :tasks="tasks"
+        @close="closeEditModal"
+        @save="handleSaveEdit"
+      />
     </div>
-  </template>
-  
-  <script setup>
-  import { ref } from 'vue';
-  import TaskTab from '@/components/task/TaskTab.vue';
-  import UserProfileMenu from '@/components/UserProfileMenu.vue';
-  import ChecklistSideMenu from '@/components/checklist/ChecklistSideMenu.vue';
-  import ChecklistDetailModal from '@/components/checklist/modal/ChecklistDetailModal.vue';
-  import ChecklistItem from '@/components/checklist/ChecklistItem.vue';
-  import EditModal from '@/components/checklist/modal/ChecklistEditModal.vue';
-  
-  // 체크리스트 목록
-  const checklists = ref([
-    {
-      id: 1,
-      title: '9월 16일 1T 필독',
-      tasks: [
-        { id: 1, content: '화장실 청소', isFixed: true },
-        { id: 2, content: '매장 정리', isFixed: false },
-        { id: 3, content: '커피 머신 청소하기', isFixed: true },
-      ],
-    },
-    {
-      id: 2,
-      title: '9월 17일 2T 필독',
-      tasks: [
-        { id: 1, content: '화장실 청소', isFixed: true },
-        { id: 2, content: '매장 정리', isFixed: false },
-      ],
-    },
-  ]);
-  
-  // 전체 task 목록
-  const tasks = ref([
-    { id: 1, content: '화장실 청소', isFixed: true },
-    { id: 2, content: '매장 정리', isFixed: false },
-    { id: 3, content: '커피 머신 청소', isFixed: true },
-    { id: 4, content: '재고 확인1', isFixed: false },
-    { id: 5, content: '재고 확인2', isFixed: false },
-    { id: 6, content: '재고 확인3', isFixed: false },
-    { id: 7, content: '재고 확인4', isFixed: false },
-    { id: 4, content: '재고 확인5', isFixed: false },
-  ]);
-  
-  // 모달 및 체크리스트 상태
-  const isModalOpen = ref(false);
-  const isEditModalOpen = ref(false); // 수정 모달 상태 추가
-  const selectedChecklist = ref(null); // 선택된 체크리스트 저장
-  const isSelecting = ref(false); // 선택 버튼 활성화 여부
-  const isEditing = ref(false); // 수정 모드 활성화 여부
-  const isDeleting = ref(false); // 삭제 모드 활성화 여부
-  
-  // '수정', '삭제', '일반' 모드 처리
-  const handleMode = (mode) => {
-    if (mode === 'normal') {
-      isSelecting.value = false; // 선택 버튼 비활성화
-      isEditing.value = false; // 수정 모드 비활성화
-      isDeleting.value = false; // 삭제 모드 비활성화
-      selectedChecklist.value = null; // 선택된 체크리스트 초기화
-      console.log('일반 모드로 전환');
-    } else if (mode === 'edit') {
-      isSelecting.value = true; // 선택 모드 활성화
-      isEditing.value = true; // 수정 모드 활성화
-      isDeleting.value = false; // 삭제 모드 비활성화
-      selectedChecklist.value = null; // 선택된 체크리스트 초기화
-      console.log('수정 모드로 전환');
-    } else if (mode === 'delete') {
-      isSelecting.value = true; // 선택 모드 활성화
-      isDeleting.value = true; // 삭제 모드 활성화
-      isEditing.value = false; // 수정 모드 비활성화
-      selectedChecklist.value = null; // 선택된 체크리스트 초기화
-      console.log('삭제 모드로 전환');
+
+    <aside class="right-side">
+      <UserProfileMenu />
+    </aside>
+  </div>
+</template>
+
+<script setup>
+import { ref, onMounted } from 'vue';
+import TaskTab from '@/components/task/TaskTab.vue';
+import UserProfileMenu from '@/components/UserProfileMenu.vue';
+import ChecklistSideMenu from '@/components/checklist/ChecklistSideMenu.vue';
+import ChecklistDetailModal from '@/components/checklist/modal/ChecklistDetailModal.vue';
+import EditModal from '@/components/checklist/modal/ChecklistEditModal.vue';
+
+const checklists = ref([]);
+const tasks = ref([]);
+const isModalOpen = ref(false);
+const isEditModalOpen = ref(false);
+const selectedChecklist = ref(null);
+const isSelecting = ref(false);
+const isEditing = ref(false);
+const isDeleting = ref(false);
+
+onMounted(async () => {
+  try {
+    // 체크리스트 데이터 가져오기
+    const checklistResponse = await fetch('http://localhost:8080/checklists');
+    checklists.value = await checklistResponse.json();
+
+    // 모든 업무 데이터 가져오기
+    const taskResponse = await fetch('http://localhost:8080/tasks');
+    tasks.value = await taskResponse.json();
+
+    console.log('Checklists:', checklists.value);
+    console.log('Tasks:', tasks.value);
+  } catch (error) {
+    console.error('데이터를 불러오는 중 오류가 발생했습니다.', error);
+  }
+});
+
+// 모드 관리
+const handleMode = (mode) => {
+  if (mode === 'normal') {
+    isSelecting.value = false;
+    isEditing.value = false;
+    isDeleting.value = false;
+    selectedChecklist.value = null;
+  } else if (mode === 'edit') {
+    isSelecting.value = true;
+    isEditing.value = true;
+    isDeleting.value = false;
+    selectedChecklist.value = null;
+  } else if (mode === 'delete') {
+    isSelecting.value = true;
+    isDeleting.value = true;
+    isEditing.value = false;
+    selectedChecklist.value = null;
+  }
+};
+
+// 체크리스트 선택
+const realSelectChecklist = (checklist) => {
+  selectedChecklist.value = checklist;
+  isModalOpen.value = true;
+};
+
+// 체크리스트 선택 및 처리
+const selectChecklist = (checklist) => {
+  selectedChecklist.value = selectedChecklist.value === checklist ? null : checklist;
+};
+
+// 삭제 확인
+const confirmDelete = (checklist) => {
+  if (window.confirm("정말로 이 체크리스트를 삭제하시겠습니까?")) {
+    deleteChecklist(checklist);
+  }
+};
+
+
+const deleteChecklist = async (checklist) => {
+  try {
+    // 1. 삭제된 체크리스트를 checklistPast에 저장
+    await saveToChecklistPast(checklist);
+
+    // 2. 체크리스트를 삭제
+    const deleteResponse = await fetch(`http://localhost:8080/checklists/${checklist.id}`, {
+      method: 'DELETE',
+    });
+
+    if (!deleteResponse.ok) {
+      throw new Error('체크리스트 삭제 실패');
     }
-  };
-  
-  // 체크리스트 선택
-  const realSelectChecklist = (checklist) => {
-    selectedChecklist.value = checklist; // 선택된 체크리스트 설정
-    isModalOpen.value = true; // 모달 열기
-  };
-  
-  // 체크리스트 선택 (실제 선택되는 경우)
-  const selectChecklist = (checklist) => {
-    if (selectedChecklist.value === checklist) {
-      selectedChecklist.value = null; // 이미 선택된 체크리스트를 클릭하면 선택 해제
-    } else {
-      selectedChecklist.value = checklist; // 새로운 체크리스트 선택
-      console.log('선택된 체크리스트:', checklist);
-    }
-  };
-  
-  // 삭제 확인 로직
-  const confirmDelete = (checklist) => {
-    const confirmed = window.confirm("진짜 삭제하시겠습니까?");
-    if (confirmed) {
-      deleteChecklist(checklist); // 체크리스트 삭제 로직 호출
-    }
-  };
-  
-  // 체크리스트 삭제
-  const deleteChecklist = (checklist) => {
+
+    // 3. 로컬 상태에서 체크리스트 제거
     const index = checklists.value.findIndex(c => c.id === checklist.id);
     if (index !== -1) {
-      checklists.value.splice(index, 1); // 체크리스트 삭제
-      console.log('삭제된 체크리스트:', checklist);
+      checklists.value.splice(index, 1);
     }
-  };
-  
-  // 수정 모드에서 선택 시 EditModal 열기
-  const openEditModal = (checklist) => {
-    selectedChecklist.value = checklist;
-    isEditModalOpen.value = true; // 수정 모달 열기
-  };
-  
-  // 모달 닫기
-  const closeModal = () => {
-    isModalOpen.value = false;
-  };
-  
-  // 수정 모달 닫기
-  const closeEditModal = () => {
-    isEditModalOpen.value = false;
-  };
-  
-  // 체크리스트 추가 (ChecklistSideMenu에서 전달받음)
-  const addChecklist = (newChecklist) => {
-    checklists.value.push(newChecklist); // 새로운 체크리스트를 목록에 추가
-  };
-  
-  const handleSaveEdit = (updatedChecklist) => {
-    const index = checklists.value.findIndex(c => c.id === updatedChecklist.id);
-    if (index !== -1) {
-      checklists.value.splice(index, 1, updatedChecklist); // 체크리스트 수정
-    }
-    console.log('수정된 체크리스트:', updatedChecklist);
-  };
-  </script>
-  
-  
-  
-  <style scoped>
-  /* 기존 스타일 유지 */
-  .checklist-list-page {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-    min-height: calc(100vh - 151.6px);
-    padding-bottom: 41.6px;
-    background-color: #F3F7FA;
-    padding: 0 20px;
-    margin: auto;
+
+    alert("체크리스트가 삭제되었고, 과거 기록에 저장되었습니다.");
+  } catch (error) {
+    console.error('삭제 중 오류 발생:', error);
+    alert("체크리스트 삭제 중 오류가 발생했습니다.");
   }
-  
-  .left-side {
-    width: 16%;
+};
+
+const saveToChecklistPast = async (checklist) => {
+  try {
+    const currentDate = new Date().toISOString();
+    const pastChecklist = {
+      ...checklist,
+      deletedAt: currentDate
+    };
+
+    const saveResponse = await fetch('http://localhost:8080/checklistsPast', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(pastChecklist),
+    });
+
+    if (!saveResponse.ok) {
+      throw new Error('과거 체크리스트 저장 실패');
+    }
+  } catch (error) {
+    console.error('과거 체크리스트 저장 중 오류 발생:', error);
+    throw error;
+  }
+};
+
+
+
+
+// 수정 모달 열기
+const openEditModal = (checklist) => {
+  selectedChecklist.value = checklist;
+  isEditModalOpen.value = true;
+};
+
+// 모달 닫기
+const closeModal = () => {
+  isModalOpen.value = false;
+};
+
+// 수정 모달 닫기
+const closeEditModal = () => {
+  isEditModalOpen.value = false;
+};
+
+// 체크리스트 추가
+const addChecklist = (newChecklist) => {
+  checklists.value.push(newChecklist);
+};
+
+// 수정된 체크리스트 저장
+const handleSaveEdit = (updatedChecklist) => {
+  const index = checklists.value.findIndex(c => c.id === updatedChecklist.id);
+  if (index !== -1) {
+    checklists.value.splice(index, 1, updatedChecklist);
+  }
+};
+</script>
+
+<style scoped>
+.checklist-list-page {
+  display: flex;
+  min-height: calc(100vh - 151.6px);
+  background-color: #F3F7FA;
+  padding: 0 20px;
+}
+
+.left-side {
+    width: 16%; 
     background-color: #F3F7FA;
     padding: 20px;
-    margin-left: 20px;
+    margin-left : 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 100px;
-  }
-  
-  .main-content {
-    flex: 1;
-    margin-left: 120px;
-    margin-right: 120px;
-  }
-  
-  .checklist-header {
-    cursor: pointer;
-    background-color: #f3bdbd;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    width: 100%;
-    box-sizing: border-box;
-    transition: background-color 0.3s ease;
-    margin-right: 40px;
-    font-size: 20px;
-    font-family: 'Trebuchet MS', Arial, sans-serif;
-    font-weight: bold;
-  }
-  
-  .checklist-header:hover {
-    background-color: #ddd;
-  }
-  
-  h1 {
-    text-align: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    font-weight: bold;
-  }
-  
-  .right-side {
-    width: 20%;
-    background-color: #F3F7FA;
-    padding: 20px;
-  }
-  </style>
-  
+}
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+.checklist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.checklist-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.checklist-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.checklist-card-content {
+  padding: 20px;
+  cursor: pointer;
+}
+
+.checklist-card h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.checklist-card p {
+  margin: 0;
+  color: #666;
+}
+
+.select-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.select-button:hover {
+  background-color: #0056b3;
+}
+
+h1 {
+  text-align: center;
+  margin: 20px 0;
+  color: #333;
+}
+
+.right-side {
+  width: 20%;
+  padding: 20px;
+}
+</style>

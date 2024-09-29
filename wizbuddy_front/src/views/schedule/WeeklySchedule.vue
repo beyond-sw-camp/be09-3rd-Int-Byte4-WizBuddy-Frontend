@@ -1,21 +1,11 @@
 <template>
-    <div class="weekly-schedule-container">
-      <aside class="left-side">
-        <LeftTab />
-      </aside>
-      
-      <!-- WeeklyScheduleContainer.vue를 호출 -->
-      <WeeklyScheduleContainer />
-  
-      <aside class="right-side">
-        <UserProfileMenu />
-      </aside>
-    </div>
+    <SideMenu>
+        <WeeklyScheduleContainer />
+    </SideMenu>
   </template>
   
   <script setup>
-  import LeftTab from '@/components/LeftTab.vue';
-  import UserProfileMenu from '@/components/UserProfileMenu.vue';
+  import SideMenu from '@/components/SideMenu.vue';
   import WeeklyScheduleContainer from '@/components/schedule/WeeklyScheduleContainer.vue';
   </script>
   
