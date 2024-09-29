@@ -5,17 +5,15 @@
     <div class="board-writer">{{ board.writer }}</div>
     <div class="board-registerdate">{{ board.registerdate }}</div>
   </div>
+  
 </template>
 
 <script setup>
   import { useRouter, useRoute } from 'vue-router';
 
   const props = defineProps({
-    board: {
-      type: Object,
-      required: true
-    }
-  });
+    board: Object
+  })
 
   const router = useRouter();
   const route = useRoute();

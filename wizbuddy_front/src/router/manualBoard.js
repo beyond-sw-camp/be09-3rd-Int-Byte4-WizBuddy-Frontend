@@ -1,6 +1,7 @@
 import ManualBoard from '@/views/board/ManualBoard.vue';
 import ManualPostDetail from '@/components/board/ManualPostDetail.vue';
 import PostCreate from '@/components/board/PostCreate.vue';
+import PostEdit from '@/components/board/PostEdit.vue';
 
 const ManualBoardRoutes = [
     {
@@ -16,6 +17,11 @@ const ManualBoardRoutes = [
     {
         path: "/manualboard/register",
         component: PostCreate,
+        props: true
+    },
+    {
+        path: '/manualboard/:id/edit',
+        component: PostEdit, // 아래에서 구현할 EditPostView를 컴포넌트로 등록
         props: true
     }
 ];

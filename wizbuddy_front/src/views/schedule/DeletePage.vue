@@ -1,7 +1,7 @@
 <template>
     <div class="main-container">
         <aside class="left-side">
-            <ScheduleTab />
+            <LeftTab />
             <div class="side">
                 <LeftSideMenu />
             </div>
@@ -47,7 +47,7 @@
 
 <script setup>
     import { ref } from 'vue';
-    import ScheduleTab from '@/components/schedule/ScheduleTab.vue';
+    import LeftTab from '@/components/LeftTab.vue';
     import UserProfileMenu from '@/components/UserProfileMenu.vue';
     import ScheduleCalendar from '@/components/schedule/ScheduleCalendar.vue';
     import ScheduleInfoModalForDelete from '@/components/schedule/modal/ScheduleInfoModalForDelete.vue';

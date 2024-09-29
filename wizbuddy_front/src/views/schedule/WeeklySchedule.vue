@@ -1,7 +1,7 @@
 <template>
     <div class="weekly-schedule-container">
       <aside class="left-side">
-        <ScheduleTab />
+        <LeftTab />
       </aside>
       
       <!-- WeeklyScheduleContainer.vue를 호출 -->
@@ -14,7 +14,7 @@
   </template>
   
   <script setup>
-  import ScheduleTab from '@/components/schedule/ScheduleTab.vue';
+  import LeftTab from '@/components/LeftTab.vue';
   import UserProfileMenu from '@/components/UserProfileMenu.vue';
   import WeeklyScheduleContainer from '@/components/schedule/WeeklyScheduleContainer.vue';
   </script>
