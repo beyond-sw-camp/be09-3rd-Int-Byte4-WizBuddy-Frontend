@@ -1,5 +1,3 @@
-
-코드 복사
 <template>
   <div class="side-menu">
     <button class="side-menu-item" @click="openInsertModal">등록</button>
@@ -83,26 +81,24 @@ const toggleDeleteMode = () => {
   
   <style scoped>
   .side-menu {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #f3f7fa;
-    width: 100%;
-    padding: 20px;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background: #f3f7fa;
+}
   
   .side-menu-item {
-    display: block;
-    padding: 15px 20px;
-    margin-bottom: 15px;
-    width: 150px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    font-size: 16px;
-    cursor: pointer;
-    text-align: center;
+  display: block;
+  padding: 10px 10px;
+  font-size: 14px;
+  width: 50%;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  margin-bottom: 20px;
+  cursor: pointer;
   }
   
   .side-menu-item:disabled {

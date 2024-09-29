@@ -1,6 +1,5 @@
-
 <template>
-  <div v-if="post" class="post-container">
+  <div v-if="board" class="post-container">
     <div class="post-inner-container">
     <div class="post-header">
         <router-link to="/manualboard" class="back-button">목록으로</router-link>
@@ -17,66 +16,87 @@
       </div>
       <div class="post-detail">
         <div class="post-title">
-          <h1>{{ post.title }}</h1>
-          <span class="post-date">{{ post.registerdate }}</span>
+          <h1>{{ board.title }}</h1>
+          <span class="post-date">{{ board.registerdate }}</span>
         </div>
         
         <div class="post-content">
-          <p>{{ post.content }}</p>
+          <p>{{ board.content }}</p>
         </div>
 
         <div class="post-actions">
-          <div class="like-counter">
-            <span>❤️ 5</span> <!-- You can make this dynamic -->
+          <div class="like-counter" @click="incrementLike">
+            <span>{{ likeClicked ? '❤️' : '🤍' }} {{ likes }}</span> <!-- You can make this dynamic -->
           </div>
-          <div class="file-actions">
-            <input type="button" value=".pdf" class="file-input" />
-            <input type="button" value="Other Action" class="file-input" />
+          <div class="etc-actions">
+            <button class="edit-button" @click="editPost">수정</button>
+            <button class="delete-button" @click="toggleModal">삭제</button>
+
           </div>
         </div>
       </div>
+
+      <DeleteModal
+            v-if="isDeleteModalOpen"
+            :isOpen="isDeleteModalOpen"
+            @close="closeDeleteModal"
+            @confirmDelete="handleDeleteConfirmation"
+        />
     </div>
   </div>
 
-  <div v-else class="else-text">
-    <p>게시글을 불러오는중...</p>
-  </div>
 </template>
 
 <script setup>
 import { ref, onMounted, computed, watch } from 'vue';
-import { useRoute } from 'vue-router';
-
-// Mock data for posts (you might fetch this from an API instead)
-const posts = [
-  { id: 1, title: '제목1', writer: '사장1', registerdate: '2024.09.20', content: '내용1' },
-  { id: 2, title: '제목2', writer: '사장2', registerdate: '2024.09.21', content: '내용2' },
-  { id: 3, title: '제목3', writer: '사장3', registerdate: '2024.09.22', content: '내용3' },
-  { id: 4, title: '제목4', writer: '사장4', registerdate: '2024.09.23', content: '내용4' },
-  { id: 5, title: '제목5', writer: '사장5', registerdate: '2024.09.24', content: '내용5' },
-];
+import { useRoute, useRouter } from 'vue-router';
+import DeleteModal from '@/components/schedule/modal/DeleteModal.vue'
 
 // Use Vue Router's useRoute to get the ID parameter from the route
-const route = useRoute();
-const post = ref(null);
+const route = useRoute(); 
+const router = useRouter();
+const board = ref(null);
+const likes = ref(0);
+
+// 기존 posts 대신 JSON 데이터를 fetch로 불러옵니다.
+const boards = ref([]); // posts를 빈 배열로 초기화합니다.
+
+onMounted (async () => {
+  try {
+    const response = await fetch('http://localhost:8080/manualboard');
+    if (!response.ok) {
+      throw new Error(`Http error! status: ${response.status}`);
+    } const data = await response.json();
+    if (data.length > 0) {
+      boards.value = data;
+      console.log('서버로부터 받아온 boards: ', boards.value);
+      const currentPost = boards.value.find((board) => board.id === postId.value);
+      if (currentPost) {
+        board.value = currentPost;
+      }
+    }
+  } catch (error) {
+    console.error ('데이터를 가져오는 중 오류가 발생했습니다: ', error);
+  }
+});
+
+// JSON 데이터가 로드된 후 게시글을 불러오도록 watch 추가
+watch(boards, (newBoards) => {
+  if (newBoards && newBoards.length > 0) {
+    const currentPost = newBoards.find((board) => board.id === postId.value);
+    if (currentPost) {
+      board.value = currentPost;
+    } else {
+      console.error('게시글을 찾을 수 없습니다.');
+    }
+  }
+});
+
+const likeClicked = ref(false);
+const isDeleteModalOpen = ref(false);
 
 // 현재 게시글 ID
 const postId = computed(() => parseInt(route.params.id));
-
-// 게시글 데이터 로드 함수
-const loadPost = () => {
-  post.value = posts.find(p => p.id === postId.value);
-};
-
-// 컴포넌트가 처음 로드될 때 게시글 데이터 로드
-onMounted(() => {
-  loadPost();
-});
-
-// 경로 변경 시(postId 변경 시) 게시글 데이터 다시 로드
-watch(postId, (newId) => {
-  loadPost();
-});
 
 // 이전 글 ID (현재 ID가 1보다 크면)
 const previousPostId = computed(() => {
@@ -85,8 +105,29 @@ const previousPostId = computed(() => {
 
 // 다음 글 ID (마지막 글보다 작은 경우)
 const nextPostId = computed(() => {
-  return postId.value < posts.length ? postId.value + 1 : null;
+  return postId.value < boards.length ? postId.value + 1 : null;
 });
+
+// 좋아요 증가 함수
+const incrementLike = () => {
+  if (!likeClicked.value) {
+    likes.value += 1;
+    likeClicked.value = true; // 한 번만 클릭 가능
+  }
+};
+
+const closeDeleteModal = () => {
+        isDeleteModalOpen.value = false;
+    };
+
+const editPost = () => {
+  router.push({ path: `/manualboard/${postId.value}/edit` });
+};
+
+const toggleModal = () => {
+  isDeleteModalOpen.value = !isDeleteModalOpen.value;
+};
+
 </script>
 
 <style scoped>
@@ -205,13 +246,6 @@ const nextPostId = computed(() => {
   align-items: center; /* 세로 정렬 */
 }
 
-/* 
-.else-text {
-  display: flex;
-  justify-content: center;
-  margin-top: auto;
-} */
-
 .else-text {
   display: flex;
   justify-content: center; /* Horizontally center */
@@ -253,9 +287,47 @@ const nextPostId = computed(() => {
   margin-right: 10px;
 }
 
-
 .arrow-text-left, .arrow-text-right {
   text-decoration: none;
 }
 
+.like-counter {
+  font-size: 18px;
+  color: #333;
+  cursor: pointer; /* 클릭 가능하게 커서 변경 */
+}
+
+.etc-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-button, .delete-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0px 2px rgba(0, 0.1, 0, 0.1);
+}
+
+.edit-button {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.edit-button:hover {
+  background-color: #e0e0e0;
+}
+
+.delete-button {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #c0392b;
+}
 </style>

@@ -4,25 +4,35 @@
     <button class="side-tab-item" @click="setActiveTab('navigateToScheduleDelete')" v-if="isScheduleMainPage">삭제</button>
     <button class="side-tab-item" @click="setActiveTab('navigateToRegisterEmployee')" v-if="isScheduleMainPage">직원 등록</button>
     <button class="side-tab-item" @click="setActiveTab('navigateToScheduleMain')" 
-      v-if="isScheduleRegisterPage|isScheduleDeletePage">완료
+      v-if="isScheduleRegisterPage || isScheduleDeletePage">완료
     </button>
+
+    <ScheduleRegister
+      v-if="isRegisterModalOpen"
+      :isOpen="isRegisterModalOpen"
+      @close="closeScheduleRegisterModal"
+      @submit="handleScheduleSubmit"
+    />
+
     <div class="shop-side" v-if="isMainPage">
       <button class="side-tab-item" @click="openShopRegistModal" v-if="isMainPage">등록</button>
       <button class="side-tab-item" @click="toggleEditMode">{{ isEditMode ? '완료' : '수정' }}</button>
       <button class="side-tab-item" @click="toggleDeleteMode">{{ isDeleteMode ? '완료' : '삭제' }}</button>
 
     </div>
+
     <ScheduleRegister v-if="isRegisterModalOpen" :isOpen="isRegisterModalOpen" @close="closeRegisterModal" @submit="handleScheduleSubmit" />
     <Modal :isOpen="isShopRegistModalOpen" @close="closeShopRegistModal">
       <shopRegist @submit="handleShopRegistSubmit" @close="closeShopRegistModal" />
     </Modal>
-  
+
   </div>
 </template>
 
 <script setup>
-import { useRoute, useRouter } from 'vue-router';
 import { ref, watch, watchEffect, onMounted, defineEmits } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+
 import ScheduleRegister from '@/components/schedule/modal/ScheduleRegisterModal.vue';
 import Modal from '@/components/shop/Modal.vue'; 
 import shopRegist from '@/components/shop/modal/shopRegist.vue';
@@ -47,19 +57,21 @@ function toggleDeleteMode() {
 }
 
 const isScheduleMainPage = ref(false);
-const isWeeklySchedulePage = ref(false);
 const isScheduleRegisterPage = ref(false);
 const isScheduleDeletePage = ref(false);
-const isMainPage = ref(false);
 
 const stores = ref([]);
 const isRegisterModalOpen = ref(false);
 const isShopRegistModalOpen = ref(false);
 const activeTab = ref('');
 
+const isMainPage = ref(false);
+
+const isRegisterModalOpen = ref(false);
+
+// 현재 페이지 경로에 따른 상태 업데이트
 watch(() => route.path, (newPath) => {
   isScheduleMainPage.value = newPath === '/schedule';
-  isWeeklySchedulePage.value = newPath ==='/schedule/schedules';
   isScheduleRegisterPage.value = newPath === '/schedule/regist';
   isScheduleDeletePage.value = newPath === '/schedule/delete';
   isMainPage.value = newPath === '/main';
@@ -69,15 +81,16 @@ watch(() => route.path, (newPath) => {
     immediate: true 
   });
 
-
 function openScheduleRegisterModal() {
   isRegisterModalOpen.value = true;
 }
 
+// 모달 닫기
 function closeScheduleRegisterModal() {
   isRegisterModalOpen.value = false;
 }
 
+// 스케줄 등록 처리 후 모달 닫기
 function handleScheduleSubmit(schedule) {
   console.log('등록된 스케줄:', schedule);
   closeScheduleRegisterModal();
@@ -96,8 +109,8 @@ function handleShopRegistSubmit(storeData) {
   closeShopRegistModal();
 }
 
+// 탭 변경 처리
 const setActiveTab = (tab) => {
-  activeTab.value = tab;
   switch (tab) {
     case 'navigateToScheduleDelete':
       router.push('/schedule/delete');
@@ -145,7 +158,6 @@ watchEffect(() => {
 <style scoped>
 .sidemenu {
   display: flex;
-  height: 476.6px;
   flex-direction: column;
   align-items: center;
   justify-content:end;
@@ -163,14 +175,13 @@ watchEffect(() => {
 }
 
 .side-tab-item {
-  display: block;
   padding: 10px 10px;
   font-size: 14px;
   width: 50%;
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 30px;
-  margin-bottom: 20px;
+  margin-top: 20px;
   cursor: pointer;
 }
 

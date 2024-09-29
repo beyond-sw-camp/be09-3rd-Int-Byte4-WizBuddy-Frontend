@@ -6,6 +6,7 @@ import UserRoutes from './user';
 import ShopRoutes from './shop';
 import ManualBoardRoutes from './manualBoard';
 import NoticeBoardRoutes from './noticeBoard';
+import SubsBoardRoutes from './subsBoard';
 import ScheduleRoutes from './schedule';
 import ChecklistRoutes from './checklist';
 import TaskRoutes from './task';
@@ -24,7 +25,8 @@ const routes = [
   ...ChecklistRoutes,
   ...TaskRoutes,
   ...UserRoutes,
-  ...ShopRoutes
+  ...ShopRoutes,
+  ...SubsBoardRoutes
 ];
 
 const router = createRouter({
