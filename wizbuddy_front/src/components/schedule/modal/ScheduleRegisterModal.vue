@@ -2,6 +2,7 @@
   <div v-if="isOpen" class="modal-overlay" @click.self="closeModal">
     <div class="modal-container">
       <h3 class="modal-title">{{ isRegistered ? '등록 완료' : '스케줄 등록' }}</h3>
+      
       <template v-if="!isRegistered">
         <form @submit.prevent="submitForm" class="modal-form">
           <div class="form-group">
@@ -24,6 +25,7 @@
           </div>
         </form>
       </template>
+
       <template v-else>
         <p class="success-message">스케줄이 등록되었습니다.</p>
         <div class="modal-actions">
@@ -35,7 +37,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, watch } from 'vue';
 
 const props = defineProps({
   isOpen: Boolean,
@@ -47,6 +49,13 @@ const props = defineProps({
 
 const emit = defineEmits(["close", "submit"]);
 
+const schedule = ref({
+  date: ""
+});
+const isValid = ref(true);
+const isRegistered = ref(false);
+const minDate = ref(formatDate(new Date()));
+
 function formatDate(date) {
   if (!date) return '';
   const d = new Date(date);
@@ -55,14 +64,6 @@ function formatDate(date) {
   const year = d.getFullYear();
   return `${year}-${month}-${day}`;
 }
-
-const schedule = ref({
-  date: ""
-});
-
-const isValid = ref(true);
-const minDate = ref(formatDate(new Date()));
-const isRegistered = ref(false);
 
 function closeModal() {
   if (isRegistered.value) {
@@ -74,8 +75,8 @@ function closeModal() {
 
 function submitForm() {
   if (isValid.value) {
-    isRegistered.value = true;  
-    
+    isRegistered.value = true;
+
     setTimeout(() => {
       emit("submit", schedule.value);
       closeModal();

@@ -1,8 +1,7 @@
 <template>
   <div class="board-info">
     <div class="board-id">{{ board.id }}</div>
-    <!-- router-link 경로를 boardType과 연동 -->
-    <router-link :to="`/${boardType}/${board.id}`" class="board-title">{{ board.title }}  <CommentCount v-if="isSubstituteBoard" :count="commentCount" /></router-link>
+    <div class="board-title" @click="navigateToDetail">{{ board.title }} <CommentCount v-if="isSubstituteBoard" :count="commentCount" /></div>
     <div class="board-writer">{{ board.writer }}</div>
     <div class="board-registerdate">{{ board.registerdate }}</div>
   </div>
@@ -12,22 +11,27 @@
 import { computed } from 'vue';
 import CommentCount from './CommentCount.vue'; // 댓글 카운트 컴포넌트 가져오기
 
-const props = defineProps({
-  board: {
-    type: Object,
-    required: true
-  },
-  boardType: {
-    type: String,
-    required: true
-  },
-  comments: {
-    type: Array,
-    default: () => []
-  }
-});
+  import { useRouter, useRoute } from 'vue-router';
 
-// 댓글 수 계산
+  const props = defineProps({
+    board: {
+      type: Object,
+      required: true
+    }
+  });
+
+  const router = useRouter();
+  const route = useRoute();
+
+  const navigateToDetail = () => {
+    if (route.path.includes('/manualboard')) {
+      router.push(`/manualboard/${props.board.id}`);
+    } else if (route.path.includes('/noticeboard')) {
+      router.push(`/noticeboard/${props.board.id}`);
+    }
+  };
+  
+  // 댓글 수 계산
 const commentCount = computed(() => {
   return props.comments.length;
 });

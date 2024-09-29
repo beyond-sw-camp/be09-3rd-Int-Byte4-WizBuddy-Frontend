@@ -1,18 +1,23 @@
 import NoticeBoard from '@/views/board/NoticeBoard.vue';
-// import NoticeDetail from '@/components/board/NoticePostDetail.vue';
+import NoticePostDetail from '@/components/board/NoticePostDetail.vue';
+import PostCreate from '@/components/board/PostCreate.vue';
 
 const NoticeBoardRoutes = [
     {
-      path: "/:boardType",
-      component: NoticeBoard,
-      props: true // boardType을 제대로 전달하는지 확인
+        path: "/noticeboard",
+        component: NoticeBoard
     },
-    // {
-    //   path: "/noticeboard/:id",
-    //   component: NoticeDetail,
-    //   props: route => ({ boardType: route.params.boardType, id: route.params.id }) // props로 boardType과 id를 전달
-    // }
-    
-  ];
+    {
+        path: '/noticeboard/:id',
+        component: NoticePostDetail,
+        props: true
+    },
+    {
+        path: "/noticeboard/register",
+        component: PostCreate,
+        props: true
+    }
+];
+
 
 export default NoticeBoardRoutes;

@@ -3,20 +3,20 @@
       <div class="modal-container">
         <div class="modal-header">
           <h3 class="modal-title">{{ currentMonth }} {{ selectedDate }}일</h3>
-          <button @click="closeModal" class="close-btn">X</button>
-        </div>
-        <div class="modal-body">
-          <div v-for="(schedule, index) in flatSchedules" :key="index" class="schedule-item">
-            <p>{{ getTimeSlot(schedule.type) }}: {{ schedule.title }}</p>
-            <button class="edit-btn">수정</button>
-          </div>
+          <ul>
+            <li v-for="schedule in schedules" :key="schedule.name">
+              {{ schedule.time }}: {{ schedule.name }}
+              <button class="edit-btn" @click="editSchedule(schedule)">수정</button>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
-  </template>
-
+</template>
+  
 <script setup>
-import { computed } from 'vue';
+  import { useRouter } from 'vue-router';
+  import { defineEmits } from 'vue';
 
   const props = defineProps({
     isOpen: Boolean,
@@ -24,94 +24,72 @@ import { computed } from 'vue';
     schedules: Array,
     currentMonth: String
   });
-
+  
   const emit = defineEmits(['close']);
-
+  const router = useRouter();
+  
   function closeModal() {
     emit('close');
   }
 
-  // Flatten the schedules to separate each name into its own entry
-  const flatSchedules = computed(() => {
-    return props.schedules.map(schedule => ({
-      title: schedule.title,
-      time: schedule.time,
-      type: schedule.type
-    }));
-  });
-
-  // Function to get time slot based on schedule type
-  function getTimeSlot(type) {
-    switch (type) {
-      case 'fun':
-        return '1T 09:00 ~ 14:00';
-      case 'important':
-        return '2T 14:00 ~ 17:00';
-      case 'personal':
-        return '3T 17:00 ~ 21:00';
-      default:
-        return '';
-    }
+  function editSchedule(schedule) {
+    router.push({
+      name: 'ScheduleEdit',
+      query: {
+        id: schedule.id,
+        date: `${props.currentMonth} ${props.selectedDate}일`,
+        worker: schedule.name,
+        timeSlot: schedule.time
+      }
+    });
   }
-  </script>
+</script>
 
-  <style scoped>
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
+<style scoped>
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
 
-  .modal-container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    width: 450px;
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
-  }
+.modal-container {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  width: 400px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+}
 
-  .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-  }
+ul {
+    margin-top: 20px;
+    list-style: none;
+    padding: 0;
+}
 
-  .modal-title {
-    font-size: 20px;
-    font-weight: bold;
-  }
+li {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  .close-btn {
-    background-color: transparent;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-  }
-
-  .schedule-item {
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .edit-btn {
+.edit-btn {
     background-color: #4285f4;
     color: white;
     padding: 5px 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-  }
+}
 
-  .edit-btn:hover {
+.edit-btn:hover {
     background-color: #357ae8;
-  }
-  </style>
+}
+</style>

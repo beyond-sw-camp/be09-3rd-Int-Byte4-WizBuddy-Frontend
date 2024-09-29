@@ -1,10 +1,11 @@
 <template>
     <nav class="tab-container">
-        <button class="tab-item" :class="{ active: activeTab === 'scheduleinfo' }" @click="setActiveTab('scheduleinfo')">근무일정</button>
-        <button class="tab-item" :class="{ active: activeTab === 'weeklyschedule' }" @click="setActiveTab('weeklyschedule')">일주일 스케줄표</button>
+        <button class="tab-item" :class="{ active: activeTab === 'scheduleinfo' }" @click="setActiveTab('scheduleinfo')" v-if="isScheduleIncludePage">근무일정</button>
+        <button class="tab-item" :class="{ active: activeTab === 'weeklyschedule' }" @click="setActiveTab('weeklyschedule')" v-if="isScheduleIncludePage">일주일 스케줄표</button>
         <!-- <button class="tab-item" :class="{ active: activeTab === 'myschedule' }" @click="setActiveTab('myschedule')">나의 스케줄표</button>
         <button class="tab-item" :class="{ active: activeTab === 'worktime' }" @click="setActiveTab('worktime')">출퇴근 시간 확인</button> -->
     </nav>
+    
 </template>
 
 <script setup>
@@ -13,12 +14,14 @@
 
     const route = useRoute();
     const router = useRouter();
+    const isScheduleIncludePage = ref(false);
     const isscheduleInfoPage = ref(false);
     const isWeeklyschedulePage = ref(false);
     // const isMyschedulePage = ref(false);
     // const isWorktimePage = ref(false);
 
     watch(() => route.path, (newPath) => {
+        isScheduleIncludePage.value = newPath.includes('/schedule');
         isscheduleInfoPage.value = newPath === '/schedule';
         isWeeklyschedulePage.value = newPath === '/schedule/schedules';
         // isMyschedulePage.value = newPath === '/schedule/myschedule';
@@ -79,7 +82,6 @@
     flex-direction: column;
     background-color: #fff;
     border-radius: 20px;
-    box-shadow: 0px 8px 33px 0px rgba(0, 0, 0, 0.1);
     padding: 20px;
     height: auto;
     min-width: 180px;

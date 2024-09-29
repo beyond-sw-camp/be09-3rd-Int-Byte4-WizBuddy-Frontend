@@ -6,7 +6,8 @@
       "password": "admin",
       "name": "김용승",
       "phone": null,
-      "health": null
+      "health": null,
+      "id": "53c6"
     },
     {
       "id": "6da1",
@@ -25,6 +26,234 @@
       "phone": "fasfasf",
       "health": "2024-10-01",
       "role": "employee"
+    },
+    {
+      "id": "72f2",
+      "email": "wpdmsdkdlel",
+      "password": "123123",
+      "name": "유제은",
+      "phone": "01045901841",
+      "health": "2024-09-19",
+      "role": "employee"
+    },
+    {
+      "id": "f4a5",
+      "email": "test@gmalmglka.com",
+      "password": "wwwww",
+      "name": "테스투",
+      "phone": "123123",
+      "health": "2024-10-10",
+      "role": "employee"
+    },
+    {
+      "id": "14ae",
+      "email": "wpdmswpdms",
+      "password": "wwww",
+      "name": "유제은",
+      "phone": "01045901841",
+      "health": "2024-09-18",
+      "role": "employee"
+    },
+    {
+      "id": "a3aa",
+      "email": "qwe@naver.com",
+      "password": "qwe",
+      "name": "유싸장",
+      "phone": "123123",
+      "health": "2024-09-26",
+      "role": "employer"
+    },
+    {
+      "id": "5010",
+      "email": "test1",
+      "password": "test",
+      "name": "조제훈",
+      "phone": "01010101001",
+      "health": "2024-10-10",
+      "role": "employee"
+    },
+    {
+      "id": "130a",
+      "email": "test2",
+      "password": "123",
+      "name": "이나현",
+      "phone": "123123123",
+      "health": "2024-09-25",
+      "role": "employee"
+    }
+  ],
+  "schedules": [
+    {
+      "id": "1001",
+      "day": 15,
+      "month": 9,
+      "name": "이서현",
+      "type": "fun",
+      "time": "1T (09:00 ~ 14:00)"
+    },
+    {
+      "id": "1002",
+      "day": 15,
+      "month": 9,
+      "name": "백경석",
+      "type": "fun",
+      "time": "1T (09:00 ~ 14:00)"
+    },
+    {
+      "id": "1003",
+      "day": 15,
+      "month": 9,
+      "name": "조제훈",
+      "type": "fun",
+      "time": "1T (09:00 ~ 14:00)"
+    },
+    {
+      "id": "1004",
+      "day": 15,
+      "month": 9,
+      "name": "이서현",
+      "type": "important",
+      "time": "2T (14:00 ~ 17:00)"
+    },
+    {
+      "id": "1005",
+      "day": 15,
+      "month": 9,
+      "name": "이나현",
+      "type": "personal",
+      "time": "3T (17:00 ~ 21:00)"
+    },
+    {
+      "id": "1006",
+      "day": 1,
+      "month": 10,
+      "name": "유제은",
+      "type": "fun",
+      "time": "1T (09:00 ~ 14:00)"
+    },
+    {
+      "id": "1007",
+      "day": 15,
+      "month": 10,
+      "name": "백경석",
+      "type": "important",
+      "time": "2T (14:00 ~ 17:00)"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "2",
+      "title": "두 번째 업무",
+      "content": "매장 정리",
+      "isFixed": false
+    },
+    {
+      "id": "4",
+      "title": "네 번째 업무",
+      "content": "재고 확인",
+      "isFixed": false
+    },
+    {
+      "id": "5",
+      "title": "task의 이름이 이렇게 길면 너가 뭘 할수 있지?",
+      "content": "재고 확인",
+      "isFixed": true
+    },
+    {
+      "id": "6",
+      "title": "짧음",
+      "content": "재고 확인",
+      "isFixed": true
+    },
+    {
+      "id": "7",
+      "title": "fixed가 아닌데 task의 이름이 이렇게 길면 너가 뭘할수있는데",
+      "content": "재고 확인",
+      "isFixed": false
+    }
+  ],
+  "checklists": [
+    {
+      "id": "2",
+      "title": "9월 17일 2T 필독",
+      "tasks": [
+        {
+          "id": "5",
+          "title": "task의 이름이 이렇게 길면 너가 뭘 할수 있지?",
+          "content": "재고 확인",
+          "isFixed": true
+        },
+        {
+          "id": "6",
+          "title": "짧음",
+          "content": "재고 확인",
+          "isFixed": false
+        },
+        {
+          "id": "7",
+          "title": "fixed가 아닌데 task의 이름이 이렇게 길면 너가 뭘할수있는데",
+          "content": "재고 확인",
+          "isFixed": false
+        }
+      ]
+    },
+    {
+      "id": "1",
+      "title": "9월 16일 1T 필독",
+      "tasks": [
+        {
+          "id": "1",
+          "title": "첫 번째 업무",
+          "content": "화장실 청소",
+          "isFixed": true
+        },
+        {
+          "id": "2",
+          "title": "두 번째 업무",
+          "content": "매장 정리",
+          "isFixed": false
+        }
+      ]
+    }
+  ],
+  "checklistsPast": [
+    {
+      "id": "d07c",
+      "title": "5",
+      "tasks": [
+        {
+          "id": "1",
+          "title": "첫 번째 업무",
+          "content": "화장실 청소",
+          "isFixed": true
+        },
+        {
+          "id": "5",
+          "title": "task의 이름이 이렇게 길면 너가 뭘 할수 있지?",
+          "content": "재고 확인",
+          "isFixed": true
+        }
+      ],
+      "deletedAt": "2024-09-29T07:47:19.652Z"
+    },
+    {
+      "id": "1",
+      "title": "9월 16일 1T 필독",
+      "tasks": [
+        {
+          "id": "1",
+          "title": "첫 번째 업무",
+          "content": "화장실 청소",
+          "isFixed": true
+        },
+        {
+          "id": "2",
+          "title": "두 번째 업무",
+          "content": "매장 정리",
+          "isFixed": false
+        }
+      ],
+      "deletedAt": "2024-09-29T08:23:35.451Z"
     }
   ]
 }

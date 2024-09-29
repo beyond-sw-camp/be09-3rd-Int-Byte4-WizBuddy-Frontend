@@ -1,6 +1,5 @@
-import ChecklistCreatePage from "@/views/checklist/ChecklistCreatePage.vue";
-import ChecklistDetailPage from "@/views/checklist/ChecklistDetailPage.vue";
 import ChecklistListPage from "@/views/checklist/ChecklistListPage.vue";
+import ChecklistPastPage from "@/views/checklist/ChecklistPastPage.vue";
 
 const ChecklistRoutes = [
   {
@@ -8,13 +7,9 @@ const ChecklistRoutes = [
     component: ChecklistListPage,
   },
   {
-    path: "/checklist/:id",
-    component: ChecklistDetailPage,
-  },
-  {
-    path: "/checklist/create",
-    component: ChecklistCreatePage,
-  },
+    path: "/checklist/past",
+    component: ChecklistPastPage,
+  }
 ];
 
 export default ChecklistRoutes;

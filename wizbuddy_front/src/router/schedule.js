@@ -1,34 +1,37 @@
-import ScheduleMainPage from "@/components/schedule/Main.vue";
-import FindAllSchedules from "@/components/schedule/FindAllSchedules.vue";
-import ScheduleRegisterPage from "@/components/schedule/RegisterPage.vue";
-import ScheduleDeletePage from "@/components/schedule/DeletePage.vue";
+import ScheduleMainPage from "@/views/schedule/Main.vue";
+import WeeklySchedule from "@/views/schedule/WeeklySchedule.vue";
+import ScheduleRegisterPage from "@/views/schedule/RegisterPage.vue";
+import ScheduleDeletePage from "@/views/schedule/DeletePage.vue";
+import ScheduleEditPage from '@/views/schedule/EditPage.vue';
 
 const ScheduleRoutes = [
-  {
-    path: "/schedule",
-    component: ScheduleMainPage,
-    // meta: { requiresAuth: true }
-  },
-  // children: [
-  //     {
-  //         path: 'regist',
-  //         component: RegisterWeeklySchedule
-  //     },
-  // ]
-  {
-    path: "/schedule/regist",
-    component: ScheduleRegisterPage,
-  },
-  {
-    path: "/schedule/delete",
-    component: ScheduleDeletePage,
-  },
-  {
-    path: "/schedule/schedules",
-    component: FindAllSchedules,
-  },
-  // { path: "/schedule/edit", component: EditPage },
-  // { path: "/schedule/delete", component: DeletePage },
+    {
+        path: "/schedule",
+        component: ScheduleMainPage
+        // meta: { requiresAuth: true }
+    },
+    {
+        path: "/schedule/regist",
+        component: ScheduleRegisterPage
+    },
+    {
+        path: "/schedule/delete",
+        component: ScheduleDeletePage
+    },
+    {
+        path: "/schedule/schedules",
+        component: WeeklySchedule
+    },
+    { 
+        path: "/schedule/edit", 
+        name: 'ScheduleEdit',
+        component: ScheduleEditPage,
+        props: (route) => ({
+            date: route.query.date,
+            title: route.query.title,
+            time: route.query.time
+        })
+    }
 ];
 
 export default ScheduleRoutes;
