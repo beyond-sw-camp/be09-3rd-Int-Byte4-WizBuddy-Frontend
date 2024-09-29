@@ -106,27 +106,15 @@
       "title": "짧음",
       "content": "재고 확인",
       "isFixed": true
+    },
+    {
+      "id": "7",
+      "title": "fixed가 아닌데 task의 이름이 이렇게 길면 너가 뭘할수있는데",
+      "content": "재고 확인",
+      "isFixed": false
     }
   ],
   "checklists": [
-    {
-      "id": "1",
-      "title": "9월 16일 1T 필독",
-      "tasks": [
-        {
-          "id": "1",
-          "title": "첫 번째 업무",
-          "content": "화장실 청소",
-          "isFixed": true
-        },
-        {
-          "id": "2",
-          "title": "두 번째 업무",
-          "content": "매장 정리",
-          "isFixed": false
-        }
-      ]
-    },
     {
       "id": "2",
       "title": "9월 17일 2T 필독",
@@ -152,6 +140,26 @@
       ]
     },
     {
+      "id": "1",
+      "title": "9월 16일 1T 필독",
+      "tasks": [
+        {
+          "id": "1",
+          "title": "첫 번째 업무",
+          "content": "화장실 청소",
+          "isFixed": true
+        },
+        {
+          "id": "2",
+          "title": "두 번째 업무",
+          "content": "매장 정리",
+          "isFixed": false
+        }
+      ]
+    }
+  ],
+  "checklistsPast": [
+    {
       "id": "d07c",
       "title": "5",
       "tasks": [
@@ -167,7 +175,8 @@
           "content": "재고 확인",
           "isFixed": true
         }
-      ]
+      ],
+      "deletedAt": "2024-09-29T07:47:19.652Z"
     },
     {
       "id": "1",
@@ -185,7 +194,8 @@
           "content": "매장 정리",
           "isFixed": false
         }
-      ]
+      ],
+      "deletedAt": "2024-09-29T08:23:35.451Z"
     }
   ]
 }
