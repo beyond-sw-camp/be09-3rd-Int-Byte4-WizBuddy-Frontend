@@ -68,15 +68,17 @@
         return;
       }
       try {
-        const response = await fetch('http://localhost:8080/users?username=' + userName.value + '&password=' + password.value);
+        const response = await fetch(`http://localhost:8080/users?email=${userName.value}&password=${password.value}`);
+
         if (!response.ok) {
           throw new Error('서버 응답이 잘못되었습니다.');
         }
         const data = await response.json();
-        
+        console.log(data);
         if (data.length > 0) {
           const user = data[0];
           localStorage.setItem('user', JSON.stringify(user));
+          
           userName.value = user.name;
           userEmail.value = user.email;
           userRole.value = user.role;

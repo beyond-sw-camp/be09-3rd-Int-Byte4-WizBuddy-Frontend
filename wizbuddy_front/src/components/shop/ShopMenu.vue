@@ -1,139 +1,292 @@
 <template>
-      <div class="store-list">
+  <div class="store-list-container">
+    <div class="store-list">
       <div v-for="store in stores" :key="store.id" class="store-card">
         <div class="store-header">
           <img src="@/assets/icons/shop/store-icon.svg" alt="Store Icon" class="store-icon">
-          <p class="store-name">{{ store.name }}</p>
+          <p class="store-name">{{ store.shop_name }}</p>
         </div>
         <div class="store-info">
-            <button class="store-option" v-for="option in store.options" :key="option"> <!-- @click="navigateTo(option) 붙여야함 -->
-                {{ option }}
-            </button>
+          <button class="store-option" v-for="option in storeOptions" :key="option" @click="navigateTo(option)">
+            {{ option }}
+          </button>
         </div>
-        <button v-if="userType ==='employer'" class="invite-button">초대</button>
+        <button v-if="userType === 'employer'" @click="openInviteModal(store)" class="invite-button">초대</button>
+        <button v-if="isEditMode" @click="() => { selectStore(store); openEditModal(store); }" class="select-button">선택</button>
+        <button v-if="isDeleteMode" @click="deleteStore(store)" class="delete-button">삭제</button>
       </div>
     </div>
-  </template>
-    
-  <script setup>
-    import { defineProps } from 'vue';
-    import { useRouter } from 'vue-router';
+  </div>
+  <Modal :isOpen="isModalOpen" @close="closeModal">
+    <shopEdit :store="selectedStore" :fetchStores="fetchStores" @submit="handleEditSubmit" @close="closeModal" />
+  </Modal>
+  <InviteModal 
+    v-if="isInviteModalOpen" 
+    :store="selectedStore" 
+    @close="closeInviteModal" 
+    @invite="inviteEmployee" 
+  />  
+</template>
 
-    const props = defineProps({
-      userType: {
-        type: String,
-      }
+<script setup>
+import { ref, defineProps, defineEmits } from 'vue';
+import { useRouter } from 'vue-router';
+import Modal from '@/components/shop/Modal.vue'; 
+import shopEdit from '@/components/shop/modal/shopEdit.vue';
+import InviteModal from '@/components/shop/modal/InviteModal.vue';
+
+const emit = defineEmits(['shop-registered', 'store-selected', 'store-deleted']);
+
+const props = defineProps({
+  userType: String,
+  stores: Array,
+  isEditMode: Boolean,
+  isDeleteMode: Boolean,
+  fetchStores: Function
 });
 
-    const stores = [
-    // {
-    //   id: 1,
-    //   name: '1번 매장',
-    //   options: ['근무일정 조회', '체크리스트 조회', '업무 조회', '게시판 조회'],
-    // },
-    // {
-    //   id: 2,
-    //   name: '2번 매장',
-    //   options: ['근무일정 조회', '체크리스트 조회', '업무 조회', '게시판 조회'],
-    // },
-  ];
+const isModalOpen = ref(false);
+const isInviteModalOpen = ref(false);
+const selectedStore = ref(null);
 
-  const router = useRouter();
+const router = useRouter();
 
-  // 매장 별 근무일정, 체크리스트 ... 조회
-//   const navigateTo = (option) => {  
-//     switch (option) {
-//         case '근무일정 조회':
-//             router.push('/schedule');
-//             break;
-//         case '체크리스트 조회':
-//             router.push('/checklist');
-//             break;
-//         case '업무 조회':
-//             router.push('/task');
-//             break;
-//         case '게시판 조회':
-//             router.push('/board');
+const storeOptions = ['근무일정 조회', '체크리스트 조회', '업무 조회', '게시판 조회'];
 
-//     }
-//   }
+function openEditModal(store) {
+  selectedStore.value = { ...store }; 
+  isModalOpen.value = true; 
+}
 
-  </script>
+function closeModal() {
+  isModalOpen.value = false;
+}
+
+function openInviteModal(store) {
+  selectedStore.value = store;
+  isInviteModalOpen.value = true;
+}
+
+function closeInviteModal() {
+  isInviteModalOpen.value = false;
+  selectedStore.value = null;
+}
+
+function handleEditSubmit(newShop) {
+  emit('shop-registered', newShop);
+  props.fetchStores();
+  closeModal();
+}
+
+function selectStore(store) {
+  emit('store-selected', store);
+}
+
+async function deleteStore(store) {
+  if (confirm('정말 삭제하시겠습니까?')) {
+    try {
+      const shopResponse = await fetch(`http://localhost:8080/shop/${store.id}`);
+      const shopData = await shopResponse.json();
+
+      if (shopData.employees && shopData.employees.length > 0) {
+        const employeeUpdates = shopData.employees.map(async (employeeId) => {
+          const employeeResponse = await fetch(`http://localhost:8080/users/${employeeId}`);
+          const employeeData = await employeeResponse.json();
+// 매장지우면 user에있는 매장id도 지워지게 -> 안그러면 매장 다시 만들때 오류남
+          employeeData.employedAt = (employeeData.employedAt || []).filter(id => id !== store.id);
+
+          return fetch(`http://localhost:8080/users/${employeeId}`, {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ employedAt: employeeData.employedAt }),
+          });
+        });
+
+        await Promise.all(employeeUpdates);
+      }
+
+      const deleteResponse = await fetch(`http://localhost:8080/shop/${store.id}`, {
+        method: 'DELETE'
+      });
+
+      if (deleteResponse.ok) {
+        alert('매장이 삭제되었습니다.');
+        props.fetchStores();
+        emit('store-deleted', store);
+      } else {
+        throw new Error('매장 삭제에 실패했습니다.');
+      }
+    } catch (error) {
+      console.error('삭제 중 오류 발생:', error);
+      alert(error.message || '삭제 중 오류가 발생했습니다.');
+    }
+  }
+}
+
+async function inviteEmployee(email) {
+  try {
+    const userResponse = await fetch(`http://localhost:8080/users?email=${email}`);
+    const users = await userResponse.json();
     
-  <style scoped>
-  .store-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-top: 20px;
+    if (users.length === 0) {
+      alert('해당 이메일의 사용자를 찾을 수 없습니다.');
+      return;
+    }
+    
+    const user = users[0];
+    
+    user.invitations = user.invitations || [];
+    user.invitations.push({
+      shopId: selectedStore.value.id,
+      shopName: selectedStore.value.shop_name
+    });
+    
+    await fetch(`http://localhost:8080/users/${user.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ invitations: user.invitations })
+    });
+    
+    selectedStore.value.invitations = selectedStore.value.invitations || [];
+    selectedStore.value.invitations.push({
+      userId: user.id,
+      status: 'pending'
+    });
+    
+    await fetch(`http://localhost:8080/shop/${selectedStore.value.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ invitations: selectedStore.value.invitations })
+    });
+
+    alert('초대가 전송되었습니다.');
+    closeInviteModal();
+  } catch (error) {
+    console.error('Error:', error);
+    alert('초대 전송 중 오류가 발생했습니다.');
   }
-  
-  .store-card {
-      position: relative; /* 자식 요소인 초대 버튼을 기준으로 상대 위치 */
-      padding: 30px 150px;
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-      margin-top: 40px;
-  } 
-  
-  .store-header {
-    position: absolute;
-    top: -20px;
-    left: 20px;
-    display: flex;
-    align-items: center;
-    background-color: #FEEB7A;
-    padding: 5px 50px;
-    border-radius: 20px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+const navigateTo = (option) => {
+  switch (option) {
+    case '근무일정 조회':
+      router.push('/schedule');
+      break;
+    case '체크리스트 조회':
+      router.push('/checklist');
+      break;
+    case '업무 조회':
+      router.push('/task');
+      break;
+    case '게시판 조회':
+      router.push('/noticeboard');
+      break;
   }
-  
-  .store-icon {
-    margin-left: 10px;
-    width: 20px;
-    height: 20px; 
-  }
-  
-  .store-name {
-    font-size: 16px;
-    font-weight: bold;
-  }
-  
-  .store-info {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-  }
-  
-  .store-option {
-    font-size: 14px;
-    border: none;
-    margin: 0 20px;
-    background-color: transparent;
-    color: #000;
-    font-weight: 500;
-    cursor: pointer;
-    text-align: center;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  }
-  
-  .invite-button {
-      position: absolute;
-      right: 10px;
-      bottom: -10px;
-      background-color: #45539D;
-      color: white;
-      border-radius: 20px;
-      border: none;
-      padding: 5px 10px;
-      cursor: pointer;
-      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  }
-  
-  .invite-button:hover {
-    background-color: #34488C;
-  }
-  
-  
-  </style>
+};
+</script>
+
+<style scoped>
+.store-list-container {
+  max-height: calc(100vh - 121.6px); 
+  min-height: calc(100vh - 121.6px);
+  overflow-y: auto;
+}
+.store-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.store-card {
+  position: relative;
+  padding: 30px 150px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 40px;
+}
+
+.store-header {
+  position: absolute;
+  top: -20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  background-color: #FEEB7A;
+  padding: 5px 50px;
+  border-radius: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.store-icon {
+  margin-left: 10px;
+  width: 20px;
+  height: 20px; 
+}
+
+.store-name {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.store-info {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.store-option {
+  font-size: 14px;
+  border: none;
+  margin: 0 20px;
+  background-color: transparent;
+  color: #000;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: center;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.invite-button {
+  position: absolute;
+  right: 10px;
+  bottom: -10px;
+  background-color: #45539D;
+  color: white;
+  border-radius: 20px;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.invite-button:hover {
+  background-color: #34488C;
+}
+
+.select-button, .delete-button {
+  position: absolute;
+  right: 10px; 
+  top: -10px;
+  background-color: #cdd0dcf3;
+  color: white;
+  border-radius: 20px;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  z-index: 10;
+}
+
+.select-button:hover, .delete-button:hover {
+  background-color: #cdd0dc;
+}
+</style>
