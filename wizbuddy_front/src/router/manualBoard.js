@@ -4,7 +4,7 @@ import PostCreate from '@/components/board/PostCreate.vue';
 
 const ManualBoardRoutes = [
     {
-      path: "/:boardType",
+      path: "/manualboard",
       component: ManualBoard,
       props: true // boardType을 제대로 전달하는지 확인
     },

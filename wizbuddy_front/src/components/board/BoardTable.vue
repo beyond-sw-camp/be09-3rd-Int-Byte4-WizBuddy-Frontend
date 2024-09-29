@@ -6,17 +6,13 @@
       <div class="board-header-writer">작성자</div>
       <div class="board-header-registerdate">작성날짜</div>
     </div>
-    <BoardItem v-for="board in boards.slice().reverse()" :key="board.id" :board="board" :boardType="boardType" :comments="getCommentsForBoard(board.id)"  />
+    <BoardItem v-for="board in boards.slice().reverse()" :key="board.id" :board="board" :comments="getCommentsForBoard(board.id)"  />
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import BoardItem from './BoardItem.vue';
-
-import { useRoute } from 'vue-router';
-const route = useRoute();
-const boardType = ref(route.params.boardType);
 
 const boards = ref([
   { id: 1, title: '제목1', writer: '사장1', registerdate: '2024.09.20' },

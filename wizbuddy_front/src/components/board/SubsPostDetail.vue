@@ -2,13 +2,13 @@
   <div v-if="post" class="post-container">
     <div class="post-inner-container">
       <div class="post-header">
-      <router-link to="/subsBoard" class="back-button"><img class="arrow2" src="@/assets/icons/left-arrow.svg">목록으로</router-link>
+      <router-link to="/subsboard" class="back-button"><img class="arrow2" src="@/assets/icons/left-arrow.svg">목록으로</router-link>
       <div class="arrow-buttons">
-        <router-link class="arrow-left" v-if="previousPostId" :to="`/subsBoard/${previousPostId}`">
+        <router-link class="arrow-left" v-if="previousPostId" :to="`/subsboard/${previousPostId}`">
           <img class="arrow" src="@/assets/icons/left-arrow.svg">
           <div class="arrow-text-left">이전 글</div>
         </router-link>
-        <router-link class="arrow-right" v-if="nextPostId" :to="`/subsBoard/${nextPostId}`">
+        <router-link class="arrow-right" v-if="nextPostId" :to="`/subsboard/${nextPostId}`">
           <div class="arrow-text-right">다음 글</div>
           <img class="arrow" src="@/assets/icons/right-arrow.svg">
         </router-link>
