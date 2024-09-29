@@ -9,7 +9,7 @@
           <input type="text" class="search-input" placeholder="검색">
           <button class="search-button">검색</button>
         </div>
-        <button class="write-button">글쓰기</button>
+        <button class="write-button" @click="goToRegister">글쓰기</button>
       </div>
     </div>
   </div>
@@ -21,6 +21,11 @@
 
     const currentRoute = useRoute();
     const router = useRouter();
+
+    const goToRegister = () => {
+      // 현재 게시판 유형에 따라 동적으로 경로 생성
+      router.push(`/registration?boardType=${currentRoute.params.boardType}`);
+    };
 </script>
   
 <style scoped>

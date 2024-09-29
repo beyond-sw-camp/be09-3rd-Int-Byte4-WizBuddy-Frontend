@@ -1,22 +1,66 @@
 <template>
   <div class="board-info">
     <div class="board-id">{{ board.id }}</div>
-    <router-link :to="`/manualboard/${board.id}`" class="board-title">{{ board.title }}</router-link>
+    <!-- router-link 경로를 boardType과 연동 -->
+    <router-link :to="`/${boardType}/${board.id}`" class="board-title">{{ board.title }}  <CommentCount v-if="isSubstituteBoard" :count="commentCount" /></router-link>
+   
     <div class="board-writer">{{ board.writer }}</div>
     <div class="board-registerdate">{{ board.registerdate }}</div>
   </div>
 </template>
 
 <script setup>
-  const props = defineProps({
-    board: {
-      type: Object,
-      required: true
-    }
-  });
+import { computed } from 'vue';
+import CommentCount from './CommentCount.vue'; // 댓글 카운트 컴포넌트 가져오기
+
+const props = defineProps({
+  board: {
+    type: Object,
+    required: true
+  },
+  boardType: {
+    type: String,
+    required: true
+  },
+  comments: {
+    type: Array,
+    default: () => []
+  }
+});
+
+// 댓글 수 계산
+const commentCount = computed(() => {
+  return props.comments.length;
+});
+const isSubstituteBoard = computed(() => {
+  return props.boardType === "subsboard";
+});
 </script>
 
 <style scoped>
+.board-item {
+  display: grid;
+  grid-template-columns: 1fr 4fr 2fr 2fr;
+  padding: 12px 16px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+.board-item-title {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.title-link {
+  color: #551A8B;
+  text-decoration: none;
+  margin-right: 8px;
+}
+
+.title-link:hover {
+  text-decoration: underline;
+}
   .board-info {
     display: grid;
     grid-template-columns: 1fr 4fr 2fr 2fr; /* Set column widths for id, title, writer, and date */
