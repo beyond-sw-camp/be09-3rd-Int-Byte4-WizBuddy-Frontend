@@ -7,21 +7,44 @@
       v-if="isScheduleRegisterPage|isScheduleDeletePage">완료
     </button>
     <div class="shop-side" v-if="isMainPage">
-      <button class="side-tab-item">등록</button>
-      <button class="side-tab-item">수정</button>
-      <button class="side-tab-item">삭제</button>
+      <button class="side-tab-item" @click="openShopRegistModal" v-if="isMainPage">등록</button>
+      <button class="side-tab-item" @click="toggleEditMode">{{ isEditMode ? '완료' : '수정' }}</button>
+      <button class="side-tab-item" @click="toggleDeleteMode">{{ isDeleteMode ? '완료' : '삭제' }}</button>
+
     </div>
     <ScheduleRegister v-if="isRegisterModalOpen" :isOpen="isRegisterModalOpen" @close="closeRegisterModal" @submit="handleScheduleSubmit" />
+    <Modal :isOpen="isShopRegistModalOpen" @close="closeShopRegistModal">
+      <shopRegist @submit="handleShopRegistSubmit" @close="closeShopRegistModal" />
+    </Modal>
+  
   </div>
 </template>
 
 <script setup>
 import { useRoute, useRouter } from 'vue-router';
-import { ref, watch} from 'vue';
+import { ref, watch, watchEffect, onMounted, defineEmits } from 'vue';
 import ScheduleRegister from '@/components/schedule/modal/ScheduleRegisterModal.vue';
+import Modal from '@/components/shop/Modal.vue'; 
+import shopRegist from '@/components/shop/modal/shopRegist.vue';
+
 
 const router = useRouter();
 const route = useRoute();
+
+const isEditMode = ref(false);
+const isDeleteMode = ref(false);
+const emit = defineEmits(['toggle-edit-mode', 'toggle-delete-mode']);
+
+
+function toggleEditMode() {
+  isEditMode.value = !isEditMode.value;
+  emit('toggle-edit-mode', isEditMode.value);  
+}
+
+function toggleDeleteMode() {
+  isDeleteMode.value = !isDeleteMode.value;
+  emit('toggle-delete-mode', isDeleteMode.value); 
+}
 
 const isScheduleMainPage = ref(false);
 const isWeeklySchedulePage = ref(false);
@@ -29,8 +52,9 @@ const isScheduleRegisterPage = ref(false);
 const isScheduleDeletePage = ref(false);
 const isMainPage = ref(false);
 
-
+const stores = ref([]);
 const isRegisterModalOpen = ref(false);
+const isShopRegistModalOpen = ref(false);
 const activeTab = ref('');
 
 watch(() => route.path, (newPath) => {
@@ -45,6 +69,7 @@ watch(() => route.path, (newPath) => {
     immediate: true 
   });
 
+
 function openScheduleRegisterModal() {
   isRegisterModalOpen.value = true;
 }
@@ -56,6 +81,19 @@ function closeScheduleRegisterModal() {
 function handleScheduleSubmit(schedule) {
   console.log('등록된 스케줄:', schedule);
   closeScheduleRegisterModal();
+}
+
+function openShopRegistModal() {
+  isShopRegistModalOpen.value = true;
+}
+
+function closeShopRegistModal() {
+  isShopRegistModalOpen.value = false;  
+}
+
+function handleShopRegistSubmit(storeData) {
+  fetchStores();
+  closeShopRegistModal();
 }
 
 const setActiveTab = (tab) => {
@@ -82,6 +120,26 @@ watch(() => route.path, (newPath) => {
     activeTab.value = 'navigateToRegisterEmployee';
   }
 }, { immediate: true });
+
+async function fetchStores() {
+  try {
+    const response = await fetch('http://localhost:8080/shop');
+    stores.value = await response.json();
+  } catch (error) {
+    console.error('매장 목록을 불러오는 중 오류 발생:', error);
+  }
+}
+
+onMounted(() => {
+  fetchStores();
+});
+
+watchEffect(() => {
+  if (!isShopRegistModalOpen.value) {
+    fetchStores(); 
+  }
+});
+
 </script>
 
 <style scoped>

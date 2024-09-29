@@ -1,8 +1,8 @@
 <template>
-    <div class="side">
+    <div class="side" :class="{ 'main-page': isMainPage }">
         <aside class="left-side">
             <LeftTab v-if="!isMainPage"/>
-            <LeftSideMenu v-if="userType === 'employer'"/>
+            <LeftSideMenu v-if="userType === 'employer'" @toggle-edit-mode="$emit('toggle-edit-mode', $event)" @toggle-delete-mode="$emit('toggle-delete-mode', $event)"  />
         </aside>
         <div class="main-container">
             <slot></slot>
@@ -50,8 +50,12 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    height: 100vh;
+    height: 100vh;     
     background: #F3F7FA;
+}
+
+.side.main-page {
+  height: calc(100vh - 121.6px);
 }
 
 .left-side {
