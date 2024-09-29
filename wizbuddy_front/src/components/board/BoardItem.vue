@@ -3,7 +3,6 @@
     <div class="board-id">{{ board.id }}</div>
     <!-- router-link 경로를 boardType과 연동 -->
     <router-link :to="`/${boardType}/${board.id}`" class="board-title">{{ board.title }}  <CommentCount v-if="isSubstituteBoard" :count="commentCount" /></router-link>
-   
     <div class="board-writer">{{ board.writer }}</div>
     <div class="board-registerdate">{{ board.registerdate }}</div>
   </div>
