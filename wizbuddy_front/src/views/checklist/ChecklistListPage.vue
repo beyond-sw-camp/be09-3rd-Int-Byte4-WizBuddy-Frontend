@@ -116,32 +116,66 @@ const selectChecklist = (checklist) => {
 
 // 삭제 확인
 const confirmDelete = (checklist) => {
-  if (window.confirm("진짜 삭제하시겠습니까?")) {
-    alert("체크리스트가 삭제되었습니다.");
+  if (window.confirm("정말로 이 체크리스트를 삭제하시겠습니까?")) {
     deleteChecklist(checklist);
   }
 };
 
+
 const deleteChecklist = async (checklist) => {
   try {
-    // JSON 서버에 DELETE 요청
-    const response = await fetch(`http://localhost:8080/checklists/${checklist.id}`, {
+    // 1. 삭제된 체크리스트를 checklistPast에 저장
+    await saveToChecklistPast(checklist);
+
+    // 2. 체크리스트를 삭제
+    const deleteResponse = await fetch(`http://localhost:8080/checklists/${checklist.id}`, {
       method: 'DELETE',
     });
 
-    if (!response.ok) {
+    if (!deleteResponse.ok) {
       throw new Error('체크리스트 삭제 실패');
     }
 
-    // 로컬 상태에서도 체크리스트 삭제
+    // 3. 로컬 상태에서 체크리스트 제거
     const index = checklists.value.findIndex(c => c.id === checklist.id);
     if (index !== -1) {
       checklists.value.splice(index, 1);
     }
+
+    alert("체크리스트가 삭제되었고, 과거 기록에 저장되었습니다.");
   } catch (error) {
     console.error('삭제 중 오류 발생:', error);
+    alert("체크리스트 삭제 중 오류가 발생했습니다.");
   }
 };
+
+const saveToChecklistPast = async (checklist) => {
+  try {
+    const currentDate = new Date().toISOString();
+    const pastChecklist = {
+      ...checklist,
+      deletedAt: currentDate
+    };
+
+    const saveResponse = await fetch('http://localhost:8080/checklistsPast', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(pastChecklist),
+    });
+
+    if (!saveResponse.ok) {
+      throw new Error('과거 체크리스트 저장 실패');
+    }
+  } catch (error) {
+    console.error('과거 체크리스트 저장 중 오류 발생:', error);
+    throw error;
+  }
+};
+
+
+
 
 // 수정 모달 열기
 const openEditModal = (checklist) => {

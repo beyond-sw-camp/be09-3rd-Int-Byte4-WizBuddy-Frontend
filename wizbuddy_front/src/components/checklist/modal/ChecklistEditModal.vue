@@ -4,7 +4,7 @@
       <h2>체크리스트 수정</h2>
 
       <!-- 체크리스트 제목 -->
-      <input v-model="checklistTitle" class="checklist-title" placeholder="체크리스트 제목을 입력하세요" />
+      <input v-model="editedTitle" class="checklist-title" placeholder="체크리스트 제목을 입력하세요" />
 
       <!-- 고정 업무 구역 -->
       <div class="section">
@@ -14,7 +14,7 @@
           <button @click="openFixedTaskModal" class="add-task-button">고정 업무 추가</button>
         </div>
         <div class="task-items-container">
-          <div v-for="task in fixedTasks" :key="task.id" class="task-item fixed-task">
+          <div v-for="task in editedTasks.filter(t => t.isFixed)" :key="task.id" class="task-item fixed-task">
             <div class="task-content">{{ task.title }}</div>
             <button class="remove-task-button" @click="removeTask(task)">x</button>
           </div>
@@ -29,7 +29,7 @@
           <button @click="openNonFixedTaskModal" class="add-task-button">비고정 업무 추가</button>
         </div>
         <div class="task-items-container">
-          <div v-for="task in nonFixedTasks" :key="task.id" class="task-item non-fixed-task">
+          <div v-for="task in editedTasks.filter(t => !t.isFixed)" :key="task.id" class="task-item non-fixed-task">
             <div class="task-content">{{ task.title }}</div>
             <button class="remove-task-button" @click="removeTask(task)">x</button>
           </div>
@@ -37,32 +37,32 @@
       </div>
 
       <div class="button-group">
-        <button class="save-button" @click="submit">저장</button>
+        <button class="save-button" @click="saveChanges">저장</button>
         <button class="close-button" @click="closeEditModal">닫기</button>
       </div>
 
       <FixedTaskModal
-          v-if="isFixedTaskModalOpen"
-          :fixedTasks="availableFixedTasksFiltered"
-          @close="closeFixedTaskModal"
-          @add-task="addFixedTask"
-        />
-  
-        <NonFixedTaskModal
-          v-if="isNonFixedTaskModalOpen"
-          :nonFixedTasks="availableNonFixedTasksFiltered"
-          @close="closeNonFixedTaskModal"
-          @add-task="addNonFixedTask"
-        />
+        v-if="isFixedTaskModalOpen"
+        :fixedTasks="availableFixedTasksFiltered"
+        @close="closeFixedTaskModal"
+        @add-task="addFixedTask"
+      />
+
+      <NonFixedTaskModal
+        v-if="isNonFixedTaskModalOpen"
+        :nonFixedTasks="availableNonFixedTasksFiltered"
+        @close="closeNonFixedTaskModal"
+        @add-task="addNonFixedTask"
+      />
     </div>
   </div>
 </template>
+
 <script setup>
 import { ref, computed } from 'vue';
 import FixedTaskModal from '@/components/checklist/modal/FixedTaskModal.vue';
 import NonFixedTaskModal from '@/components/checklist/modal/NonFixedTaskModal.vue';
 
-// props로 checklist와 tasks를 받음
 const props = defineProps({
   checklist: {
     type: Object,
@@ -74,43 +74,56 @@ const props = defineProps({
   },
 });
 
-// checklist를 수정 가능한 상태로 복사
-const submitChecklist = ref({ ...props.checklist });
-
-// emit을 정의하여 부모에게 수정된 데이터를 전달
 const emit = defineEmits(['close', 'save']);
 
-// 제목과 고정/비고정 업무를 각각 관리
-const checklistTitle = ref(submitChecklist.value.title);
-const fixedTasks = computed(() => submitChecklist.value.tasks.filter(task => task.isFixed));
-const nonFixedTasks = computed(() => submitChecklist.value.tasks.filter(task => !task.isFixed));
+// 수정 중인 체크리스트 제목과 업무 목록
+const editedTitle = ref(props.checklist.title);
+const editedTasks = ref([...props.checklist.tasks]);
 
-// 모달 상태 관리
 const isFixedTaskModalOpen = ref(false);
 const isNonFixedTaskModalOpen = ref(false);
 
-// 사용 가능한 고정/비고정 업무 목록 계산
 const availableFixedTasksFiltered = computed(() =>
-  props.tasks.filter(task => task.isFixed && !fixedTasks.value.some(t => t.id === task.id))
+  props.tasks.filter(task => task.isFixed && !editedTasks.value.some(t => t.id === task.id))
 );
 
 const availableNonFixedTasksFiltered = computed(() =>
-  props.tasks.filter(task => !task.isFixed && !nonFixedTasks.value.some(t => t.id === task.id))
+  props.tasks.filter(task => !task.isFixed && !editedTasks.value.some(t => t.id === task.id))
 );
 
-// 모달 닫기
 const closeEditModal = () => {
   emit('close');
 };
 
-// 제출 함수에서 수정된 데이터를 부모로 전달
-const saveChanges = () => {
-  submitChecklist.value.title = checklistTitle.value; // 수정된 제목 반영
-  emit('save', submitChecklist.value); // 부모로 수정된 데이터 전달
-  closeEditModal();
+const saveChanges = async () => {
+  try {
+    const updatedChecklist = {
+      ...props.checklist,
+      title: editedTitle.value,
+      tasks: editedTasks.value
+    };
+
+    const response = await fetch(`http://localhost:8080/checklists/${updatedChecklist.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedChecklist),
+    });
+
+    if (!response.ok) {
+      throw new Error('서버 응답이 실패했습니다.');
+    }
+    
+    const savedChecklist = await response.json();
+    emit('save', savedChecklist);
+    closeEditModal();
+  } catch (error) {
+    console.error('체크리스트 수정 중 오류 발생:', error);
+    alert('체크리스트 수정에 실패했습니다. 다시 시도해주세요.');
+  }
 };
 
-// 고정 업무 모달 열기/닫기
 const openFixedTaskModal = () => {
   isFixedTaskModalOpen.value = true;
 };
@@ -119,7 +132,6 @@ const closeFixedTaskModal = () => {
   isFixedTaskModalOpen.value = false;
 };
 
-// 비고정 업무 모달 열기/닫기
 const openNonFixedTaskModal = () => {
   isNonFixedTaskModalOpen.value = true;
 };
@@ -128,53 +140,25 @@ const closeNonFixedTaskModal = () => {
   isNonFixedTaskModalOpen.value = false;
 };
 
-// 고정 업무 추가
 const addFixedTask = (task) => {
-  if (!fixedTasks.value.some(t => t.id === task.id)) {
-    submitChecklist.value.tasks.push({ ...task, isFixed: true });
+  if (!editedTasks.value.some(t => t.id === task.id)) {
+    editedTasks.value.push({ ...task, isFixed: true });
   }
 };
 
-// 비고정 업무 추가
 const addNonFixedTask = (task) => {
-  if (!nonFixedTasks.value.some(t => t.id === task.id)) {
-    submitChecklist.value.tasks.push({ ...task, isFixed: false });
+  if (!editedTasks.value.some(t => t.id === task.id)) {
+    editedTasks.value.push({ ...task, isFixed: false });
   }
 };
 
-// 업무 삭제
 const removeTask = (task) => {
-  const taskIndex = submitChecklist.value.tasks.findIndex(t => t.id === task.id);
-  if (taskIndex !== -1) {
-    submitChecklist.value.tasks.splice(taskIndex, 1);
+  const index = editedTasks.value.findIndex(t => t.id === task.id);
+  if (index !== -1) {
+    editedTasks.value.splice(index, 1);
   }
-};
-
-// 서버에 데이터를 전송하고 수정 완료
-const submit = async () => {
-  try {
-    const response = await fetch(`http://localhost:8080/checklists/${submitChecklist.value.id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(submitChecklist.value), // 수정된 submitChecklist 전송
-    });
-
-    if (!response.ok) {
-      throw new Error('서버 응답이 실패했습니다.');
-    }
-    
-    const editChecklist = await response.json();
-    emit('save', submitChecklist.value); // 수정된 데이터를 부모로 전달
-    closeEditModal();
-  } catch (error) {
-    console.error('체크리스트 수정 중 오류 발생:', error);
-    alert('체크리스트 수정에 실패했습니다. 다시 시도해주세요.');
-  } 
 };
 </script>
-
 
 
 <style scoped>
