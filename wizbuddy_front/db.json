@@ -255,5 +255,114 @@
       ],
       "deletedAt": "2024-09-29T08:23:35.451Z"
     }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "대타 구합니다.",
+      "writer": "조제훈",
+      "registerdate": "2024.09.01",
+      "content": "9월 30일에 우리 매장의 마스크 나랭이가 고향에 다녀와야 한다고 해서 대타가 급하게 필요합니다. 가능한 직원들은 댓글 달아주세요!"
+    },
+    {
+      "id": 2,
+      "title": "대타 구구 비둘기",
+      "writer": "조제훈",
+      "registerdate": "2024.09.02",
+      "content": "우리 나현이 대타좀 해주세요. 이번에는 학교를 가야한답디다?"
+    },
+    {
+      "id": 3,
+      "title": "시급 ㄷㄷ",
+      "writer": "조제훈",
+      "registerdate": "2024.09.03",
+      "content": "9월 3일에 우리 매장의 마스코트 나짱이가 고향에 다녀와야한다고해서 대타가 급하게 필요합니다. 가능한 직원들은 댓글 달아주세요!"
+    },
+    {
+      "id": 4,
+      "title": "긴급 대타 구인",
+      "writer": "조제훈",
+      "registerdate": "2024.09.04",
+      "content": "급하게 대타를 구합니다. 연락주세요."
+    },
+    {
+      "id": 5,
+      "title": "다음주 토요일 대타",
+      "writer": "조제훈",
+      "registerdate": "2024.09.05",
+      "content": "다음주 토요일 대타 구합니다. 시간 조정 가능!"
+    },
+    {
+      "id": 6,
+      "title": "새벽 근무 대타",
+      "writer": "조제훈",
+      "registerdate": "2024.09.06",
+      "content": "새벽 근무 대타 급하게 구해요. 연락주세요!"
+    },
+    {
+      "id": 7,
+      "title": "대타 요청합니다.",
+      "writer": "조제훈",
+      "registerdate": "2024.09.07",
+      "content": "주말에 개인 사정이 생겨 대타 구합니다. 연락바랍니다."
+    },
+    {
+      "id": 8,
+      "title": "금요일 대타 가능하신 분",
+      "writer": "조제훈",
+      "registerdate": "2024.09.08",
+      "content": "이번주 금요일 대타가 필요합니다. 가능한 분 연락 주세요."
+    },
+    {
+      "id": 9,
+      "title": "수요일 근무 대타",
+      "writer": "조제훈",
+      "registerdate": "2024.09.09",
+      "content": "수요일 근무 대타 구합니다."
+    },
+    {
+      "id": 10,
+      "title": "주말 대타 구인",
+      "writer": "조제훈",
+      "registerdate": "2024.09.10",
+      "content": "주말 근무 대타 구인합니다. 급합니다!"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "postId": 1,
+      "writer": "김용승",
+      "content": "제가 대신 근무하겠습니다.",
+      "avatar": "/src/assets/icons/board/avater2.svg"
+    },
+    {
+      "id": 2,
+      "postId": 2,
+      "writer": "이나현",
+      "content": "저 대신 누가,, 해주십쇼!!!!!",
+      "avatar": "/src/assets/icons/board/avater3.svg"
+    },
+    {
+      "id": 3,
+      "postId": 1,
+      "writer": "백경석",
+      "content": "제가 대신 근무하겠습니다.",
+      "avatar": "/src/assets/icons/board/avatar.svg"
+    },
+    {
+      "id": "2a33",
+      "content": "ㄴㄴ",
+      "postId": 1,
+      "writer": "사용자",
+      "avatar": "/src/assets/icons/board/avater0.svg"
+    },
+    {
+      "id": "d106",
+      "content": "고민중~~",
+      "postId": 2,
+      "writer": "사용자",
+      "avatar": "/src/assets/icons/board/avater0.svg"
+    }
   ]
 }
