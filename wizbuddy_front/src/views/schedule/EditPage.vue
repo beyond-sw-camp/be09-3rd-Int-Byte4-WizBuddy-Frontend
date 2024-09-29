@@ -17,7 +17,7 @@
                     </select>
 
                     <label for="timeSlot">시간</label>
-                    <input type="text" id="timeSlot" v-model="timeSlot" readonly/>
+                    <input type="text" id="timeSlot" v-model="timeSlot" readonly />
                 </div>
 
                 <div class="edit-actions">
@@ -32,6 +32,7 @@
 <script setup>
     import { ref, onMounted } from 'vue';
     import { useRouter, useRoute } from 'vue-router';
+    import axios from 'axios';
     import SideMenu from '@/components/SideMenu.vue';
 
     const router = useRouter();
@@ -40,18 +41,37 @@
     const selectedDate = ref('');
     const selectedWorker = ref('');
     const timeSlot = ref('');
+    const id = ref(null);  // id로 변경
     const workers = ['유제은', '백경석', '조제훈', '이서현', '이나현'];
 
     onMounted(() => {
         selectedDate.value = route.query.date || '';
         selectedWorker.value = route.query.worker || '';
-        timeSlot.value = route.query.timeSlot || '';  // timeSlot 값 설정
+        timeSlot.value = route.query.timeSlot || '';
+        id.value = route.query.id || null;  // id로 변경
     });
 
+    async function updateSchedule() {
+        if (!id.value) {
+            alert("수정할 스케줄의 id가 없습니다.");
+            return;
+        }
 
-    function updateSchedule() {
-        alert(`${selectedDate.value}에 ${timeSlot.value}의 근무자는 ${selectedWorker.value}으로(로) 수정되었습니다.`);
-        router.push('/schedule');
+        const updatedSchedule = {
+            name: selectedWorker.value
+        };
+
+        console.log('id:', id.value);
+        console.log('Updated Schedule:', updatedSchedule);
+
+        try {
+            await axios.patch(`http://localhost:8080/schedules/${id.value}`, updatedSchedule);
+            alert(`${selectedDate.value}의 근무자는 ${selectedWorker.value}으로 수정되었습니다.`);
+            router.push('/schedule');
+        } catch (error) {
+            console.error("스케줄 수정 중 오류 발생:", error);
+            alert("스케줄 수정 중 문제가 발생했습니다.");
+        }
     }
 
     function goBack() {
