@@ -2,7 +2,7 @@
   <div v-if="isOpen" class="modal-overlay" @click.self="closeModal">
     <div class="modal-container">
       <h3 class="modal-title">{{ isRegistered ? '등록 완료' : '스케줄 등록' }}</h3>
-      
+
       <template v-if="!isRegistered">
         <form @submit.prevent="submitForm" class="modal-form">
           <div class="form-group">
@@ -19,9 +19,10 @@
             />
           </div>
           <p v-if="!isValid" class="error-message">선택한 날짜는 월요일이 아닙니다.</p>
+          <div v-if="isDuplicate" class="error-message">이미 등록된 월요일입니다. 다른 날짜를 선택해주세요.</div>
           <div class="modal-actions">
             <button type="button" class="cancel-btn" @click="closeModal">취소</button>
-            <button type="submit" class="submit-btn" :disabled="!isValid">등록</button>
+            <button type="submit" class="submit-btn" :disabled="!isValid || isDuplicate">등록</button>
           </div>
         </form>
       </template>
@@ -37,11 +38,16 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
+import axios from 'axios';
 
 const props = defineProps({
   isOpen: Boolean,
   disabledMondays: {
+    type: Array,
+    default: () => []
+  },
+  existingSchedules: {
     type: Array,
     default: () => []
   }
@@ -50,9 +56,13 @@ const props = defineProps({
 const emit = defineEmits(["close", "submit"]);
 
 const schedule = ref({
-  date: ""
+  date: "",
+  title: "",
+  employee_working_part: []
 });
+
 const isValid = ref(true);
+const isDuplicate = ref(false);
 const isRegistered = ref(false);
 const minDate = ref(formatDate(new Date()));
 
@@ -73,25 +83,57 @@ function closeModal() {
   emit("close");
 }
 
-function submitForm() {
-  if (isValid.value) {
-    isRegistered.value = true;
+async function submitForm() {
+  if (isValid.value && !isDuplicate.value) {
+    const selectedDate = new Date(schedule.value.date);
+    const year = selectedDate.getFullYear();
+    const month = selectedDate.getMonth() + 1;
+    const weekNumber = getWeekNumber(selectedDate);
+    schedule.value.title = `${year}년 ${month}월 ${weekNumber}주차 스케줄`;
 
-    setTimeout(() => {
-      emit("submit", schedule.value);
-      closeModal();
-    }, 5000);
+    const newSchedule = {
+      id: Date.now().toString(),
+      title: schedule.value.title,
+      schedule_start_date: formatDate(schedule.value.date),
+      employee_working_part: []
+    };
+
+    try {
+      await axios.post('http://localhost:8080/schedules', newSchedule);
+
+      isRegistered.value = true;
+      setTimeout(() => {
+        emit("submit", newSchedule);
+        closeModal();
+      }, 500);
+    } catch (error) {
+      console.error("스케줄 등록 중 오류 발생:", error);
+      alert("스케줄 등록 중 문제가 발생했습니다.");
+    }
   }
 }
+
 
 function validateMonday() {
   const selectedDate = new Date(schedule.value.date);
   isValid.value = selectedDate.getDay() === 1;
+
+  const formattedDate = formatDate(selectedDate);
+  isDuplicate.value = props.existingSchedules.some(schedule => 
+    schedule.employee_working_part.some(part => formatDate(new Date(part.year, part.month - 1, part.day)) === formattedDate)
+  );
 }
 
 function isDateDisabled(date) {
   if (!date) return false;
-  return props.disabledMondays.includes(formatDate(date));
+  return props.disabledMondays.includes(formatDate(date)) || isDuplicate.value;
+}
+
+function getWeekNumber(date) {
+  const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+  const firstMonday = firstDayOfMonth.getDay() === 1 ? firstDayOfMonth : new Date(firstDayOfMonth.setDate(firstDayOfMonth.getDate() + (1 - firstDayOfMonth.getDay() + 7) % 7));
+  const diffInDays = (date - firstMonday) / (1000 * 60 * 60 * 24);
+  return Math.floor(diffInDays / 7) + 1;
 }
 </script>
 
@@ -110,7 +152,7 @@ function isDateDisabled(date) {
 }
 
 .modal-container {
-  background-color: #DCEDF9; /* Light blue background */
+  background-color: #DCEDF9;
   padding: 30px;
   border-radius: 20px;
   width: 400px;

@@ -9,6 +9,7 @@
     <div class="board-writer">{{ board.writer }}</div>
     <div class="board-registerdate">{{ board.registerdate }}</div>
   </div>
+  
 </template>
 
 <script setup>

@@ -1,10 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import MainPage from "@/views/user/MainPage.vue";
-import LoginPage from "@/views/user/LoginPage.vue";
-import SignupPage from "@/views/user/SignupPage.vue";
 import WelcomePage from '@/views/welcome/WelcomePage.vue';
 
+import UserRoutes from './user';
+import ShopRoutes from './shop';
 import ManualBoardRoutes from './manualBoard';
 import NoticeBoardRoutes from './noticeBoard';
 import SubsBoardRoutes from './subsBoard';
@@ -20,24 +19,13 @@ function isLoggedIn() {
 // meta: {requireAuth: true} 로그인이 필요한 페이지에 추가하기
 const routes = [
   { path: "/", component: WelcomePage },
-  { 
-    path: "/login", 
-    component: LoginPage,
-  },
-
-  {
-    path: "/signup",
-    component: SignupPage,
-  },
-  {
-    path: "/main",
-    component: MainPage
-  },
   ...ManualBoardRoutes,
   ...NoticeBoardRoutes,
   ...ScheduleRoutes,
   ...ChecklistRoutes,
   ...TaskRoutes,
+  ...UserRoutes,
+  ...ShopRoutes,
   ...SubsBoardRoutes
 ];
 

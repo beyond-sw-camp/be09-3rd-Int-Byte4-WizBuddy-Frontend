@@ -24,7 +24,7 @@
           v-for="day in daysInMonth"
           :key="day"
           class="calendar-day"
-          :class="{ today: isToday(day), selected: day === selectedDay }"
+          :class="{ today: isToday(day), selected: day === selectedDay, 'highlighted-week': isDayInHighlightedWeek(day) }"
           @click="handleDayClick(day)"
         >
           <div class="day-number">{{ day }}</div>
@@ -54,6 +54,10 @@ const props = defineProps({
   daysInMonth: Array,
   selectedDay: Number,
   isToday: Function,
+  highlightedWeeks: {
+    type: Array,
+    default: () => []
+  },
   groupSchedulesByType: Function,
   prevMonth: Function,
   nextMonth: Function,
@@ -75,6 +79,13 @@ function handleScheduleClick(day, group) {
   if (props.enableScheduleSelect) {
     emit('selectSchedule', { day, group });
   }
+}
+
+function isDayInHighlightedWeek(day) {
+  const date = new Date(props.currentYear, props.currentMonth, day);
+  return props.highlightedWeeks.some(
+    week => date >= week.weekStart && date <= week.weekEnd
+  );
 }
 </script>
 

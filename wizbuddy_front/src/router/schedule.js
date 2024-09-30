@@ -27,6 +27,8 @@ const ScheduleRoutes = [
         name: 'ScheduleEdit',
         component: ScheduleEditPage,
         props: (route) => ({
+            scheduleId: route.query.id,
+            partId: route.query.partId,
             date: route.query.date,
             title: route.query.title,
             time: route.query.time
