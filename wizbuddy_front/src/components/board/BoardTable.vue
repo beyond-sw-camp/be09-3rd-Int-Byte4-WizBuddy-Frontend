@@ -57,23 +57,8 @@ const nextPage = () => {
 const paginatedBoards = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage.value;
   const end = start + itemsPerPage.value;
-  return boards.value.slice().reverse().slice(start, end); // 최신 게시글이 위로 오도록 reverse() 추가
+  return boards.value.slice().reverse().slice(start, end);
 });
-
-  onMounted (async () => {
-    try {
-      const response = await fetch('http://localhost:8080/manualboard');
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      } const data = await response.json();
-      if (data.length > 0) {
-        boards.value = data;
-        console.log('서버로부터 받아온 boards: ', boards.value);
-      }
-    } catch (error) {
-      console.error ('데이터를 가져오는 중 오류가 발생했습니다: ', error);
-    }
-  });
 
 
 import { watchEffect } from 'vue';
