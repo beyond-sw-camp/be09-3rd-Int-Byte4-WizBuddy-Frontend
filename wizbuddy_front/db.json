@@ -424,7 +424,7 @@
       "title": "대타 구합니다.",
       "writer": "조제훈",
       "time": "2024/09/01 1T",
-      "partname":"이나현",
+      "partname": "이나현",
       "registerdate": "2024.09.01",
       "content": "9월 30일에 우리 매장의 마스크 나랭이ㅇㅇ가 고향에 다녀와야 한다고 해서 대타가 급하게 필요합니다. 가능한 직원들은 댓글 달아주세요!"
     },
@@ -433,7 +433,7 @@
       "title": "대타 구구 비둘기",
       "writer": "조제훈",
       "time": "2024/09/02 2T",
-      "partname":"이나현",
+      "partname": "이나현",
       "registerdate": "2024.09.02",
       "content": "우리 나현이 대타좀 해주세요. 이번에는 학교를 가야한답디다?"
     },
@@ -442,7 +442,7 @@
       "title": "시급 ㄷㄷ",
       "writer": "조제훈",
       "time": "2024/09/03 3T",
-      "partname":"이나현",
+      "partname": "이나현",
       "registerdate": "2024.09.03",
       "content": "9월 3일에 우리 매장의 마스코트 나짱이가 고향에 다녀와야한다고해서 대타가 급하게 필요합니다. 가능한 직원들은 댓글 달아주세요!"
     },
@@ -451,7 +451,7 @@
       "title": "긴급 대타 구인",
       "writer": "조제훈",
       "time": "2024/09/04 1T",
-      "partname":"이나현",
+      "partname": "이나현",
       "registerdate": "2024.09.04",
       "content": "급하게 대타를 구합니다. 연락주세요."
     },
@@ -460,7 +460,7 @@
       "title": "다음주 토요일 대타",
       "writer": "조제훈",
       "time": "2024/09/05 3T",
-      "partname":"백경석",
+      "partname": "백경석",
       "registerdate": "2024.09.05",
       "content": "다음주 토요일 대타 구합니다. 시간 조정 가능!"
     },
@@ -469,7 +469,7 @@
       "title": "새벽 근무 대타",
       "writer": "조제훈",
       "time": "2024/09/06 1T",
-      "partname":"유제은",
+      "partname": "유제은",
       "registerdate": "2024.09.06",
       "content": "새벽 근무 대타 급하게 구해요. 연락주세요!"
     },
@@ -478,7 +478,7 @@
       "title": "대타 요청합니다.",
       "writer": "조제훈",
       "time": "2024/09/07 2T",
-      "partname":"이서현",
+      "partname": "이서현",
       "registerdate": "2024.09.07",
       "content": "주말에 개인 사정이 생겨 대타 구합니다. 연락바랍니다."
     },
@@ -487,7 +487,7 @@
       "title": "금요일 대타 가능하신 분",
       "writer": "조제훈",
       "time": "2024/09/08 1T",
-      "partname":"백경석",
+      "partname": "백경석",
       "registerdate": "2024.09.08",
       "content": "이번주 금요일 대타가 필요합니다. 가능한 분 연락 주세요."
     },
@@ -496,7 +496,7 @@
       "title": "수요일 근무 대타",
       "writer": "조제훈",
       "time": "2024/09/09 3T",
-      "partname":"이나현",
+      "partname": "이나현",
       "registerdate": "2024.09.09",
       "content": "수요일 근무 대타 구합니다."
     },
@@ -505,153 +505,153 @@
       "title": "주말 대타 구인",
       "writer": "조제훈",
       "time": "2024/09/10 1T",
-      "partname":"유제은",
+      "partname": "유제은",
       "registerdate": "2024.09.10",
       "content": "주말 근무 대타 구인합니다. 급합니다!"
     }
   ],
   "comments": [
-  {
-    "id": "1",
-    "postId": 1,
-    "writer": "김용승",
-    "content": "제가 대신 근무하겠습니다.!!",
-    "avatar": "/src/assets/icons/board/avater2.svg"
-  },
-  {
-    "id": "2",
-    "postId": 1,
-    "writer": "조제훈",
-    "content": "다음에는 제가 할게요!",
-    "avatar": "/src/assets/icons/board/avater3.svg"
-  },
-  {
-    "id": "3",
-    "postId": 2,
-    "writer": "이나현",
-    "content": "저 대신 누가 해주실 분 있나요?",
-    "avatar": "/src/assets/icons/board/avater3.svg"
-  },
-  {
-    "id": "4",
-    "postId": 2,
-    "writer": "백경석",
-    "content": "제가 도와드릴게요!",
-    "avatar": "/src/assets/icons/board/avatar.svg"
-  },
-  {
-    "id": "5",
-    "postId": 3,
-    "writer": "이서현",
-    "content": "이번에는 어려울 것 같습니다.",
-    "avatar": "/src/assets/icons/board/avater4.svg"
-  },
-  {
-    "id": "6",
-    "postId": 3,
-    "writer": "박철민",
-    "content": "가능하면 제가 맡을게요!",
-    "avatar": "/src/assets/icons/board/avater0.svg"
-  },
-  {
-    "id": "7",
-    "postId": 4,
-    "writer": "서미란",
-    "content": "저 대신 근무해주실 수 있을까요?",
-    "avatar": "/src/assets/icons/board/avater7.svg"
-  },
-  {
-    "id": "8",
-    "postId": 4,
-    "writer": "유제은",
-    "content": "네! 제가 할 수 있어요.",
-    "avatar": "/src/assets/icons/board/avater5.svg"
-  },
-  {
-    "id": "9",
-    "postId": 5,
-    "writer": "백경석",
-    "content": "제가 대신 해드릴게요.",
-    "avatar": "/src/assets/icons/board/avatar.svg"
-  },
-  {
-    "id": "10",
-    "postId": 5,
-    "writer": "김용승",
-    "content": "이번에는 제가 도와드릴게요!",
-    "avatar": "/src/assets/icons/board/avater2.svg"
-  },
-  {
-    "id": "11",
-    "postId": 6,
-    "writer": "이나현",
-    "content": "이 날은 제가 가능합니다.",
-    "avatar": "/src/assets/icons/board/avater3.svg"
-  },
-  {
-    "id": "12",
-    "postId": 6,
-    "writer": "조제훈",
-    "content": "저도 가능할 것 같아요!",
-    "avatar": "/src/assets/icons/board/avater4.svg"
-  },
-  {
-    "id": "13",
-    "postId": 7,
-    "writer": "서미란",
-    "content": "근무해주실 분 계신가요?",
-    "avatar": "/src/assets/icons/board/avater0.svg"
-  },
-  {
-    "id": "14",
-    "postId": 7,
-    "writer": "유제은",
-    "content": "제가 대신할 수 있어요!",
-    "avatar": "/src/assets/icons/board/avater5.svg"
-  },
-  {
-    "id": "15",
-    "postId": 8,
-    "writer": "김용승",
-    "content": "제가 그날 근무하겠습니다.",
-    "avatar": "/src/assets/icons/board/avater2.svg"
-  },
-  {
-    "id": "16",
-    "postId": 8,
-    "writer": "백경석",
-    "content": "제가 그날 가능합니다!",
-    "avatar": "/src/assets/icons/board/avatar.svg"
-  },
-  {
-    "id": "17",
-    "postId": 9,
-    "writer": "이서현",
-    "content": "제가 대신할 수 있을 것 같아요.",
-    "avatar": "/src/assets/icons/board/avater4.svg"
-  },
-  {
-    "id": "18",
-    "postId": 9,
-    "writer": "박철민",
-    "content": "네! 제가 맡겠습니다.",
-    "avatar": "/src/assets/icons/board/avater0.svg"
-  },
-  {
-    "id": "19",
-    "postId": 10,
-    "writer": "서미란",
-    "content": "제가 근무 가능합니다.",
-    "avatar": "/src/assets/icons/board/avater0.svg"
-  },
-  {
-    "id": "20",
-    "postId": 10,
-    "writer": "유제은",
-    "content": "저 대신 누가 해주실 분 있나요?",
-    "avatar": "/src/assets/icons/board/avater5.svg"
-  }
-],
+    {
+      "id": "1",
+      "postId": 1,
+      "writer": "김용승",
+      "content": "제가 대신 근무하겠습니다.!!",
+      "avatar": "/src/assets/icons/board/avater2.svg"
+    },
+    {
+      "id": "2",
+      "postId": 1,
+      "writer": "조제훈",
+      "content": "다음에는 제가 할게요!",
+      "avatar": "/src/assets/icons/board/avater3.svg"
+    },
+    {
+      "id": "3",
+      "postId": 2,
+      "writer": "이나현",
+      "content": "저 대신 누가 해주실 분 있나요?",
+      "avatar": "/src/assets/icons/board/avater3.svg"
+    },
+    {
+      "id": "4",
+      "postId": 2,
+      "writer": "백경석",
+      "content": "제가 도와드릴게요!",
+      "avatar": "/src/assets/icons/board/avatar.svg"
+    },
+    {
+      "id": "5",
+      "postId": 3,
+      "writer": "이서현",
+      "content": "이번에는 어려울 것 같습니다.",
+      "avatar": "/src/assets/icons/board/avater4.svg"
+    },
+    {
+      "id": "6",
+      "postId": 3,
+      "writer": "박철민",
+      "content": "가능하면 제가 맡을게요!",
+      "avatar": "/src/assets/icons/board/avater0.svg"
+    },
+    {
+      "id": "7",
+      "postId": 4,
+      "writer": "서미란",
+      "content": "저 대신 근무해주실 수 있을까요?",
+      "avatar": "/src/assets/icons/board/avater7.svg"
+    },
+    {
+      "id": "8",
+      "postId": 4,
+      "writer": "유제은",
+      "content": "네! 제가 할 수 있어요.",
+      "avatar": "/src/assets/icons/board/avater5.svg"
+    },
+    {
+      "id": "9",
+      "postId": 5,
+      "writer": "백경석",
+      "content": "제가 대신 해드릴게요.",
+      "avatar": "/src/assets/icons/board/avatar.svg"
+    },
+    {
+      "id": "10",
+      "postId": 5,
+      "writer": "김용승",
+      "content": "이번에는 제가 도와드릴게요!",
+      "avatar": "/src/assets/icons/board/avater2.svg"
+    },
+    {
+      "id": "11",
+      "postId": 6,
+      "writer": "이나현",
+      "content": "이 날은 제가 가능합니다.",
+      "avatar": "/src/assets/icons/board/avater3.svg"
+    },
+    {
+      "id": "12",
+      "postId": 6,
+      "writer": "조제훈",
+      "content": "저도 가능할 것 같아요!",
+      "avatar": "/src/assets/icons/board/avater4.svg"
+    },
+    {
+      "id": "13",
+      "postId": 7,
+      "writer": "서미란",
+      "content": "근무해주실 분 계신가요?",
+      "avatar": "/src/assets/icons/board/avater0.svg"
+    },
+    {
+      "id": "14",
+      "postId": 7,
+      "writer": "유제은",
+      "content": "제가 대신할 수 있어요!",
+      "avatar": "/src/assets/icons/board/avater5.svg"
+    },
+    {
+      "id": "15",
+      "postId": 8,
+      "writer": "김용승",
+      "content": "제가 그날 근무하겠습니다.",
+      "avatar": "/src/assets/icons/board/avater2.svg"
+    },
+    {
+      "id": "16",
+      "postId": 8,
+      "writer": "백경석",
+      "content": "제가 그날 가능합니다!",
+      "avatar": "/src/assets/icons/board/avatar.svg"
+    },
+    {
+      "id": "17",
+      "postId": 9,
+      "writer": "이서현",
+      "content": "제가 대신할 수 있을 것 같아요.",
+      "avatar": "/src/assets/icons/board/avater4.svg"
+    },
+    {
+      "id": "18",
+      "postId": 9,
+      "writer": "박철민",
+      "content": "네! 제가 맡겠습니다.",
+      "avatar": "/src/assets/icons/board/avater0.svg"
+    },
+    {
+      "id": "19",
+      "postId": 10,
+      "writer": "서미란",
+      "content": "제가 근무 가능합니다.",
+      "avatar": "/src/assets/icons/board/avater0.svg"
+    },
+    {
+      "id": "20",
+      "postId": 10,
+      "writer": "유제은",
+      "content": "저 대신 누가 해주실 분 있나요?",
+      "avatar": "/src/assets/icons/board/avater5.svg"
+    }
+  ],
   "manualboard": [
     {
       "id": "1",
@@ -696,6 +696,12 @@
       "writer": "사장님",
       "registerdate": "2024-09-29",
       "id": "5"
+    },
+    {
+      "id": 6,
+      "title": "공지사항입니다",
+      "content": "사실 딱히 별건 없습니다.",
+      "file": ""
     }
   ]
 }

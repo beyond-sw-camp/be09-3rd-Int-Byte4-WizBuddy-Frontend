@@ -80,8 +80,10 @@ const loadBoards = async () => {
 
   if(window.location.pathname === '/noticeboard') {
     boardUrl = 'http://localhost:8080/noticeboard';
-  } else {
+  } else if (window.location.pathname === '/manualboard') {
     boardUrl = 'http://localhost:8080/manualboard';
+  } else {
+    boardUrl = 'http://localhost:8080/subsboard';
   }
 
   try {
