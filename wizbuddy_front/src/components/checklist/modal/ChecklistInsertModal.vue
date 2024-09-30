@@ -60,6 +60,10 @@ import { ref, computed, onMounted } from 'vue';
 import NonFixedTaskModal from './NonFixedTaskModal.vue';
 import FixedTaskModal from './FixedTaskModal.vue';
 
+// 로컬 스토리지에서 shop 정보를 가져오기
+const shop = JSON.parse(localStorage.getItem('shop'));
+const shopId = shop?.id || null; // shop 정보가 없으면 null 처리
+
 const props = defineProps({
   tasks: {
     type: Array,
@@ -70,6 +74,7 @@ const props = defineProps({
 const newChecklist = ref({
   title: '',
   tasks: [],
+  shopId: shopId, // shopId 추가
 });
 
 const fixedTasks = computed(() => newChecklist.value.tasks.filter(task => task.isFixed));

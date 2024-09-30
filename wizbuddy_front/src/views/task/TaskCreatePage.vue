@@ -11,12 +11,24 @@ import { useRouter } from 'vue-router';
 
 const router = useRouter();
 
+// 로컬 스토리지에서 shop 정보를 가져오기
+const shop = JSON.parse(localStorage.getItem('shop'));
+const shopId = shop?.id || null; // shop 정보가 없으면 null 처리
+
 const handleTaskSubmit = async (newTask) => {
+  if (!shopId) {
+    alert('매장 정보가 없습니다. 먼저 매장을 선택해 주세요.');
+    return;
+  }
+
+  // newTask에 shopId 추가
+  newTask.shopId = shopId;
+
   try {
     const addedTask = await fetchLastIdAndAddNewTask(newTask);
     if (addedTask) {
       console.log('등록된 업무:', addedTask);
-      router.push('/task');
+      router.push('/task'); // 등록 완료 후 task 리스트 페이지로 이동
     }
   } catch (error) {
     console.error('Error:', error);
@@ -24,6 +36,7 @@ const handleTaskSubmit = async (newTask) => {
   }
 };
 
+// 새로운 업무 추가 로직
 const fetchLastIdAndAddNewTask = async (newTask) => {
   const response = await fetch('http://localhost:8080/tasks');
   const tasks = await response.json();

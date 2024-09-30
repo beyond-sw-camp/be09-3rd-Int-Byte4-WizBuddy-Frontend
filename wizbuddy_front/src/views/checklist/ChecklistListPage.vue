@@ -3,7 +3,7 @@
     <aside class="left-side">
       <TaskTab />
       <ChecklistSideMenu
-        :tasks="tasks"
+        :tasks="filteredTasks" 
         :selectedChecklist="selectedChecklist"
         @add-checklist="addChecklist"
         @trigger-mode="handleMode"
@@ -37,7 +37,7 @@
       <EditModal
         v-if="isEditModalOpen"
         :checklist="selectedChecklist"
-        :tasks="tasks"
+        :tasks="filteredTasks" 
         @close="closeEditModal"
         @save="handleSaveEdit"
       />
@@ -50,7 +50,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import TaskTab from '@/components/task/TaskTab.vue';
 import UserProfileMenu from '@/components/UserProfileMenu.vue';
 import ChecklistSideMenu from '@/components/checklist/ChecklistSideMenu.vue';
@@ -65,22 +65,39 @@ const selectedChecklist = ref(null);
 const isSelecting = ref(false);
 const isEditing = ref(false);
 const isDeleting = ref(false);
+const shop = JSON.parse(localStorage.getItem('shop'));
+const shopId = shop?.id || null; // shop 정보가 없으면 null 처리
 
 onMounted(async () => {
-  try {
-    // 체크리스트 데이터 가져오기
-    const checklistResponse = await fetch('http://localhost:8080/checklists');
-    checklists.value = await checklistResponse.json();
+  console.log(shop);
+  console.log(shopId);
 
-    // 모든 업무 데이터 가져오기
-    const taskResponse = await fetch('http://localhost:8080/tasks');
-    tasks.value = await taskResponse.json();
+  if (shopId) {
+    try {
+      // 모든 체크리스트 데이터 가져오기
+      const checklistResponse = await fetch('http://localhost:8080/checklists');
+      const allChecklists = await checklistResponse.json();
 
-    console.log('Checklists:', checklists.value);
-    console.log('Tasks:', tasks.value);
-  } catch (error) {
-    console.error('데이터를 불러오는 중 오류가 발생했습니다.', error);
+      // 해당 shopId에 맞는 체크리스트 필터링
+      checklists.value = allChecklists.filter(checklist => checklist.shopId === shopId);
+
+      // 모든 업무 데이터 가져오기
+      const taskResponse = await fetch('http://localhost:8080/tasks');
+      tasks.value = await taskResponse.json();
+
+      console.log('Filtered Checklists:', checklists.value);
+      console.log('Tasks:', tasks.value);
+    } catch (error) {
+      console.error('데이터를 불러오는 중 오류가 발생했습니다.', error);
+    }
+  } else {
+    console.error('로컬 스토리지에서 shop 정보를 가져올 수 없습니다.');
   }
+});
+
+// shopId에 해당하는 task만 필터링
+const filteredTasks = computed(() => {
+  return tasks.value.filter(task => task.shopId === shopId);
 });
 
 // 모드 관리
@@ -120,7 +137,6 @@ const confirmDelete = (checklist) => {
     deleteChecklist(checklist);
   }
 };
-
 
 const deleteChecklist = async (checklist) => {
   try {
@@ -173,9 +189,6 @@ const saveToChecklistPast = async (checklist) => {
     throw error;
   }
 };
-
-
-
 
 // 수정 모달 열기
 const openEditModal = (checklist) => {

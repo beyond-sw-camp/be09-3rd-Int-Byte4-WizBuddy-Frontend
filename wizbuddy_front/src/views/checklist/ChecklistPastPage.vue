@@ -36,22 +36,32 @@
   import { ref, onMounted } from 'vue';
   import TaskTab from '@/components/task/TaskTab.vue';
   import UserProfileMenu from '@/components/UserProfileMenu.vue';
-  import ChecklistSideMenu from '@/components/checklist/ChecklistSideMenu.vue';
   import ChecklistDetailModal from '@/components/checklist/modal/ChecklistDetailModal.vue';
   
   const checklists = ref([]);
   const isModalOpen = ref(false);
   const selectedChecklist = ref(null);
   
-  onMounted(async () => {
-    try {
-      // 체크리스트 이력 데이터 가져오기
-      const checklistResponse = await fetch('http://localhost:8080/checklistsPast');
-      checklists.value = await checklistResponse.json();
+  // 로컬 스토리지에서 shop 정보를 가져오기
+  const shop = JSON.parse(localStorage.getItem('shop'));
+  const shopId = shop?.id || null; // shop 정보가 없으면 null 처리
   
-      console.log('Checklist History:', checklists.value);
-    } catch (error) {
-      console.error('데이터를 불러오는 중 오류가 발생했습니다.', error);
+  onMounted(async () => {
+    if (shopId) {
+      try {
+        // 체크리스트 이력 데이터 가져오기
+        const checklistResponse = await fetch('http://localhost:8080/checklistsPast');
+        const allChecklists = await checklistResponse.json();
+  
+        // 해당 shopId에 맞는 체크리스트 이력 필터링
+        checklists.value = allChecklists.filter(checklist => checklist.shopId === shopId);
+  
+        console.log('Filtered Checklist History:', checklists.value);
+      } catch (error) {
+        console.error('데이터를 불러오는 중 오류가 발생했습니다.', error);
+      }
+    } else {
+      console.error('로컬 스토리지에서 shop 정보를 가져올 수 없습니다.');
     }
   });
   
@@ -68,16 +78,17 @@
   
   // 날짜 포맷 함수
   const formatDate = (dateString) => {
-  const options = { year: 'numeric', month: 'long', day: 'numeric' };
-  return new Date(dateString).toLocaleDateString('ko-KR', options);
-};
-
-// 시간 포맷 함수
-const formatTime = (dateString) => {
-  const options = { hour: '2-digit', minute: '2-digit' };
-  return new Date(dateString).toLocaleTimeString('ko-KR', options);
-};
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString('ko-KR', options);
+  };
+  
+  // 시간 포맷 함수
+  const formatTime = (dateString) => {
+    const options = { hour: '2-digit', minute: '2-digit' };
+    return new Date(dateString).toLocaleTimeString('ko-KR', options);
+  };
   </script>
+  
   
   <style scoped>
   .checklist-list-page {
