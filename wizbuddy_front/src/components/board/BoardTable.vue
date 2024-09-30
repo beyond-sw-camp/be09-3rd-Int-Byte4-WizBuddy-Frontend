@@ -8,7 +8,7 @@
     </div>
     
     <!-- 현재 페이지에 해당하는 게시글만 렌더링 -->
-    <BoardItem v-for="board in paginatedBoards" :key="board.id" :board="board" :comments="getCommentsForBoard(board.id)"  />
+    <BoardItem v-for="board in paginatedBoards" :key="board.id" :board="board" :comments="getCommentsForBoard (board.id)"  />
 
     <!-- 페이징 버튼 -->
     <div class="pagination">
@@ -74,15 +74,36 @@ const nextPage = () => {
   }
 };
 
-// 특정 게시글에 대한 댓글 필터링
-const getCommentsForBoard = (boardId) => {
-  return comments.value.filter(comment => comment.postId === boardId);
-};
+import { watchEffect } from 'vue';
 
+const getCommentsForBoard = (boardId) => {
+  console.log("게시글 ID 타입:", typeof boardId);
+  console.log("댓글 postId 타입:", comments.value.map(comment => typeof comment.postId));
+
+  const filteredComments = comments.value.filter(comment => Number(comment.postId) === Number(boardId));
+  console.log("게시글 ID:", boardId, "에 대한 댓글:", filteredComments);
+  return filteredComments;
+};
+// comments가 변경되면 필터링 로직을 실행
+watchEffect(() => {
+  if (comments.value.length > 0) {
+    console.log("댓글 데이터가 로드되었습니다:", comments.value);
+    // 모든 게시글에 대해 댓글 필터링 (테스트 목적으로)
+    boards.value.forEach(board => {
+      getCommentsForBoard(board.id);
+    });
+  }
+});
+
+const filteredCommentsForBoard = computed(() => {
+  return (boardId) => {
+    return comments.value.filter(comment => comment.postId === boardId);
+  };
+});
 // 게시글 및 댓글 데이터를 로드하는 함수
 const loadBoards = async () => {
   try {
-    const response = await axios.get('http://localhost:8080/posts');
+    const response = await axios.get('http://localhost:8080/subsboard');
     boards.value = response.data;
   } catch (error) {
     console.error('게시글 데이터를 불러오지 못했습니다.', error);
@@ -93,6 +114,7 @@ const loadComments = async () => {
   try {
     const response = await axios.get('http://localhost:8080/comments');
     comments.value = response.data;
+    console.log(comments)
   } catch (error) {
     console.error('댓글 데이터를 불러오지 못했습니다.', error);
   }

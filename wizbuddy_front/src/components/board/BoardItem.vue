@@ -17,6 +17,7 @@ import { computed } from 'vue';
 import CommentCount from './CommentCount.vue'; // 댓글 카운트 컴포넌트 가져오기
 import { useRouter, useRoute } from 'vue-router';
 
+
 const props = defineProps({
   board: {
     type: Object,
@@ -29,7 +30,7 @@ const props = defineProps({
 });
 
 const router = useRouter();
-const route = useRoute();
+
 
 const navigateToDetail = () => {
   if (route.path.includes('/manualboard')) {
@@ -45,6 +46,9 @@ const navigateToDetail = () => {
 const commentCount = computed(() => {
   return props.comments.length;
 });
+
+
+const route = useRoute();
 
 // 현재 페이지가 대타 게시판인지 확인
 const isSubstituteBoard = computed(() => {
