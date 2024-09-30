@@ -70,13 +70,13 @@
     const posts = response.data;
 
     if (posts.length === 0) {
-      return 1;
+      return "1";
     }
 
     const ids = posts.map(post => parseInt(post.id, 10));
     const maxId = Math.max(...ids);
 
-    return maxId + 1;
+    return (maxId + 1).toString();
   }
   
   const submitPost = async () => {
@@ -88,11 +88,20 @@
     }
     const newId = await getNextId(apiUrl);
 
+    const formatDate = (date) => {
+      const year = date.getFullYear();
+      const month = (date.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 +1
+      const day = date.getDate().toString().padStart(2, '0');
+      return `${year}.${month}.${day}`;
+    };
+    const newRegisterdate = formatDate(new Date());
+
     const postData = {
       id: newId,
       title: title.value,
       content: content.value,
-      file: fileName.value
+      file: fileName.value,
+      registerdate: newRegisterdate
     };
 
     try {
