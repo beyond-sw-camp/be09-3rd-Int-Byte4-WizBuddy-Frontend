@@ -1,5 +1,5 @@
 <template>
-  <div v-if="post" class="post-container">
+  <div v-if="board" class="post-container">
     <div class="post-inner-container">
     <div class="post-header">
         <router-link to="/noticeboard" class="back-button">목록으로</router-link>
@@ -16,78 +16,97 @@
       </div>
       <div class="post-detail">
         <div class="post-title">
-          <h1>{{ post.title }}</h1>
-          <span class="post-date">{{ post.registerdate }}</span>
+          <h1>{{ board.title }}</h1>
+          <span class="post-date">{{ board.registerdate }}</span>
         </div>
         
         <div class="post-content">
-          <p>{{ post.content }}</p>
+          <p>{{ board.content }}</p>
         </div>
 
         <div class="post-actions">
           <div class="like-counter" @click="incrementLike">
-            <span>{{ likeClicked ? '❤️' : '🤍' }} {{ likes }}</span> <!-- You can make this dynamic -->
+            <span>{{ likeClicked ? '❤️' : '🤍' }} {{ likes }}</span>
           </div>
-          <div class="file-actions">
-            <input type="button" value=".pdf" class="file-input" />
-            <input type="button" value="Other Action" class="file-input" />
+          <div class="etc-actions">
+            <button class="edit-button" @click="editPost">수정</button>
+            <button class="delete-button" @click="toggleModal">삭제</button>
+
           </div>
         </div>
       </div>
+
+      <DeleteModal
+            v-if="isDeleteModalOpen"
+            :isOpen="isDeleteModalOpen"
+            @close="closeDeleteModal"
+            @confirmDelete="handleDeleteConfirmation"
+        />
     </div>
   </div>
 
-  <div v-else class="else-text">
-    <p>게시글을 불러오는중...</p>
-  </div>
 </template>
 
 <script setup>
 import { ref, onMounted, computed, watch } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
+import axios from 'axios';
+import DeleteModal from '@/components/DeleteModal.vue'
 
-// Mock data for posts (you might fetch this from an API instead)
-const posts = [
-  { id: 1, title: '제목1', writer: '사장1', registerdate: '2024.09.20', content: '내용1' },
-  { id: 2, title: '제목2', writer: '사장2', registerdate: '2024.09.21', content: '내용2' },
-  { id: 3, title: '제목3', writer: '사장3', registerdate: '2024.09.22', content: '내용3' },
-  { id: 4, title: '제목4', writer: '사장4', registerdate: '2024.09.23', content: '내용4' },
-  { id: 5, title: '제목5', writer: '사장5', registerdate: '2024.09.24', content: '내용5' },
-];
-
-// Use Vue Router's useRoute to get the ID parameter from the route
-const route = useRoute();
-const post = ref(null);
+const route = useRoute(); 
+const router = useRouter();
+const board = ref(null);
 const likes = ref(0);
-
-const likeClicked = ref(false);
-
-// 현재 게시글 ID
+const boards = ref([]);
 const postId = computed(() => parseInt(route.params.id));
+const likeClicked = ref(false);
+const isDeleteModalOpen = ref(false);
 
-// 게시글 데이터 로드 함수
-const loadPost = () => {
-  post.value = posts.find(p => p.id === postId.value);
+const loadPost = async () => {
+  try {
+    const response = await axios.get(`http://localhost:8080/noticeboard`);
+    boards.value = response.data;
+
+    const currentBoard = boards.value.find(board => parseInt(board.id) === postId.value);
+    if (currentBoard) {
+      board.value = currentBoard;
+    } else {
+      console.error('게시글을 찾을 수 없습니다.');
+    }
+  } catch (error) {
+    console.error('게시글 데이터를 불러오는 중 오류 발생: ', error);
+  }
 };
 
-// 컴포넌트가 처음 로드될 때 게시글 데이터 로드
 onMounted(() => {
   loadPost();
 });
 
-// 경로 변경 시(postId 변경 시) 게시글 데이터 다시 로드
-watch(postId, (newId) => {
+watch(postId, () => {
   loadPost();
 });
 
-// 이전 글 ID (현재 ID가 1보다 크면)
+watch(boards, (newBoards) => {
+  if (newBoards && newBoards.length > 0) {
+    const currentPost = newBoards.find((board) => parseInt(board.id) === postId.value);
+    if (currentPost) {
+      board.value = currentPost;
+    } else {
+      console.error('게시글을 찾을 수 없습니다.');
+    }
+  }
+});
+
+// 이전 글 ID 계산 (현재 postId가 1보다 크면)
 const previousPostId = computed(() => {
   return postId.value > 1 ? postId.value - 1 : null;
 });
 
-// 다음 글 ID (마지막 글보다 작은 경우)
+// 다음 글 ID 계산 (boards 배열의 마지막 ID와 비교)
 const nextPostId = computed(() => {
-  return postId.value < posts.length ? postId.value + 1 : null;
+  const lastPostId = boards.value.length;
+  console.log(lastPostId);
+  return postId.value < lastPostId ? postId.value + 1 : null;
 });
 
 // 좋아요 증가 함수
@@ -96,6 +115,29 @@ const incrementLike = () => {
     likes.value += 1;
     likeClicked.value = true; // 한 번만 클릭 가능
   }
+};
+
+const closeDeleteModal = () => {
+  isDeleteModalOpen.value = false;
+};
+
+
+// 삭제 확인 처리 함수 (여기서 DeleteModal의 삭제 확인을 처리)
+const handleDeleteConfirmation = async () => {
+  try {
+    await axios.delete(`http://localhost:8080/noticeboard/${route.params.id}`);
+    router.push('/noticeboard');
+  } catch (error) {
+    console.error('게시글 삭제 중 오류 발생:', error);
+  }
+};
+
+const editPost = () => {
+  router.push({ path: `/noticeboard/${postId.value}/edit` });
+};
+
+const toggleModal = () => {
+  isDeleteModalOpen.value = !isDeleteModalOpen.value;
 };
 
 </script>
@@ -216,13 +258,6 @@ const incrementLike = () => {
   align-items: center; /* 세로 정렬 */
 }
 
-/* 
-.else-text {
-  display: flex;
-  justify-content: center;
-  margin-top: auto;
-} */
-
 .else-text {
   display: flex;
   justify-content: center; /* Horizontally center */
@@ -274,4 +309,37 @@ const incrementLike = () => {
   cursor: pointer; /* 클릭 가능하게 커서 변경 */
 }
 
+.etc-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-button, .delete-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0px 2px rgba(0, 0.1, 0, 0.1);
+}
+
+.edit-button {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.edit-button:hover {
+  background-color: #e0e0e0;
+}
+
+.delete-button {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #c0392b;
+}
 </style>

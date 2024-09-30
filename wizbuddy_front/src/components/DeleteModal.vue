@@ -13,6 +13,26 @@
   
   <script setup>
   import { ref } from 'vue';
+  import { useRoute, useRouter } from 'vue-router';
+
+  const route = useRoute();
+  const router = useRouter();
+
+  async function confirmDelete() {
+    try {
+      if (route.path.startsWith('/manualbaord')) {
+        await axios.delete('http://localhost:8080/manualbaord/${route.params.id}');
+        router.push('/manualboard');
+      } else {
+        console.log('현재 경로는 manualboard 삭제 경로가 아닙니다.');
+      }
+    } catch (error) {
+      console.error('게시글 삭제 중 오류 발생 ', error);
+    }
+    
+    isDeleted.value = true;
+    emit('confirmDelete');
+  }
   
   const props = defineProps({
     isOpen: Boolean,
@@ -25,15 +45,15 @@
     emit('close');
   }
   
-  function confirmDelete() {
-    isDeleted.value = true;
-    emit('confirmDelete');
+  // function confirmDelete() {
+  //   isDeleted.value = true;
+  //   emit('confirmDelete');
   
-    setTimeout(() => {
-      closeModal(); 
-      isDeleted.value = false;
-    }, 4000); 
-  }
+  //   setTimeout(() => {
+  //     closeModal(); 
+  //     isDeleted.value = false;
+  //   }, 4000); 
+  // }
   </script>
   
   <style scoped>
