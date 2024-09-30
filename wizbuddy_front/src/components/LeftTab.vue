@@ -6,34 +6,35 @@
   </template>
   
   <script setup>
-  import { useRouter } from 'vue-router';
-  import { ref, watch, onMounted } from 'vue';
+  import { useRoute, useRouter } from 'vue-router';
+  import { ref, watch, onMounted, watchEffect } from 'vue';
   
+  const route = useRoute();
   const router = useRouter();
   const isScheduleIncludePage = ref(false);
   const activeTab = ref('');
   
-  // 현재 경로 감시
-  watch(() => router.currentRoute.value.path, (newPath) => {
+  watch(() => route.path, (newPath) => {
     isScheduleIncludePage.value = newPath.includes('/schedule');
   }, { immediate: true });
   
   const setActiveTab = (tab) => {
     activeTab.value = tab;
-    const shopId = JSON.parse(localStorage.getItem('shop'))?.id; // 로컬스토리지에서 shopId 가져오기
+    const shopId = route.query.shopId; // 현재 shopId 가져오기
   
     switch (tab) {
       case 'scheduleinfo':
-        router.push('/schedule'); // 쿼리 없이 경로로 이동
+        router.push({ path: '/schedule', query: { shopId } }); // shopId를 쿼리로 추가
         break;
       case 'weeklyschedule':
-        router.push('/schedule/schedules'); // 쿼리 없이 경로로 이동
+        router.push({ path: '/schedule/schedules', query: { shopId } }); // shopId를 쿼리로 추가
         break;
     }
   };
   
   const updateActiveTabFromRoute = () => {
-    const path = router.currentRoute.value.path;
+    const path = route.path;
+    const shopId = route.query.shopId;
   
     if (path.includes('/schedule/schedules')) {
       activeTab.value = 'weeklyschedule';
@@ -46,46 +47,47 @@
     updateActiveTabFromRoute();
   });
   
-  // 경로 변화 감시
-  watch(() => router.currentRoute.value.path, updateActiveTabFromRoute);
+  watchEffect(() => {
+    updateActiveTabFromRoute();
+  });
   </script>
   
   <style scoped>
   .tab-container {
-    display: flex;
-    margin-top: 10px;
-    flex-direction: column;
-    background-color: #fff;
-    border-radius: 20px;
-    padding: 20px;
-    height: auto;
-    min-width: 180px;
+      display: flex;
+      margin-top: 10px;
+      flex-direction: column;
+      background-color: #fff;
+      border-radius: 20px;
+      padding: 20px;
+      height: auto;
+      min-width: 180px;
   }
   
   .tab-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 40px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    font-size: 12px;
-    color: #000;
-    text-align: center;
-    transition: background-color 0.3s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 40px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      font-size: 12px;
+      color: #000;
+      text-align: center;
+      transition: background-color 0.3s ease;
   }
   
   .tab-item:hover {
-    background-color: #f0f0f0;
+      background-color: #f0f0f0;
   }
   
   .tab-item.active {
-    background: rgba(69, 83, 157, 0.20);
-    color: #000;
-    border-radius: 10px;
-    font-weight: bold;
+      background: rgba(69, 83, 157, 0.20);
+      color: #000;
+      border-radius: 10px;
+      font-weight: bold;
   }
   </style>
   
