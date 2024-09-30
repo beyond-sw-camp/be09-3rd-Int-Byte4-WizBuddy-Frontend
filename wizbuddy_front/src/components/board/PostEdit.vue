@@ -74,8 +74,11 @@
   // 게시글 데이터 불러오기
   const loadPost = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/manualboard`);
-
+      let apiUrl = 'http://localhost:8080/manualboard';
+      if (window.location.pathname.includes('/noticeboard')) {
+        apiUrl = 'http://localhost:8080/noticeboard';
+      }
+      const response = await axios.get(apiUrl);
       const postData = response.data.find(post => parseInt(post.id) === parseInt(postId.value));
     
       title.value = postData.title;
@@ -93,6 +96,11 @@
   // 게시글 수정 요청
 const updatePost = async () => {
   try {
+    let apiUrl = `http://localhost:8080/manualboard/${postId.value}`;
+    if (window.location.pathname.includes('/noticeboard')) {
+      apiUrl = `http://localhost:8080/noticeboard/${postId.value}`;
+      console.log("공지사항");
+    }
     const updatedPost = {
       title: title.value,
       content: content.value,
@@ -101,10 +109,19 @@ const updatePost = async () => {
       file: file.value, // 파일 데이터도 함께 전송
     };
 
-    await axios.put(`http://localhost:8080/manualboard/${postId.value}`, updatedPost);
+    console.log('API 요청 URL: ', apiUrl);
+    console.log('수정할 데이터: ', updatedPost);
+
+    await axios.put(apiUrl, updatedPost);
     
     message.value = '게시글이 성공적으로 수정되었습니다.';
-    router.push(`/manualboard/${postId.value}`);
+    console.log(apiUrl);
+
+    if (window.location.pathname.includes('/noticeboard')) {
+      router.push(`/noticeboard/${postId.value}`);
+    } else {
+      router.push(`/manualboard/${postId.value}`);
+    }
   } catch (error) {
     console.error('게시글 수정 중 오류 발생: ', error);
     message.value = '게시글 수정 중 오류가 발생했습니다.';

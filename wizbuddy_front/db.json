@@ -641,7 +641,7 @@
       "title": "대타 구합니다.",
       "writer": "조제훈",
       "time": "2024/09/01 1T",
-      "partname":"이나현",
+      "partname": "이나현",
       "registerdate": "2024.09.01",
       "content": "9월 30일에 우리 매장의 마스크 나랭이ㅇㅇ가 고향에 다녀와야 한다고 해서 대타가 급하게 필요합니다. 가능한 직원들은 댓글 달아주세요!"
     },
@@ -650,7 +650,7 @@
       "title": "대타 구구 비둘기",
       "writer": "조제훈",
       "time": "2024/09/02 2T",
-      "partname":"이나현",
+      "partname": "이나현",
       "registerdate": "2024.09.02",
       "content": "우리 나현이 대타좀 해주세요. 이번에는 학교를 가야한답디다?"
     },
@@ -659,7 +659,7 @@
       "title": "시급 ㄷㄷ",
       "writer": "조제훈",
       "time": "2024/09/03 3T",
-      "partname":"이나현",
+      "partname": "이나현",
       "registerdate": "2024.09.03",
       "content": "9월 3일에 우리 매장의 마스코트 나짱이가 고향에 다녀와야한다고해서 대타가 급하게 필요합니다. 가능한 직원들은 댓글 달아주세요!"
     },
@@ -668,7 +668,7 @@
       "title": "긴급 대타 구인",
       "writer": "조제훈",
       "time": "2024/09/04 1T",
-      "partname":"이나현",
+      "partname": "이나현",
       "registerdate": "2024.09.04",
       "content": "급하게 대타를 구합니다. 연락주세요."
     },
@@ -677,7 +677,7 @@
       "title": "다음주 토요일 대타",
       "writer": "조제훈",
       "time": "2024/09/05 3T",
-      "partname":"백경석",
+      "partname": "백경석",
       "registerdate": "2024.09.05",
       "content": "다음주 토요일 대타 구합니다. 시간 조정 가능!"
     },
@@ -686,7 +686,7 @@
       "title": "새벽 근무 대타",
       "writer": "조제훈",
       "time": "2024/09/06 1T",
-      "partname":"유제은",
+      "partname": "유제은",
       "registerdate": "2024.09.06",
       "content": "새벽 근무 대타 급하게 구해요. 연락주세요!"
     },
@@ -695,7 +695,7 @@
       "title": "대타 요청합니다.",
       "writer": "조제훈",
       "time": "2024/09/07 2T",
-      "partname":"이서현",
+      "partname": "이서현",
       "registerdate": "2024.09.07",
       "content": "주말에 개인 사정이 생겨 대타 구합니다. 연락바랍니다."
     },
@@ -704,7 +704,7 @@
       "title": "금요일 대타 가능하신 분",
       "writer": "조제훈",
       "time": "2024/09/08 1T",
-      "partname":"백경석",
+      "partname": "백경석",
       "registerdate": "2024.09.08",
       "content": "이번주 금요일 대타가 필요합니다. 가능한 분 연락 주세요."
     },
@@ -713,7 +713,7 @@
       "title": "수요일 근무 대타",
       "writer": "조제훈",
       "time": "2024/09/09 3T",
-      "partname":"이나현",
+      "partname": "이나현",
       "registerdate": "2024.09.09",
       "content": "수요일 근무 대타 구합니다."
     },
@@ -722,188 +722,402 @@
       "title": "주말 대타 구인",
       "writer": "조제훈",
       "time": "2024/09/10 1T",
-      "partname":"유제은",
+      "partname": "유제은",
       "registerdate": "2024.09.10",
       "content": "주말 근무 대타 구인합니다. 급합니다!"
+    },
+    {
+      "id": "1704",
+      "title": "대타 구해요잇",
+      "writer": "김민수",
+      "content": "누구 쉬는날 근무 할 사람~~~~",
+      "registerdate": "2024.09.30"
     }
   ],
   "comments": [
-  {
-    "id": "1",
-    "postId": 1,
-    "writer": "김용승",
-    "content": "제가 대신 근무하겠습니다.!!",
-    "avatar": "/src/assets/icons/board/avater2.svg"
-  },
-  {
-    "id": "2",
-    "postId": 1,
-    "writer": "조제훈",
-    "content": "다음에는 제가 할게요!",
-    "avatar": "/src/assets/icons/board/avater3.svg"
-  },
-  {
-    "id": "3",
-    "postId": 2,
-    "writer": "이나현",
-    "content": "저 대신 누가 해주실 분 있나요?",
-    "avatar": "/src/assets/icons/board/avater3.svg"
-  },
-  {
-    "id": "4",
-    "postId": 2,
-    "writer": "백경석",
-    "content": "제가 도와드릴게요!",
-    "avatar": "/src/assets/icons/board/avatar.svg"
-  },
-  {
-    "id": "5",
-    "postId": 3,
-    "writer": "이서현",
-    "content": "이번에는 어려울 것 같습니다.",
-    "avatar": "/src/assets/icons/board/avater4.svg"
-  },
-  {
-    "id": "6",
-    "postId": 3,
-    "writer": "박철민",
-    "content": "가능하면 제가 맡을게요!",
-    "avatar": "/src/assets/icons/board/avater0.svg"
-  },
-  {
-    "id": "7",
-    "postId": 4,
-    "writer": "서미란",
-    "content": "저 대신 근무해주실 수 있을까요?",
-    "avatar": "/src/assets/icons/board/avater7.svg"
-  },
-  {
-    "id": "8",
-    "postId": 4,
-    "writer": "유제은",
-    "content": "네! 제가 할 수 있어요.",
-    "avatar": "/src/assets/icons/board/avater5.svg"
-  },
-  {
-    "id": "9",
-    "postId": 5,
-    "writer": "백경석",
-    "content": "제가 대신 해드릴게요.",
-    "avatar": "/src/assets/icons/board/avatar.svg"
-  },
-  {
-    "id": "10",
-    "postId": 5,
-    "writer": "김용승",
-    "content": "이번에는 제가 도와드릴게요!",
-    "avatar": "/src/assets/icons/board/avater2.svg"
-  },
-  {
-    "id": "11",
-    "postId": 6,
-    "writer": "이나현",
-    "content": "이 날은 제가 가능합니다.",
-    "avatar": "/src/assets/icons/board/avater3.svg"
-  },
-  {
-    "id": "12",
-    "postId": 6,
-    "writer": "조제훈",
-    "content": "저도 가능할 것 같아요!",
-    "avatar": "/src/assets/icons/board/avater4.svg"
-  },
-  {
-    "id": "13",
-    "postId": 7,
-    "writer": "서미란",
-    "content": "근무해주실 분 계신가요?",
-    "avatar": "/src/assets/icons/board/avater0.svg"
-  },
-  {
-    "id": "14",
-    "postId": 7,
-    "writer": "유제은",
-    "content": "제가 대신할 수 있어요!",
-    "avatar": "/src/assets/icons/board/avater5.svg"
-  },
-  {
-    "id": "15",
-    "postId": 8,
-    "writer": "김용승",
-    "content": "제가 그날 근무하겠습니다.",
-    "avatar": "/src/assets/icons/board/avater2.svg"
-  },
-  {
-    "id": "16",
-    "postId": 8,
-    "writer": "백경석",
-    "content": "제가 그날 가능합니다!",
-    "avatar": "/src/assets/icons/board/avatar.svg"
-  },
-  {
-    "id": "17",
-    "postId": 9,
-    "writer": "이서현",
-    "content": "제가 대신할 수 있을 것 같아요.",
-    "avatar": "/src/assets/icons/board/avater4.svg"
-  },
-  {
-    "id": "18",
-    "postId": 9,
-    "writer": "박철민",
-    "content": "네! 제가 맡겠습니다.",
-    "avatar": "/src/assets/icons/board/avater0.svg"
-  },
-  {
-    "id": "19",
-    "postId": 10,
-    "writer": "서미란",
-    "content": "제가 근무 가능합니다.",
-    "avatar": "/src/assets/icons/board/avater0.svg"
-  },
-  {
-    "id": "20",
-    "postId": 10,
-    "writer": "유제은",
-    "content": "저 대신 누가 해주실 분 있나요?",
-    "avatar": "/src/assets/icons/board/avater5.svg"
-  }
-],
-  "manualboard": [
     {
       "id": "1",
-      "title": "아메리카노와 라떼의 차이",
-      "writer": "이서현",
-      "registerdate": "2024-09-25",
-      "content": "아메리카노와 라떼는 커피의 기본적인 두 가지 형태로, 아메리카노는 에스프레소에 물을 추가한 반면, 라떼는 우유를 더해 부드러운 맛을 냅니다."
+      "postId": 1,
+      "writer": "김용승",
+      "content": "제가 대신 근무하겠습니다.!!",
+      "avatar": "/src/assets/icons/board/avater2.svg"
     },
     {
       "id": "2",
-      "title": "최고의 핸드드립 커피 원두 고르는 법",
-      "writer": "김지훈",
-      "registerdate": "2024-09-26",
-      "content": "핸드드립 커피를 즐기려면 원두 선택이 중요한데, 신선한 원두와 적절한 로스팅 정도를 고려하는 것이 중요합니다."
+      "postId": 1,
+      "writer": "조제훈",
+      "content": "다음에는 제가 할게요!",
+      "avatar": "/src/assets/icons/board/avater3.svg"
     },
     {
       "id": "3",
-      "title": "카페 인테리어 트렌드 2024",
-      "writer": "박지민",
-      "registerdate": "2024-09-27",
-      "content": "2024년 카페 인테리어 트렌드는 미니멀리즘과 자연 친화적 디자인이 주류를 이루며, 따뜻한 조명과 나무 소재가 인기입니다."
+      "postId": 2,
+      "writer": "이나현",
+      "content": "저 대신 누가 해주실 분 있나요?",
+      "avatar": "/src/assets/icons/board/avater3.svg"
     },
     {
       "id": "4",
-      "title": "콜드브루 만들기: 집에서 쉽게 즐기는 법",
-      "writer": "최은지",
-      "registerdate": "2024-09-28",
-      "content": "콜드브루는 찬물로 오랜 시간 추출한 커피로, 집에서도 간단하게 만들 수 있는 방법과 함께 주의사항을 소개합니다."
+      "postId": 2,
+      "writer": "백경석",
+      "content": "제가 도와드릴게요!",
+      "avatar": "/src/assets/icons/board/avatar.svg"
     },
     {
       "id": "5",
-      "title": "카페 운영에 꼭 필요한 장비 리스트",
-      "writer": "정현수",
-      "registerdate": "2024-09-29",
-      "content": "에스프레소 머신, 그라인더, 스티머 등 카페 운영에 필요한 필수 장비와 선택 장비 리스트를 소개합니다."
+      "postId": 3,
+      "writer": "이서현",
+      "content": "이번에는 어려울 것 같습니다.",
+      "avatar": "/src/assets/icons/board/avater4.svg"
+    },
+    {
+      "id": "6",
+      "postId": 3,
+      "writer": "박철민",
+      "content": "가능하면 제가 맡을게요!",
+      "avatar": "/src/assets/icons/board/avater0.svg"
+    },
+    {
+      "id": "7",
+      "postId": 4,
+      "writer": "서미란",
+      "content": "저 대신 근무해주실 수 있을까요?",
+      "avatar": "/src/assets/icons/board/avater7.svg"
+    },
+    {
+      "id": "8",
+      "postId": 4,
+      "writer": "유제은",
+      "content": "네! 제가 할 수 있어요.",
+      "avatar": "/src/assets/icons/board/avater5.svg"
+    },
+    {
+      "id": "9",
+      "postId": 5,
+      "writer": "백경석",
+      "content": "제가 대신 해드릴게요.",
+      "avatar": "/src/assets/icons/board/avatar.svg"
+    },
+    {
+      "id": "10",
+      "postId": 5,
+      "writer": "김용승",
+      "content": "이번에는 제가 도와드릴게요!",
+      "avatar": "/src/assets/icons/board/avater2.svg"
+    },
+    {
+      "id": "11",
+      "postId": 6,
+      "writer": "이나현",
+      "content": "이 날은 제가 가능합니다.",
+      "avatar": "/src/assets/icons/board/avater3.svg"
+    },
+    {
+      "id": "12",
+      "postId": 6,
+      "writer": "조제훈",
+      "content": "저도 가능할 것 같아요!",
+      "avatar": "/src/assets/icons/board/avater4.svg"
+    },
+    {
+      "id": "13",
+      "postId": 7,
+      "writer": "서미란",
+      "content": "근무해주실 분 계신가요?",
+      "avatar": "/src/assets/icons/board/avater0.svg"
+    },
+    {
+      "id": "14",
+      "postId": 7,
+      "writer": "유제은",
+      "content": "제가 대신할 수 있어요!",
+      "avatar": "/src/assets/icons/board/avater5.svg"
+    },
+    {
+      "id": "15",
+      "postId": 8,
+      "writer": "김용승",
+      "content": "제가 그날 근무하겠습니다.",
+      "avatar": "/src/assets/icons/board/avater2.svg"
+    },
+    {
+      "id": "16",
+      "postId": 8,
+      "writer": "백경석",
+      "content": "제가 그날 가능합니다!",
+      "avatar": "/src/assets/icons/board/avatar.svg"
+    },
+    {
+      "id": "17",
+      "postId": 9,
+      "writer": "이서현",
+      "content": "제가 대신할 수 있을 것 같아요.",
+      "avatar": "/src/assets/icons/board/avater4.svg"
+    },
+    {
+      "id": "18",
+      "postId": 9,
+      "writer": "박철민",
+      "content": "네! 제가 맡겠습니다.",
+      "avatar": "/src/assets/icons/board/avater0.svg"
+    },
+    {
+      "id": "19",
+      "postId": 10,
+      "writer": "서미란",
+      "content": "제가 근무 가능합니다.",
+      "avatar": "/src/assets/icons/board/avater0.svg"
+    },
+    {
+      "id": "20",
+      "postId": 10,
+      "writer": "유제은",
+      "content": "저 대신 누가 해주실 분 있나요?",
+      "avatar": "/src/assets/icons/board/avater5.svg"
     }
-  ]
+  ],
+    "manualboard": [
+      {
+        "id": "1",
+        "title": "매장 청소 방법",
+        "content": "매장 청소는 하루에 두 번, 개점 전과 마감 후 진행됩니다.",
+        "registerdate": "2024-09-29",
+        "file": "cleaning_guide.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "2",
+        "title": "커피머신 사용법",
+        "content": "커피머신의 사용법은 반드시 교육을 받은 후 사용 가능합니다.",
+        "registerdate": "2024-09-29",
+        "file": "coffee_machine_manual.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "3",
+        "title": "재고 관리 가이드",
+        "content": "재고는 매일 저녁 마감 후 점검하여 부족한 물품을 기록합니다.",
+        "registerdate": "2024-09-29",
+        "file": "inventory_guide.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "4",
+        "title": "음료 제조 표준",
+        "content": "음료 제조 시에는 레시피에 따라 정확한 계량을 해야 합니다.",
+        "registerdate": "2024-09-29",
+        "file": "drink_recipe.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "5",
+        "title": "고객 응대 매뉴얼",
+        "content": "고객 응대 시 항상 미소를 유지하며 정중히 인사합니다.",
+        "registerdate": "2024-09-29",
+        "file": "customer_service_manual.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "6",
+        "title": "POS 시스템 사용법",
+        "content": "POS 시스템은 결제 시 반드시 확인 후 사용하세요.",
+        "registerdate": "2024-09-29",
+        "file": "pos_manual.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "7",
+        "title": "휴식 시간 규칙",
+        "content": "휴식 시간은 4시간 근무 시 30분이며, 교대로 진행합니다.",
+        "registerdate": "2024-09-29",
+        "file": "break_policy.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "8",
+        "title": "음료 오더 처리 방법",
+        "content": "음료 주문은 정확히 입력하고, 결제 후 제조 시작합니다.",
+        "registerdate": "2024-09-29",
+        "file": "order_processing_guide.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "9",
+        "title": "유니폼 착용 규칙",
+        "content": "근무 시 항상 유니폼을 착용하며, 청결하게 유지합니다.",
+        "registerdate": "2024-09-29",
+        "file": "uniform_policy.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "10",
+        "title": "안전 사고 예방 매뉴얼",
+        "content": "안전 사고를 예방하기 위해서는 항상 주의를 기울입니다.",
+        "registerdate": "2024-09-29",
+        "file": "safety_manual.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "11",
+        "title": "식자재 관리법",
+        "content": "식자재는 매일 신선도를 확인하고, 유통기한을 점검합니다.",
+        "registerdate": "2024-09-29",
+        "file": "food_management.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "12",
+        "title": "음료 리필 규칙",
+        "content": "음료 리필은 특정 메뉴에 한해 제공하며, 리필 조건을 안내합니다.",
+        "registerdate": "2024-09-29",
+        "file": "refill_policy.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "13",
+        "title": "고객 불만 처리 매뉴얼",
+        "content": "고객 불만이 있을 경우 매니저에게 즉시 보고합니다.",
+        "registerdate": "2024-09-29",
+        "file": "complaint_handling.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "14",
+        "title": "음료 트레이닝 계획",
+        "content": "신입 직원은 음료 제조 트레이닝을 주 2회 진행합니다.",
+        "registerdate": "2024-09-29",
+        "file": "training_plan.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "15",
+        "title": "마감 정리 매뉴얼",
+        "content": "마감 시에는 모든 장비를 정리하고, 청소를 철저히 합니다.",
+        "registerdate": "2024-09-29",
+        "file": "closing_guide.pdf",
+        "writer": "관리자"
+      }
+    ],
+    "noticeboard": [
+      {
+        "id": "1",
+        "title": "휴무 일정 공지",
+        "content": "다음 주 월요일은 휴무입니다.",
+        "registerdate": "2024-09-29",
+        "file": "holiday_notice.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "2",
+        "title": "추석 연휴 안내",
+        "content": "추석 연휴 동안 매장은 휴무입니다.",
+        "registerdate": "2024-09-29",
+        "file": "chuseok_notice.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "3",
+        "title": "가격 인상 안내",
+        "content": "다음 달부터 일부 메뉴의 가격이 인상됩니다.",
+        "registerdate": "2024-09-29",
+        "file": "price_increase.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "4",
+        "title": "신메뉴 출시 안내",
+        "content": "신메뉴 '자몽 에이드'가 출시되었습니다.",
+        "registerdate": "2024-09-29",
+        "file": "new_menu_notice.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "5",
+        "title": "정기 점검 안내",
+        "content": "이번 주 토요일에 매장 정기 점검이 진행됩니다.",
+        "registerdate": "2024-09-29",
+        "file": "inspection_notice.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "6",
+        "title": "연말 파티 초대",
+        "content": "직원 연말 파티가 12월 25일에 열립니다.",
+        "registerdate": "2024-09-29",
+        "file": "party_invite.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "7",
+        "title": "이벤트 공지",
+        "content": "고객을 위한 특별 이벤트가 다음 주에 진행됩니다.",
+        "registerdate": "2024-09-29",
+        "file": "event_notice.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "8",
+        "title": "위생 점검 결과",
+        "content": "최근 위생 점검에서 우수 평가를 받았습니다.",
+        "registerdate": "2024-09-29",
+        "file": "hygiene_report.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "9",
+        "title": "직원 건강검진 안내",
+        "content": "직원 건강검진이 이번 달 말에 진행됩니다.",
+        "registerdate": "2024-09-29",
+        "file": "health_checkup.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "10",
+        "title": "고객 설문조사",
+        "content": "고객 만족도를 조사하는 설문 이벤트를 진행합니다.",
+        "registerdate": "2024-09-29",
+        "file": "survey_notice.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "11",
+        "title": "신입 직원 교육 일정",
+        "content": "신입 직원 교육이 다음 주에 시작됩니다.",
+        "registerdate": "2024-09-29",
+        "file": "training_schedule.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "12",
+        "title": "매장 리모델링 안내",
+        "content": "다음 달에 매장 리모델링이 진행될 예정입니다.",
+        "registerdate": "2024-09-29",
+        "file": "remodeling_notice.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "13",
+        "title": "정기 회의 일정",
+        "content": "다음 주 월요일에 정기 회의가 열립니다.",
+        "registerdate": "2024-09-29",
+        "file": "meeting_schedule.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "14",
+        "title": "할인 행사 안내",
+        "content": "이번 주에 특별 할인 행사를 진행합니다.",
+        "registerdate": "2024-09-29",
+        "file": "discount_event.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "15",
+        "title": "고객 불편사항 접수",
+        "content": "고객 불편사항 접수를 위한 전용 창구가 마련되었습니다.",
+        "registerdate": "2024-09-29",
+        "file": "complaint_service.pdf",
+        "writer": "관리자"
+      }
+    ]
 }

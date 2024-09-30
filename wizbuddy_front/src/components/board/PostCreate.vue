@@ -34,7 +34,10 @@
   
   <script setup>
   import { ref } from 'vue';
+  import { useRouter } from 'vue-router';
+  import axios from 'axios';
   
+  const router = useRouter();
   const title = ref('');
   const content = ref('');
   const file = ref(null);
@@ -61,19 +64,59 @@
     fileName.value = '';
     document.getElementById('fileInput').value = '';
   };
+
+  const getNextId = async (apiUrl) => {
+    const response = await axios.get(apiUrl);
+    const posts = response.data;
+
+    if (posts.length === 0) {
+      return "1";
+    }
+
+    const ids = posts.map(post => parseInt(post.id, 10));
+    const maxId = Math.max(...ids);
+
+    return (maxId + 1).toString();
+  }
   
-  const submitPost = () => {
+  const submitPost = async () => {
     // 게시글 등록 로직 (폼 데이터 전송 예시)
+
+    let apiUrl = 'http://localhost:8080/manualboard';
+    if (window.location.pathname.includes('/noticeboard')) {
+      apiUrl = 'http://localhost:8080/noticeboard';
+    }
+    const newId = await getNextId(apiUrl);
+
+    const formatDate = (date) => {
+      const year = date.getFullYear();
+      const month = (date.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 +1
+      const day = date.getDate().toString().padStart(2, '0');
+      return `${year}.${month}.${day}`;
+    };
+    const newRegisterdate = formatDate(new Date());
+
     const postData = {
+      id: newId,
       title: title.value,
       content: content.value,
-      file: file.value,
+      file: fileName.value,
+      registerdate: newRegisterdate
     };
-    console.log('게시글 데이터:', postData);
-  
-    // 필요한 API 요청을 이곳에서 처리 (ex: Axios 사용)
-    // axios.post('/api/posts', formData).then(...);
-  };
+
+    try {
+    const response = await axios.post(apiUrl, postData);
+    console.log('게시글이 성공적으로 등록되었습니다:', response.data);
+    if (window.location.pathname.includes('/noticeboard')) {
+      router.push('/noticeboard');
+    } else {
+      router.push('/manualboard');
+    }
+  } catch (error) {
+    console.error('게시글 등록 중 오류 발생:', error);
+  }
+};
+
   </script>
   
   <style scoped>

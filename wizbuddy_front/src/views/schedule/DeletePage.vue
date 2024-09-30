@@ -43,7 +43,7 @@
   import SideMenu from '@/components/SideMenu.vue';
   import ScheduleCalendar from '@/components/schedule/ScheduleCalendar.vue';
   import ScheduleInfoModalForDelete from '@/components/schedule/modal/ScheduleInfoModalForDelete.vue';
-  import DeleteModal from '@/components/schedule/modal/DeleteModal.vue';
+  import DeleteModal from '@/components/DeleteModal.vue';
   
   const currentYear = ref(new Date().getFullYear());
   const currentMonth = ref(new Date().getMonth() + 1);

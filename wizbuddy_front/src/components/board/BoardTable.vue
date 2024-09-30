@@ -12,9 +12,9 @@
 
     <!-- 페이징 버튼 -->
     <div class="pagination">
-      <button @click="prevPage" :disabled="currentPage === 1">이전</button>
+      <button class="prev-page" @click="prevPage" :disabled="currentPage === 1">이전</button>
       <span>{{ currentPage }} / {{ totalPages }}</span>
-      <button @click="nextPage" :disabled="currentPage === totalPages">다음</button>
+      <button class="next-page" @click="nextPage" :disabled="currentPage === totalPages">다음</button>
     </div>
   </div>
 </template>
@@ -38,6 +38,21 @@ const totalPages = computed(() => {
   return Math.ceil(boards.value.length / itemsPerPage.value);
 });
 
+// 이전 페이지로 이동
+const prevPage = () => {
+  if (currentPage.value > 1) {
+    currentPage.value--;
+  }
+};
+
+// 다음 페이지로 이동
+const nextPage = () => {
+  if (currentPage.value < totalPages.value) {
+    currentPage.value++;
+  }
+};
+
+
 // 현재 페이지에 해당하는 게시글 반환
 const paginatedBoards = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage.value;
@@ -60,19 +75,6 @@ const paginatedBoards = computed(() => {
     }
   });
 
-// 이전 페이지로 이동
-const prevPage = () => {
-  if (currentPage.value > 1) {
-    currentPage.value--;
-  }
-};
-
-// 다음 페이지로 이동
-const nextPage = () => {
-  if (currentPage.value < totalPages.value) {
-    currentPage.value++;
-  }
-};
 
 import { watchEffect } from 'vue';
 
@@ -100,15 +102,6 @@ const filteredCommentsForBoard = computed(() => {
     return comments.value.filter(comment => comment.postId === boardId);
   };
 });
-// 게시글 및 댓글 데이터를 로드하는 함수
-const loadBoards = async () => {
-  try {
-    const response = await axios.get('http://localhost:8080/subsboard');
-    boards.value = response.data;
-  } catch (error) {
-    console.error('게시글 데이터를 불러오지 못했습니다.', error);
-  }
-};
 
 const loadComments = async () => {
   try {
@@ -117,6 +110,32 @@ const loadComments = async () => {
     console.log(comments)
   } catch (error) {
     console.error('댓글 데이터를 불러오지 못했습니다.', error);
+  }
+};
+
+// 컴포넌트가 마운트될 때 게시글과 댓글 데이터를 로드
+onMounted(() => {
+  loadBoards();
+  loadComments();
+});
+
+
+const loadBoards = async () => {
+  let boardUrl = '';
+
+  if(window.location.pathname === '/noticeboard') {
+    boardUrl = 'http://localhost:8080/noticeboard';
+  } else if (window.location.pathname === '/manualboard') {
+    boardUrl = 'http://localhost:8080/manualboard';
+  } else {
+    boardUrl = 'http://localhost:8080/subsboard';
+  }
+
+  try {
+    const boardResponse = await axios.get(boardUrl);
+    boards.value = boardResponse.data;
+  } catch (error) {
+    console.error('데이터를 불러오지 못했습니다: ', error);
   }
 };
 
@@ -158,17 +177,18 @@ onMounted(() => {
   bottom: 0; /* 화면 하단에 위치 */
 }
 
-button {
+.prev-page, .next-page {
   padding: 8px 12px;
-  margin: 0 5px;
+  margin: 0 10px;
   cursor: pointer;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-  background-color: #fff;
+  background-color: #45539D;
   border: none;
+  border-radius: 10px;
+  color: #ffffff;
 }
 
-button:disabled {
+.prev-page:disabled, .next-page:disabled {
   cursor: not-allowed;
- 
 }
 </style>
