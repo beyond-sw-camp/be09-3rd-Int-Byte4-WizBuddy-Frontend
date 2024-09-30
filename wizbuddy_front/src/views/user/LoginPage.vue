@@ -1,120 +1,106 @@
-
-<!-- 
-  관리자로 로그인 -> 관리자 페이지가 뜨도록 /admin 
-  사장으로 로그인 -> /main이 뜨는데 옆에 수정삭제등록버튼이 있는 화면으로
-  직원으로 로그인 - > /main이 뜨는데 옆에 수정삭제등록버튼이 없는 화면으로  
--->
-
 <template>
-    <div class="login-page">
-      <div class="left-section">
-        <img src="@/assets/icons/user/큰 아이콘 부분.png" alt="Wizzbuddy_character" class="character-image" />
-      </div>
-      <div class="right-section">
-        <div class="login-form">
-          <form @submit.prevent="onSubmit">
-            <div class="input-group">
-              <label for="userName">아이디</label>
-              <input type="text" id="userName" v-model="userName" placeholder="아이디 입력" />
-            </div>
-            <div class="input-group">
-              <label for="password">비밀번호</label>
-              <input type="password" id="password" v-model="password" placeholder="비밀번호 입력" />
+  <div class="login-page">
+    <div class="left-section">
+      <img src="@/assets/icons/user/큰 아이콘 부분.png" alt="Wizzbuddy_character" class="character-image" />
+    </div>
+    <div class="right-section">
+      <div class="login-form">
+        <form @submit.prevent="onSubmit">
+          <div class="input-group">
+            <label for="userName">아이디</label>
+            <input type="text" id="userName" v-model="userName" placeholder="아이디 입력" />
+          </div>
+          <div class="input-group">
+            <label for="password">비밀번호</label>
+            <input type="password" id="password" v-model="password" placeholder="비밀번호 입력" />
+          </div>
 
-            </div>
-            <p v-if="errorMessage" class="error-Message">
-              <span v-if="errorMessage === '아이디 또는 비밀번호를 입력해주세요.'">
-                <strong>아이디 또는 비밀번호</strong>를 입력해주세요.
-              </span>
-              <span v-else>{{errorMessage}}</span></P>
+          <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
 
-             <div class="login-button">
-              <button type="submit" class="login-btn">
-                <img src="@/assets/icons/user/로그인.svg" alt="로그인 버튼">
-              </button>
-              <button type="button" @click="kakaoLogin" class="kakao-btn">
-                <img src="@/assets/icons/user/카카오_로그인.svg" alt="카카오 로그인 버튼">
-              </button>
-                <div class="login-bottom-btn">
-                  <button type="submit" class="find-id-btn">아이디 찾기</button>
-                  <p> | </p>
-                  <button class="find-password-btn">비밀번호 찾기</button> 
-                  <p> | </p>
-                  <button @click="goToSignup" class="signup-btn">회원가입</button> <!-- 회원가입 -> 회원 가입 누르면 /signup으로 -->
-                </div>
-              </div>
-          </form>
-        </div>
+          <div class="login-button">
+            <button type="submit" class="login-btn">
+              <img src="@/assets/icons/user/로그인.svg" alt="로그인 버튼" />
+            </button>
+            <button type="button" @click="kakaoLogin" class="kakao-btn">
+              <img src="@/assets/icons/user/카카오_로그인.svg" alt="카카오 로그인 버튼" />
+            </button>
+          </div>
+
+          <div class="login-bottom-btn">
+            <button type="button" class="find-id-btn">아이디 찾기</button>
+            <p>|</p>
+            <button type="button" class="find-password-btn">비밀번호 찾기</button>
+            <p>|</p>
+            <button type="button" @click="goToSignup" class="signup-btn">회원가입</button>
+          </div>
+        </form>
       </div>
     </div>
-  </template>
-  
-  <script setup>
-    import { ref, onMounted } from 'vue';
-    import { useRouter } from 'vue-router';
-    
-    const userName = ref('');
-    const password = ref('');
-    const userEmail = ref('');
-    const userRole = ref('');
-    const errorMessage = ref('');
+  </div>
+</template>
 
-    const router = useRouter();
-  
-    const onSubmit = async () => {
-      errorMessage.value = '';
-      if(!userName.value || !password.value) {
-        errorMessage.value = '아이디 또는 비밀번호를 입력해주세요.';
-        return;
+<script setup>
+import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+
+const userName = ref('');
+const password = ref('');
+const errorMessage = ref('');
+const router = useRouter();
+
+const onSubmit = async () => {
+  errorMessage.value = '';
+
+  // 유효성 검증
+  if (!userName.value || !password.value) {
+    errorMessage.value = '아이디 또는 비밀번호를 입력해주세요.';
+    return;
+  }
+
+  try {
+    const response = await fetch(`http://localhost:8080/users?email=${userName.value}&password=${password.value}`);
+    if (!response.ok) throw new Error('서버 응답 오류');
+
+    const data = await response.json();
+    if (data.length > 0) {
+      const user = data[0];
+
+      // 사용자 정보를 localStorage에 저장
+      localStorage.setItem('user', JSON.stringify(user));
+
+      // 사용자 역할에 따라 페이지 이동
+      if (user.role === 'admin') {
+        router.push('/admin'); // 관리자 페이지
+      } else if (user.role === 'employer') {
+        router.push('/main?type=employer'); // 사장 페이지
+      } else if (user.role === 'employee') {
+        router.push('/main?type=employee'); // 직원 페이지
       }
-      try {
-        const response = await fetch(`http://localhost:8080/users?email=${userName.value}&password=${password.value}`);
+    } else {
+      errorMessage.value = '일치하는 회원정보가 없습니다.';
+    }
+  } catch (error) {
+    console.error('로그인 중 오류 발생:', error);
+    errorMessage.value = '로그인 처리 중 오류가 발생했습니다.';
+  }
+};
 
-        if (!response.ok) {
-          throw new Error('서버 응답이 잘못되었습니다.');
-        }
-        const data = await response.json();
-        console.log(data);
-        if (data.length > 0) {
-          const user = data[0];
-          localStorage.setItem('user', JSON.stringify(user));
-          
-          userName.value = user.name;
-          userEmail.value = user.email;
-          userRole.value = user.role;
-          
-          
-          if (user.role === 'admin') {
-            // router.push('/admin'); // 관리자 페이지로 이동
-          } else if (user.role === 'employer') {
-            router.push('/main?type=employer'); // 사장 화면으로 이동
-          } else if (user.role === 'employee') {
-            router.push('/main?type=employee'); // 직원 화면으로 이동
-          }
-        } else {
-          errorMessage.value = '일치하는 회원정보가 없습니다.';
+// 로그인 전 이전 사용자 정보 초기화
+onMounted(() => {
+  localStorage.removeItem('user');
+});
 
-        }
-      } catch (error) {
-        console.error('로그인 중 오류가 발생했습니다:', error);
-      }
-    };
-    
-    onMounted(() => {
-      localStorage.removeItem('user');
-    });
+// 카카오 로그인 처리 함수 (구현 예정)
+const kakaoLogin = () => {
+  console.log('카카오 로그인 시도');
+};
 
-    
-    const kakaoLogin = () => {
-      console.log('카카오 로그인 시도');
-    };
+// 회원가입 페이지로 이동
+const goToSignup = () => {
+  router.push('/signup');
+};
+</script>
 
-    const goToSignup = () => {
-      router.push('/signup');
-    };
-</script> 
-
-  
 <style scoped>
 
   .login-page {
@@ -240,10 +226,9 @@
   display: flex;
   }
 
-  .error-Message {
+  .error-message {
     font-size: 12px;
     color: red;
   }
 
 </style>
-  

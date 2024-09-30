@@ -86,6 +86,7 @@
   "schedules": [
     {
       "id": "1",
+      "shopId": "1",
       "title": "2024년 9월 1주차 스케줄",
       "schedule_start_date": "2024-09-02",
       "employee_working_part": [
@@ -102,6 +103,7 @@
     },
     {
       "id": "2",
+      "shopId": "1",
       "title": "2024년 9월 2주차 스케줄",
       "schedule_start_date": "2024-09-09",
       "employee_working_part": [
@@ -147,6 +149,15 @@
           "month": 9,
           "year": 2024,
           "name": "유제은",
+          "type": "fun",
+          "time": "1T (09:00 ~ 14:00)"
+        },
+        {
+          "id": "4o1drnl",
+          "day": 10,
+          "month": 9,
+          "year": 2024,
+          "name": "백경석",
           "type": "fun",
           "time": "1T (09:00 ~ 14:00)"
         },
@@ -198,15 +209,6 @@
         {
           "id": "pgfs99x",
           "day": 11,
-          "month": 9,
-          "year": 2024,
-          "name": "이서현",
-          "type": "personal",
-          "time": "3T (17:00 ~ 21:00)"
-        },
-        {
-          "id": "dbt1cr7",
-          "day": 10,
           "month": 9,
           "year": 2024,
           "name": "이서현",
@@ -564,6 +566,7 @@
       "content": "콜드브루는 찬물로 오랜 시간 추출한 커피로, 집에서도 간단하게 만들 수 있는 방법과 함께 주의사항을 소개합니다."
     },
     {
+      "id": "5",
       "title": "카페 운영에 꼭 필요한 장비 리스트",
       "content": "에스프레소 머신, 그라인더, 스티머 등 카페 운영에 필요한 필수 장비와 선택 장비 리스트를 소개합니다.\n와아아아아아아앙 짱이다아앙 우화아아앙",
       "writer": "이나짱",

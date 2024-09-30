@@ -1,98 +1,79 @@
 <template>
   <div class="sidemenu">
+    <!-- 스케줄 관련 버튼들 -->
     <button class="side-tab-item" @click="openScheduleRegisterModal" v-if="isScheduleMainPage">스케줄 등록</button>
     <button class="side-tab-item" @click="setActiveTab('navigateToScheduleDelete')" v-if="isScheduleMainPage">삭제</button>
     <button class="side-tab-item" @click="setActiveTab('navigateToRegisterEmployee')" v-if="isScheduleMainPage">직원 등록</button>
-    <button class="side-tab-item" @click="setActiveTab('navigateToScheduleMain')" 
-      v-if="isScheduleRegisterPage || isScheduleDeletePage">완료
-    </button>
+    <button class="side-tab-item" @click="setActiveTab('navigateToScheduleMain')" v-if="isScheduleRegisterPage || isScheduleDeletePage">완료</button>
 
-    <ScheduleRegister
-      v-if="isRegisterModalOpen"
-      :isOpen="isRegisterModalOpen"
-      @close="closeScheduleRegisterModal"
-      @submit="handleScheduleSubmit"
-    />
+    <!-- 스케줄 등록 모달 -->
+    <ScheduleRegister v-if="isRegisterModalOpen" :isOpen="isRegisterModalOpen" @close="closeScheduleRegisterModal" @submit="handleScheduleSubmit" />
 
+    <!-- 매장 관련 버튼들 -->
     <div class="shop-side" v-if="isMainPage">
-      <button class="side-tab-item" @click="openShopRegistModal" v-if="isMainPage">등록</button>
+      <button class="side-tab-item" @click="openShopRegistModal">등록</button>
       <button class="side-tab-item" @click="toggleEditMode">{{ isEditMode ? '완료' : '수정' }}</button>
       <button class="side-tab-item" @click="toggleDeleteMode">{{ isDeleteMode ? '완료' : '삭제' }}</button>
-
     </div>
 
-    <ScheduleRegister v-if="isRegisterModalOpen" :isOpen="isRegisterModalOpen" @close="closeRegisterModal" @submit="handleScheduleSubmit" />
+    <!-- 매장 등록 모달 -->
     <Modal :isOpen="isShopRegistModalOpen" @close="closeShopRegistModal">
       <shopRegist @submit="handleShopRegistSubmit" @close="closeShopRegistModal" />
     </Modal>
-
   </div>
 </template>
 
 <script setup>
-import { ref, watch, watchEffect, onMounted, defineEmits } from 'vue';
+import { ref, watch, onMounted, defineEmits } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-
 import ScheduleRegister from '@/components/schedule/modal/ScheduleRegisterModal.vue';
-import Modal from '@/components/shop/Modal.vue'; 
+import Modal from '@/components/shop/Modal.vue';
 import shopRegist from '@/components/shop/modal/shopRegist.vue';
-
 
 const router = useRouter();
 const route = useRoute();
 
-const isEditMode = ref(false);
-const isDeleteMode = ref(false);
+// emit 이벤트 설정
 const emit = defineEmits(['toggle-edit-mode', 'toggle-delete-mode']);
 
-
-function toggleEditMode() {
-  isEditMode.value = !isEditMode.value;
-  emit('toggle-edit-mode', isEditMode.value);  
-}
-
-function toggleDeleteMode() {
-  isDeleteMode.value = !isDeleteMode.value;
-  emit('toggle-delete-mode', isDeleteMode.value); 
-}
-
+// 상태 변수
+const isEditMode = ref(false);
+const isDeleteMode = ref(false);
 const isScheduleMainPage = ref(false);
 const isScheduleRegisterPage = ref(false);
 const isScheduleDeletePage = ref(false);
-
-const stores = ref([]);
+const isMainPage = ref(false);
 const isRegisterModalOpen = ref(false);
 const isShopRegistModalOpen = ref(false);
-const activeTab = ref('');
+const shopId = ref(route.query.shopId || null);
 
-const isMainPage = ref(false);
+// 수정 모드 토글 함수
+function toggleEditMode() {
+  isEditMode.value = !isEditMode.value;
+  emit('toggle-edit-mode', isEditMode.value); // 부모에게 emit 이벤트 전달
+}
 
+// 삭제 모드 토글 함수
+function toggleDeleteMode() {
+  isDeleteMode.value = !isDeleteMode.value;
+  emit('toggle-delete-mode', isDeleteMode.value); // 부모에게 emit 이벤트 전달
+}
 
-// 현재 페이지 경로에 따른 상태 업데이트
+// 라우트 경로 감시
 watch(() => route.path, (newPath) => {
   isScheduleMainPage.value = newPath === '/schedule';
   isScheduleRegisterPage.value = newPath === '/schedule/regist';
   isScheduleDeletePage.value = newPath === '/schedule/delete';
   isMainPage.value = newPath === '/main';
-  }
-  , 
-  {
-    immediate: true 
-  });
+}, { immediate: true });
 
+// 모달 관련 함수
 function openScheduleRegisterModal() {
   isRegisterModalOpen.value = true;
 }
 
-// 모달 닫기
 function closeScheduleRegisterModal() {
   isRegisterModalOpen.value = false;
-}
-
-// 스케줄 등록 처리 후 모달 닫기
-function handleScheduleSubmit(schedule) {
-  console.log('등록된 스케줄:', schedule);
-  closeScheduleRegisterModal();
 }
 
 function openShopRegistModal() {
@@ -100,9 +81,16 @@ function openShopRegistModal() {
 }
 
 function closeShopRegistModal() {
-  isShopRegistModalOpen.value = false;  
+  isShopRegistModalOpen.value = false;
 }
 
+// 스케줄 등록 처리 함수
+function handleScheduleSubmit(schedule) {
+  console.log('등록된 스케줄:', schedule);
+  closeScheduleRegisterModal();
+}
+
+// 매장 등록 처리 함수
 function handleShopRegistSubmit(storeData) {
   fetchStores();
   closeShopRegistModal();
@@ -110,48 +98,41 @@ function handleShopRegistSubmit(storeData) {
 
 // 탭 변경 처리
 const setActiveTab = (tab) => {
+  const query = shopId.value ? { shopId: shopId.value } : {};
+
   switch (tab) {
     case 'navigateToScheduleDelete':
-      router.push('/schedule/delete');
+      router.push({ path: '/schedule/delete', query });
       break;
     case 'navigateToScheduleMain':
-      router.push('/schedule');
+      router.push({ path: '/schedule', query });
       break;
     case 'navigateToRegisterEmployee':
-      router.push('/schedule/regist');
+      router.push({ path: '/schedule/regist', query });
       break;
   }
 };
 
-watch(() => route.path, (newPath) => {
-  if (newPath === '/schedule/delete') {
-    activeTab.value = 'navigateToScheduleDelete';
-  } else if (newPath === '/schedule') {
-    activeTab.value = 'navigateToScheduleMain';
-  } else if (newPath === '/schedule/regist') {
-    activeTab.value = 'navigateToRegisterEmployee';
-  }
-}, { immediate: true });
+// shopId 감시
+watch(() => route.query.shopId, (newShopId) => {
+  shopId.value = newShopId;
+});
 
+// 매장 목록 불러오기 함수
 async function fetchStores() {
   try {
     const response = await fetch('http://localhost:8080/shop');
-    stores.value = await response.json();
+    const stores = await response.json();
+    console.log('Fetched stores:', stores);
   } catch (error) {
     console.error('매장 목록을 불러오는 중 오류 발생:', error);
   }
 }
 
+// 초기 매장 목록 불러오기
 onMounted(() => {
   fetchStores();
 });
-
-watchEffect(() => {
-  if (!isShopRegistModalOpen.value) {
-    fetchStores(); 
-  }
-});
-
 </script>
 
 <style scoped>
@@ -164,12 +145,10 @@ watchEffect(() => {
   background: #f3f7fa;
 }
 
-
 .shop-side {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* gap: 20px; */
   margin-top: 20px;
 }
 
