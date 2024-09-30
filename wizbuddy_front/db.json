@@ -252,184 +252,159 @@
       "title": "11111/2125415135135123122411253532434634636",
       "content": "123123",
       "isFixed": true,
-      "shopId": "2"
+      "shopId": "2",
+      "finishedState": true,
+      "userId": "1",
+      "createdAt": "2024-09-30T03:40:08.399Z",
+      "updatedAt": "2024-09-30T03:40:08.399Z"
     },
     {
       "id": "14",
       "title": "22222/2",
       "content": "21312321",
       "isFixed": false,
-      "shopId": "2"
+      "shopId": "2",
+      "finishedState": true,
+      "userId": "1",
+      "createdAt": "2024-09-30T03:41:49.215Z",
+      "updatedAt": "2024-09-30T03:41:49.215Z"
     },
     {
       "id": "15",
       "title": "33333/2",
       "content": "346346346",
       "isFixed": true,
-      "shopId": "2"
+      "shopId": "2",
+      "finishedState": true,
+      "userId": "1",
+      "createdAt": "2024-09-30T03:35:57.631Z",
+      "updatedAt": "2024-09-30T03:35:57.631Z"
     },
     {
       "id": "16",
       "title": "44444/2",
       "content": "123123123",
       "isFixed": true,
-      "shopId": "2"
+      "shopId": "2",
+      "finishedState": true,
+      "userId": "1",
+      "createdAt": "2024-09-30T03:40:08.727Z",
+      "updatedAt": "2024-09-30T03:40:08.727Z"
     }
   ],
   "checklists": [
     {
-      "id": "c2c4",
-      "title": "11111",
+      "id": "1",
+      "title": "123",
       "tasks": [
         {
           "id": "9",
           "title": "11111",
           "content": "123",
           "isFixed": true,
-          "shopId": "1"
+          "shopId": "1",
+          "finishedState": true,
+          "userId": "1",
+          "createdAt": "2024-09-30T05:01:39.091Z",
+          "updatedAt": "2024-09-30T05:01:39.091Z"
+        }
+      ],
+      "shopId": "1"
+    },
+    {
+      "id": "2",
+      "title": "212",
+      "tasks": [
+        {
+          "id": "9",
+          "title": "11111",
+          "content": "123",
+          "isFixed": true,
+          "shopId": "1",
+          "finishedState": false,
+          "userId": null,
+          "createdAt": null,
+          "updatedAt": "2024-09-30T05:01:30.812Z"
         },
         {
           "id": "10",
           "title": "22222",
           "content": "11123",
           "isFixed": true,
-          "shopId": "1"
+          "shopId": "1",
+          "finishedState": true,
+          "userId": "1",
+          "createdAt": "2024-09-30T05:01:46.147Z",
+          "updatedAt": "2024-09-30T05:01:46.147Z"
         },
         {
           "id": "11",
           "title": "33333",
           "content": "1231231",
           "isFixed": true,
-          "shopId": "1"
+          "shopId": "1",
+          "finishedState": true,
+          "userId": "1",
+          "createdAt": "2024-09-30T05:01:45.547Z",
+          "updatedAt": "2024-09-30T05:01:45.547Z"
+        }
+      ],
+      "shopId": "1"
+    },
+    {
+      "id": "3",
+      "title": "22",
+      "tasks": [
+        {
+          "id": "9",
+          "title": "11111",
+          "content": "123",
+          "isFixed": true,
+          "shopId": "1",
+          "finishedState": true,
+          "userId": "1",
+          "createdAt": "2024-09-30T05:04:52.659Z",
+          "updatedAt": "2024-09-30T05:04:52.659Z",
+          "isCompleted": true
+        },
+        {
+          "id": "10",
+          "title": "22222",
+          "content": "11123",
+          "isFixed": true,
+          "shopId": "1",
+          "finishedState": true,
+          "userId": "1",
+          "createdAt": "2024-09-30T05:04:52.908Z",
+          "updatedAt": "2024-09-30T05:04:52.908Z",
+          "isCompleted": true
+        },
+        {
+          "id": "11",
+          "title": "33333",
+          "content": "1231231",
+          "isFixed": true,
+          "shopId": "1",
+          "finishedState": true,
+          "userId": "1",
+          "createdAt": "2024-09-30T05:04:53.195Z",
+          "updatedAt": "2024-09-30T05:04:53.195Z",
+          "isCompleted": true
         },
         {
           "id": "12",
           "title": "44444",
           "content": "2123",
           "isFixed": false,
-          "shopId": "1"
+          "shopId": "1",
+          "finishedState": true,
+          "userId": "1",
+          "createdAt": "2024-09-30T05:04:52.179Z",
+          "updatedAt": "2024-09-30T05:04:52.179Z",
+          "isCompleted": true
         }
       ],
       "shopId": "1"
-    },
-    {
-      "id": "1f15",
-      "title": "22222",
-      "tasks": [
-        {
-          "id": "9",
-          "title": "11111",
-          "content": "123",
-          "isFixed": true,
-          "shopId": "1"
-        },
-        {
-          "id": "10",
-          "title": "22222",
-          "content": "11123",
-          "isFixed": true,
-          "shopId": "1"
-        },
-        {
-          "id": "11",
-          "title": "33333",
-          "content": "1231231",
-          "isFixed": true,
-          "shopId": "1"
-        }
-      ],
-      "shopId": "1"
-    },
-    {
-      "id": "9b82",
-      "title": "33333",
-      "tasks": [
-        {
-          "id": "11",
-          "title": "33333",
-          "content": "1231231",
-          "isFixed": true,
-          "shopId": "1"
-        }
-      ],
-      "shopId": "1"
-    },
-    {
-      "id": "0e7b",
-      "title": "11111/2",
-      "tasks": [
-        {
-          "id": "13",
-          "title": "11111/2125415135135123122411253532434634636",
-          "content": "123123",
-          "isFixed": true,
-          "shopId": "2"
-        },
-        {
-          "id": "15",
-          "title": "33333/2",
-          "content": "346346346",
-          "isFixed": true,
-          "shopId": "2"
-        },
-        {
-          "id": "16",
-          "title": "44444/2",
-          "content": "123123123",
-          "isFixed": true,
-          "shopId": "2"
-        },
-        {
-          "id": "14",
-          "title": "22222/2",
-          "content": "21312321",
-          "isFixed": false,
-          "shopId": "2"
-        }
-      ],
-      "shopId": "2"
-    },
-    {
-      "id": "ff13",
-      "title": "222222/2",
-      "tasks": [
-        {
-          "id": "13",
-          "title": "11111/2125415135135123122411253532434634636",
-          "content": "123123",
-          "isFixed": true,
-          "shopId": "2"
-        },
-        {
-          "id": "15",
-          "title": "33333/2",
-          "content": "346346346",
-          "isFixed": true,
-          "shopId": "2"
-        },
-        {
-          "id": "16",
-          "title": "44444/2",
-          "content": "123123123",
-          "isFixed": true,
-          "shopId": "2"
-        }
-      ],
-      "shopId": "2"
-    },
-    {
-      "id": "741f",
-      "title": "33333/2",
-      "tasks": [
-        {
-          "id": "15",
-          "title": "33333/2",
-          "content": "346346346",
-          "isFixed": true,
-          "shopId": "2"
-        }
-      ],
-      "shopId": "2"
     }
   ],
   "checklistsPast": [
@@ -585,6 +560,86 @@
       ],
       "shopId": "2",
       "deletedAt": "2024-09-30T02:28:55.164Z"
+    },
+    {
+      "id": "c2c4",
+      "title": "11111",
+      "tasks": [
+        {
+          "id": "9",
+          "title": "11111",
+          "content": "123",
+          "isFixed": true,
+          "shopId": "1"
+        },
+        {
+          "id": "10",
+          "title": "22222",
+          "content": "11123",
+          "isFixed": true,
+          "shopId": "1"
+        },
+        {
+          "id": "11",
+          "title": "33333",
+          "content": "1231231",
+          "isFixed": true,
+          "shopId": "1"
+        },
+        {
+          "id": "12",
+          "title": "44444",
+          "content": "2123",
+          "isFixed": false,
+          "shopId": "1"
+        }
+      ],
+      "shopId": "1",
+      "deletedAt": "2024-09-30T03:47:00.300Z"
+    },
+    {
+      "id": "9b82",
+      "title": "33333",
+      "tasks": [
+        {
+          "id": "11",
+          "title": "33333",
+          "content": "1231231",
+          "isFixed": true,
+          "shopId": "1"
+        }
+      ],
+      "shopId": "1",
+      "deletedAt": "2024-09-30T03:47:01.065Z"
+    },
+    {
+      "id": "1f15",
+      "title": "22222",
+      "tasks": [
+        {
+          "id": "9",
+          "title": "11111",
+          "content": "123",
+          "isFixed": true,
+          "shopId": "1"
+        },
+        {
+          "id": "10",
+          "title": "22222",
+          "content": "11123",
+          "isFixed": true,
+          "shopId": "1"
+        },
+        {
+          "id": "11",
+          "title": "33333",
+          "content": "1231231",
+          "isFixed": true,
+          "shopId": "1"
+        }
+      ],
+      "shopId": "1",
+      "deletedAt": "2024-09-30T03:47:01.560Z"
     }
   ],
   "posts": [
