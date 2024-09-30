@@ -220,136 +220,92 @@
   ],
   "tasks": [
     {
-      "id": "2",
-      "title": "두 번째 업무",
-      "content": "매장 정리",
-      "isFixed": false,
-      "shopId": "1"
-    },
-    {
-      "id": "4",
-      "title": "네 번째 업무",
-      "content": "재고 확인",
-      "isFixed": false,
-      "shopId": "1"
-    },
-    {
-      "id": "5",
-      "title": "task의 이름이 이렇게 길면 너가 뭘 할수 있지?",
-      "content": "재고 확인",
-      "isFixed": true,
-      "shopId": "1"
-    },
-    {
-      "id": "6",
-      "title": "짧음",
-      "content": "재고 확인",
-      "isFixed": true,
-      "shopId": "2"
-    },
-    {
-      "id": "7",
-      "title": "fixed가 아닌데 task의 이름이 이렇게 길면 너가 뭘할수있는데",
-      "content": "재고 확인",
-      "isFixed": false,
-      "shopId": "2"
-    },
-    {
-      "id": "8",
-      "title": "3",
-      "content": "3",
-      "isFixed": false,
-      "shopId": "2"
-    },
-    {
       "id": "9",
-      "title": "3",
-      "content": "3",
-      "isFixed": false,
+      "title": "11111",
+      "content": "123",
+      "isFixed": true,
       "shopId": "1"
     },
     {
       "id": "10",
-      "title": "3",
-      "content": "3",
+      "title": "22222",
+      "content": "11123",
+      "isFixed": true,
+      "shopId": "1"
+    },
+    {
+      "id": "11",
+      "title": "33333",
+      "content": "1231231",
+      "isFixed": true,
+      "shopId": "1"
+    },
+    {
+      "id": "12",
+      "title": "44444",
+      "content": "2123",
       "isFixed": false,
       "shopId": "1"
+    },
+    {
+      "id": "13",
+      "title": "11111/2125415135135123122411253532434634636",
+      "content": "123123",
+      "isFixed": true,
+      "shopId": "2"
+    },
+    {
+      "id": "14",
+      "title": "22222/2",
+      "content": "21312321",
+      "isFixed": false,
+      "shopId": "2"
+    },
+    {
+      "id": "15",
+      "title": "33333/2",
+      "content": "346346346",
+      "isFixed": true,
+      "shopId": "2"
+    },
+    {
+      "id": "16",
+      "title": "44444/2",
+      "content": "123123123",
+      "isFixed": true,
+      "shopId": "2"
     }
   ],
   "checklists": [
     {
-      "id": "2",
-      "title": "9월 17일 2T 필독",
+      "id": "c2c4",
+      "title": "11111",
       "tasks": [
         {
-          "id": "5",
-          "title": "task의 이름이 이렇게 길면 너가 뭘 할수 있지?",
-          "content": "재고 확인",
-          "isFixed": true
-        },
-        {
-          "id": "6",
-          "title": "짧음",
-          "content": "재고 확인",
-          "isFixed": true
-        }
-      ],
-      "shopId": "2"
-    },
-    {
-      "id": "1",
-      "title": "9월 16일 1T 필독",
-      "tasks": [
-        {
-          "id": "1",
-          "title": "첫 번째 업무",
-          "content": "화장실 청소",
-          "isFixed": true
-        },
-        {
-          "id": "2",
-          "title": "두 번째 업무",
-          "content": "매장 정리",
-          "isFixed": false
-        }
-      ],
-      "shopId": "2"
-    },
-    {
-      "id": "e68f",
-      "title": "1",
-      "tasks": [
-        {
-          "id": "6",
-          "title": "짧음",
-          "content": "재고 확인",
-          "isFixed": true
-        }
-      ],
-      "shopId": "1"
-    },
-    {
-      "id": "36bc",
-      "title": "새ㅑ로운 체크리스트다 이놈아",
-      "tasks": [
-        {
-          "id": "5",
-          "title": "task의 이름이 이렇게 길면 너가 뭘 할수 있지?",
-          "content": "재고 확인",
+          "id": "9",
+          "title": "11111",
+          "content": "123",
           "isFixed": true,
           "shopId": "1"
         },
         {
-          "id": "4",
-          "title": "네 번째 업무",
-          "content": "재고 확인",
-          "isFixed": false,
+          "id": "10",
+          "title": "22222",
+          "content": "11123",
+          "isFixed": true,
           "shopId": "1"
         },
         {
-          "id": "9",
-          "title": "3",
-          "content": "3",
+          "id": "11",
+          "title": "33333",
+          "content": "1231231",
+          "isFixed": true,
+          "shopId": "1"
+        },
+        {
+          "id": "12",
+          "title": "44444",
+          "content": "2123",
           "isFixed": false,
           "shopId": "1"
         }
@@ -357,27 +313,118 @@
       "shopId": "1"
     },
     {
-      "id": "f2dc",
-      "title": "123",
+      "id": "1f15",
+      "title": "22222",
       "tasks": [
         {
-          "id": "6",
-          "title": "짧음",
-          "content": "재고 확인",
+          "id": "9",
+          "title": "11111",
+          "content": "123",
+          "isFixed": true,
+          "shopId": "1"
+        },
+        {
+          "id": "10",
+          "title": "22222",
+          "content": "11123",
+          "isFixed": true,
+          "shopId": "1"
+        },
+        {
+          "id": "11",
+          "title": "33333",
+          "content": "1231231",
+          "isFixed": true,
+          "shopId": "1"
+        }
+      ],
+      "shopId": "1"
+    },
+    {
+      "id": "9b82",
+      "title": "33333",
+      "tasks": [
+        {
+          "id": "11",
+          "title": "33333",
+          "content": "1231231",
+          "isFixed": true,
+          "shopId": "1"
+        }
+      ],
+      "shopId": "1"
+    },
+    {
+      "id": "0e7b",
+      "title": "11111/2",
+      "tasks": [
+        {
+          "id": "13",
+          "title": "11111/2125415135135123122411253532434634636",
+          "content": "123123",
+          "isFixed": true,
+          "shopId": "2"
+        },
+        {
+          "id": "15",
+          "title": "33333/2",
+          "content": "346346346",
+          "isFixed": true,
+          "shopId": "2"
+        },
+        {
+          "id": "16",
+          "title": "44444/2",
+          "content": "123123123",
+          "isFixed": true,
+          "shopId": "2"
+        },
+        {
+          "id": "14",
+          "title": "22222/2",
+          "content": "21312321",
+          "isFixed": false,
+          "shopId": "2"
+        }
+      ],
+      "shopId": "2"
+    },
+    {
+      "id": "ff13",
+      "title": "222222/2",
+      "tasks": [
+        {
+          "id": "13",
+          "title": "11111/2125415135135123122411253532434634636",
+          "content": "123123",
+          "isFixed": true,
+          "shopId": "2"
+        },
+        {
+          "id": "15",
+          "title": "33333/2",
+          "content": "346346346",
+          "isFixed": true,
+          "shopId": "2"
+        },
+        {
+          "id": "16",
+          "title": "44444/2",
+          "content": "123123123",
           "isFixed": true,
           "shopId": "2"
         }
       ],
-      "shopId":"2"
+      "shopId": "2"
     },
     {
-      "id": "92c2",
-      "title": "qwqwqw",
+      "id": "741f",
+      "title": "33333/2",
       "tasks": [
         {
-          "id": "6",
-          "title": "짧음",
-          "content": "재고 확인",
+          "id": "15",
+          "title": "33333/2",
+          "content": "346346346",
           "isFixed": true,
           "shopId": "2"
         }
@@ -425,6 +472,119 @@
       ],
       "deletedAt": "2024-09-29T08:23:35.451Z",
       "shopId": "1"
+    },
+    {
+      "id": "e68f",
+      "title": "1",
+      "tasks": [
+        {
+          "id": "6",
+          "title": "짧음",
+          "content": "재고 확인",
+          "isFixed": true
+        }
+      ],
+      "shopId": "1",
+      "deletedAt": "2024-09-30T02:27:53.988Z"
+    },
+    {
+      "id": "36bc",
+      "title": "새ㅑ로운 체크리스트다 이놈아",
+      "tasks": [
+        {
+          "id": "5",
+          "title": "task의 이름이 이렇게 길면 너가 뭘 할수 있지?",
+          "content": "재고 확인",
+          "isFixed": true,
+          "shopId": "1"
+        },
+        {
+          "id": "4",
+          "title": "네 번째 업무",
+          "content": "재고 확인",
+          "isFixed": false,
+          "shopId": "1"
+        },
+        {
+          "id": "9",
+          "title": "3",
+          "content": "3",
+          "isFixed": false,
+          "shopId": "1"
+        }
+      ],
+      "shopId": "1",
+      "deletedAt": "2024-09-30T02:27:54.947Z"
+    },
+    {
+      "id": "2",
+      "title": "9월 17일 2T 필독",
+      "tasks": [
+        {
+          "id": "5",
+          "title": "task의 이름이 이렇게 길면 너가 뭘 할수 있지?",
+          "content": "재고 확인",
+          "isFixed": true
+        },
+        {
+          "id": "6",
+          "title": "짧음",
+          "content": "재고 확인",
+          "isFixed": true
+        }
+      ],
+      "shopId": "2",
+      "deletedAt": "2024-09-30T02:28:52.997Z"
+    },
+    {
+      "id": "1",
+      "title": "9월 16일 1T 필독",
+      "tasks": [
+        {
+          "id": "1",
+          "title": "첫 번째 업무",
+          "content": "화장실 청소",
+          "isFixed": true
+        },
+        {
+          "id": "2",
+          "title": "두 번째 업무",
+          "content": "매장 정리",
+          "isFixed": false
+        }
+      ],
+      "shopId": "2",
+      "deletedAt": "2024-09-30T02:28:54.175Z"
+    },
+    {
+      "id": "f2dc",
+      "title": "123",
+      "tasks": [
+        {
+          "id": "6",
+          "title": "짧음",
+          "content": "재고 확인",
+          "isFixed": true,
+          "shopId": "2"
+        }
+      ],
+      "shopId": "2",
+      "deletedAt": "2024-09-30T02:28:54.676Z"
+    },
+    {
+      "id": "92c2",
+      "title": "qwqwqw",
+      "tasks": [
+        {
+          "id": "6",
+          "title": "짧음",
+          "content": "재고 확인",
+          "isFixed": true,
+          "shopId": "2"
+        }
+      ],
+      "shopId": "2",
+      "deletedAt": "2024-09-30T02:28:55.164Z"
     }
   ],
   "posts": [
@@ -570,8 +730,7 @@
       "title": "카페 운영에 꼭 필요한 장비 리스트",
       "content": "에스프레소 머신, 그라인더, 스티머 등 카페 운영에 필요한 필수 장비와 선택 장비 리스트를 소개합니다.\n와아아아아아아앙 짱이다아앙 우화아아앙",
       "writer": "이나짱",
-      "registerdate": "2024-09-29",
-      "id": "5"
+      "registerdate": "2024-09-29"
     }
   ]
 }
