@@ -51,7 +51,7 @@
 import { ref, onMounted, computed, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import axios from 'axios';
-import DeleteModal from '@/components/schedule/modal/DeleteModal.vue'
+import DeleteModal from '@/components/DeleteModal.vue'
 
 const route = useRoute(); 
 const router = useRouter();
@@ -118,8 +118,19 @@ const incrementLike = () => {
 };
 
 const closeDeleteModal = () => {
-        isDeleteModalOpen.value = false;
-    };
+  isDeleteModalOpen.value = false;
+};
+
+
+// 삭제 확인 처리 함수 (여기서 DeleteModal의 삭제 확인을 처리)
+const handleDeleteConfirmation = async () => {
+  try {
+    await axios.delete(`http://localhost:8080/manualboard/${route.params.id}`);
+    router.push('/manualboard');
+  } catch (error) {
+    console.error('게시글 삭제 중 오류 발생:', error);
+  }
+};
 
 const editPost = () => {
   router.push({ path: `/manualboard/${postId.value}/edit` });

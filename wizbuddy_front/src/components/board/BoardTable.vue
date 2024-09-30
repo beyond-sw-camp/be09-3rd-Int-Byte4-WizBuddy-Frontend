@@ -45,21 +45,6 @@ const paginatedBoards = computed(() => {
   return boards.value.slice().reverse().slice(start, end); // 최신 게시글이 위로 오도록 reverse() 추가
 });
 
-  onMounted (async () => {
-    try {
-      const response = await fetch('http://localhost:8080/manualboard');
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      } const data = await response.json();
-      if (data.length > 0) {
-        boards.value = data;
-        console.log('서버로부터 받아온 boards: ', boards.value);
-      }
-    } catch (error) {
-      console.error ('데이터를 가져오는 중 오류가 발생했습니다: ', error);
-    }
-  });
-
 // 이전 페이지로 이동
 const prevPage = () => {
   if (currentPage.value > 1) {
@@ -80,14 +65,14 @@ const getCommentsForBoard = (boardId) => {
 };
 
 // 게시글 및 댓글 데이터를 로드하는 함수
-const loadBoards = async () => {
-  try {
-    const response = await axios.get('http://localhost:8080/posts');
-    boards.value = response.data;
-  } catch (error) {
-    console.error('게시글 데이터를 불러오지 못했습니다.', error);
-  }
-};
+// const loadBoards = async () => {
+//   try {
+//     const response = await axios.get('http://localhost:8080/posts');
+//     boards.value = response.data;
+//   } catch (error) {
+//     console.error('게시글 데이터를 불러오지 못했습니다.', error);
+//   }
+// };
 
 const loadComments = async () => {
   try {
@@ -95,6 +80,23 @@ const loadComments = async () => {
     comments.value = response.data;
   } catch (error) {
     console.error('댓글 데이터를 불러오지 못했습니다.', error);
+  }
+};
+
+const loadBoards = async () => {
+  let boardUrl = '';
+
+  if(window.location.pathname === '/noticeboard') {
+    boardUrl = 'http://localhost:8080/noticeboard';
+  } else {
+    boardUrl = 'http://localhost:8080/manualboard';
+  }
+
+  try {
+    const boardResponse = await axios.get(boardUrl);
+    boards.value = boardResponse.data;
+  } catch (error) {
+    console.error('데이터를 불러오지 못했습니다: ', error);
   }
 };
 
