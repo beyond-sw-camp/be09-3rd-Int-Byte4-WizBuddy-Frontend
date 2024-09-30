@@ -7,7 +7,7 @@
     <!-- ChecklistInsertModal 모달 -->
     <ChecklistInsertModal
       v-if="isInsertModalOpen"
-      :tasks="tasks"
+      :tasks="props.tasks"
       @close="closeInsertModal"
       @submit="submitNewChecklist"
     />
