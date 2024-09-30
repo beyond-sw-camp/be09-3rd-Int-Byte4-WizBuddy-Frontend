@@ -1,31 +1,31 @@
 <template>
   <SideMenu>
-      <div class="edit-container">
-        <div class="edit-header">
-          <h2>{{ selectedDate }} 근무자 수정</h2>
-          <p>기존 근무자: {{ selectedWorker }}</p>
-        </div>
-        <form @submit.prevent="updateSchedule">
-          <div class="edit-form">
-            <label for="scheduleDate">날짜</label>
-            <input type="text" id="scheduleDate" v-model="selectedDate" readonly />
-
-            <label for="workerName">근무자</label>
-            <select v-model="selectedWorker">
-              <option value="" disabled>근무자를 선택해주세요</option>
-              <option v-for="worker in workers" :key="worker" :value="worker">{{ worker }}</option>
-            </select>
-
-            <label for="timeSlot">시간</label>
-            <input type="text" id="timeSlot" v-model="timeSlot" readonly />
-          </div>
-
-          <div class="edit-actions">
-            <button type="button" @click="goBack" class="cancel-btn">취소</button>
-            <button type="submit" class="submit-btn">등록</button>
-          </div>
-        </form>
+    <div class="edit-container">
+      <div class="edit-header">
+        <h2>{{ selectedDate }} 근무자 수정</h2>
+        <p>기존 근무자: {{ originalWorker }}</p>
       </div>
+      <form @submit.prevent="updateSchedule">
+        <div class="edit-form">
+          <label for="scheduleDate">날짜</label>
+          <input type="text" id="scheduleDate" v-model="selectedDate" readonly />
+
+          <label for="workerName">근무자</label>
+          <select v-model="selectedWorker">
+            <option value="" disabled>근무자를 선택해주세요</option>
+            <option v-for="worker in workers" :key="worker" :value="worker">{{ worker }}</option>
+          </select>
+
+          <label for="timeSlot">시간</label>
+          <input type="text" id="timeSlot" v-model="timeSlot" readonly />
+        </div>
+
+        <div class="edit-actions">
+          <button type="button" @click="goBack" class="cancel-btn">취소</button>
+          <button type="submit" class="submit-btn">등록</button>
+        </div>
+      </form>
+    </div>
   </SideMenu>
 </template>
 
@@ -40,6 +40,7 @@ const route = useRoute();
 
 const selectedDate = ref('');
 const selectedWorker = ref('');
+const originalWorker = ref(''); // 기존 근무자 이름을 저장할 변수
 const timeSlot = ref('');
 const scheduleId = ref(null);
 const employeeWorkingPartId = ref(null);
@@ -50,6 +51,7 @@ const workers = ['유제은', '백경석', '조제훈', '이서현', '이나현'
 onMounted(() => {
   selectedDate.value = route.query.date || '';
   selectedWorker.value = route.query.worker || '';
+  originalWorker.value = route.query.worker || ''; // 기존 근무자 이름 저장
   timeSlot.value = route.query.timeSlot || '';
   scheduleId.value = route.query.scheduleId || null;
   employeeWorkingPartId.value = route.query.partId || null;
@@ -80,7 +82,7 @@ async function updateSchedule() {
       });
 
       alert(`${selectedDate.value}의 근무자는 ${selectedWorker.value}으로 수정되었습니다.`);
-      router.push({ path: '/schedule', query: { shopId: shopId.value } });
+      router.push({ path: '/schedule' });
     } else {
       alert("해당 근무자를 찾을 수 없습니다.");
     }
@@ -91,7 +93,7 @@ async function updateSchedule() {
 }
 
 function goBack() {
-  router.push({ path: '/schedule', query: { shopId: shopId.value } });
+  router.push({ path: '/schedule' });
 }
 </script>
 
