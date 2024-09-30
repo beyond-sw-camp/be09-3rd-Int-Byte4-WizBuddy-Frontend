@@ -77,13 +77,24 @@ const newChecklist = ref({
   shopId: shopId, // shopId 추가
 });
 
+// 새로운 태스크를 추가하는 함수
+const createTask = (task) => {
+  return {
+    ...task,
+    finishedState: false, // 기본값: false
+    userId: null, // 기본값: null
+    createdAt: null, 
+    updatedAt: new Date().toISOString(),
+  };
+};
+
 const fixedTasks = computed(() => newChecklist.value.tasks.filter(task => task.isFixed));
 const nonFixedTasks = computed(() => newChecklist.value.tasks.filter(task => !task.isFixed));
 
 const addFixedTasksToChecklist = () => {
   props.tasks.forEach(task => {
     if (task.isFixed && !newChecklist.value.tasks.some(t => t.id === task.id)) {
-      newChecklist.value.tasks.push(task);
+      newChecklist.value.tasks.push(createTask(task)); // 수정된 부분
     }
   });
 };
@@ -120,11 +131,11 @@ const availableFixedTasksFiltered = computed(() =>
 );
 
 const addNonFixedTask = (task) => {
-  newChecklist.value.tasks.push({ ...task, isFixed: false });
+  newChecklist.value.tasks.push({ ...createTask(task), isFixed: false }); // 수정된 부분
 };
 
 const addFixedTask = (task) => {
-  newChecklist.value.tasks.push({ ...task, isFixed: true });
+  newChecklist.value.tasks.push({ ...createTask(task), isFixed: true }); // 수정된 부분
 };
 
 const removeTask = (task) => {
@@ -139,8 +150,15 @@ const submit = async () => {
     return;
   }
 
+  // ID 생성 로직 추가
   try {
-    const response = await fetch('http://localhost:8080/checklists', {
+    const response = await fetch('http://localhost:8080/checklists');
+    const allChecklists = await response.json();
+    const maxId = Math.max(...allChecklists.map(checklist => parseInt(checklist.id, 10)), 0); // 최대 ID 찾기
+    newChecklist.value.id = (maxId + 1).toString(); // 새로운 ID 설정
+
+    // 체크리스트 추가
+    const addResponse = await fetch('http://localhost:8080/checklists', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -148,11 +166,11 @@ const submit = async () => {
       body: JSON.stringify(newChecklist.value),
     });
 
-    if (!response.ok) {
+    if (!addResponse.ok) {
       throw new Error('서버 응답이 실패했습니다.');
     }
 
-    const addedChecklist = await response.json();
+    const addedChecklist = await addResponse.json();
     emit('checklist-added', addedChecklist);
     emit('submit', addedChecklist);
     close();

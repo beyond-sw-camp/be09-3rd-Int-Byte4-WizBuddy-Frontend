@@ -2,12 +2,15 @@
     <div class="task-detail-page">
       <h1>업무 상세</h1>
       <!-- TaskDetail 컴포넌트를 사용하여 상세 내용 출력 -->
-      <TaskDetail v-if="selectedTask" :task="selectedTask" />
+      <TaskDetail 
+        v-if="selectedTask" 
+        :task="selectedTask" 
+      />
       <div v-else>
         <p>해당 업무를 찾을 수 없습니다.</p>
       </div>
   
-      <div class="action-buttons" v-if="selectedTask">
+      <div class="action-buttons" v-if="selectedTask &&  userRole !== 'employee'">
         <button class="edit-button" @click="editTask">수정</button>
         <button class="delete-button" @click="deleteTask">삭제</button>
       </div>
@@ -22,6 +25,8 @@
   const router = useRouter();
   const route = useRoute();
   const selectedTask = ref(null);
+  const user = JSON.parse(localStorage.getItem('user'));
+  const userRole = user?.role || null; // 사용자 역할 가져오기
   
   // 페이지가 로드될 때 db.json으로부터 task를 받아옴
   onMounted(async () => {
