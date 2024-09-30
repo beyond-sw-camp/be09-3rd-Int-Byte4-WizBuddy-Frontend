@@ -1,0 +1,1116 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "email": "qwe@naver.com",
+      "password": "qwe",
+      "name": "조싸장",
+      "phone": "123123",
+      "health": "2024-09-26",
+      "role": "employer",
+      "shop_id": "1",
+      "invitations": [],
+      "employedAt": [
+        "1"
+      ]
+    },
+    {
+      "id": "2",
+      "email": "test",
+      "password": "1",
+      "name": "유제은",
+      "phone": "01045901841",
+      "health": "2024-09-24",
+      "role": "employee",
+      "invitations": [],
+      "employedAt": [
+        "2"
+      ]
+    },
+    {
+      "id": "3",
+      "email": "test2",
+      "password": "1",
+      "name": "백경석",
+      "phone": "01010101010",
+      "health": "2024-09-16",
+      "role": "employee",
+      "invitations": [],
+      "employedAt": [
+        "3"
+      ]
+    }
+  ],
+  "shop": [
+    {
+      "id": "1",
+      "shop_name": "제훈치킨",
+      "shop_location": "인천 서구 당하동",
+      "shop_open_time": "09:00",
+      "business_num": "112233",
+      "created_at": "2024-09-29T13:41:02.440Z",
+      "updated_at": "2024-09-29T13:41:02.440Z",
+      "employer_code": "1",
+      "employees": [
+        "1"
+      ],
+      "invitations": []
+    },
+    {
+      "id": "2",
+      "shop_name": "조랭이떡집",
+      "shop_location": "123123",
+      "shop_open_time": "09:00",
+      "business_num": "11123",
+      "created_at": "2024-09-29T18:03:48.140Z",
+      "updated_at": "2024-09-29T18:03:48.140Z",
+      "invitations": [],
+      "employees": [
+        "2"
+      ]
+    },
+    {
+      "id": "3",
+      "shop_name": "er",
+      "shop_location": "er",
+      "shop_open_time": "09:00",
+      "business_num": "er",
+      "created_at": "2024-09-29T18:24:20.988Z",
+      "updated_at": "2024-09-29T18:24:20.988Z",
+      "invitations": [],
+      "employees": [
+        "3"
+      ]
+    }
+  ],
+  "schedules": [
+    {
+      "id": "1",
+      "shopId": "1",
+      "title": "2024년 9월 1주차 스케줄",
+      "schedule_start_date": "2024-09-02",
+      "employee_working_part": [
+        {
+          "id": "1002",
+          "day": 5,
+          "month": 9,
+          "year": 2024,
+          "name": "백경석",
+          "type": "fun",
+          "time": "1T (09:00 ~ 14:00)"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "shopId": "1",
+      "title": "2024년 9월 2주차 스케줄",
+      "schedule_start_date": "2024-09-09",
+      "employee_working_part": [
+        {
+          "id": "4yip5u3",
+          "day": 13,
+          "month": 9,
+          "year": 2024,
+          "name": "이나현",
+          "type": "fun",
+          "time": "1T (09:00 ~ 14:00)"
+        },
+        {
+          "id": "i9ahik4",
+          "day": 12,
+          "month": 9,
+          "year": 2024,
+          "name": "유제은",
+          "type": "fun",
+          "time": "1T (09:00 ~ 14:00)"
+        },
+        {
+          "id": "5xd6r9i",
+          "day": 11,
+          "month": 9,
+          "year": 2024,
+          "name": "백경석",
+          "type": "fun",
+          "time": "1T (09:00 ~ 14:00)"
+        },
+        {
+          "id": "4u94bzk",
+          "day": 14,
+          "month": 9,
+          "year": 2024,
+          "name": "유제은",
+          "type": "fun",
+          "time": "1T (09:00 ~ 14:00)"
+        },
+        {
+          "id": "4o1drnl",
+          "day": 10,
+          "month": 9,
+          "year": 2024,
+          "name": "백경석",
+          "type": "fun",
+          "time": "1T (09:00 ~ 14:00)"
+        },
+        {
+          "id": "2p1smar",
+          "day": 12,
+          "month": 9,
+          "year": 2024,
+          "name": "백경석",
+          "type": "important",
+          "time": "2T (14:00 ~ 17:00)"
+        },
+        {
+          "id": "e1h8alf",
+          "day": 11,
+          "month": 9,
+          "year": 2024,
+          "name": "이서현",
+          "type": "important",
+          "time": "2T (14:00 ~ 17:00)"
+        },
+        {
+          "id": "ztjlsmz",
+          "day": 13,
+          "month": 9,
+          "year": 2024,
+          "name": "이서현",
+          "type": "important",
+          "time": "2T (14:00 ~ 17:00)"
+        },
+        {
+          "id": "69q5txy",
+          "day": 13,
+          "month": 9,
+          "year": 2024,
+          "name": "유제은",
+          "type": "important",
+          "time": "2T (14:00 ~ 17:00)"
+        },
+        {
+          "id": "ihx3vkz",
+          "day": 10,
+          "month": 9,
+          "year": 2024,
+          "name": "백경석",
+          "type": "important",
+          "time": "2T (14:00 ~ 17:00)"
+        },
+        {
+          "id": "pgfs99x",
+          "day": 11,
+          "month": 9,
+          "year": 2024,
+          "name": "이서현",
+          "type": "personal",
+          "time": "3T (17:00 ~ 21:00)"
+        }
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "id": "9",
+      "title": "11111",
+      "content": "123",
+      "isFixed": true,
+      "shopId": "1"
+    },
+    {
+      "id": "10",
+      "title": "22222",
+      "content": "11123",
+      "isFixed": true,
+      "shopId": "1"
+    },
+    {
+      "id": "11",
+      "title": "33333",
+      "content": "1231231",
+      "isFixed": true,
+      "shopId": "1"
+    },
+    {
+      "id": "12",
+      "title": "44444",
+      "content": "2123",
+      "isFixed": false,
+      "shopId": "1"
+    },
+    {
+      "id": "13",
+      "title": "11111/2125415135135123122411253532434634636",
+      "content": "123123",
+      "isFixed": true,
+      "shopId": "2",
+      "finishedState": true,
+      "userId": "1",
+      "createdAt": "2024-09-30T03:40:08.399Z",
+      "updatedAt": "2024-09-30T03:40:08.399Z"
+    },
+    {
+      "id": "14",
+      "title": "22222/2",
+      "content": "21312321",
+      "isFixed": false,
+      "shopId": "2",
+      "finishedState": true,
+      "userId": "1",
+      "createdAt": "2024-09-30T03:41:49.215Z",
+      "updatedAt": "2024-09-30T03:41:49.215Z"
+    },
+    {
+      "id": "15",
+      "title": "33333/2",
+      "content": "346346346",
+      "isFixed": true,
+      "shopId": "2",
+      "finishedState": true,
+      "userId": "1",
+      "createdAt": "2024-09-30T03:35:57.631Z",
+      "updatedAt": "2024-09-30T03:35:57.631Z"
+    },
+    {
+      "id": "16",
+      "title": "44444/2",
+      "content": "123123123",
+      "isFixed": true,
+      "shopId": "2",
+      "finishedState": true,
+      "userId": "1",
+      "createdAt": "2024-09-30T03:40:08.727Z",
+      "updatedAt": "2024-09-30T03:40:08.727Z"
+    }
+  ],
+  "checklists": [
+    {
+      "id": "3",
+      "title": "22",
+      "tasks": [
+        {
+          "id": "9",
+          "title": "11111",
+          "content": "123",
+          "isFixed": true,
+          "shopId": "1",
+          "finishedState": true,
+          "userId": "1",
+          "createdAt": "2024-09-30T05:04:52.659Z",
+          "updatedAt": "2024-09-30T05:04:52.659Z",
+          "isCompleted": true
+        },
+        {
+          "id": "10",
+          "title": "22222",
+          "content": "11123",
+          "isFixed": true,
+          "shopId": "1",
+          "finishedState": true,
+          "userId": "1",
+          "createdAt": "2024-09-30T05:04:52.908Z",
+          "updatedAt": "2024-09-30T05:04:52.908Z",
+          "isCompleted": true
+        },
+        {
+          "id": "11",
+          "title": "33333",
+          "content": "1231231",
+          "isFixed": true,
+          "shopId": "1",
+          "finishedState": true,
+          "userId": "1",
+          "createdAt": "2024-09-30T05:04:53.195Z",
+          "updatedAt": "2024-09-30T05:04:53.195Z",
+          "isCompleted": true
+        },
+        {
+          "id": "12",
+          "title": "44444",
+          "content": "2123",
+          "isFixed": false,
+          "shopId": "1",
+          "finishedState": true,
+          "userId": "1",
+          "createdAt": "2024-09-30T05:04:52.179Z",
+          "updatedAt": "2024-09-30T05:21:26.092Z",
+          "isCompleted": true
+        }
+      ],
+      "shopId": "1"
+    }
+  ],
+  "checklistsPast": [
+    {
+      "id": "d07c",
+      "title": "5",
+      "tasks": [
+        {
+          "id": "1",
+          "title": "첫 번째 업무",
+          "content": "화장실 청소",
+          "isFixed": true
+        },
+        {
+          "id": "5",
+          "title": "task의 이름이 이렇게 길면 너가 뭘 할수 있지?",
+          "content": "재고 확인",
+          "isFixed": true
+        }
+      ],
+      "deletedAt": "2024-09-29T07:47:19.652Z",
+      "shopId": "1"
+    },
+    {
+      "id": "1",
+      "title": "9월 16일 1T 필독",
+      "tasks": [
+        {
+          "id": "1",
+          "title": "첫 번째 업무",
+          "content": "화장실 청소",
+          "isFixed": true
+        },
+        {
+          "id": "2",
+          "title": "두 번째 업무",
+          "content": "매장 정리",
+          "isFixed": false
+        }
+      ],
+      "deletedAt": "2024-09-29T08:23:35.451Z",
+      "shopId": "1"
+    },
+    {
+      "id": "e68f",
+      "title": "1",
+      "tasks": [
+        {
+          "id": "6",
+          "title": "짧음",
+          "content": "재고 확인",
+          "isFixed": true
+        }
+      ],
+      "shopId": "1",
+      "deletedAt": "2024-09-30T02:27:53.988Z"
+    },
+    {
+      "id": "36bc",
+      "title": "새ㅑ로운 체크리스트다 이놈아",
+      "tasks": [
+        {
+          "id": "5",
+          "title": "task의 이름이 이렇게 길면 너가 뭘 할수 있지?",
+          "content": "재고 확인",
+          "isFixed": true,
+          "shopId": "1"
+        },
+        {
+          "id": "4",
+          "title": "네 번째 업무",
+          "content": "재고 확인",
+          "isFixed": false,
+          "shopId": "1"
+        },
+        {
+          "id": "9",
+          "title": "3",
+          "content": "3",
+          "isFixed": false,
+          "shopId": "1"
+        }
+      ],
+      "shopId": "1",
+      "deletedAt": "2024-09-30T02:27:54.947Z"
+    },
+    {
+      "id": "2",
+      "title": "9월 17일 2T 필독",
+      "tasks": [
+        {
+          "id": "5",
+          "title": "task의 이름이 이렇게 길면 너가 뭘 할수 있지?",
+          "content": "재고 확인",
+          "isFixed": true
+        },
+        {
+          "id": "6",
+          "title": "짧음",
+          "content": "재고 확인",
+          "isFixed": true
+        }
+      ],
+      "shopId": "2",
+      "deletedAt": "2024-09-30T02:28:52.997Z"
+    },
+    {
+      "id": "1",
+      "title": "9월 16일 1T 필독",
+      "tasks": [
+        {
+          "id": "1",
+          "title": "첫 번째 업무",
+          "content": "화장실 청소",
+          "isFixed": true
+        },
+        {
+          "id": "2",
+          "title": "두 번째 업무",
+          "content": "매장 정리",
+          "isFixed": false
+        }
+      ],
+      "shopId": "2",
+      "deletedAt": "2024-09-30T02:28:54.175Z"
+    },
+    {
+      "id": "f2dc",
+      "title": "123",
+      "tasks": [
+        {
+          "id": "6",
+          "title": "짧음",
+          "content": "재고 확인",
+          "isFixed": true,
+          "shopId": "2"
+        }
+      ],
+      "shopId": "2",
+      "deletedAt": "2024-09-30T02:28:54.676Z"
+    },
+    {
+      "id": "92c2",
+      "title": "qwqwqw",
+      "tasks": [
+        {
+          "id": "6",
+          "title": "짧음",
+          "content": "재고 확인",
+          "isFixed": true,
+          "shopId": "2"
+        }
+      ],
+      "shopId": "2",
+      "deletedAt": "2024-09-30T02:28:55.164Z"
+    },
+    {
+      "id": "c2c4",
+      "title": "11111",
+      "tasks": [
+        {
+          "id": "9",
+          "title": "11111",
+          "content": "123",
+          "isFixed": true,
+          "shopId": "1"
+        },
+        {
+          "id": "10",
+          "title": "22222",
+          "content": "11123",
+          "isFixed": true,
+          "shopId": "1"
+        },
+        {
+          "id": "11",
+          "title": "33333",
+          "content": "1231231",
+          "isFixed": true,
+          "shopId": "1"
+        },
+        {
+          "id": "12",
+          "title": "44444",
+          "content": "2123",
+          "isFixed": false,
+          "shopId": "1"
+        }
+      ],
+      "shopId": "1",
+      "deletedAt": "2024-09-30T03:47:00.300Z"
+    },
+    {
+      "id": "9b82",
+      "title": "33333",
+      "tasks": [
+        {
+          "id": "11",
+          "title": "33333",
+          "content": "1231231",
+          "isFixed": true,
+          "shopId": "1"
+        }
+      ],
+      "shopId": "1",
+      "deletedAt": "2024-09-30T03:47:01.065Z"
+    },
+    {
+      "id": "1f15",
+      "title": "22222",
+      "tasks": [
+        {
+          "id": "9",
+          "title": "11111",
+          "content": "123",
+          "isFixed": true,
+          "shopId": "1"
+        },
+        {
+          "id": "10",
+          "title": "22222",
+          "content": "11123",
+          "isFixed": true,
+          "shopId": "1"
+        },
+        {
+          "id": "11",
+          "title": "33333",
+          "content": "1231231",
+          "isFixed": true,
+          "shopId": "1"
+        }
+      ],
+      "shopId": "1",
+      "deletedAt": "2024-09-30T03:47:01.560Z"
+    },
+    {
+      "id": "1",
+      "title": "123",
+      "tasks": [
+        {
+          "id": "9",
+          "title": "11111",
+          "content": "123",
+          "isFixed": true,
+          "shopId": "1",
+          "finishedState": true,
+          "userId": "1",
+          "createdAt": "2024-09-30T05:01:39.091Z",
+          "updatedAt": "2024-09-30T05:01:39.091Z"
+        }
+      ],
+      "shopId": "1",
+      "deletedAt": "2024-09-30T05:21:13.613Z"
+    },
+    {
+      "id": "2",
+      "title": "212",
+      "tasks": [
+        {
+          "id": "9",
+          "title": "11111",
+          "content": "123",
+          "isFixed": true,
+          "shopId": "1",
+          "finishedState": false,
+          "userId": null,
+          "createdAt": null,
+          "updatedAt": "2024-09-30T05:01:30.812Z"
+        },
+        {
+          "id": "10",
+          "title": "22222",
+          "content": "11123",
+          "isFixed": true,
+          "shopId": "1",
+          "finishedState": true,
+          "userId": "1",
+          "createdAt": "2024-09-30T05:01:46.147Z",
+          "updatedAt": "2024-09-30T05:01:46.147Z"
+        },
+        {
+          "id": "11",
+          "title": "33333",
+          "content": "1231231",
+          "isFixed": true,
+          "shopId": "1",
+          "finishedState": true,
+          "userId": "1",
+          "createdAt": "2024-09-30T05:01:45.547Z",
+          "updatedAt": "2024-09-30T05:01:45.547Z"
+        }
+      ],
+      "shopId": "1",
+      "deletedAt": "2024-09-30T05:21:19.804Z"
+    }
+  ],
+    "subsboard": [
+      {
+        "id": "1",
+        "title": "대타 구합니다.",
+        "writer": "조제훈",
+        "time": "2024/09/01 1T",
+        "partname": "이나현",
+        "registerdate": "2024.09.01",
+        "content": "9월 30일에 우리 매장의 마스코트 나랭이가 고향에 다녀와야 한다고 해서 대타가 급하게 필요합니다. 가능한 직원들은 댓글 달아주세요!"
+      },
+      {
+        "id": "2",
+        "title": "급하게 대타가 필요합니다!",
+        "writer": "조제훈",
+        "time": "2024/09/05 2T",
+        "partname": "박지현",
+        "registerdate": "2024.09.05",
+        "content": "제가 갑자기 가족 모임이 생겨서 9월 15일에 대타가 필요합니다. 도와주실 분 댓글 남겨주세요."
+      },
+      {
+        "id": "3",
+        "title": "대타 구해요!",
+        "writer": "조제훈",
+        "time": "2024/09/07 3T",
+        "partname": "정현아",
+        "registerdate": "2024.09.07",
+        "content": "9월 20일에 급한 개인 사정으로 대타 구합니다. 1T 타임 가능하신 분 있으면 부탁드립니다!"
+      },
+      {
+        "id": "4",
+        "title": "급한 대타 요청",
+        "writer": "조제훈",
+        "time": "2024/09/09 1T",
+        "partname": "최유리",
+        "registerdate": "2024.09.09",
+        "content": "9월 28일에 일할 대타가 필요해요. 사정이 생겨서 출근이 어렵습니다. 도와주실 분 계시면 댓글 부탁드립니다!"
+      },
+      {
+        "id": "5",
+        "title": "대타 구해요~!",
+        "writer": "조제훈",
+        "time": "2024/09/11 2T",
+        "partname": "정수민",
+        "registerdate": "2024.09.11",
+        "content": "9월 25일에 개인 사정으로 인해 대타가 필요합니다. 도와주실 분 구합니다!"
+      },
+      {
+        "id": "6",
+        "title": "9월 26일 대타 부탁드립니다!",
+        "writer": "조제훈",
+        "time": "2024/09/12 3T",
+        "partname": "이재영",
+        "registerdate": "2024.09.12",
+        "content": "9월 26일에 제가 다른 일이 생겨서 대타가 필요해요. 가능하신 분은 댓글 남겨주세요!"
+      },
+      {
+        "id": "7",
+        "title": "대타 구합니다!",
+        "writer": "조제훈",
+        "time": "2024/09/15 1T",
+        "partname": "김지민",
+        "registerdate": "2024.09.15",
+        "content": "9월 29일에 출근이 어려울 것 같아서 대타를 구합니다. 도와주실 분 계시면 댓글 부탁드려요."
+      },
+      {
+        "id": "8",
+        "title": "9월 30일 대타 필요합니다.",
+        "writer": "조제훈",
+        "time": "2024/09/18 2T",
+        "partname": "이서현",
+        "registerdate": "2024.09.18",
+        "content": "9월 30일에 중요한 일이 생겨 대타가 필요합니다. 도와주실 분은 연락 부탁드립니다!"
+      },
+      {
+        "id": "9",
+        "title": "대타 구합니다!",
+        "writer": "조제훈",
+        "time": "2024/09/20 1T",
+        "partname": "유제은",
+        "registerdate": "2024.09.20",
+        "content": "9월 27일에 대타가 필요해요. 2T 타임 도와주실 분 있으면 정말 감사하겠습니다!"
+      },
+      {
+        "id": "10",
+        "title": "대타 구합니다~!",
+        "writer": "조제훈",
+        "time": "2024/09/22 3T",
+        "partname": "김예지",
+        "registerdate": "2024.09.22",
+        "content": "9월 30일에 중요한 일이 생겨서 대타가 필요합니다. 가능하신 분은 댓글 부탁드려요!"
+      }
+  ],
+    "comments": [
+      {
+        "id": "1",
+        "postId": 1,
+        "writer": "김철수",
+        "content": "제가 하겠습니다!",
+        "avatar": "/src/assets/icons/board/avater0.svg"
+      },
+      {
+        "id": "2",
+        "postId": 1,
+        "writer": "이영희",
+        "content": "제가 할 시간 있을 것 같아요.",
+        "avatar": "/src/assets/icons/board/avatar.svg"
+      },
+      {
+        "id": "3",
+        "postId": 2,
+        "writer": "박민수",
+        "content": "제가 이 부분 맡겠습니다.",
+        "avatar": "/src/assets/icons/board/avater2.svg"
+      },
+      {
+        "id": "4",
+        "postId": 2,
+        "writer": "정수연",
+        "content": "이 일은 제가 처리할 수 있어요.",
+        "avatar": "/src/assets/icons/board/avater5.svg"
+      },
+      {
+        "id": "5",
+        "postId": 3,
+        "writer": "김하나",
+        "content": "제가 맡아서 진행할게요.",
+        "avatar": "/src/assets/icons/board/avater4.svg"
+      },
+      {
+        "id": "6",
+        "postId": 3,
+        "writer": "박철민",
+        "content": "시간이 될 것 같으니 제가 하겠습니다.",
+        "avatar": "/src/assets/icons/board/avater0.svg"
+      },
+      {
+        "id": "7",
+        "postId": 4,
+        "writer": "최은지",
+        "content": "제가 이 일을 할 수 있을 것 같아요.",
+        "avatar": "/src/assets/icons/board/avater4.svg"
+      },
+      {
+        "id": "8",
+        "postId": 4,
+        "writer": "유제은",
+        "content": "네! 제가 할 수 있어요.",
+        "avatar": "/src/assets/icons/board/avater3.svg"
+      },
+      {
+        "id": "9",
+        "postId": 5,
+        "writer": "김민지",
+        "content": "제가 하겠습니다! 걱정 마세요.",
+        "avatar": "/src/assets/icons/board/avater2.svg"
+      },
+      {
+        "id": "10",
+        "postId": 5,
+        "writer": "박준영",
+        "content": "시간이 되니 제가 맡겠습니다.",
+        "avatar": "/src/assets/icons/board/avater5.svg"
+      },
+      {
+        "id": "11",
+        "postId": 6,
+        "writer": "한지민",
+        "content": "제가 처리할 수 있어요.",
+        "avatar": "/src/assets/icons/board/avatar.svg"
+      },
+      {
+        "id": "12",
+        "postId": 6,
+        "writer": "서준호",
+        "content": "제가 할 수 있을 것 같습니다.",
+        "avatar": "/src/assets/icons/board/avater5.svg"
+      },
+      {
+        "id": "13",
+        "postId": 7,
+        "writer": "이지은",
+        "content": "제가 이 일을 맡을게요.",
+        "avatar": "/src/assets/icons/board/avater3.svg"
+      },
+      {
+        "id": "14",
+        "postId": 7,
+        "writer": "박소영",
+        "content": "제가 처리해보겠습니다.",
+        "avatar": "/src/assets/icons/board/avater4.svg"
+      },
+      {
+        "id": "15",
+        "postId": 8,
+        "writer": "강지훈",
+        "content": "제가 이 일을 할 수 있을 것 같아요.",
+        "avatar": "/src/assets/icons/board/avater2.svg"
+      },
+      {
+        "id": "16",
+        "postId": 8,
+        "writer": "김예지",
+        "content": "네, 제가 맡아서 할게요.",
+        "avatar": "/src/assets/icons/board/avatar.svg"
+      },
+      {
+        "id": "17",
+        "postId": 9,
+        "writer": "정민수",
+        "content": "제가 이 일을 맡겠습니다!",
+        "avatar": "/src/assets/icons/board/avater0.svg"
+      },
+      {
+        "id": "18",
+        "postId": 9,
+        "writer": "이수현",
+        "content": "제가 할 시간 될 것 같아요.",
+        "avatar": "/src/assets/icons/board/avater5.svg"
+      },
+      {
+        "id": "19",
+        "postId": 10,
+        "writer": "박성민",
+        "content": "제가 처리할 수 있을 것 같아요.",
+        "avatar": "/src/assets/icons/board/avater3.svg"
+      },
+      {
+        "id": "20",
+        "postId": 10,
+        "writer": "최유리",
+        "content": "제가 맡을게요! 걱정 마세요.",
+        "avatar": "/src/assets/icons/board/avater4.svg"
+      }
+    ],
+  "manualboard": [
+    {
+      "id": "1",
+      "title": "매장 청소 방법",
+      "content": "매장 청소는 하루에 두 번, 개점 전과 마감 후 진행됩니다.",
+      "registerdate": "2024-09-29",
+      "file": "cleaning_guide.pdf",
+      "writer": "관리자"
+    },
+    {
+      "id": "2",
+      "title": "커피머신 사용법",
+      "content": "커피머신의 사용법은 반드시 교육을 받은 후 사용 가능합니다.",
+      "registerdate": "2024-09-29",
+      "file": "coffee_machine_manual.pdf",
+      "writer": "관리자"
+    },
+    {
+      "id": "3",
+      "title": "재고 관리 가이드",
+      "content": "재고는 매일 저녁 마감 후 점검하여 부족한 물품을 기록합니다.",
+      "registerdate": "2024-09-29",
+      "file": "inventory_guide.pdf",
+      "writer": "관리자"
+    },
+    {
+      "id": "4",
+      "title": "음료 제조 표준",
+      "content": "음료 제조 시에는 레시피에 따라 정확한 계량을 해야 합니다.",
+      "registerdate": "2024-09-29",
+      "file": "drink_recipe.pdf",
+      "writer": "관리자"
+    },
+    {
+      "id": "5",
+      "title": "고객 응대 매뉴얼",
+      "content": "고객 응대 시 항상 미소를 유지하며 정중히 인사합니다.",
+      "registerdate": "2024-09-29",
+      "file": "customer_service_manual.pdf",
+      "writer": "관리자"
+    },
+    {
+      "id": "6",
+      "title": "POS 시스템 사용법",
+      "content": "POS 시스템은 결제 시 반드시 확인 후 사용하세요.",
+      "registerdate": "2024-09-29",
+      "file": "pos_manual.pdf",
+      "writer": "관리자"
+    },
+    {
+      "id": "7",
+      "title": "휴식 시간 규칙",
+      "content": "휴식 시간은 4시간 근무 시 30분이며, 교대로 진행합니다.",
+      "registerdate": "2024-09-29",
+      "file": "break_policy.pdf",
+      "writer": "관리자"
+    },
+    {
+      "id": "8",
+      "title": "음료 오더 처리 방법",
+      "content": "음료 주문은 정확히 입력하고, 결제 후 제조 시작합니다.",
+      "registerdate": "2024-09-29",
+      "file": "order_processing_guide.pdf",
+      "writer": "관리자"
+    },
+    {
+      "id": "9",
+      "title": "유니폼 착용 규칙",
+      "content": "근무 시 항상 유니폼을 착용하며, 청결하게 유지합니다.",
+      "registerdate": "2024-09-29",
+      "file": "uniform_policy.pdf",
+      "writer": "관리자"
+    },
+    {
+      "id": "10",
+      "title": "안전 사고 예방 매뉴얼",
+      "content": "안전 사고를 예방하기 위해서는 항상 주의를 기울입니다.",
+      "registerdate": "2024-09-29",
+      "file": "safety_manual.pdf",
+      "writer": "관리자"
+    },
+    {
+      "id": "11",
+      "title": "식자재 관리법",
+      "content": "식자재는 매일 신선도를 확인하고, 유통기한을 점검합니다.",
+      "registerdate": "2024-09-29",
+      "file": "food_management.pdf",
+      "writer": "관리자"
+    },
+    {
+      "id": "12",
+      "title": "음료 리필 규칙",
+      "content": "음료 리필은 특정 메뉴에 한해 제공하며, 리필 조건을 안내합니다.",
+      "registerdate": "2024-09-29",
+      "file": "refill_policy.pdf",
+      "writer": "관리자"
+    },
+    {
+      "id": "13",
+      "title": "고객 불만 처리 매뉴얼",
+      "content": "고객 불만이 있을 경우 매니저에게 즉시 보고합니다.",
+      "registerdate": "2024-09-29",
+      "file": "complaint_handling.pdf",
+      "writer": "관리자"
+    },
+    {
+      "id": "14",
+      "title": "음료 트레이닝 계획",
+      "content": "신입 직원은 음료 제조 트레이닝을 주 2회 진행합니다.",
+      "registerdate": "2024-09-29",
+      "file": "training_plan.pdf",
+      "writer": "관리자"
+    },
+    {
+      "id": "15",
+      "title": "마감 정리 매뉴얼",
+      "content": "마감 시에는 모든 장비를 정리하고, 청소를 철저히 합니다.",
+      "registerdate": "2024-09-29",
+      "file": "closing_guide.pdf",
+      "writer": "관리자"
+    }
+  ],
+  "noticeboard": [
+    {
+      "id": "1",
+      "title": "휴무 일정 공지",
+      "content": "다음 주 월요일은 휴무입니다.",
+      "registerdate": "2024-09-29",
+      "file": "holiday_notice.pdf",
+      "writer": "관리자"
+    },
+    {
+      "id": "2",
+      "title": "추석 연휴 안내",
+      "content": "추석 연휴 동안 매장은 휴무입니다.",
+      "registerdate": "2024-09-29",
+      "file": "chuseok_notice.pdf",
+      "writer": "관리자"
+    },
+    {
+      "id": "3",
+      "title": "가격 인상 안내",
+      "content": "다음 달부터 일부 메뉴의 가격이 인상됩니다.",
+      "registerdate": "2024-09-29",
+      "file": "price_increase.pdf",
+      "writer": "관리자"
+    },
+    {
+      "id": "4",
+      "title": "신메뉴 출시 안내",
+      "content": "신메뉴 '자몽 에이드'가 출시되었습니다.",
+      "registerdate": "2024-09-29",
+      "file": "new_menu_notice.pdf",
+      "writer": "관리자"
+    },
+    {
+      "id": "5",
+      "title": "정기 점검 안내",
+      "content": "이번 주 토요일에 매장 정기 점검이 진행됩니다.",
+      "registerdate": "2024-09-29",
+      "file": "inspection_notice.pdf",
+      "writer": "관리자"
+    },
+    {
+      "id": "6",
+      "title": "연말 파티 초대",
+      "content": "직원 연말 파티가 12월 25일에 열립니다.",
+      "registerdate": "2024-09-29",
+      "file": "party_invite.pdf",
+      "writer": "관리자"
+    },
+    {
+      "id": "7",
+      "title": "이벤트 공지",
+      "content": "고객을 위한 특별 이벤트가 다음 주에 진행됩니다.",
+      "registerdate": "2024-09-29",
+      "file": "event_notice.pdf",
+      "writer": "관리자"
+    },
+    {
+      "id": "8",
+      "title": "위생 점검 결과",
+      "content": "최근 위생 점검에서 우수 평가를 받았습니다.",
+      "registerdate": "2024-09-29",
+      "file": "hygiene_report.pdf",
+      "writer": "관리자"
+    },
+    {
+      "id": "9",
+      "title": "직원 건강검진 안내",
+      "content": "직원 건강검진이 이번 달 말에 진행됩니다.",
+      "registerdate": "2024-09-29",
+      "file": "health_checkup.pdf",
+      "writer": "관리자"
+    },
+    {
+      "id": "10",
+      "title": "고객 설문조사",
+      "content": "고객 만족도를 조사하는 설문 이벤트를 진행합니다.",
+      "registerdate": "2024-09-29",
+      "file": "survey_notice.pdf",
+      "writer": "관리자"
+    },
+    {
+      "id": "11",
+      "title": "신입 직원 교육 일정",
+      "content": "신입 직원 교육이 다음 주에 시작됩니다.",
+      "registerdate": "2024-09-29",
+      "file": "training_schedule.pdf",
+      "writer": "관리자"
+    },
+    {
+      "id": "12",
+      "title": "매장 리모델링 안내",
+      "content": "다음 달에 매장 리모델링이 진행될 예정입니다.",
+      "registerdate": "2024-09-29",
+      "file": "remodeling_notice.pdf",
+      "writer": "관리자"
+    },
+    {
+      "id": "13",
+      "title": "정기 회의 일정",
+      "content": "다음 주 월요일에 정기 회의가 열립니다.",
+      "registerdate": "2024-09-29",
+      "file": "meeting_schedule.pdf",
+      "writer": "관리자"
+    },
+    {
+      "id": "14",
+      "title": "할인 행사 안내",
+      "content": "이번 주에 특별 할인 행사를 진행합니다.",
+      "registerdate": "2024-09-29",
+      "file": "discount_event.pdf",
+      "writer": "관리자"
+    },
+    {
+      "id": "15",
+      "title": "고객 불편사항 접수",
+      "content": "고객 불편사항 접수를 위한 전용 창구가 마련되었습니다.",
+      "registerdate": "2024-09-29",
+      "file": "complaint_service.pdf",
+      "writer": "관리자"
+    }
+  ]
+}
