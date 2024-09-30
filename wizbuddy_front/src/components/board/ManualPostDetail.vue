@@ -50,40 +50,45 @@
 <script setup>
 import { ref, onMounted, computed, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import axios from 'axios';
 import DeleteModal from '@/components/schedule/modal/DeleteModal.vue'
 
-// Use Vue Router's useRoute to get the ID parameter from the route
 const route = useRoute(); 
 const router = useRouter();
 const board = ref(null);
 const likes = ref(0);
+const boards = ref([]);
+const postId = computed(() => parseInt(route.params.id));
+const likeClicked = ref(false);
+const isDeleteModalOpen = ref(false);
 
-// 기존 posts 대신 JSON 데이터를 fetch로 불러옵니다.
-const boards = ref([]); // posts를 빈 배열로 초기화합니다.
-
-onMounted (async () => {
+const loadPost = async () => {
   try {
-    const response = await fetch('http://localhost:8080/manualboard');
-    if (!response.ok) {
-      throw new Error(`Http error! status: ${response.status}`);
-    } const data = await response.json();
-    if (data.length > 0) {
-      boards.value = data;
-      console.log('서버로부터 받아온 boards: ', boards.value);
-      const currentPost = boards.value.find((board) => board.id === postId.value);
-      if (currentPost) {
-        board.value = currentPost;
-      }
+    const response = await axios.get(`http://localhost:8080/manualboard`);
+    boards.value = response.data;
+
+    const currentBoard = boards.value.find(board => parseInt(board.id) === postId.value);
+    if (currentBoard) {
+      board.value = currentBoard;
+    } else {
+      console.error('게시글을 찾을 수 없습니다.');
     }
   } catch (error) {
-    console.error ('데이터를 가져오는 중 오류가 발생했습니다: ', error);
+    console.error('게시글 데이터를 불러오는 중 오류 발생: ', error);
   }
+};
+
+onMounted(() => {
+  loadPost();
 });
 
-// JSON 데이터가 로드된 후 게시글을 불러오도록 watch 추가
+watch(postId, () => {
+  loadPost();
+});
+
 watch(boards, (newBoards) => {
   if (newBoards && newBoards.length > 0) {
-    const currentPost = newBoards.find((board) => board.id === postId.value);
+    const currentPost = newBoards.find((board) => parseInt(board.id) === postId.value);
     if (currentPost) {
       board.value = currentPost;
     } else {
@@ -92,20 +97,16 @@ watch(boards, (newBoards) => {
   }
 });
 
-const likeClicked = ref(false);
-const isDeleteModalOpen = ref(false);
-
-// 현재 게시글 ID
-const postId = computed(() => parseInt(route.params.id));
-
-// 이전 글 ID (현재 ID가 1보다 크면)
+// 이전 글 ID 계산 (현재 postId가 1보다 크면)
 const previousPostId = computed(() => {
   return postId.value > 1 ? postId.value - 1 : null;
 });
 
-// 다음 글 ID (마지막 글보다 작은 경우)
+// 다음 글 ID 계산 (boards 배열의 마지막 ID와 비교)
 const nextPostId = computed(() => {
-  return postId.value < boards.length ? postId.value + 1 : null;
+  const lastPostId = boards.value.length;
+  console.log(lastPostId);
+  return postId.value < lastPostId ? postId.value + 1 : null;
 });
 
 // 좋아요 증가 함수

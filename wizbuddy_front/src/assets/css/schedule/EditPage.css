@@ -1,79 +1,69 @@
-.main-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-    min-height: 100vh;
-    padding-bottom: 41.6px;
-    background-color: #F3F7FA;
-    padding: 0 20px;
-}
-
 .edit-container {
-    max-width: 600px;
+    max-width: 650px;
     width: 100%;
-    margin-top: 40px;
-    padding: 20px;
-    background-color: #f9f9f9;
+    margin-top: 20px;
+    margin-left: 150px;
+    margin-right: 150px;
+    background-color: white;
+    border: 1px solid #ccc;
     border-radius: 20px;
+    padding: 5px 30px 14px 30px;
     box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
     overflow: hidden;
     flex: 1;
-  }
-  
-  .edit-header {
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .edit-form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .edit-form label {
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  .edit-form input,
-  .edit-form select {
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
-  
-  .edit-actions {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .cancel-btn {
-    background-color: #ddd;
-    color: #333;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .submit-btn {
-    background-color: #4285f4;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .cancel-btn:hover {
-    background-color: #ccc;
-  }
-  
-  .submit-btn:hover {
-    background-color: #357ae8;
-  }
+}
+
+.edit-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-form label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.edit-form input,
+.edit-form select {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.edit-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cancel-btn {
+  background-color: #ddd;
+  color: #333;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submit-btn {
+  background-color: #4285f4;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cancel-btn:hover {
+  background-color: #ccc;
+}
+
+.submit-btn:hover {
+  background-color: #357ae8;
+}

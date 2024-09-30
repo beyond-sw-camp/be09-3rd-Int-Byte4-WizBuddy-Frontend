@@ -7,7 +7,7 @@
           <p class="store-name">{{ store.shop_name }}</p>
         </div>
         <div class="store-info">
-          <button class="store-option" v-for="option in storeOptions" :key="option" @click="navigateTo(option)">
+          <button class="store-option" v-for="option in storeOptions" :key="option" @click="navigateTo(option, store)">
             {{ option }}
           </button>
         </div>
@@ -92,7 +92,8 @@ async function deleteStore(store) {
         const employeeUpdates = shopData.employees.map(async (employeeId) => {
           const employeeResponse = await fetch(`http://localhost:8080/users/${employeeId}`);
           const employeeData = await employeeResponse.json();
-// 매장지우면 user에있는 매장id도 지워지게 -> 안그러면 매장 다시 만들때 오류남
+
+          // 매장 삭제 시 사용자의 employedAt에서 매장 ID 제거
           employeeData.employedAt = (employeeData.employedAt || []).filter(id => id !== store.id);
 
           return fetch(`http://localhost:8080/users/${employeeId}`, {
@@ -172,22 +173,29 @@ async function inviteEmployee(email) {
     alert('초대 전송 중 오류가 발생했습니다.');
   }
 }
-const navigateTo = (option) => {
+
+const navigateTo = (option, store) => {
+  // 클릭한 매장의 id를 localStorage에 저장
+  localStorage.setItem('shop', JSON.stringify(store));
+  console.log(store);
+
+  // 원하는 페이지로 이동
   switch (option) {
     case '근무일정 조회':
-      router.push('/schedule');
+      router.push({ path: '/schedule', query: { shopId: store.id } });
       break;
     case '체크리스트 조회':
-      router.push('/checklist');
+      router.push({ path: '/checklist', query: { shopId: store.id } }); // 체크리스트에 shopId 전달
       break;
     case '업무 조회':
-      router.push('/task');
+      router.push({ path: '/task', query: { shopId: store.id } }); // 업무 조회에 shopId 전달
       break;
     case '게시판 조회':
-      router.push('/noticeboard');
+      router.push({ path: '/noticeboard', query: { shopId: store.id } }); // 게시판 조회에 shopId 전달
       break;
   }
 };
+
 </script>
 
 <style scoped>
