@@ -174,8 +174,9 @@ async function inviteEmployee(email) {
 }
 
 const navigateTo = (option, store) => {
-  // 매장 정보를 로컬스토리지에 저장
-  localStorage.setItem('shop', JSON.stringify(store)); 
+  // 클릭한 매장의 id를 localStorage에 저장
+  localStorage.setItem('shop', JSON.stringify(store));
+  console.log(store);
   
   // 원하는 페이지로 이동
   switch (option) {
