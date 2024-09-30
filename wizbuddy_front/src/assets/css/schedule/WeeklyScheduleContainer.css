@@ -1,0 +1,100 @@
+.schedule-container {
+    max-width: 900px;
+    width: 100%;
+    margin-top: 20px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 5px 40px 14px 40px;
+    box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    overflow-x: hidden;
+    flex: 1;
+  }
+  
+  .schedule-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .date-range {
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .time-header {
+    display: flex;
+    justify-content: space-around;
+    padding-left: 50px;
+    padding-right: 25px;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .schedule-grid {
+    display: flex;
+    flex-direction: column; /* 세로로 정렬합니다 */
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .day-container {
+    display: flex;
+    justify-content: space-between; /* 요일별로 간격을 유지합니다 */
+    margin-bottom: 10px; /* 요일 간 간격 */
+  }
+  
+  .day-header {
+    font-weight: bold;
+    margin-bottom: 10px;
+    width: 50px; /* 요일 컬럼의 너비를 지정합니다 */
+  }
+  
+  .time-slot {
+    flex: 1;
+    height: 40px;
+    border: 1px solid #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .schedule-item {
+    background-color: #d2f0ff;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .prev-next-button {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+  
+  .prev-next-button svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .schedule-fun {
+    background-color: #D2F0FF;
+  }
+  
+  .schedule-important {
+    background-color: #FFD9D9;
+  }
+  
+  .schedule-personal {
+    background-color: #FEE6C9;
+  }
