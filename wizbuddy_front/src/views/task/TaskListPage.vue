@@ -20,7 +20,6 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
 import TaskItem from '@/components/task/TaskItem.vue';
 import TaskTab from '@/components/task/TaskTab.vue';
 import UserProfileMenu from '@/components/UserProfileMenu.vue';
@@ -28,27 +27,32 @@ import SideMenu from '@/components/task/TaskSideMenu.vue';
 
 const tasks = ref([]);
 
-const route = useRoute();
+// 로컬 스토리지에서 shop 정보를 가져오기
+const shop = JSON.parse(localStorage.getItem('shop'));
+const shopId = shop?.id || null; // shop 정보가 없으면 null 처리
 
-// 페이지가 로드될 때 API로부터 데이터를 가져옴
 onMounted(async () => {
-  try {
-    const response = await fetch('http://localhost:8080/tasks'); // JSON 서버에서 데이터를 가져옴
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+  if (shopId) {
+    try {
+      const response = await fetch('http://localhost:8080/tasks'); // JSON 서버에서 데이터를 가져옴
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const allTasks = await response.json();
+
+      // shopId가 일치하는 tasks만 필터링
+      tasks.value = allTasks.filter(task => task.shopId === shopId);
+
+      console.log('Filtered tasks for shopId:', shopId, tasks.value);
+    } catch (error) {
+      console.error('데이터를 가져오는 중 오류가 발생했습니다:', error);
     }
-    const data = await response.json();
-    console.log(data);    
-    if (data.length > 0) {
-      tasks.value = data;  // 가져온 데이터를 tasks에 할당
-      console.log('서버로부터 받아온 tasks:', tasks.value);
-    }
-  } catch (error) {
-    console.error('데이터를 가져오는 중 오류가 발생했습니다:', error);
+  } else {
+    console.error('로컬 스토리지에서 shop 정보를 가져올 수 없습니다.');
   }
 });
-
 </script>
+
 
 <style scoped>
 .task-list-page {

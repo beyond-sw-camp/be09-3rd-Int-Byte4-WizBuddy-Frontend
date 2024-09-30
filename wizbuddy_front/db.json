@@ -221,49 +221,57 @@
       "id": "2",
       "title": "두 번째 업무",
       "content": "매장 정리",
-      "isFixed": false
+      "isFixed": false,
+      "shopId": "1"
     },
     {
       "id": "4",
       "title": "네 번째 업무",
       "content": "재고 확인",
-      "isFixed": false
+      "isFixed": false,
+      "shopId": "1"
     },
     {
       "id": "5",
       "title": "task의 이름이 이렇게 길면 너가 뭘 할수 있지?",
       "content": "재고 확인",
-      "isFixed": true
+      "isFixed": true,
+      "shopId": "1"
     },
     {
       "id": "6",
       "title": "짧음",
       "content": "재고 확인",
-      "isFixed": true
+      "isFixed": true,
+      "shopId": "2"
     },
     {
       "id": "7",
       "title": "fixed가 아닌데 task의 이름이 이렇게 길면 너가 뭘할수있는데",
       "content": "재고 확인",
-      "isFixed": false
+      "isFixed": false,
+      "shopId": "2"
     },
     {
       "id": "8",
       "title": "3",
       "content": "3",
-      "isFixed": false
+      "isFixed": false,
+      "shopId": "2"
     },
     {
       "id": "9",
       "title": "3",
       "content": "3",
-      "isFixed": false
+      "isFixed": false,
+      "shopId": "1"
     },
     {
       "id": "10",
       "title": "3",
       "content": "3",
-      "isFixed": false
+      "isFixed": false,
+      "shopId": "1"
     }
   ],
   "checklists": [
@@ -283,7 +291,8 @@
           "content": "재고 확인",
           "isFixed": true
         }
-      ]
+      ],
+      "shopId": "2"
     },
     {
       "id": "1",
@@ -301,7 +310,8 @@
           "content": "매장 정리",
           "isFixed": false
         }
-      ]
+      ],
+      "shopId": "2"
     },
     {
       "id": "e68f",
@@ -313,7 +323,64 @@
           "content": "재고 확인",
           "isFixed": true
         }
-      ]
+      ],
+      "shopId": "1"
+    },
+    {
+      "id": "36bc",
+      "title": "새ㅑ로운 체크리스트다 이놈아",
+      "tasks": [
+        {
+          "id": "5",
+          "title": "task의 이름이 이렇게 길면 너가 뭘 할수 있지?",
+          "content": "재고 확인",
+          "isFixed": true,
+          "shopId": "1"
+        },
+        {
+          "id": "4",
+          "title": "네 번째 업무",
+          "content": "재고 확인",
+          "isFixed": false,
+          "shopId": "1"
+        },
+        {
+          "id": "9",
+          "title": "3",
+          "content": "3",
+          "isFixed": false,
+          "shopId": "1"
+        }
+      ],
+      "shopId": "1"
+    },
+    {
+      "id": "f2dc",
+      "title": "123",
+      "tasks": [
+        {
+          "id": "6",
+          "title": "짧음",
+          "content": "재고 확인",
+          "isFixed": true,
+          "shopId": "2"
+        }
+      ],
+      "shopId":"2"
+    },
+    {
+      "id": "92c2",
+      "title": "qwqwqw",
+      "tasks": [
+        {
+          "id": "6",
+          "title": "짧음",
+          "content": "재고 확인",
+          "isFixed": true,
+          "shopId": "2"
+        }
+      ],
+      "shopId": "2"
     }
   ],
   "checklistsPast": [
@@ -334,7 +401,8 @@
           "isFixed": true
         }
       ],
-      "deletedAt": "2024-09-29T07:47:19.652Z"
+      "deletedAt": "2024-09-29T07:47:19.652Z",
+      "shopId": "1"
     },
     {
       "id": "1",
@@ -353,7 +421,8 @@
           "isFixed": false
         }
       ],
-      "deletedAt": "2024-09-29T08:23:35.451Z"
+      "deletedAt": "2024-09-29T08:23:35.451Z",
+      "shopId": "1"
     }
   ],
   "posts": [
@@ -501,5 +570,5 @@
       "registerdate": "2024-09-29",
       "content": "에스프레소 머신, 그라인더, 스티머 등 카페 운영에 필요한 필수 장비와 선택 장비 리스트를 소개합니다."
     }
-  ]  
+  ]
 }
