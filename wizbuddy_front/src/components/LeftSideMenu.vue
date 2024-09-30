@@ -59,7 +59,6 @@ function toggleDeleteMode() {
   emit('toggle-delete-mode', isDeleteMode.value); // 부모에게 emit 이벤트 전달
 }
 
-
 // 라우트 경로 감시
 watch(() => route.path, (newPath) => {
   isScheduleMainPage.value = newPath === '/schedule';
