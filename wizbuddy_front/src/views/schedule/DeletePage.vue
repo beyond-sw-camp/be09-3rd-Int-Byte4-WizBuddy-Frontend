@@ -38,6 +38,7 @@
   
   <script setup>
   import { ref, onMounted } from 'vue';
+  import { useRoute, useRouter } from 'vue-router'; // useRouter 추가
   import axios from 'axios';
   import SideMenu from '@/components/SideMenu.vue';
   import ScheduleCalendar from '@/components/schedule/ScheduleCalendar.vue';
@@ -62,6 +63,7 @@
   const enableScheduleSelect = ref(true);
   
   const today = ref(new Date());
+  const router = useRouter(); // useRouter 사용
   
   const isToday = (day) => {
     return (
@@ -154,34 +156,33 @@
   };
   
   const handleDeleteConfirmation = async () => {
-  try {
-    if (selectedScheduleId.value) {
-      const scheduleToUpdate = scheduleData.value.find(schedule => 
-        schedule.employee_working_part.some(part => part.id === selectedScheduleId.value)
-      );
-
-      if (scheduleToUpdate) {
-        scheduleToUpdate.employee_working_part = scheduleToUpdate.employee_working_part.filter(
-          part => part.id !== selectedScheduleId.value
+    try {
+      if (selectedScheduleId.value) {
+        const scheduleToUpdate = scheduleData.value.find(schedule => 
+          schedule.employee_working_part.some(part => part.id === selectedScheduleId.value)
         );
-
-        await axios.patch(`http://localhost:8080/schedules/${scheduleToUpdate.id}`, {
-          employee_working_part: scheduleToUpdate.employee_working_part
-        });
-
-        alert('스케줄이 삭제되었습니다.');
-        loadScheduleData();
-      } else {
-        alert('삭제할 스케줄을 찾을 수 없습니다.');
+  
+        if (scheduleToUpdate) {
+          scheduleToUpdate.employee_working_part = scheduleToUpdate.employee_working_part.filter(
+            part => part.id !== selectedScheduleId.value
+          );
+  
+          await axios.patch(`http://localhost:8080/schedules/${scheduleToUpdate.id}`, {
+            employee_working_part: scheduleToUpdate.employee_working_part
+          });
+  
+          alert('스케줄이 삭제되었습니다.');
+          loadScheduleData();
+        } else {
+          alert('삭제할 스케줄을 찾을 수 없습니다.');
+        }
       }
+    } catch (error) {
+      console.error('스케줄 삭제 중 오류 발생:', error.response ? error.response.data : error.message);
+      alert('스케줄 삭제 중 문제가 발생했습니다.');
     }
-  } catch (error) {
-    console.error('스케줄 삭제 중 오류 발생:', error.response ? error.response.data : error.message);
-    alert('스케줄 삭제 중 문제가 발생했습니다.');
-  }
-  closeDeleteModal();
-};
-
+    closeDeleteModal();
+  };
   
   const loadScheduleData = async () => {
     try {

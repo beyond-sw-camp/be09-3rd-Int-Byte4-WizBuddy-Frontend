@@ -1,83 +1,97 @@
 <template>
-    <div class="container">
-      <div class="form-container">
-        <!-- 글쓰기 폼 -->
-        <div class="writing-form">
-          <div class="form-field title-container">
-            <label class="form-label">제목</label>
-            <input v-model="newPost.title" type="text" placeholder="제목을 입력하세요" class="title-input">
+  <div class="container">
+    <div class="form-container">
+      <!-- 글쓰기 폼 -->
+      <div class="writing-form">
+        <div class="form-field title-container">
+          <label class="form-label">제목</label>
+          <input v-model="newPost.title" type="text" placeholder="제목을 입력하세요" class="title-input" />
+        </div>
+
+        <div class="form-field content-container">
+          <label class="form-label">내용</label>
+          <textarea v-model="newPost.content" placeholder="내용을 입력하세요" class="content-textarea"></textarea>
+        </div>
+
+        <!-- 이름 및 날짜/타임 선택을 가로 정렬 -->
+        <div class="name-time-row">
+          <div class="form-field name-select-container">
+            <select v-model="selectedName" class="name-select">
+              <option disabled value="">이름 선택</option>
+              <option v-for="name in names" :key="name">{{ name }}</option>
+            </select>
           </div>
-  
-          <div class="form-field content-container">
-            <label class="form-label">내용</label>
-            <textarea v-model="newPost.content" placeholder="내용을 입력하세요" class="content-textarea"></textarea>
+
+          <div class="form-field time-select-container">
+            <select v-model="selectedDateAndTime" class="name-select">
+              <option disabled value="">근무 날짜 및 타임 선택</option>
+              <option v-for="dateAndTime in dateAndTimes" :key="dateAndTime">{{ dateAndTime }}</option>
+            </select>
           </div>
-  
-          <!-- 이름 및 날짜/타임 선택을 가로 정렬 -->
-          <div class="name-time-row">
-            <div class="form-field name-select-container">
-              <select v-model="selectedName" class="name-select">
-                <option disabled value="">이름 선택</option>
-                <option v-for="name in names" :key="name">{{ name }}</option>
-              </select>
-            </div>
-  
-            <div class="form-field time-select-container">
-              <select v-model="selectedDateAndTime" class="name-select">
-                <option disabled value="">근무 날짜 및 타임 선택</option>
-                <option v-for="dateAndTime in dateAndTimes" :key="dateAndTime">{{ dateAndTime }}</option>
-              </select>
-            </div>
-            <!-- 등록 버튼 -->
-          <div class="form-controls">
-            <button @click="submitPost" class="submit-button">등록</button>
-          </div>
-          </div>
-  
-          
+        </div>
+
+        <!-- 등록 버튼 -->
+        <div class="form-controls">
+          <button @click="submitPost" class="submit-button">등록</button>
         </div>
       </div>
     </div>
-  </template>
-  
-  
-  
-  <script setup>
-  import { ref } from 'vue';
-  
-  const newPost = ref({
-    title: '',
-    content: ''
-  });
+  </div>
+</template>
 
-//   // 게시글 등록 함수
-// const submitPost = async () => {
-//   const newPost = {
-//     title: '새 게시글',
-//     writer: '사용자 이름',
-//     content: '게시글 내용',
-//     registerdate: new Date().toISOString().split('T')[0],
-//   };
-//   const response = await axios.post('http://localhost:8080/posts', newPost);
-//   post.value = response.data;
-// };
+<script setup>
+import { ref } from 'vue';
+import axios from 'axios'; 
+import { useRouter } from 'vue-router';
 
-  
-  const selectedName = ref('');
-  const selectedDateAndTime = ref('');
-  
-  const names = ['이나현', '조제훈', '김민수'];
-  const dateAndTimes = ['09/03 2T', '09/04 2T', '09/05 1T'];
-  
-  const submitPost = () => {
-    if (!newPost.value.title || !newPost.value.content || !selectedName.value || !selectedDateAndTime.value) {
-      alert('제목, 내용, 이름, 날짜 및 타임을 모두 선택해주세요.');
-      return;
-    }
-    console.log('New Post Submitted:', newPost.value);
-  };
-  </script>
-  
+const router = useRouter();
+
+const newPost = ref({
+  title: '',
+  writer: '',
+  content: '',
+  registerdate: '',
+});
+
+const post = ref(null); // post 객체 추가
+
+// 날짜 포맷 함수
+const formatDate = (date) => {
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 +1
+  const day = date.getDate().toString().padStart(2, '0');
+  return `${year}.${month}.${day}`;
+};
+
+// 게시글 등록 함수
+const submitPost = async () => {
+  if (!newPost.value.title || !newPost.value.content || !selectedName.value || !selectedDateAndTime.value) {
+    alert('제목, 내용, 이름, 날짜 및 타임을 모두 선택해주세요.');
+    return;
+  }
+
+  // 현재 날짜를 포맷하여 등록 날짜 설정
+  newPost.value.registerdate = formatDate(new Date());
+  newPost.value.writer = selectedName.value; // 선택된 이름을 작성자로 설정
+
+  try {
+    const response = await axios.post('http://localhost:8080/subsboard', newPost.value);
+    post.value = response.data;
+    alert('게시글이 성공적으로 등록되었습니다.');
+    router.push('/subsboard');
+  } catch (error) {
+    console.error('게시글 등록 중 오류 발생:', error);
+  }
+};
+
+// 선택 옵션
+const selectedName = ref('');
+const selectedDateAndTime = ref('');
+
+const names = ['이나현', '조제훈', '김민수'];
+const dateAndTimes = ['09/03 2T', '09/04 2T', '09/05 1T'];
+</script>
+
   <style scoped>
   .container {
 display: flex;

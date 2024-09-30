@@ -24,13 +24,16 @@
       :currentMonth="months[currentMonth - 1]"
       :scheduleId="currentScheduleId"
       :selectedDate="selectedDay"
+      :shopId="shopId"
       @close="closeScheduleModal"
     />
+    <p v-if="!shopId">유효한 매장 ID가 없습니다. 스케줄을 불러올 수 없습니다.</p>
   </SideMenu>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
+import { useRoute } from 'vue-router'; // 쿼리 파라미터 가져오기 위해 사용
 import axios from 'axios';
 import SideMenu from '@/components/SideMenu.vue';
 import ScheduleCalendar from '@/components/schedule/ScheduleCalendar.vue';
@@ -61,13 +64,26 @@ const scheduleData = ref([]);
 const blanks = ref([]);
 const daysInMonth = ref([]);
 
-const getFirstDayOfMonth = (year, month) => new Date(year, month, 1);
-const getLastDayOfMonth = (year, month) => new Date(year, month + 1, 0);
+// 로컬 스토리지에서 shopId 가져오기
+const shopId = ref(JSON.parse(localStorage.getItem('shop'))?.id || null);
 
 const loadScheduleData = async () => {
+  if (!shopId.value) {
+    console.error("유효한 shopId가 없습니다.");
+    return;
+  }
+
   try {
     const response = await axios.get('http://localhost:8080/schedules');
-    scheduleData.value = response.data;
+    
+    if (shopId.value) {
+      scheduleData.value = response.data.filter(schedule => schedule.shopId === shopId.value);
+    }
+
+    if (scheduleData.value.length === 0) {
+      console.warn("해당 매장의 스케줄이 없습니다.");
+    }
+
     updateCalendar();
   } catch (error) {
     console.error('스케줄 데이터를 불러오지 못했습니다:', error);
@@ -180,7 +196,6 @@ const selectSchedule = ({ day, group }) => {
   }
 };
 
-
 const closeScheduleModal = () => {
   isScheduleModalOpen.value = false;
 };
@@ -190,7 +205,6 @@ onMounted(() => {
   updateCalendar();
 });
 </script>
-
 
 <style scoped>
   @import url('@/assets/css/schedule/Main.css');

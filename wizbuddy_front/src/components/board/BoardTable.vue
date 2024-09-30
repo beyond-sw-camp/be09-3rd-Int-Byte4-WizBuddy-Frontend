@@ -8,7 +8,7 @@
     </div>
     
     <!-- 현재 페이지에 해당하는 게시글만 렌더링 -->
-    <BoardItem v-for="board in paginatedBoards" :key="board.id" :board="board" :comments="getCommentsForBoard(board.id)"  />
+    <BoardItem v-for="board in paginatedBoards" :key="board.id" :board="board" :comments="getCommentsForBoard (board.id)"  />
 
     <!-- 페이징 버튼 -->
     <div class="pagination">
@@ -59,25 +59,17 @@ const nextPage = () => {
   }
 };
 
-// 특정 게시글에 대한 댓글 필터링
+import { watchEffect } from 'vue';
+
 const getCommentsForBoard = (boardId) => {
   return comments.value.filter(comment => comment.postId === boardId);
 };
-
-// 게시글 및 댓글 데이터를 로드하는 함수
-// const loadBoards = async () => {
-//   try {
-//     const response = await axios.get('http://localhost:8080/posts');
-//     boards.value = response.data;
-//   } catch (error) {
-//     console.error('게시글 데이터를 불러오지 못했습니다.', error);
-//   }
-// };
 
 const loadComments = async () => {
   try {
     const response = await axios.get('http://localhost:8080/comments');
     comments.value = response.data;
+    console.log(comments)
   } catch (error) {
     console.error('댓글 데이터를 불러오지 못했습니다.', error);
   }

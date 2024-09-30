@@ -66,6 +66,9 @@ const isDuplicate = ref(false);
 const isRegistered = ref(false);
 const minDate = ref(formatDate(new Date()));
 
+// 로컬스토리지에서 shopId 가져오기
+const shopId = JSON.parse(localStorage.getItem('shop'))?.id;
+
 function formatDate(date) {
   if (!date) return '';
   const d = new Date(date);
@@ -95,6 +98,7 @@ async function submitForm() {
       id: Date.now().toString(),
       title: schedule.value.title,
       schedule_start_date: formatDate(schedule.value.date),
+      shopId, // shopId를 포함
       employee_working_part: []
     };
 
@@ -112,7 +116,6 @@ async function submitForm() {
     }
   }
 }
-
 
 function validateMonday() {
   const selectedDate = new Date(schedule.value.date);
