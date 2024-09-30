@@ -2,7 +2,10 @@
   <div class="task-list-page">
     <aside class="left-side">
       <TaskTab/>
-      <SideMenu :tasks="tasks" />
+      <SideMenu 
+        v-if="userRole !== 'employee'" 
+        :tasks="tasks" 
+      />
     </aside>
     
     <div class="main-content">
@@ -30,6 +33,8 @@ const tasks = ref([]);
 // 로컬 스토리지에서 shop 정보를 가져오기
 const shop = JSON.parse(localStorage.getItem('shop'));
 const shopId = shop?.id || null; // shop 정보가 없으면 null 처리
+const user = JSON.parse(localStorage.getItem('user'));
+const userRole = user?.role || null; // 사용자 역할 가져오기
 
 onMounted(async () => {
   if (shopId) {

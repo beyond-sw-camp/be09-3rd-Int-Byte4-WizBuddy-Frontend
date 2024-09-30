@@ -2,7 +2,9 @@
   <div class="checklist-list-page">
     <aside class="left-side">
       <TaskTab />
+       <!-- 'role'이 'employee'가 아닌 경우에만 ChecklistSideMenu를 보여줌 -->
       <ChecklistSideMenu
+        v-if="userRole !== 'employee'" 
         :tasks="filteredTasks" 
         :selectedChecklist="selectedChecklist"
         @add-checklist="addChecklist"
@@ -67,6 +69,8 @@ const isEditing = ref(false);
 const isDeleting = ref(false);
 const shop = JSON.parse(localStorage.getItem('shop'));
 const shopId = shop?.id || null; // shop 정보가 없으면 null 처리
+const user = JSON.parse(localStorage.getItem('user'));
+const userRole = user?.role || null; // 사용자 역할 가져오기
 
 onMounted(async () => {
   console.log(shop);

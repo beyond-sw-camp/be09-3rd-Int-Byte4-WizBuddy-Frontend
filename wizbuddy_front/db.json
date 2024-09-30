@@ -294,64 +294,6 @@
   ],
   "checklists": [
     {
-      "id": "1",
-      "title": "123",
-      "tasks": [
-        {
-          "id": "9",
-          "title": "11111",
-          "content": "123",
-          "isFixed": true,
-          "shopId": "1",
-          "finishedState": true,
-          "userId": "1",
-          "createdAt": "2024-09-30T05:01:39.091Z",
-          "updatedAt": "2024-09-30T05:01:39.091Z"
-        }
-      ],
-      "shopId": "1"
-    },
-    {
-      "id": "2",
-      "title": "212",
-      "tasks": [
-        {
-          "id": "9",
-          "title": "11111",
-          "content": "123",
-          "isFixed": true,
-          "shopId": "1",
-          "finishedState": false,
-          "userId": null,
-          "createdAt": null,
-          "updatedAt": "2024-09-30T05:01:30.812Z"
-        },
-        {
-          "id": "10",
-          "title": "22222",
-          "content": "11123",
-          "isFixed": true,
-          "shopId": "1",
-          "finishedState": true,
-          "userId": "1",
-          "createdAt": "2024-09-30T05:01:46.147Z",
-          "updatedAt": "2024-09-30T05:01:46.147Z"
-        },
-        {
-          "id": "11",
-          "title": "33333",
-          "content": "1231231",
-          "isFixed": true,
-          "shopId": "1",
-          "finishedState": true,
-          "userId": "1",
-          "createdAt": "2024-09-30T05:01:45.547Z",
-          "updatedAt": "2024-09-30T05:01:45.547Z"
-        }
-      ],
-      "shopId": "1"
-    },
-    {
       "id": "3",
       "title": "22",
       "tasks": [
@@ -400,7 +342,7 @@
           "finishedState": true,
           "userId": "1",
           "createdAt": "2024-09-30T05:04:52.179Z",
-          "updatedAt": "2024-09-30T05:04:52.179Z",
+          "updatedAt": "2024-09-30T05:21:26.092Z",
           "isCompleted": true
         }
       ],
@@ -640,6 +582,66 @@
       ],
       "shopId": "1",
       "deletedAt": "2024-09-30T03:47:01.560Z"
+    },
+    {
+      "id": "1",
+      "title": "123",
+      "tasks": [
+        {
+          "id": "9",
+          "title": "11111",
+          "content": "123",
+          "isFixed": true,
+          "shopId": "1",
+          "finishedState": true,
+          "userId": "1",
+          "createdAt": "2024-09-30T05:01:39.091Z",
+          "updatedAt": "2024-09-30T05:01:39.091Z"
+        }
+      ],
+      "shopId": "1",
+      "deletedAt": "2024-09-30T05:21:13.613Z"
+    },
+    {
+      "id": "2",
+      "title": "212",
+      "tasks": [
+        {
+          "id": "9",
+          "title": "11111",
+          "content": "123",
+          "isFixed": true,
+          "shopId": "1",
+          "finishedState": false,
+          "userId": null,
+          "createdAt": null,
+          "updatedAt": "2024-09-30T05:01:30.812Z"
+        },
+        {
+          "id": "10",
+          "title": "22222",
+          "content": "11123",
+          "isFixed": true,
+          "shopId": "1",
+          "finishedState": true,
+          "userId": "1",
+          "createdAt": "2024-09-30T05:01:46.147Z",
+          "updatedAt": "2024-09-30T05:01:46.147Z"
+        },
+        {
+          "id": "11",
+          "title": "33333",
+          "content": "1231231",
+          "isFixed": true,
+          "shopId": "1",
+          "finishedState": true,
+          "userId": "1",
+          "createdAt": "2024-09-30T05:01:45.547Z",
+          "updatedAt": "2024-09-30T05:01:45.547Z"
+        }
+      ],
+      "shopId": "1",
+      "deletedAt": "2024-09-30T05:21:19.804Z"
     }
   ],
   "posts": [
