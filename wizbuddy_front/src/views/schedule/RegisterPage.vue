@@ -33,6 +33,7 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 import axios from 'axios';
 import SideMenu from '@/components/SideMenu.vue';
 import ScheduleCalendar from '@/components/schedule/ScheduleCalendar.vue';
@@ -61,6 +62,11 @@ const formattedSelectedDate = computed(() => {
   }
   return '';
 });
+
+// useRouter 사용
+const router = useRouter();
+const route = useRoute();
+const shopId = ref(route.query.shopId || null);
 
 const loadScheduleData = async () => {
   try {
@@ -168,7 +174,6 @@ const handleEmployeeSubmit = async (employeeData) => {
 
     schedule.employee_working_part.push(newEmployee);
 
-    // 정렬 로직을 추가합니다.
     schedule.employee_working_part.sort((a, b) => {
       const timeOrder = ['1T', '2T', '3T'];
       return timeOrder.indexOf(a.time.split(' ')[0]) - timeOrder.indexOf(b.time.split(' ')[0]);
@@ -191,14 +196,14 @@ const handleEmployeeSubmit = async (employeeData) => {
   }
 };
 
-function getWeekNumber(date) {
+const getWeekNumber = (date) => {
   const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
   const firstDayOfWeek = firstDayOfMonth.getDay();
   const adjustedDate = date.getDate() + firstDayOfWeek;
   return Math.ceil(adjustedDate / 7);
-}
+};
 
-function getTimeRange(time) {
+const getTimeRange = (time) => {
   switch (time) {
     case '1T':
       return '09:00 ~ 14:00';
@@ -209,11 +214,11 @@ function getTimeRange(time) {
     default:
       return '';
   }
-}
+};
 
-function generateId() {
+const generateId = () => {
   return Math.random().toString(36).substring(2, 9);
-}
+};
 
 const getStartOfWeek = (date) => {
   const day = new Date(date);
@@ -271,6 +276,11 @@ const nextMonth = () => {
 const selectDay = (day) => {
   selectedDay.value = day;
   isRegisterModalOpen.value = true;
+
+  const shopId = route.query.shopId || null;
+  if (shopId) {
+    router.push({ path: '/schedule/regist', query: { shopId } });
+  }
 };
 
 const closeRegisterModal = () => {

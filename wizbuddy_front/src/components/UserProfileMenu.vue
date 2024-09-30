@@ -6,10 +6,18 @@
       <p class="profile-email">{{ userEmail }}</p>
     </div>
     <div class="profile-menu">
-      <button class="profile-button"><img src="@/assets/icons/right-profile-notice-button.svg" alt="notice-button"></button>
-      <button class="profile-button"><img src="@/assets/icons/right-profile-calendars-button.svg" alt="calendars-button"></button>
-      <button class="profile-button"><img src="@/assets/icons/right-profile-manual-button.svg" alt="manual-button"></button>
-      <button class="profile-button"><img src="@/assets/icons/right-profile-todos-button.svg" alt="todos-button"></button>
+      <button class="profile-button">
+        <img src="@/assets/icons/right-profile-notice-button.svg" alt="notice-button" />
+      </button>
+      <button class="profile-button">
+        <img src="@/assets/icons/right-profile-calendars-button.svg" alt="calendars-button" />
+      </button>
+      <button class="profile-button">
+        <img src="@/assets/icons/right-profile-manual-button.svg" alt="manual-button" />
+      </button>
+      <button class="profile-button">
+        <img src="@/assets/icons/right-profile-todos-button.svg" alt="todos-button" />
+      </button>
     </div>
     <div v-if="invitations.length > 0" class="invitations-list">
       <h3>초대 목록</h3>
@@ -51,6 +59,7 @@ async function fetchInvitations() {
   const userData = await response.json();
   invitations.value = userData.invitations || [];
 }
+
 async function acceptInvitation(invite) {
   try {
     const userResponse = await fetch(`http://localhost:8080/users/${userId.value}`);
@@ -97,10 +106,10 @@ async function acceptInvitation(invite) {
 
     await fetchInvitations();
     if (fetchStores) {
-      await fetchStores();
+      await fetchStores(); // 매장 정보를 다시 불러옵니다.
     }
     if (handleInvitationAccepted) {
-      await handleInvitationAccepted();
+      await handleInvitationAccepted(); // 초대 수락 후 필요한 처리를 실행합니다.
     }
     alert('초대를 수락했습니다.');
   } catch (error) {
@@ -108,7 +117,6 @@ async function acceptInvitation(invite) {
     alert('초대 수락 중 오류가 발생했습니다.');
   }
 }
-
 
 async function rejectInvitation(invite) {
   try {
@@ -183,7 +191,7 @@ async function rejectInvitation(invite) {
 }
 
 .profile-button:hover {
-  background-color: #ddd; 
+  background-color: #ddd;
 }
 
 .invitations-list {
@@ -203,7 +211,7 @@ async function rejectInvitation(invite) {
 .invitations-list button {
   margin-left: 10px;
   padding: 5px 10px;
-  background-color: #45539D;
+  background-color: #45539d;
   color: white;
   border: none;
   border-radius: 5px;
