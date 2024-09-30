@@ -33,12 +33,21 @@
   </template>
   
   <script setup>
-  import { ref } from 'vue';
+  import { ref, onMounted } from 'vue';
+  import { useRoute, useRouter } from 'vue-router';
+  import axios from 'axios';
+
+  const route = useRoute(); // 현재 라우트에서 ID 파라미터를 가져옴
+  const router = useRouter();
+  const postId = ref(route.params.id); // 현재 게시글 ID
+  const message = ref(null); // 메시지(성공/실패)
   
   const title = ref('');
   const content = ref('');
   const file = ref(null);
   const fileName = ref('');
+  const writer = ref('');
+  const registerdate = ref('');
   
   const triggerFileUpload = () => {
     // 파일 선택 트리거
@@ -62,18 +71,54 @@
     document.getElementById('fileInput').value = '';
   };
   
-  const submitPost = () => {
-    // 게시글 등록 로직 (폼 데이터 전송 예시)
-    const postData = {
+  // 게시글 데이터 불러오기
+  const loadPost = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/manualboard`);
+
+      const postData = response.data.find(post => parseInt(post.id) === parseInt(postId.value));
+    
+      title.value = postData.title;
+      content.value = postData.content;
+      writer.value = postData.writer;
+      registerdate.value = postData.registerdate; // registerdate도 함께 가져옴
+      fileName.value = postData.fileName; // 파일 데이터도 가져옴
+      file.value = postData.file; // 실제 파일 정보
+
+    } catch (error) {
+      console.error('게시글 데이터를 불러오는 중 오류 발생:', error);
+    }
+  };
+
+  // 게시글 수정 요청
+const updatePost = async () => {
+  try {
+    const updatedPost = {
       title: title.value,
       content: content.value,
-      file: file.value,
+      writer: writer.value,
+      registerdate: registerdate.value, // registerdate도 함께 전송
+      file: file.value, // 파일 데이터도 함께 전송
     };
-    console.log('게시글 데이터:', postData);
-  
-    // 필요한 API 요청을 이곳에서 처리 (ex: Axios 사용)
-    // axios.post('/api/posts', formData).then(...);
-  };
+
+    await axios.put(`http://localhost:8080/manualboard/${postId.value}`, updatedPost);
+    
+    message.value = '게시글이 성공적으로 수정되었습니다.';
+    router.push(`/manualboard/${postId.value}`);
+  } catch (error) {
+    console.error('게시글 수정 중 오류 발생: ', error);
+    message.value = '게시글 수정 중 오류가 발생했습니다.';
+  }
+};
+
+  // 컴포넌트가 마운트되었을 때 게시글 데이터를 불러옴
+  onMounted(() => {
+    loadPost();
+  });
+
+  const submitPost = () => {
+  updatePost();
+};
   </script>
   
   <style scoped>
