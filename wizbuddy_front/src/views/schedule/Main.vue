@@ -24,6 +24,7 @@
       :currentMonth="months[currentMonth - 1]"
       :scheduleId="currentScheduleId"
       :selectedDate="selectedDay"
+      :shopId="shopId"
       @close="closeScheduleModal"
     />
     <p v-if="!shopId">유효한 매장 ID가 없습니다. 스케줄을 불러올 수 없습니다.</p>
@@ -63,11 +64,8 @@ const scheduleData = ref([]);
 const blanks = ref([]);
 const daysInMonth = ref([]);
 
-const route = useRoute();
-const shopId = ref(route.query.shopId || null);
-
-const getFirstDayOfMonth = (year, month) => new Date(year, month, 1);
-const getLastDayOfMonth = (year, month) => new Date(year, month + 1, 0);
+// 로컬 스토리지에서 shopId 가져오기
+const shopId = ref(JSON.parse(localStorage.getItem('shop'))?.id || null);
 
 const loadScheduleData = async () => {
   if (!shopId.value) {

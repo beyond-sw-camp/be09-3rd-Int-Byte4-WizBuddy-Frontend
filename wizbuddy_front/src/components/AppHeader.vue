@@ -21,17 +21,20 @@
 </template>
 
 <script setup>
-import { useRoute, useRouter } from 'vue-router';
 import { ref, watch, onMounted, watchEffect } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute();
 const router = useRouter();
 const isLoginPage = ref(false);
 const isSignupPage = ref(false);
 const isMainPage = ref(false);
-const user = ref(JSON.parse(localStorage.getItem('user')));
+const user = ref(JSON.parse(localStorage.getItem('user'))); // 사용자 정보 가져오기
 const userName = ref(user.value ? user.value.name : '');
 const userRole = ref(user.value ? user.value.role : '');
+
+// 로컬스토리지에서 shopId 가져오기
+const shopId = ref(localStorage.getItem('shopId') || null); 
 
 watch(() => route.path, (newPath) => {
   isLoginPage.value = newPath === '/login';
@@ -43,23 +46,22 @@ const activeTab = ref('');
 
 function setActiveTab(tab) {
   activeTab.value = tab;
-  const shopId = route.query.shopId; // 현재 shopId 가져오기
 
   switch (tab) {
     case 'schedule':
-      router.push({ path: '/schedule', query: { shopId } }); // shopId를 쿼리로 추가
+      router.push('/schedule'); // shopId를 쿼리로 추가하지 않고 로컬스토리지에서 가져오기
       break;
     case 'checklist':
-      router.push({ path: '/checklist', query: { shopId } }); // shopId를 쿼리로 추가
+      router.push('/checklist'); // shopId를 쿼리로 추가하지 않고 로컬스토리지에서 가져오기
       break;
     case 'noticeboard':
-      router.push({ path: '/noticeboard', query: { shopId } }); // shopId를 쿼리로 추가
+      router.push('/noticeboard'); // shopId를 쿼리로 추가하지 않고 로컬스토리지에서 가져오기
       break;
     case 'manualboard':
-      router.push({ path: '/manualboard', query: { shopId } }); // shopId를 쿼리로 추가
+      router.push('/manualboard'); // shopId를 쿼리로 추가하지 않고 로컬스토리지에서 가져오기
       break;
     case 'subsboard':
-      router.push({ path: '/subsboard', query: { shopId } }); // shopId를 쿼리로 추가
+      router.push('/subsboard'); // shopId를 쿼리로 추가하지 않고 로컬스토리지에서 가져오기
       break;
   }
 }

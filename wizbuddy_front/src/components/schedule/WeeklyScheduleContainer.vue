@@ -46,16 +46,15 @@
   const currentYear = ref(currentDate.value.getFullYear());
   const currentMonth = ref(currentDate.value.getMonth());
   const currentWeek = ref(getWeekOfMonth(currentDate.value));
-  const currentWeekRange = ref(getWeekRange(currentYear.value, currentMonth.value, currentWeek.value));
+  const currentWeekRange = ref(getWeekRange(currentDate.value));
   
   const days = ['월', '화', '수', '목', '금', '토', '일'];
-  
   const schedules = ref([]);
   
   const filteredSchedules = computed(() => {
     const startDate = new Date(currentWeekRange.value.start);
     const endDate = new Date(currentWeekRange.value.end);
-    
+  
     return schedules.value.flatMap(schedule => 
       schedule.employee_working_part.filter(part => {
         const partDate = new Date(part.year, part.month - 1, part.day);
@@ -63,38 +62,59 @@
       })
     );
   });
-
+  
   const getScheduleClass = (type) => {
-  switch(type) {
-    case 'fun':
-      return 'schedule-fun';
-    case 'important':
-      return 'schedule-important';
-    case 'personal':
-      return 'schedule-personal';
-    default:
-      return '';
-  }
-};
+    switch(type) {
+      case 'fun':
+        return 'schedule-fun';
+      case 'important':
+        return 'schedule-important';
+      case 'personal':
+        return 'schedule-personal';
+      default:
+        return '';
+    }
+  };
   
   function getWeekOfMonth(date) {
-    const firstDay = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
-    return Math.ceil((date.getDate() + firstDay) / 7);
+    const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+    const lastDayOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+    
+    // 첫 주의 월요일 찾기
+    let firstMonday = new Date(firstDayOfMonth);
+    while (firstMonday.getDay() !== 1) {
+      firstMonday.setDate(firstMonday.getDate() + 1);
+    }
+  
+    // 주차 계산
+    const daysDifference = Math.floor((date - firstMonday) / (24 * 60 * 60 * 1000));
+    let weekNumber = Math.floor(daysDifference / 7) + 1;
+  
+    // 첫 주가 이전 달에 속하는 경우 처리
+    if (firstMonday < firstDayOfMonth) {
+      weekNumber -= 1;
+    }
+  
+    // 마지막 주가 다음 달에 속하는 경우 처리
+    if (weekNumber === 0) {
+      const lastDayOfPrevMonth = new Date(date.getFullYear(), date.getMonth(), 0);
+      return getWeekOfMonth(lastDayOfPrevMonth);
+    }
+  
+    return weekNumber;
   }
   
-  function getWeekRange(year, month, week) {
-    const firstDayOfMonth = new Date(year, month, 1);
-    const firstMonday = new Date(firstDayOfMonth.setDate(1 + ((8 - firstDayOfMonth.getDay()) % 7)));
-  
-    const startDate = new Date(firstMonday);
-    startDate.setDate(startDate.getDate() + (week - 1) * 7);
-  
-    const endDate = new Date(startDate);
-    endDate.setDate(startDate.getDate() + 6);
+  function getWeekRange(date) {
+    const currentDay = date.getDay();
+    const diff = date.getDate() - currentDay + (currentDay === 0 ? -6 : 1); // 월요일 기준으로 조정
+    
+    const weekStart = new Date(date.setDate(diff));
+    const weekEnd = new Date(weekStart);
+    weekEnd.setDate(weekStart.getDate() + 6);
   
     return {
-      start: formatDate(startDate),
-      end: formatDate(endDate)
+      start: formatDate(weekStart),
+      end: formatDate(weekEnd)
     };
   }
   
@@ -114,7 +134,7 @@
     currentYear.value = currentDate.value.getFullYear();
     currentMonth.value = currentDate.value.getMonth();
     currentWeek.value = getWeekOfMonth(currentDate.value);
-    currentWeekRange.value = getWeekRange(currentYear.value, currentMonth.value, currentWeek.value);
+    currentWeekRange.value = getWeekRange(currentDate.value);
     loadScheduleData();
   };
   
@@ -131,7 +151,7 @@
     const dayIndex = days.indexOf(day);
     const scheduleDate = new Date(currentWeekRange.value.start);
     scheduleDate.setDate(scheduleDate.getDate() + dayIndex);
-    
+  
     return filteredSchedules.value.some(part => 
       part.day === scheduleDate.getDate() &&
       part.month === scheduleDate.getMonth() + 1 &&
@@ -144,7 +164,7 @@
     const dayIndex = days.indexOf(day);
     const scheduleDate = new Date(currentWeekRange.value.start);
     scheduleDate.setDate(scheduleDate.getDate() + dayIndex);
-    
+  
     return filteredSchedules.value.find(part => 
       part.day === scheduleDate.getDate() &&
       part.month === scheduleDate.getMonth() + 1 &&
@@ -161,8 +181,7 @@
     loadScheduleData();
   });
   </script>
-
+  
   <style scoped>
   @import url('@/assets/css/schedule/WeeklyScheduleContainer.css');
   </style>
-  

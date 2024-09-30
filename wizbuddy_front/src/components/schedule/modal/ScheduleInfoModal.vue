@@ -19,35 +19,35 @@ import { useRouter } from 'vue-router';
 import { defineEmits, defineProps } from 'vue';
 
 const props = defineProps({
-isOpen: Boolean,
-selectedDate: Number,
-schedules: Array,
-currentMonth: String,
-scheduleId: String,
-scheduleStartDate: String,
-shopId: String // shopId를 추가
+  isOpen: Boolean,
+  selectedDate: Number,
+  schedules: Array,
+  currentMonth: String,
+  scheduleId: String,
+  scheduleStartDate: String,
+  shopId: String // shopId를 추가
 });
 
 const emit = defineEmits(['close']);
 const router = useRouter();
 
 function closeModal() {
-emit('close');
+  emit('close');
 }
 
 function editSchedule(schedule) {
-router.push({
-  name: 'ScheduleEdit',
-  query: {
-    scheduleId: props.scheduleId,
-    partId: schedule.id,
-    date: `${props.currentMonth} ${props.selectedDate}일`,
-    worker: schedule.name,
-    timeSlot: schedule.time,
-    startDate: props.scheduleStartDate,
-    shopId: props.shopId // shopId를 수정 페이지로 전달
-  }
-});
+  router.push({
+    name: 'ScheduleEdit',
+    query: {
+      scheduleId: props.scheduleId,
+      partId: schedule.id,
+      date: `${props.currentMonth} ${props.selectedDate}일`,
+      worker: schedule.name,
+      timeSlot: schedule.time,
+      startDate: props.scheduleStartDate,
+      shopId: props.shopId // shopId를 수정 페이지로 전달
+    }
+  });
 }
 </script>
 

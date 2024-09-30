@@ -93,7 +93,6 @@ async function deleteStore(store) {
           const employeeResponse = await fetch(`http://localhost:8080/users/${employeeId}`);
           const employeeData = await employeeResponse.json();
 
-          // 매장 삭제 시 사용자의 employedAt에서 매장 ID 제거
           employeeData.employedAt = (employeeData.employedAt || []).filter(id => id !== store.id);
 
           return fetch(`http://localhost:8080/users/${employeeId}`, {
@@ -178,11 +177,11 @@ const navigateTo = (option, store) => {
   // 클릭한 매장의 id를 localStorage에 저장
   localStorage.setItem('shop', JSON.stringify(store));
   console.log(store);
-
+  
   // 원하는 페이지로 이동
   switch (option) {
     case '근무일정 조회':
-      router.push({ path: '/schedule', query: { shopId: store.id } });
+      router.push({ path: '/schedule', query: { shopId: store.id } }); // 스케줄 화면으로 이동
       break;
     case '체크리스트 조회':
       router.push({ path: '/checklist', query: { shopId: store.id } }); // 체크리스트에 shopId 전달
@@ -195,7 +194,6 @@ const navigateTo = (option, store) => {
       break;
   }
 };
-
 </script>
 
 <style scoped>
