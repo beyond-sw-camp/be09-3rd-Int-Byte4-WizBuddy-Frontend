@@ -12,9 +12,9 @@
 
     <!-- 페이징 버튼 -->
     <div class="pagination">
-      <button @click="prevPage" :disabled="currentPage === 1">이전</button>
+      <button class="prev-page" @click="prevPage" :disabled="currentPage === 1">이전</button>
       <span>{{ currentPage }} / {{ totalPages }}</span>
-      <button @click="nextPage" :disabled="currentPage === totalPages">다음</button>
+      <button class="next-page" @click="nextPage" :disabled="currentPage === totalPages">다음</button>
     </div>
   </div>
 </template>
@@ -177,17 +177,18 @@ onMounted(() => {
   bottom: 0; /* 화면 하단에 위치 */
 }
 
-button {
+.prev-page, .next-page {
   padding: 8px 12px;
-  margin: 0 5px;
+  margin: 0 10px;
   cursor: pointer;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-  background-color: #fff;
+  background-color: #45539D;
   border: none;
+  border-radius: 10px;
+  color: #ffffff;
 }
 
-button:disabled {
+.prev-page:disabled, .next-page:disabled {
   cursor: not-allowed;
- 
 }
 </style>

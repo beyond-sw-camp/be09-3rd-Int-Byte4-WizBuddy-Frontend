@@ -876,75 +876,248 @@
       "avatar": "/src/assets/icons/board/avater5.svg"
     }
   ],
-  "manualboard": [
-    {
-      "title": "최고의 핸드드립 커피 원두 고르는 법",
-      "content": "핸드드립 커피를 즐기려면 원두 선택이 중요한데, 신선한 원두와 적절한 로스팅 정도를 고려하는 것이 중요합니다. 그렇군요ㅇㅇㅇ",
-      "writer": "김지훈",
-      "registerdate": "2024-09-26",
-      "id": "2"
-    },
-    {
-      "title": "카페 인테리어 트렌드 2024",
-      "content": "2024년 카페 인테리어 트렌드는 미니멀리즘과 자연 친화적 디자인이 주류를 이루며, 따뜻한 조명과 나무 소재가 인기입니다. \n정말 그럴까요? 호호ㅊㅍㄴㅇㄹ",
-      "writer": "박지민",
-      "registerdate": "2024-09-27",
-      "id": "3"
-    },
-    {
-      "id": "4",
-      "title": "ㄴㅇㄹㅇㄴㄹ",
-      "content": "ㅈㄷㄹㅈㄷ",
-      "file": "",
-      "registerdate": "2024.09.30"
-    }
-  ],
-  "noticeboard": [
-    {
-      "id": "2",
-      "title": "출근 시간 엄수 안내",
-      "content": "최근 출근 시간을 지키지 않는 경우가 발생하고 있습니다. 모든 직원은 출근 시간을 엄수해 주시기 바랍니다.",
-      "writer": "사장님",
-      "registerdate": "2024-09-27"
-    },
-    {
-      "id": "3",
-      "title": "새로운 POS 시스템 교육",
-      "content": "다음 주 월요일에 새로운 POS 시스템 교육이 있습니다. 모든 직원은 참석해 주세요.",
-      "writer": "사장님",
-      "registerdate": "2024-09-28"
-    },
-    {
-      "id": "6",
-      "title": "공지사항입니다",
-      "content": "사실 딱히 별건 없습니다.",
-      "file": ""
-    },
-    {
-      "id": "8",
-      "title": "ㄹㄴㅇㄹ",
-      "content": "ㄴㅇㄹㅇㄴ",
-      "file": ""
-    },
-    {
-      "id": 9,
-      "title": "ㅈㄷㄱㄷㅈㄹㅇㄴㄹㄴㅇ",
-      "content": "ㄹㅇㄴㄹㄴㅇㄹㄷ",
-      "file": ""
-    },
-    {
-      "id": "10",
-      "title": "ㄴㅇㄹㄴㅇㄹㄴ",
-      "content": "ㄷㄹㄴㅇㄹㅈㄷㄹ",
-      "file": "",
-      "registerdate": "2024.09.30"
-    },
-    {
-      "id": "11",
-      "title": "ㄴㅇㄹㅇㄴㄹ",
-      "content": "ㅂㅈㄱㅂㅈㄷㄹㅇㄴㄹ",
-      "file": "",
-      "registerdate": "2024.09.30"
-    }
-  ]
+    "manualboard": [
+      {
+        "id": "1",
+        "title": "매장 청소 방법",
+        "content": "매장 청소는 하루에 두 번, 개점 전과 마감 후 진행됩니다.",
+        "registerdate": "2024-09-29",
+        "file": "cleaning_guide.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "2",
+        "title": "커피머신 사용법",
+        "content": "커피머신의 사용법은 반드시 교육을 받은 후 사용 가능합니다.",
+        "registerdate": "2024-09-29",
+        "file": "coffee_machine_manual.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "3",
+        "title": "재고 관리 가이드",
+        "content": "재고는 매일 저녁 마감 후 점검하여 부족한 물품을 기록합니다.",
+        "registerdate": "2024-09-29",
+        "file": "inventory_guide.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "4",
+        "title": "음료 제조 표준",
+        "content": "음료 제조 시에는 레시피에 따라 정확한 계량을 해야 합니다.",
+        "registerdate": "2024-09-29",
+        "file": "drink_recipe.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "5",
+        "title": "고객 응대 매뉴얼",
+        "content": "고객 응대 시 항상 미소를 유지하며 정중히 인사합니다.",
+        "registerdate": "2024-09-29",
+        "file": "customer_service_manual.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "6",
+        "title": "POS 시스템 사용법",
+        "content": "POS 시스템은 결제 시 반드시 확인 후 사용하세요.",
+        "registerdate": "2024-09-29",
+        "file": "pos_manual.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "7",
+        "title": "휴식 시간 규칙",
+        "content": "휴식 시간은 4시간 근무 시 30분이며, 교대로 진행합니다.",
+        "registerdate": "2024-09-29",
+        "file": "break_policy.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "8",
+        "title": "음료 오더 처리 방법",
+        "content": "음료 주문은 정확히 입력하고, 결제 후 제조 시작합니다.",
+        "registerdate": "2024-09-29",
+        "file": "order_processing_guide.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "9",
+        "title": "유니폼 착용 규칙",
+        "content": "근무 시 항상 유니폼을 착용하며, 청결하게 유지합니다.",
+        "registerdate": "2024-09-29",
+        "file": "uniform_policy.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "10",
+        "title": "안전 사고 예방 매뉴얼",
+        "content": "안전 사고를 예방하기 위해서는 항상 주의를 기울입니다.",
+        "registerdate": "2024-09-29",
+        "file": "safety_manual.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "11",
+        "title": "식자재 관리법",
+        "content": "식자재는 매일 신선도를 확인하고, 유통기한을 점검합니다.",
+        "registerdate": "2024-09-29",
+        "file": "food_management.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "12",
+        "title": "음료 리필 규칙",
+        "content": "음료 리필은 특정 메뉴에 한해 제공하며, 리필 조건을 안내합니다.",
+        "registerdate": "2024-09-29",
+        "file": "refill_policy.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "13",
+        "title": "고객 불만 처리 매뉴얼",
+        "content": "고객 불만이 있을 경우 매니저에게 즉시 보고합니다.",
+        "registerdate": "2024-09-29",
+        "file": "complaint_handling.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "14",
+        "title": "음료 트레이닝 계획",
+        "content": "신입 직원은 음료 제조 트레이닝을 주 2회 진행합니다.",
+        "registerdate": "2024-09-29",
+        "file": "training_plan.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "15",
+        "title": "마감 정리 매뉴얼",
+        "content": "마감 시에는 모든 장비를 정리하고, 청소를 철저히 합니다.",
+        "registerdate": "2024-09-29",
+        "file": "closing_guide.pdf",
+        "writer": "관리자"
+      }
+    ],
+    "noticeboard": [
+      {
+        "id": "1",
+        "title": "휴무 일정 공지",
+        "content": "다음 주 월요일은 휴무입니다.",
+        "registerdate": "2024-09-29",
+        "file": "holiday_notice.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "2",
+        "title": "추석 연휴 안내",
+        "content": "추석 연휴 동안 매장은 휴무입니다.",
+        "registerdate": "2024-09-29",
+        "file": "chuseok_notice.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "3",
+        "title": "가격 인상 안내",
+        "content": "다음 달부터 일부 메뉴의 가격이 인상됩니다.",
+        "registerdate": "2024-09-29",
+        "file": "price_increase.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "4",
+        "title": "신메뉴 출시 안내",
+        "content": "신메뉴 '자몽 에이드'가 출시되었습니다.",
+        "registerdate": "2024-09-29",
+        "file": "new_menu_notice.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "5",
+        "title": "정기 점검 안내",
+        "content": "이번 주 토요일에 매장 정기 점검이 진행됩니다.",
+        "registerdate": "2024-09-29",
+        "file": "inspection_notice.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "6",
+        "title": "연말 파티 초대",
+        "content": "직원 연말 파티가 12월 25일에 열립니다.",
+        "registerdate": "2024-09-29",
+        "file": "party_invite.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "7",
+        "title": "이벤트 공지",
+        "content": "고객을 위한 특별 이벤트가 다음 주에 진행됩니다.",
+        "registerdate": "2024-09-29",
+        "file": "event_notice.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "8",
+        "title": "위생 점검 결과",
+        "content": "최근 위생 점검에서 우수 평가를 받았습니다.",
+        "registerdate": "2024-09-29",
+        "file": "hygiene_report.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "9",
+        "title": "직원 건강검진 안내",
+        "content": "직원 건강검진이 이번 달 말에 진행됩니다.",
+        "registerdate": "2024-09-29",
+        "file": "health_checkup.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "10",
+        "title": "고객 설문조사",
+        "content": "고객 만족도를 조사하는 설문 이벤트를 진행합니다.",
+        "registerdate": "2024-09-29",
+        "file": "survey_notice.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "11",
+        "title": "신입 직원 교육 일정",
+        "content": "신입 직원 교육이 다음 주에 시작됩니다.",
+        "registerdate": "2024-09-29",
+        "file": "training_schedule.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "12",
+        "title": "매장 리모델링 안내",
+        "content": "다음 달에 매장 리모델링이 진행될 예정입니다.",
+        "registerdate": "2024-09-29",
+        "file": "remodeling_notice.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "13",
+        "title": "정기 회의 일정",
+        "content": "다음 주 월요일에 정기 회의가 열립니다.",
+        "registerdate": "2024-09-29",
+        "file": "meeting_schedule.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "14",
+        "title": "할인 행사 안내",
+        "content": "이번 주에 특별 할인 행사를 진행합니다.",
+        "registerdate": "2024-09-29",
+        "file": "discount_event.pdf",
+        "writer": "관리자"
+      },
+      {
+        "id": "15",
+        "title": "고객 불편사항 접수",
+        "content": "고객 불편사항 접수를 위한 전용 창구가 마련되었습니다.",
+        "registerdate": "2024-09-29",
+        "file": "complaint_service.pdf",
+        "writer": "관리자"
+      }
+    ]
 }
